@@ -17,3 +17,10 @@ h2 {
     color: rgb(255, 255, 255);
     margin: 80px;
 }
+a{
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    width:200px;
+    text-decoration: none;
+}
