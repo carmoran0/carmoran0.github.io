@@ -1,17 +1,19 @@
 body {
     background-color: rgb(33, 33, 33);
+    font-size: 80px;
 }
 h1 {
     color: rgb(22,184,243);
     margin: 20px;
     text-align: center;
-    font-size: 120px;
+    font-size: 160px;
 }
 h2 {
     color: rgb(255, 255, 255);
     margin: 20px;
+    font-size: 100px;
 }
     p {
     color: rgb(255, 255, 255);
-    margin: 20px;
+    margin: 80px;
 }
