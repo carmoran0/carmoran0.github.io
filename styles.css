@@ -6,14 +6,15 @@ h1 {
     color: rgb(22,184,243);
     margin: 20px;
     text-align: center;
-    font-size: 140px;
+    font-size: 130px;
 }
 h2 {
     color: rgb(255, 255, 255);
     margin: 20px;
-    font-size: 60px;
+    font-size: 70px;
 }
     p {
     color: rgb(255, 255, 255);
-    font-size: 40px;
+    font-size: 50px;
+    margin: 30px;
 }
