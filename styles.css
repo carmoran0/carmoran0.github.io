@@ -22,4 +22,5 @@ a{
     text-align: center;
     width:200px;
     text-decoration: none;
+    display: inline-block;
 }
