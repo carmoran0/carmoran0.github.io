@@ -4,6 +4,8 @@ body {
 h1 {
     color: rgb(22,184,243);
     margin: 20px;
+    text-align: center;
+    font-size: 80px;
 }
 h2 {
     color: rgb(255, 255, 255);
