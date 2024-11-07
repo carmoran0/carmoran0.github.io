@@ -43,10 +43,10 @@
         </div>
         <p></p>
         <p>Hola hola</p>
-    <script src="getAccessToken.js"></script>
-    <script>
+    <script type="module">
+        import { getAccessToken } from './getAccessToken.js';
+
         async function fetchNowPlaying() {
-            const { getAccessToken } = await import('./getAccessToken.js');
             const token = await getAccessToken();
 
             const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
