@@ -62,31 +62,28 @@
             return data.access_token;
         }
 
-        async function getNowPlaying(token) {
-            const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+        async function getRecentlyPlayed(token) {
+            const response = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             });
-            if (response.status === 204) {
-                document.getElementById('now-playing').style.display = 'none';
-                return;
-            }
             const data = await response.json();
-            if (data && data.item) {
-                document.getElementById('album-cover').src = data.item.album.images[0].url;
-                document.getElementById('track-name').textContent = data.item.name;
-                document.getElementById('artist-name').textContent = data.item.artists.map(artist => artist.name).join(', ');
+            if (data && data.items && data.items.length > 0) {
+                const item = data.items[0].track;
+                document.getElementById('album-cover').src = item.album.images[0].url;
+                document.getElementById('track-name').textContent = item.name;
+                document.getElementById('artist-name').textContent = item.artists.map(artist => artist.name).join(', ');
             }
         }
 
         async function updateNowPlaying() {
             const token = await getSpotifyToken();
-            await getNowPlaying(token);
+            await getRecentlyPlayed(token);
         }
 
         updateNowPlaying();
-        setInterval(updateNowPlaying, 20000); // Actualiza 20 segundos
+        setInterval(updateNowPlaying, 20000); // Actualiza cada 20 segundos
     </script>
 </body>
 </html>
