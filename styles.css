@@ -1,5 +1,5 @@
 body {
-    background-image: url('imgfondo.jpg');
+    background-image: url('imgfondo.jpg'); /* Imagen de fondo para móviles */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -20,11 +20,7 @@ p {
     font-size: 25px; /* Estilo por defecto para móviles */
     margin: 20px;
 }
-#now-playing {
-    color: rgb(255, 255, 255);
-    font-size: 25px; /* Estilo por defecto para móviles */
-    margin: 20px;
-}
+
 a.link-button {
     color: white;
     padding: 10px 15px;
@@ -43,28 +39,32 @@ a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord { background-color: #7289da; }
 
-/* Estilos para pantallas grandes (ordenador) */
-@media (min-width: 768px) {
+
+/* Estilos para pantallas grandes (ordenador) 
+@media screen and (min-width: 768px) {
     body {
         margin-left: 20%;
         margin-right: 20%;
-        background-image: url('imgfondo-ordenador.jpg'); /* Cambiar la imagen de fondo en ordenador */
-    }
-    h1, h2, p {
-        text-align: left;
+        background-image: url('imgfondo-ordenador.jpg'); 
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
     }
     h1 {
         font-size: 100px;
+        text-align: left;
     }
     h2 {
         font-size: 50px;
+        text-align: left;
     }
     p {
         font-size: 30px;
+        text-align: left;
     }
     a.link-button {
         padding: 14px 25px;
         width: 300px;
         font-size: 40px;
     }
-}
+}*/
