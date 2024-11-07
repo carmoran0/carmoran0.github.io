@@ -14,6 +14,7 @@
 <body>
     <h1 id="texto">C:\Carlos Moreno </h1>
     <script>
+        // Cambia el texto del encabezado cada 530 ms
         const textos = ["C:\\Carlos Moreno|", "C:\\Carlos Moreno"];
         let indice = 0;
 
@@ -23,7 +24,7 @@
             indice = (indice + 1) % textos.length;
         }
 
-        setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
+        setInterval(cambiarTexto, 530); // Cambia el texto cada 530 ms
     </script>
     <p>Linktree casero</p>
     <p>Hecho para ver desde móvil.</p>
@@ -31,6 +32,7 @@
     <p>nerd que hace muchas cosas, wikipedia enjoyer</p>
         <h2>LINK(ARLO)S</h2>
         <div style="text-align:center">
+            <!-- Enlaces a diferentes plataformas -->
             <p><a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a><p>
             <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a><p>
             <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a><p>
@@ -38,17 +40,21 @@
             <p><a class="link-button github" href="https://github.com/carmoran0">Github</a><p>
             <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a><p>
         </div>
+        <div style="text-align:center">
+            <a id="login-button" class="link-button spotify" href="#">Iniciar sesión con Spotify</a>
+        </div>
         <div id="now-playing-box">
             <p id="now-playing">Cargando...</p>
         </div>
         <p></p>
         <p>Hola hola</p>
     <script type="module">
-        import { getAccessToken } from './getAccessToken.js';
+        import { getAuthorizationUrl, getAccessTokenFromUrl } from './getAccessToken.js';
 
-        async function fetchNowPlaying() {
-            const token = await getAccessToken();
+        const loginButton = document.getElementById('login-button');
+        loginButton.href = getAuthorizationUrl();
 
+        async function fetchNowPlaying(token) {
             const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -65,8 +71,11 @@
             }
         }
 
-        fetchNowPlaying();
-        setInterval(fetchNowPlaying, 30000); // Actualiza cada 30 segundos
+        const token = getAccessTokenFromUrl();
+        if (token) {
+            fetchNowPlaying(token);
+            setInterval(() => fetchNowPlaying(token), 30000); // Actualiza cada 30 segundos
+        }
     </script>
 </body>
 </html>

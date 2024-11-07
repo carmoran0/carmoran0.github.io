@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spotify Callback</title>
+        <script>
+            window.onload = function() {
+                if (window.opener) {
+                    window.opener.postMessage(window.location.hash, '*');
+                    window.close();
+                }
+            };
+        </script>
+    </head>
+<body>
+    <p>Autenticando...</p>
+</body>
+</html>
