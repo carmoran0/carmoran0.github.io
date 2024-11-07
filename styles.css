@@ -24,15 +24,6 @@ p {
     color: rgb(255, 255, 255);
     font-size: 25px; /* Estilo por defecto para móviles */
     margin: 20px;
-    text-align: center;
-}
-#now-playing img {
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
-}
-#now-playing span {
-    vertical-align: middle;
 }
 a.link-button {
     color: white;
@@ -42,6 +33,7 @@ a.link-button {
     font-size: 30px; /* Estilo por defecto para móviles */
     text-decoration: none;
     display: inline-block;
+    margin: 0 auto; /* Centrar los botones */
 }
 a.spotify { background-color: #1ED760; }
 a.letterbox { background-color: #ff8000; }
@@ -49,28 +41,30 @@ a.steam { background-color: #2a475e; }
 a.instagram { background-color: #ff0069; }
 a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
+a.discord { background-color: #7289da; }
 
 /* Estilos para pantallas grandes (ordenador) */
 @media (min-width: 768px) {
+    body {
+        margin-left: 20%;
+        margin-right: 20%;
+        background-image: url('imgfondo-ordenador.jpg'); /* Cambiar la imagen de fondo en ordenador */
+    }
+    h1, h2, p {
+        text-align: left;
+    }
     h1 {
-        font-size: 120px;
+        font-size: 100px;
     }
     h2 {
-        font-size: 70px;
+        font-size: 50px;
     }
     p {
-        font-size: 50px;
-    }
-    #now-playing {
-        font-size: 50px;
-    }
-    #now-playing img {
-        width: 100px;
-        height: 100px;
+        font-size: 30px;
     }
     a.link-button {
         padding: 14px 25px;
         width: 300px;
-        font-size: 60px;
+        font-size: 40px;
     }
 }

@@ -26,7 +26,6 @@
         setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
     </script>
     <p>Linktree casero</p>
-    <p>Hecho para ver desde móvil.</p>
         <h2>Carlos:</h2>
     <p>nerd que hace muchas cosas, wikipedia enjoyer</p>
         <h2>LINK(ARLO)S</h2>
@@ -35,109 +34,11 @@
             <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a><p>
             <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a><p>
             <p><a class="link-button instagram" href="https://www.instagram.com/carlosmorenomalvado/">Instagram</a><p>
+            <p><a class="link-button discord" href="https://discordapp.com/users/357955189149532161">Discord</a><p>
             <p><a class="link-button github" href="https://github.com/carmoran0">Github</a><p>
             <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a><p>
         </div>
-        <div id="now-playing">
-            <p>Now Playing:</p>
-            <img id="album-cover" src="" alt="Album Cover">
-            <span id="track-name"></span> - <span id="artist-name"></span>
-        </div>
         <p></p>
         <p>Hola hola</p>
-    <script>
-        const clientId = '1e4caf68abfd436fa4cada7d8da95ac6';
-        const clientSecret = 'b58a1dc21b7f499a8245f512567d8dd1';
-        const redirectUri = 'https://carmoran0.github.io/'; // Cambia esto a tu URL de redirección
-        let accessToken = '';
-        let refreshToken = '';
-
-        function getAccessToken() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
-            if (code) {
-                fetchAccessToken(code);
-            } else {
-                const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user-read-recently-played`;
-                window.location.href = authUrl;
-            }
-        }
-
-        async function fetchAccessToken(code) {
-            try {
-                const response = await fetch('https://accounts.spotify.com/api/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
-                    },
-                    body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(redirectUri)}`
-                });
-                const data = await response.json();
-                if (data.access_token) {
-                    accessToken = data.access_token;
-                    refreshToken = data.refresh_token;
-                    updateNowPlaying();
-                    setInterval(refreshAccessToken, 3600000); // Renueva el token cada hora
-                } else {
-                    console.error('Error fetching access token:', data);
-                    // Redirigir para obtener un nuevo código de autorización
-                    window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user-read-recently-played`;
-                }
-            } catch (error) {
-                console.error('Error fetching access token:', error);
-            }
-        }
-
-        async function refreshAccessToken() {
-            try {
-                const response = await fetch('https://accounts.spotify.com/api/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
-                    },
-                    body: `grant_type=refresh_token&refresh_token=${refreshToken}`
-                });
-                const data = await response.json();
-                if (data.access_token) {
-                    accessToken = data.access_token;
-                } else {
-                    console.error('Error refreshing access token:', data);
-                }
-            } catch (error) {
-                console.error('Error refreshing access token:', error);
-            }
-        }
-
-        async function getCurrentlyPlaying(token) {
-            try {
-                const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                });
-                if (response.status === 204 || response.status === 401) {
-                    document.getElementById('now-playing').style.display = 'none';
-                    return;
-                }
-                const data = await response.json();
-                if (data && data.item) {
-                    document.getElementById('album-cover').src = data.item.album.images[0].url;
-                    document.getElementById('track-name').textContent = data.item.name;
-                    document.getElementById('artist-name').textContent = data.item.artists.map(artist => artist.name).join(', ');
-                }
-            } catch (error) {
-                console.error('Error fetching currently playing track:', error);
-            }
-        }
-
-        async function updateNowPlaying() {
-            await getCurrentlyPlaying(accessToken);
-        }
-
-        getAccessToken();
-        setInterval(updateNowPlaying, 20000); // Actualiza cada 20 segundos
-    </script>
 </body>
 </html>
