@@ -24,6 +24,15 @@ p {
     color: rgb(255, 255, 255);
     font-size: 25px; /* Estilo por defecto para móviles */
     margin: 20px;
+    text-align: center;
+}
+#now-playing img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+#now-playing span {
+    vertical-align: middle;
 }
 a.link-button {
     color: white;
@@ -54,6 +63,10 @@ a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
     }
     #now-playing {
         font-size: 50px;
+    }
+    #now-playing img {
+        width: 100px;
+        height: 100px;
     }
     a.link-button {
         padding: 14px 25px;
