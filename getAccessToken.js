@@ -16,8 +16,4 @@ async function getAccessToken() {
     return data.access_token;
 }
 
-getAccessToken().then(token => {
-    console.log('Access Token:', token);
-}).catch(error => {
-    console.error('Error getting access token:', error);
-});
+module.exports = { getAccessToken };
