@@ -1,5 +1,4 @@
 body {
-
     background-image: url('imgfondo.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -9,20 +8,56 @@ h1 {
     color: rgb(22,184,243);
     margin: 20px;
     text-align: center;
-    font-size: 120px;
+    font-size: 60px; /* Estilo por defecto para móviles */
 }
 h2 {
     color: rgb(255, 255, 255);
     margin: 20px;
-    font-size: 70px;
+    font-size: 35px; /* Estilo por defecto para móviles */
 }
 p {
     color: rgb(255, 255, 255);
-    font-size: 50px;
+    font-size: 25px; /* Estilo por defecto para móviles */
     margin: 20px;
 }
 #now-playing {
     color: rgb(255, 255, 255);
-    font-size: 50px;
+    font-size: 25px; /* Estilo por defecto para móviles */
     margin: 20px;
+}
+a.link-button {
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    width: 200px;
+    font-size: 30px; /* Estilo por defecto para móviles */
+    text-decoration: none;
+    display: inline-block;
+}
+a.spotify { background-color: #1ED760; }
+a.letterbox { background-color: #ff8000; }
+a.steam { background-color: #2a475e; }
+a.instagram { background-color: #ff0069; }
+a.github { background-color: #6e5494; }
+a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
+
+/* Estilos para pantallas grandes (ordenador) */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 120px;
+    }
+    h2 {
+        font-size: 70px;
+    }
+    p {
+        font-size: 50px;
+    }
+    #now-playing {
+        font-size: 50px;
+    }
+    a.link-button {
+        padding: 14px 25px;
+        width: 300px;
+        font-size: 60px;
+    }
 }
