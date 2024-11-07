@@ -81,6 +81,8 @@
                     setInterval(refreshAccessToken, 3600000); // Renueva el token cada hora
                 } else {
                     console.error('Error fetching access token:', data);
+                    // Redirigir para obtener un nuevo código de autorización
+                    window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user-read-recently-played`;
                 }
             } catch (error) {
                 console.error('Error fetching access token:', error);
