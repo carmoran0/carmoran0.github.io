@@ -46,18 +46,6 @@
         <p></p>
         <p>Hola hola</p>
     <script>
-        const textos = ["C:\\Carlos Moreno|", "C:\\Carlos Moreno"];
-        let indice = 0;
-
-        function cambiarTexto() {
-            const elemento = document.getElementById("texto");
-            elemento.textContent = textos[indice];
-            indice = (indice + 1) % textos.length;
-        }
-
-        setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
-    </script>
-    <script>
         const clientId = '1e4caf68abfd436fa4cada7d8da95ac6';
         const clientSecret = 'b58a1dc21b7f499a8245f512567d8dd1';
         const redirectUri = 'https://carmoran0.github.io/'; // Cambia esto a tu URL de redirección
@@ -85,10 +73,14 @@
                 body: `grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(redirectUri)}`
             });
             const data = await response.json();
-            accessToken = data.access_token;
-            refreshToken = data.refresh_token;
-            updateNowPlaying();
-            setInterval(refreshAccessToken, 3600000); // Renueva el token cada hora
+            if (data.access_token) {
+                accessToken = data.access_token;
+                refreshToken = data.refresh_token;
+                updateNowPlaying();
+                setInterval(refreshAccessToken, 3600000); // Renueva el token cada hora
+            } else {
+                console.error('Error fetching access token:', data);
+            }
         }
 
         async function refreshAccessToken() {
@@ -101,7 +93,11 @@
                 body: `grant_type=refresh_token&refresh_token=${refreshToken}`
             });
             const data = await response.json();
-            accessToken = data.access_token;
+            if (data.access_token) {
+                accessToken = data.access_token;
+            } else {
+                console.error('Error refreshing access token:', data);
+            }
         }
 
         async function getCurrentlyPlaying(token) {
