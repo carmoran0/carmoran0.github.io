@@ -5,7 +5,7 @@ body {
     background-size: cover;
 }
 h1 {
-    color: rgb(22,184,243);
+    color: #16b8f3;
     margin: 80px;
     text-align: center;
     font-size: 100px; /* Estilo por defecto para móviles */
@@ -24,14 +24,24 @@ p {
 
 a.link-button {
     color: white;
-    padding: 10px 15px;
+    padding: 10px 15px; /* Estilo por defecto para ordenadores */
     text-align: center;
-    width: 200px;
-    font-size: 30px; /* Estilo por defecto para móviles */
+    width: 400px;
+    font-size: 30px; /* Estilo por defecto para ordenadores */
     text-decoration: none;
     display: inline-block;
     margin: 0 auto; /* Centrar los botones */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
 }
+
+a.link-button:hover {
+    background-color: #202020; /* Cambia el color de fondo al pasar el cursor */
+    color: #16b8f3; /* Cambia el color del texto al pasar el cursor */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el cursor */
+}
+
+
 a.spotify { background-color: #1ED760; }
 a.letterbox { background-color: #ff8000; }
 a.steam { background-color: #2a475e; }
@@ -40,32 +50,20 @@ a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord { background-color: #7289da; }
 
-
-/* Estilos para pantallas grandes (ordenador) 
-@media screen and (min-width: 768px) {
-    body {
-        margin-left: 20%;
-        margin-right: 20%;
-        background-image: url('imgfondo-ordenador.jpg'); 
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
+@media screen and (min-width: 780px) {
+    h1{
+        font-size: 80px; /* Estilo por defecto para móviles */
+        margin: 5px;
     }
-    h1 {
-        font-size: 100px;
-        text-align: left;
+    h2{
+        font-size: 50px; /* Estilo por defecto para móviles */
+        margin: 5px;
     }
-    h2 {
-        font-size: 50px;
-        text-align: left;
-    }
-    p {
-        font-size: 30px;
-        text-align: left;
-    }
+}
+@media screen and (max-width: 780px) {
     a.link-button {
-        padding: 14px 25px;
-        width: 300px;
-        font-size: 40px;
+        padding: 20px 30px; /* Estilo para móviles */
+        font-size: 40px; /* Estilo para móviles */
+        width: 200px;
     }
-}*/
+}
