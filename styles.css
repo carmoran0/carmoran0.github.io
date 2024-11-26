@@ -50,6 +50,13 @@ a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord { background-color: #7289da; }
 
+@media screen and (max-width: 780px) {
+    a.link-button {
+        padding: 20px 30px; /* Estilo para móviles */
+        font-size: 40px; /* Estilo para móviles */
+        width: 200px;
+    }
+}
 @media screen and (min-width: 780px) {
     h1{
         font-size: 80px; /* Estilo por defecto para móviles */
@@ -58,12 +65,5 @@ a.discord { background-color: #7289da; }
     h2{
         font-size: 50px; /* Estilo por defecto para móviles */
         margin: 5px;
-    }
-}
-@media screen and (max-width: 780px) {
-    a.link-button {
-        padding: 20px 30px; /* Estilo para móviles */
-        font-size: 40px; /* Estilo para móviles */
-        width: 200px;
     }
 }
