@@ -6,15 +6,15 @@ body {
 }
 h1 {
     color: #16b8f3;
-    margin: 80px;
+    margin: 40px;
     text-align: center;
-    font-size: 100px; /* Estilo por defecto para móviles */
+    font-size: 80px; /* Estilo por defecto para móviles */
 }
 h2 {
     color: rgb(255, 255, 255);
     margin: 20px;
     text-align: center;
-    font-size: 70px; /* Estilo por defecto para móviles */
+    font-size: 50px; /* Estilo por defecto para móviles */
 }
 p {
     color: rgb(255, 255, 255);
@@ -55,15 +55,21 @@ a.discord { background-color: #7289da; }
         padding: 20px 30px; /* Estilo para móviles */
         font-size: 40px; /* Estilo para móviles */
         width: 200px;
+        margin-right: auto; /* Ajusta el margen de la derecha */
+        margin-left: auto; /* Ajusta el margen de la izquierda */
+    }
+    h1 {
+        margin-left: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
+        margin-right: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
+        font-size: 65px; /* Estilo para móviles */
     }
 }
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 780px) { /* Estilos para ordenadores */
     h1{
-        font-size: 80px; /* Estilo por defecto para móviles */
+        font-size: 80px; 
         margin: 5px;
     }
     h2{
-        font-size: 50px; /* Estilo por defecto para móviles */
-        margin: 5px;
+        font-size: 50px; 
     }
 }
