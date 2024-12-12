@@ -33,7 +33,7 @@ h2 {
 }
 p {
     color: rgb(255, 255, 255);
-    font-size: 25px; /* Estilo por defecto para móviles */
+    font-size: 10px; /* Estilo por defecto para móviles */
     margin: 20px;
 }
 
@@ -74,7 +74,7 @@ a.discord { background-color: #7289da; }
 
 @media screen and (max-width: 780px) {
     a.link-button {
-        padding: 20px 30px; /* Estilo para móviles */
+        padding: 15px 30px; /* Estilo para móviles */
         font-size: 20px; /* Estilo para móviles */
         width: 200px;
         margin-right: auto; /* Ajusta el margen de la derecha */
@@ -85,6 +85,9 @@ a.discord { background-color: #7289da; }
         margin-right: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
         font-size: 40px; /* Estilo para móviles */
     }
+    p{
+        font-size: 10px; /* Estilo para móviles */
+    }
 }
 @media screen and (min-width: 780px) { /* Estilos para ordenadores */
     h1{
@@ -93,5 +96,8 @@ a.discord { background-color: #7289da; }
     }
     h2{
         font-size: 30px; 
+    }
+    p{
+        font-size: 20px; /* Estilo para  */
     }
 }
