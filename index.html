@@ -34,7 +34,6 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/TextureLoader.js"></script>
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -43,21 +42,9 @@
         document.getElementById('model-container').appendChild(renderer.domElement);
 
         const loader = new THREE.GLTFLoader();
-        const textureLoader = new THREE.TextureLoader();
-
         loader.load('carlos.glb', function(gltf) {
             const model = gltf.scene;
             model.scale.set(2.5, 2.5, 2.5); // Escalar el modelo para hacerlo más grande
-
-            // Cargar y aplicar texturas
-            const texture = textureLoader.load('path/to/your/texture.jpg');
-            model.traverse((node) => {
-                if (node.isMesh) {
-                    node.material.map = texture;
-                    node.material.needsUpdate = true;
-                }
-            });
-
             scene.add(model);
 
             function animate() {
