@@ -1,20 +1,35 @@
+@font-face {
+    font-family: Minecraft;
+    src: url(Minecraft.otf);
+  }
+
 body {
     background-image: url('imgfondo.jpg'); /* Imagen de fondo para móviles */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+
+#model-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Asegura que el modelo esté detrás de los botones */
+    pointer-events: none; /* Permite hacer clic en los botones a través del modelo */
+}
+
 h1 {
     color: #16b8f3;
     margin: 40px;
     text-align: center;
-    font-size: 80px; /* Estilo por defecto para móviles */
 }
 h2 {
     color: rgb(255, 255, 255);
     margin: 20px;
     text-align: center;
-    font-size: 50px; /* Estilo por defecto para móviles */
+    font-size: 30px; /* Estilo por defecto para móviles */
 }
 p {
     color: rgb(255, 255, 255);
@@ -27,12 +42,19 @@ a.link-button {
     padding: 10px 15px; /* Estilo por defecto para ordenadores */
     text-align: center;
     width: 400px;
-    font-size: 30px; /* Estilo por defecto para ordenadores */
+    font-size: 20px; /* Estilo por defecto para ordenadores */
     text-decoration: none;
     display: inline-block;
     margin: 0 auto; /* Centrar los botones */
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    border: 25px solid transparent; /* Necesario para que border-image funcione correctamente */    
+    
+    border-image: url('marco.png') 25; /* Imagen de borde personalizada */
+    border-image-repeat: repeat; /* Define cómo se repiten las partes del borde */
+
+    /*box-shadow: 0 10px 6px rgba(0, 0, 0, 1);*/
+
 }
 
 a.link-button:hover {
@@ -53,7 +75,7 @@ a.discord { background-color: #7289da; }
 @media screen and (max-width: 780px) {
     a.link-button {
         padding: 20px 30px; /* Estilo para móviles */
-        font-size: 40px; /* Estilo para móviles */
+        font-size: 20px; /* Estilo para móviles */
         width: 200px;
         margin-right: auto; /* Ajusta el margen de la derecha */
         margin-left: auto; /* Ajusta el margen de la izquierda */
@@ -61,15 +83,15 @@ a.discord { background-color: #7289da; }
     h1 {
         margin-left: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
         margin-right: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
-        font-size: 65px; /* Estilo para móviles */
+        font-size: 40px; /* Estilo para móviles */
     }
 }
 @media screen and (min-width: 780px) { /* Estilos para ordenadores */
     h1{
-        font-size: 80px; 
+        font-size: 60px; 
         margin: 5px;
     }
     h2{
-        font-size: 50px; 
+        font-size: 30px; 
     }
 }

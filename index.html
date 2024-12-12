@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=0.75">
+
 <html>
+
     <head>
         <title>link(arlo)s</title>
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
@@ -8,11 +10,12 @@
         <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>
         <style>
         body {
-            font-family: 'VT323';font-size: 22px;
+            font-family: 'Minecraft';font-size: 10px;
         }
         </style>
     </head>
 <body>
+    <div id="model-container"></div>
     <h1 id="texto">C:\Carlos Moreno </h1>
     <script>
         const textos = ["C:\\Carlos Moreno|", "C:\\Carlos Moreno"];
@@ -25,6 +28,40 @@
         }
 
         setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('model-container').appendChild(renderer.domElement);
+
+        const loader = new THREE.GLTFLoader();
+        loader.load('carlos.glb', function(gltf) {
+            const model = gltf.scene;
+            scene.add(model);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                model.rotation.x += Math.random() * 0.01;
+                model.rotation.y += Math.random() * 0.01;
+                model.rotation.z += Math.random() * 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }, undefined, function(error) {
+            console.error(error);
+        });
+
+        camera.position.z = 5;
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
         <h2>LINK(ARLO)S</h2>
         <div style="text-align:center">
