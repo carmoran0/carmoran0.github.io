@@ -45,7 +45,16 @@
 
         loader.load('carlos2.gltf', function(gltf) {
             const model = gltf.scene;
-            model.scale.set(2.5, 2.5, 2.5); // Escalar el modelo para hacerlo más grande
+            model.scale.set(3, 3, 3); // Escalar el modelo para hacerlo más grande
+
+            // Aplicar material de color marrón a todo el modelo
+            const defaultMaterial = new THREE.MeshStandardMaterial({ color: 0x1E120F });
+            model.traverse(function(node) {
+                if (node.isMesh) {
+                    node.material = defaultMaterial;
+                }
+            });
+
             scene.add(model);
 
             function animate() {
