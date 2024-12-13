@@ -74,6 +74,12 @@
 			},
 			"name":"palo madera",
 			"pbrMetallicRoughness":{
+				"baseColorFactor":[
+					0.016225,
+					0.009246,
+					0.005665,
+					0
+				],
 				"metallicFactor":0,
 				"roughnessFactor":0.9
 			}
