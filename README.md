@@ -4,13 +4,16 @@ Este es un proyecto de Linktree personalizado para Carlos Moreno. La página web
 
 ## Descripción
 
-La página contiene enlaces a varias plataformas y servicios utilizados por Carlos Moreno, incluyendo Spotify, Letterbox, Steam, Instagram, Discord, Github y correo electrónico.
+La página contiene enlaces a varias plataformas y servicios utilizados por yo migo.
+
+Además, la página incluye un modelo 3D muy guay.
 
 ## Estructura del Proyecto
 
 - `index.html`: El archivo principal de la página web.
 - `styles.css`: Archivo de estilos CSS para la página.
 - `imgfondo.jpg`: Imagen de fondo para dispositivos móviles.
+- `carlos2.gltf`: Archivo del modelo 3D.
 
 ## Enlaces
 
