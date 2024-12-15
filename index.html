@@ -53,7 +53,7 @@
 
         const loader = new THREE.GLTFLoader();
 
-        let model, speedX = 0.01, speedY = 0.01;
+        let model, speedX = 0.1, speedY = 0.1;
         let posX = 0, posY = 0;
 
         loader.load('carlos2.gltf', function(gltf) {
@@ -67,8 +67,8 @@
                 model.rotation.y += Math.random() * 0.01;
                 model.rotation.z += Math.random() * 0.01;
 
-                posX += speedX * 10;
-                posY += speedY * 10;
+                posX += speedX;
+                posY += speedY;
 
                 const modelWidth = 3.1 * 50; // Ajusta este valor según el tamaño real del modelo
                 const modelHeight = 3.1 * 50; // Ajusta este valor según el tamaño real del modelo
