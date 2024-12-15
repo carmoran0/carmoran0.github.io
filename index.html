@@ -70,10 +70,13 @@
                 posX += speedX;
                 posY += speedY;
 
-                if (posX > window.innerWidth / 2 || posX < -window.innerWidth / 2) {
+                const modelWidth = 3.1; // Ajusta este valor según el tamaño real del modelo
+                const modelHeight = 3.1; // Ajusta este valor según el tamaño real del modelo
+
+                if (posX > (window.innerWidth / 2 - modelWidth) || posX < (-window.innerWidth / 2 + modelWidth)) {
                     speedX = -speedX;
                 }
-                if (posY > window.innerHeight / 2 || posY < -window.innerHeight / 2) {
+                if (posY > (window.innerHeight / 2 - modelHeight) || posY < (-window.innerHeight / 2 + modelHeight)) {
                     speedY = -speedY;
                 }
 
