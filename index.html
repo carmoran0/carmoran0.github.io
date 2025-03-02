@@ -46,7 +46,7 @@
         setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
 
         function changeAccentColor() {
-            const hue = (Date.now() / 50) % 360;
+            const hue = (Date.now() / 10) % 360; // Cambia el valor de 50 a 20 para aumentar la velocidad
             document.documentElement.style.setProperty('--accent-color', `hsl(${hue}, 100%, 50%)`);
             requestAnimationFrame(changeAccentColor);
         }
