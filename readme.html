@@ -4,20 +4,10 @@
 <html>
 
     <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-TXZ4HYYS6Q"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-TXZ4HYYS6Q');
-        </script>
-        
         <title>link(arlo)s</title>
         <link rel="shortcut icon" type="image/png" href="/favicon.png">
         <link rel="stylesheet" href="styles.css">
-        <<!--link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>-->
+        <!--link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>-->
         <style>
         body {
             font-family: 'Minecraft';font-size: 10px;
@@ -25,13 +15,26 @@
         </style>
     </head>
 <body>
+    
+
+
+
+    
     <div id="model-container"></div>
-    <h1 id="texto">C:\Carlos Moreno </h1>
-    <p style="text-align: center; font-style: italic; margin: 50px;">
-        Mirando la tierra desde lejos te das cuenta de que es demasiado pequeña para el conflicto y lo suficientemente grande para la cooperación.  <span style="color: #16b8f3; font-weight: bold;">- Yuri Gagarin</span>
+    <h1 id="texto">C:\arlos\readme.txt</h1>
+    <p style="text-align: left; font-style: italic; margin: 50px;">
+        Mirando la tierra desde lejos te das cuenta de que es demasiado pequeña para el conflicto y lo suficientemente grande para la cooperación.  <span style="color: var(--accent-color); font-weight: bold;">- Yuri Gagarin</span>
     </p>
+
+    <div id="bouncing-images">
+        <img src="logoministerioMOD.png" id="image1" class="bouncing-image">
+        <img src="Prohibido4.png" id="image2" class="bouncing-image">
+        <img src="ANI3DbatHover.gif" id="image3" class="bouncing-image">
+        <img src="ANI3DbatHover.gif" id="image4" class="bouncing-image">
+    </div>
+
     <script>
-        const textos = ["C:\\Carlos Moreno|", "C:\\Carlos Moreno"];
+        const textos = ["C:\\arlos\\readme.txt|", "C:\\arlos\\readme.txt"];
         let indice = 0;
 
         function cambiarTexto() {
@@ -41,6 +44,14 @@
         }
 
         setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
+
+        function changeAccentColor() {
+            const hue = (Date.now() / 50) % 360;
+            document.documentElement.style.setProperty('--accent-color', `hsl(${hue}, 100%, 50%)`);
+            requestAnimationFrame(changeAccentColor);
+        }
+
+        // changeAccentColor();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -85,6 +96,52 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        const bouncingImages = document.querySelectorAll('.bouncing-image');
+        const speeds = [{ x: 1, y: 1 }, { x: -2, y: -2 }, { x: 1.5, y: 1.5 }, { x: -1.5, y: -1.5 }];
+        const positions = [
+            { x: 0, y: 0 },
+            { x: window.innerWidth - 100, y: window.innerHeight - 100 },
+            { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+            { x: window.innerWidth / 3, y: window.innerHeight / 3 }
+        ];
+
+        function adjustImageSizes() {
+            bouncingImages.forEach((img, index) => {
+                if (img.id === 'image1') {
+                    img.style.width = '150px'; // Ajustar el tamaño de logoministerioMOD.png
+                } else {
+                    img.style.width = '100px'; // Tamaño original de Prohibido4.png y ANI3DbatHover.gif
+                }
+            });
+        }
+
+        function animateImages() {
+            bouncingImages.forEach((img, index) => {
+                positions[index].x += speeds[index].x;
+                positions[index].y += speeds[index].y;
+
+                if (positions[index].x <= 0 || positions[index].x >= window.innerWidth - img.width) {
+                    speeds[index].x *= -1;
+                }
+                if (positions[index].y <= 0 || positions[index].y >= window.innerHeight - img.height) {
+                    speeds[index].y *= -1;
+                }
+
+                img.style.left = positions[index].x + 'px';
+                img.style.top = positions[index].y + 'px';
+            });
+
+            requestAnimationFrame(animateImages);
+        }
+
+        adjustImageSizes();
+        animateImages();
+
+        window.addEventListener('resize', () => {
+            positions[1].x = window.innerWidth - 100;
+            positions[1].y = window.innerHeight - 100;
+        });
     </script>
 
         <div style="text-align:center">
@@ -97,5 +154,8 @@
             <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a><p>
         </div>
         <p></p>
+        <div style="text-align:center; margin-top: 20px;">
+            <img src="683187kki8abof29.jpg" alt="Imagen al final de la página" style="max-width: 100%; height: auto;">
+        </div>
 </body>
 </html>

@@ -1,14 +1,29 @@
+/*
 @font-face {
     font-family: Minecraft;
     src: url(Minecraft.otf);
-  }
-
+}
+*/
+:root {
+    --accent-color: #b50000;
+}
+/*
 body {
-    background-image: url('imgfondo.jpg'); /* Imagen de fondo para móviles */
+    background-image: url('imgfondo.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+*/
+
+
+body {
+background-image: url('fondo.gif');
+background-attachment: fixed;
+background-repeat: repeat;
+}
+
+
 
 #model-container {
     position: fixed;
@@ -20,10 +35,26 @@ body {
     pointer-events: none; /* Permite hacer clic en los botones a través del modelo */
 }
 
+#bouncing-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.bouncing-image {
+    position: absolute;
+    width: 100px;
+    height: auto; /* Mantener el aspect ratio */
+}
+
 h1 {
-    color: #16b8f3;
+    color: var(--accent-color);
     margin: 40px;
-    text-align: center;
+    text-align: left;
 }
 h2 {
     color: rgb(255, 255, 255);
@@ -32,7 +63,7 @@ h2 {
     font-size: 30px; /* Estilo por defecto para móviles */
 }
 p {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 10px; /* Estilo por defecto para móviles */
     margin: 20px;
 }
@@ -59,7 +90,7 @@ a.link-button {
 
 a.link-button:hover {
     background-color: #202020; /* Cambia el color de fondo al pasar el cursor */
-    color: #16b8f3; /* Cambia el color del texto al pasar el cursor */
+    color: var(--accent-color); /* Cambia el color del texto al pasar el cursor */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el cursor */
 }
 
@@ -79,14 +110,16 @@ a.discord { background-color: #7289da; }
         width: 200px;
         margin-right: auto; /* Ajusta el margen de la derecha */
         margin-left: auto; /* Ajusta el margen de la izquierda */
+        text-align: center;
     }
     h1 {
         margin-left: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
         margin-right: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
-        font-size: 40px; /* Estilo para móviles */
+        font-size: 33px; /* Estilo para móviles */
     }
     p{
-        font-size: 10px; /* Estilo para móviles */
+        font-size: 15px; /* Estilo para móviles */
+        
     }
 }
 @media screen and (min-width: 780px) { /* Estilos para ordenadores */
