@@ -53,8 +53,9 @@ background-repeat: repeat;
 
 h1 {
     color: var(--accent-color);
-    margin: 40px;
+    margin: 20px;
     text-align: left;
+    text-shadow: 2px 2px 8px rgb(54, 54, 54);
 }
 h2 {
     color: rgb(255, 255, 255);
@@ -63,7 +64,7 @@ h2 {
     font-size: 30px; /* Estilo por defecto para móviles */
 }
 p {
-    color: rgb(0, 0, 0);
+    color: rgb(54, 54, 54);
     font-size: 10px; /* Estilo por defecto para móviles */
     margin: 20px;
 }
@@ -113,7 +114,7 @@ a.discord { background-color: #7289da; }
         text-align: center;
     }
     h1 {
-        margin-left: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
+        margin-left: 20px; /* Excepción para los márgenes laterales del h1 en móviles */
         margin-right: 5px; /* Excepción para los márgenes laterales del h1 en móviles */
         font-size: 33px; /* Estilo para móviles */
     }

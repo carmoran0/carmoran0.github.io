@@ -10,7 +10,7 @@
         <!--link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>-->
         <style>
         body {
-            font-family: 'Comic Sans MS';font-size: 10px;
+            font-family: 'Minecraft';font-size: 10px;
         }
         </style>
     </head>
@@ -22,9 +22,32 @@
     
     <div id="model-container"></div>
     <h1 id="texto">C:\arlos\readme.txt</h1>
-    <p style="text-align: left; font-style: italic; margin: 50px;">
-        Mirando la tierra desde lejos te das cuenta de que es demasiado pequeña para el conflicto y lo suficientemente grande para la cooperación.  <span style="color: var(--accent-color); font-weight: bold;">- Yuri Gagarin</span>
+    <p id="moving-text" style="white-space: nowrap; overflow: hidden; position: relative;">
+        PRONOMBRE CULTURAL PEDRO SANCHEZ: <span style="color: var(--accent-color); font-weight: bold;">He/They/She</span>
     </p>
+    <script>
+        const movingText = document.getElementById('moving-text');
+        let textPosition = -movingText.offsetWidth;
+
+        function moveText() {
+            textPosition += 1; // Velocidad de movimiento
+            if (textPosition > window.innerWidth) {
+                textPosition = -movingText.offsetWidth;
+            }
+            movingText.style.transform = `translateX(${textPosition}px)`;
+            requestAnimationFrame(moveText);
+        }
+
+        moveText();
+    </script></p>
+    
+    <p style="text-align: left; font-style: italic; margin: 20px;">
+        <span style="color: var(--accent-color);">¡Hola!</span> Que haces aqui. hola. SOy una nightly build yo mismo............... Ctrl + I para continuar con Copilot. 
+        <br>
+        <br>Si algun dia me saco el carnet de conducir seré un peligro para todos vosotros mortales :P
+    </p>
+    <p>ultima actualizacion de esta pagina web: 03/03/2025 gracias por tu atencion te amo</p>
+    
 
     <div id="bouncing-images">
         <img src="logoministerioMOD.png" id="image1" class="bouncing-image">
@@ -148,9 +171,9 @@
             <p><a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a><p>
             <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a><p>
             <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a><p>
-            <p><a class="link-button instagram" href="https://www.instagram.com/carlosmorenomalvado/">Instagram</a><p>
+            <p><a class="link-button instagram" href="https://www.instagram.com/testriculo/">Instagram</a><p>
             <p><a class="link-button discord" href="https://discordapp.com/users/357955189149532161">Discord</a><p>
-            <p><a class="link-button github" href="https://github.com/carmoran0">Github</a><p>
+            <!-- <p><a class="link-button github" href="https://github.com/carmoran0">Github</a><p> -->
             <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a><p>
         </div>
         <p></p>
