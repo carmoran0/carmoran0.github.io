@@ -1,185 +1,63 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=0.75">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página personal de Carlos - Enlaces a redes sociales y proyectos">
+    <title>link(arlo)s</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(https://cur.cursors-4u.net/nature/nat-11/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
+</head>
 
-<html>
-
-    <head>
-        <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(https://cur.cursors-4u.net/nature/nat-11/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
-        <title>link(arlo)s</title>
-        <link rel="shortcut icon" type="image/png" href="/favicon.png">
-        <link rel="stylesheet" href="styles.css">
-        <!--link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>-->
-        <style>
-        body {
-            font-family: 'Minecraft.otf';font-size: 10px;
-        }
-        </style>
-    </head>
 <body>
+    <header>
+        <div id="model-container"></div>
+        <h1 id="texto">C:\arlos\readme.txt</h1>
+        <p id="moving-text" style="white-space: nowrap; overflow: hidden; position: relative;">
+            PRONOMBRE CULTURAL PEDRO SANCHEZ: <span style="color: var(--accent-color); font-weight: bold;">He/They/She</span>
+        </p>
+    </header>
     
+    <main>
+        <section class="intro">
+            <p style="text-align: left; font-style: italic; margin: 20px;">
+                <span style="color: var(--accent-color);">¡Hola!</span> Que haces aqui. hola. SOy una nightly build yo mismo............... Ctrl + I para continuar con Copilot. 
+                <br>
+                <br>Si algun dia me saco el carnet de conducir seré un peligro para todos vosotros mortales :P
+            </p>
+            <p>ultima actualizacion de esta pagina web: 07/03/2025 gracias por tu atencion te amo</p>
+        </section>
+
+        <div id="bouncing-images">
+            <img src="logoministerioMOD.png" id="image1" class="bouncing-image" alt="Logo Ministerio">
+            <img src="Prohibido4.png" id="image2" class="bouncing-image" alt="Prohibido">
+            <img src="ANI3DbatHover.gif" id="image3" class="bouncing-image" alt="Bat Animation">
+            <img src="ANI3DbatHover.gif" id="image4" class="bouncing-image" alt="Bat Animation">
+        </div>
+
+        <section class="social-links">
+            <div style="text-align:center">
+                <p><a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a></p>
+                <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a></p>
+                <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a></p>
+                <p><a class="link-button instagram" href="https://www.instagram.com/testriculo/">Instagram</a></p>
+                <p><a class="link-button discord" href="https://discordapp.com/users/357955189149532161">Discord</a></p>
+                <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div style="text-align:center; margin-top: 20px;">
+            <img src="683187kki8abof29.jpg" alt="hola caracola" style="max-width: 100%; height: auto;">
+        </div>
+    </footer>
 
 
-
-    
-    <div id="model-container"></div>
-    <h1 id="texto">C:\arlos\readme.txt</h1>
-    <p id="moving-text" style="white-space: nowrap; overflow: hidden; position: relative;">
-        PRONOMBRE CULTURAL PEDRO SANCHEZ: <span style="color: var(--accent-color); font-weight: bold;">He/They/She</span>
-    </p>
-    <script>
-        const movingText = document.getElementById('moving-text');
-        let textPosition = -movingText.offsetWidth;
-
-        function moveText() {
-            textPosition += 1; // Velocidad de movimiento
-            if (textPosition > window.innerWidth) {
-                textPosition = -movingText.offsetWidth;
-            }
-            movingText.style.transform = `translateX(${textPosition}px)`;
-            requestAnimationFrame(moveText);
-        }
-
-        moveText();
-    </script></p>
-    
-    <p style="text-align: left; font-style: italic; margin: 20px;">
-        <span style="color: var(--accent-color);">¡Hola!</span> Que haces aqui. hola. SOy una nightly build yo mismo............... Ctrl + I para continuar con Copilot. 
-        <br>
-        <br>Si algun dia me saco el carnet de conducir seré un peligro para todos vosotros mortales :P
-    </p>
-    <p>ultima actualizacion de esta pagina web: 03/03/2025 gracias por tu atencion te amo</p>
-    
-
-    <div id="bouncing-images">
-        <img src="logoministerioMOD.png" id="image1" class="bouncing-image">
-        <img src="Prohibido4.png" id="image2" class="bouncing-image">
-        <img src="ANI3DbatHover.gif" id="image3" class="bouncing-image">
-        <img src="ANI3DbatHover.gif" id="image4" class="bouncing-image">
-    </div>
-
-    <script>
-        const textos = ["C:\\arlos\\readme.txt|", "C:\\arlos\\readme.txt"];
-        let indice = 0;
-
-        function cambiarTexto() {
-            const elemento = document.getElementById("texto");
-            elemento.textContent = textos[indice];
-            indice = (indice + 1) % textos.length;
-        }
-
-        setInterval(cambiarTexto, 530); // Cambia el texto cada segundos
-
-        function changeAccentColor() {
-            const hue = (Date.now() / 10) % 360; // Cambia el valor de 50 a 20 para aumentar la velocidad
-            document.documentElement.style.setProperty('--accent-color', `hsl(${hue}, 100%, 50%)`);
-            requestAnimationFrame(changeAccentColor);
-        }
-
-        changeAccentColor();
-    </script>
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('model-container').appendChild(renderer.domElement);
-
-        const loader = new THREE.GLTFLoader();
-
-        let model, speedX = 0, speedY = 0.005;
-        let posX = 0, posY = 0;
-
-
-        loader.load('carlos2.gltf', function(gltf) {
-            model = gltf.scene;
-            model.scale.set(3.1, 3.1, 3.1); // Escalar el modelo para hacerlo más grande
-            scene.add(model);
-
-            function animate() {
-                requestAnimationFrame(animate);
-                model.rotation.x += Math.random() * 0.01;
-                model.rotation.y += Math.random() * 0.01;
-                model.rotation.z += Math.random() * 0.01;
-
-                posX += speedX;
-                posY += speedY;
-                model.position.set(posX, posY, 0);
-                renderer.render(scene, camera);
-            }
-            animate();
-        }, undefined, function(error) {
-            console.error(error);
-        });
-
-        camera.position.z = 5;
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        const bouncingImages = document.querySelectorAll('.bouncing-image');
-        const speeds = [{ x: 1, y: 1 }, { x: -2, y: -2 }, { x: 1.5, y: 1.5 }, { x: -1.5, y: -1.5 }];
-        const positions = [
-            { x: 0, y: 0 },
-            { x: window.innerWidth - 100, y: window.innerHeight - 100 },
-            { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-            { x: window.innerWidth / 3, y: window.innerHeight / 3 }
-        ];
-
-        function adjustImageSizes() {
-            bouncingImages.forEach((img, index) => {
-                if (img.id === 'image1') {
-                    img.style.width = '150px'; // Ajustar el tamaño de logoministerioMOD.png
-                } else {
-                    img.style.width = '100px'; // Tamaño original de Prohibido4.png y ANI3DbatHover.gif
-                }
-            });
-        }
-
-        function animateImages() {
-            bouncingImages.forEach((img, index) => {
-                positions[index].x += speeds[index].x;
-                positions[index].y += speeds[index].y;
-
-                if (positions[index].x <= 0 || positions[index].x >= window.innerWidth - img.width) {
-                    speeds[index].x *= -1;
-                }
-                if (positions[index].y <= 0 || positions[index].y >= window.innerHeight - img.height) {
-                    speeds[index].y *= -1;
-                }
-
-                img.style.left = positions[index].x + 'px';
-                img.style.top = positions[index].y + 'px';
-            });
-
-            requestAnimationFrame(animateImages);
-        }
-
-        adjustImageSizes();
-        animateImages();
-
-        window.addEventListener('resize', () => {
-            positions[1].x = window.innerWidth - 100;
-            positions[1].y = window.innerHeight - 100;
-        });
-    </script>
-
-        <div style="text-align:center">
-            <p><a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a><p>
-            <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a><p>
-            <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a><p>
-            <p><a class="link-button instagram" href="https://www.instagram.com/testriculo/">Instagram</a><p>
-            <p><a class="link-button discord" href="https://discordapp.com/users/357955189149532161">Discord</a><p>
-            <!-- <p><a class="link-button github" href="https://github.com/carmoran0">Github</a><p> -->
-            <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a><p>
-        </div>
-        <p></p>
-        <div style="text-align:center; margin-top: 20px;">
-            <img src="683187kki8abof29.jpg" alt="Imagen al final de la página" style="max-width: 100%; height: auto;">
-        </div>
+    <script src="scripts.js"></script>
 </body>
 </html>

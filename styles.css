@@ -1,20 +1,7 @@
-/*
-@font-face {
-    font-family: Minecraft;
-    src: url(Minecraft.otf);
-}
-*/
+
 :root {
     --accent-color: #b50000;
 }
-/*
-body {
-    background-image: url('imgfondo.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
-*/
 
 
 body {
@@ -69,30 +56,41 @@ p {
     margin: 20px;
 }
 
+/* Contenedor de los enlaces sociales */
+.social-links > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.social-links p {
+    margin: 10px;
+    flex: 0 0 auto;
+}
+
 a.link-button {
     color: white;
     padding: 10px 15px; /* Estilo por defecto para ordenadores */
     text-align: center;
-    width: 400px;
+    width: 180px; /* Ancho reducido para que quepan varios en una fila */
     font-size: 20px; /* Estilo por defecto para ordenadores */
     text-decoration: none;
     display: inline-block;
-    margin: 0 auto; /* Centrar los botones */
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra mejorada con doble efecto */
     border: 25px solid transparent; /* Necesario para que border-image funcione correctamente */    
     
     border-image: url('marco.png') 25; /* Imagen de borde personalizada */
     border-image-repeat: repeat; /* Define cómo se repiten las partes del borde */
-
-    /*box-shadow: 0 10px 6px rgba(0, 0, 0, 1);*/
-
 }
 
 a.link-button:hover {
     background-color: #202020; /* Cambia el color de fondo al pasar el cursor */
     color: var(--accent-color); /* Cambia el color del texto al pasar el cursor */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el cursor */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra hover mejorada con más profundidad */
+    transform: translateY(-2px); /* Efecto de elevación al pasar el cursor */
 }
 
 
