@@ -49,7 +49,8 @@ function setup3DModel() {
     let model, speedX = 0, speedY = 0.005;
     let posX = 0, posY = 0;
 
-    loader.load('carlos2.gltf', function(gltf) {
+    // En la función setup3DModel o donde cargues el modelo:
+    loader.load('models/carlos2.gltf', function(gltf) {
         model = gltf.scene;
         model.scale.set(3.1, 3.1, 3.1);
         scene.add(model);
