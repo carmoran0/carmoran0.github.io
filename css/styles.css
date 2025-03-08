@@ -13,7 +13,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     z-index: -1;
     pointer-events: none;
@@ -23,7 +23,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     pointer-events: none;
     z-index: -1;
@@ -151,10 +151,9 @@ a.bat-counter {
 }
 
 #lastfm-container {
-    width: 100%;
+    width: 90%;
     max-width: 800px;
 }
-
 .lastfm-content {
     display: flex;
     gap: 20px;
@@ -164,8 +163,12 @@ a.bat-counter {
     border-image: url('../images/marco.png') 25;
     border-image-repeat: repeat;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
 }
 
+.lastfm-content:hover {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+}
 .lastfm-album-art img {
     width: 200px;
     height: 200px;

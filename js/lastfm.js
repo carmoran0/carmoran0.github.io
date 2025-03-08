@@ -1,7 +1,7 @@
 // Last.fm API integration
 const lastfmApiKey = 'c34e2201253c0fb7ff1d0b56101b4391'; // Replace with your Last.fm API key
 const lastfmUsername = 'sobaco27'; // Replace with your Last.fm username
-const updateInterval = 10000; // Update every minute
+const updateInterval = 10000; // Update every 10s
 
 // Function to fetch recent tracks from Last.fm API
 async function fetchRecentTracks() {
