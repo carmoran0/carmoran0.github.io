@@ -129,9 +129,27 @@ function setupBouncingImages() {
     });
 }
 
+// Contador de visitantes
+function setupVisitorCounter() {
+    const counterElement = document.getElementById('visitor-counter');
+    const today = new Date().toLocaleDateString();
+    const storageKey = 'visitorCount_' + today;
+    
+    // Obtener el conteo actual
+    let count = localStorage.getItem(storageKey) || 0;
+    count = parseInt(count) + 1;
+    
+    // Guardar el nuevo conteo
+    localStorage.setItem(storageKey, count);
+    
+    // Actualizar el texto del contador
+    counterElement.textContent = `Visitantes: ${count}`;
+}
+
 // Inicializar todo cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     setupMovingText();
     setup3DModel();
     setupBouncingImages();
+    setupVisitorCounter();
 });

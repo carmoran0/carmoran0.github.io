@@ -90,7 +90,6 @@ a.link-button:hover {
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
     transform: translateY(-2px);
 }
-
 a.spotify { background-color: #1ED760; }
 a.letterbox { background-color: #ff8000; }
 a.steam { background-color: #2a475e; }  
@@ -98,6 +97,16 @@ a.instagram { background-color: #ff0069; }
 a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord { background-color: #7289da; }
+a.bluesky { background-color: #1185FE; }
+a.visitors { 
+    background-color: rgba(139, 92, 246, 0.7); 
+    background-image: url('../images/Naturalis_Biodiversity_Center_-_ZMA.MAM.28371.b_reg_-_Nycteris_woodi_-_skin.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
 
 @media screen and (max-width: 780px) {
     a.link-button {
