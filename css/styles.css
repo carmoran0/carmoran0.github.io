@@ -98,14 +98,12 @@ a.github { background-color: #6e5494; }
 a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord { background-color: #7289da; }
 a.bluesky { background-color: #1185FE; }
-a.visitors { 
-    background-color: rgba(139, 92, 246, 0.7); 
+a.bat-counter { 
+    background-color: #6b3fa0; 
     background-image: url('../images/Naturalis_Biodiversity_Center_-_ZMA.MAM.28371.b_reg_-_Nycteris_woodi_-_skin.jpeg');
     background-size: cover;
-    background-position: center;
     background-blend-mode: overlay;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    background-position: center;
 }
 
 @media screen and (max-width: 780px) {

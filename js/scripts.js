@@ -19,6 +19,47 @@ function changeAccentColor() {
 
 changeAccentColor();
 
+// Variables globales para los murciélagos
+let speeds = [{ x: 1, y: 1 }, { x: -2, y: -2 }, { x: 1.5, y: 1.5 }, { x: -1.5, y: -1.5 }];
+let positions = [
+    { x: 0, y: 0 },
+    { x: window.innerWidth - 100, y: window.innerHeight - 100 },
+    { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+    { x: window.innerWidth / 3, y: window.innerHeight / 3 }
+];
+let batCount = 2;
+let bouncingImagesContainer;
+
+// Función global para añadir murciélagos
+function addNewBat() {
+    batCount++;
+    const newBat = document.createElement('img');
+    newBat.src = 'images/ANI3DbatHover.gif';
+    newBat.id = 'image' + (batCount + 2);
+    newBat.className = 'bouncing-image';
+    newBat.alt = 'Bat Animation';
+    newBat.style.width = '100px';
+
+    const randomX = Math.random() * (window.innerWidth - 100);
+    const randomY = Math.random() * (window.innerHeight - 100);
+    positions.push({ x: randomX, y: randomY });
+
+    const randomSpeed = {
+        x: (Math.random() * 2 - 1) * 2,
+        y: (Math.random() * 2 - 1) * 2
+    };
+    speeds.push(randomSpeed);
+
+    bouncingImagesContainer.appendChild(newBat);
+    
+    const batCounterButton = document.querySelector('.bat-counter');
+    if (batCounterButton) {
+        batCounterButton.textContent = `Murciélagos: ${batCount}`;
+    }
+    
+    return false;
+}
+
 // Texto en movimiento
 function setupMovingText() {
     const movingText = document.getElementById('moving-text');
@@ -49,7 +90,6 @@ function setup3DModel() {
     let model, speedX = 0, speedY = 0.005;
     let posX = 0, posY = 0;
 
-    // En la función setup3DModel o donde cargues el modelo:
     loader.load('models/carlos2.gltf', function(gltf) {
         model = gltf.scene;
         model.scale.set(3.1, 3.1, 3.1);
@@ -82,17 +122,10 @@ function setup3DModel() {
 
 // Imágenes rebotando
 function setupBouncingImages() {
-    const bouncingImages = document.querySelectorAll('.bouncing-image');
-    const speeds = [{ x: 1, y: 1 }, { x: -2, y: -2 }, { x: 1.5, y: 1.5 }, { x: -1.5, y: -1.5 }];
-    const positions = [
-        { x: 0, y: 0 },
-        { x: window.innerWidth - 100, y: window.innerHeight - 100 },
-        { x: window.innerWidth / 2, y: window.innerHeight / 2 },
-        { x: window.innerWidth / 3, y: window.innerHeight / 3 }
-    ];
-
+    bouncingImagesContainer = document.getElementById('bouncing-images');
+    
     function adjustImageSizes() {
-        bouncingImages.forEach((img, index) => {
+        document.querySelectorAll('.bouncing-image').forEach((img, index) => {
             if (img.id === 'image1') {
                 img.style.width = '150px';
             } else {
@@ -102,19 +135,21 @@ function setupBouncingImages() {
     }
 
     function animateImages() {
-        bouncingImages.forEach((img, index) => {
-            positions[index].x += speeds[index].x;
-            positions[index].y += speeds[index].y;
+        document.querySelectorAll('.bouncing-image').forEach((img, index) => {
+            if (index < positions.length) {
+                positions[index].x += speeds[index].x;
+                positions[index].y += speeds[index].y;
 
-            if (positions[index].x <= 0 || positions[index].x >= window.innerWidth - img.width) {
-                speeds[index].x *= -1;
-            }
-            if (positions[index].y <= 0 || positions[index].y >= window.innerHeight - img.height) {
-                speeds[index].y *= -1;
-            }
+                if (positions[index].x <= 0 || positions[index].x >= window.innerWidth - img.width) {
+                    speeds[index].x *= -1;
+                }
+                if (positions[index].y <= 0 || positions[index].y >= window.innerHeight - img.height) {
+                    speeds[index].y *= -1;
+                }
 
-            img.style.left = positions[index].x + 'px';
-            img.style.top = positions[index].y + 'px';
+                img.style.left = positions[index].x + 'px';
+                img.style.top = positions[index].y + 'px';
+            }
         });
 
         requestAnimationFrame(animateImages);
@@ -129,27 +164,9 @@ function setupBouncingImages() {
     });
 }
 
-// Contador de visitantes
-function setupVisitorCounter() {
-    const counterElement = document.getElementById('visitor-counter');
-    const today = new Date().toLocaleDateString();
-    const storageKey = 'visitorCount_' + today;
-    
-    // Obtener el conteo actual
-    let count = localStorage.getItem(storageKey) || 0;
-    count = parseInt(count) + 1;
-    
-    // Guardar el nuevo conteo
-    localStorage.setItem(storageKey, count);
-    
-    // Actualizar el texto del contador
-    counterElement.textContent = `Visitantes: ${count}`;
-}
-
 // Inicializar todo cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     setupMovingText();
     setup3DModel();
     setupBouncingImages();
-    setupVisitorCounter();
 });
