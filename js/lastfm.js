@@ -1,5 +1,5 @@
 // Last.fm API integration
-const lastfmApiKey = 'c34e2201253c0fb7ff1d0b56101b4391'; // Replace with your Last.fm API key
+const lastfmApiKey = 'c34e2201253c0fb7ff1d0b56101b4391'; // RAAAA ME DA IGUAL TODOOOOOO
 const lastfmUsername = 'sobaco27'; // Replace with your Last.fm username
 const updateInterval = 10000; // Update every 10s
 
