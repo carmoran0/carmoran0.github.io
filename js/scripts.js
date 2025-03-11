@@ -286,3 +286,52 @@ function addNewBat() {
     }
     return false;
 }
+
+// Función para activar el modo oscuro y cambiar los murciélagos por screamers
+function activateDarkMode() {
+    document.body.classList.add("dark-mode");
+
+    let bats = document.querySelectorAll(".bouncing-image");
+    bats.forEach((bat, index) => {
+        // Alternar entre dos imágenes de screamer
+        let screamerImg = index % 2 === 0 ? "images/screamer1.jpeg" : "images/screemer2.jpeg";
+        bat.src = screamerImg;
+        bat.classList.add("screamer-effect");
+    });
+}
+
+// Función para desactivar el modo oscuro y restaurar los murciélagos
+function deactivateDarkMode() {
+    document.body.classList.remove("dark-mode");
+
+    let bats = document.querySelectorAll(".bouncing-image");
+    bats.forEach(bat => {
+        bat.src = "images/ANI3DbatHover.gif"; // Imagen original de los murciélagos
+        bat.classList.remove("screamer-effect");
+    });
+}
+
+// Función que revisa si son las 3 AM
+function checkTimeForDarkMode() {
+    let now = new Date();
+    let hours = now.getHours();
+
+    if (hours === 3) {
+        activateDarkMode();
+    } else {
+        deactivateDarkMode();
+    }
+}
+
+// Verifica la hora al cargar la página y cada minuto
+checkTimeForDarkMode();
+setInterval(checkTimeForDarkMode, 60000);
+
+// Función para probar manualmente el efecto en la consola
+function uwu(state) {
+    if (state) {
+        activateDarkMode();
+    } else {
+        deactivateDarkMode();
+    }
+}
