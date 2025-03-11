@@ -130,6 +130,18 @@ function setup3DModel() {
     document.getElementById('model-container').appendChild(renderer.domElement);
 
     const loader = new THREE.GLTFLoader();
+    
+    // Add a texture loader path resolver
+    const loadingManager = new THREE.LoadingManager();
+    loadingManager.setURLModifier(function(url) {
+        // Check if the URL is a texture file referenced in the GLTF
+        if(url.includes('carlos%20supremo.png')) {
+            return 'images/carlos supremo.png';
+        }
+        return url;
+    });
+    
+    loader.manager = loadingManager;
 
     let model, speedX = 0, speedY = 0.005;
     let posX = 0, posY = 0;
@@ -152,7 +164,7 @@ function setup3DModel() {
         }
         animate();
     }, undefined, function(error) {
-        console.error(error);
+        console.error('Error loading 3D model:', error);
     });
 
     camera.position.z = 5;
