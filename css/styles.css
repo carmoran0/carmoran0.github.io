@@ -439,3 +439,27 @@ a.hunt-button.hunting-active {
         padding: 8px 12px;
     }
 }
+/* Fondo negro cuando son las 3 AM */
+.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Casi negro */
+    z-index: -1;
+}
+
+/* Ajuste para que los screamers sean más grandes y se muevan más rápido */
+.screamer-effect {
+    width: 300px !important; /* Tamaño más grande */
+    height: auto;
+    animation: shake 0.1s infinite alternate; /* Mueve más rápido */
+}
+
+/* Animación de temblor para los screamers */
+@keyframes shake {
+    from { transform: translateX(-10px) rotate(-5deg); }
+    to { transform: translateX(10px) rotate(5deg); }
+}
