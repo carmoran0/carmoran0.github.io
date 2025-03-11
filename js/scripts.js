@@ -218,10 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Array con diferentes títulos
 const titulos = [
-    "Título Principal",
-    "Bienvenido a mi sitio web",
-    "Información importante",
-    "No te pierdas nuestras ofertas"
+    "C:\\Users\\cormoran>",
+    "C:\\Users\\cormoran>|"
   ];
   
   // Variable para controlar el índice actual
