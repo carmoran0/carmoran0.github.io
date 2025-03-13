@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Página 404 - Página no encontrada">
     <title>404 - Página no encontrada</title>
@@ -166,17 +167,19 @@
     </style>
 </head>
 <body>
-    <header>
-        <div id="model-container"></div>
-        <h1 id="texto">C:\arlos\error.txt</h1>
-    </header>
+    <div id="model-container"></div>
     
-    <main>
-        <p id="moving-text" style="white-space: nowrap; overflow: hidden; position: relative;">
-            ERROR 404 - PÁGINA NO ENCONTRADA - ERROR 404 - PÁGINA NO ENCONTRADA - ERROR 404 - PÁGINA NO ENCONTRADA
-        </p>
+    <div class="content-container">
+        <header>
+            <h1 id="texto">C:\arlos\error.txt</h1>
+        </header>
         
-        <div class="error-container">
+        <main>
+            <p id="moving-text" style="white-space: nowrap; overflow: hidden; position: relative;">
+                ERROR 404 - PÁGINA NO ENCONTRADA - ERROR 404 - PÁGINA NO ENCONTRADA - ERROR 404 - PÁGINA NO ENCONTRADA
+            </p>
+            
+            <div class="error-container">
             <h1 class="error-code">404</h1>
             <p class="error-message">¡Ups! Vete a la mierda</p>
             <p style="color: white;">La página que buscas no existe</p>
@@ -195,10 +198,15 @@
 
     <footer>
         <div style="text-align:center; margin-top: 20px;">
-            <a href="https://www.glitter-graphics.com"><img src="http://dl10.glitter-graphics.net/pub/485/485100pcc1kskzgw.gif" width=150 height=20 border=0></a><br>
-            <a href="https://www.glitter-graphics.com"><img src="http://dl10.glitter-graphics.net/pub/522/522730blmk1smow4.gif" width=150 height=20 border=0></a><br>
+            <img src="http://dl10.glitter-graphics.net/pub/485/485100pcc1kskzgw.gif" width=150 height=20 border=0></a><br><a href="https://www.glitter-graphics.com" target=_blank></a>
+            <img src="http://dl10.glitter-graphics.net/pub/522/522730blmk1smow4.gif" width=150 height=20 border=0></a><br><a href="https://www.glitter-graphics.com" target=_blank></a>
+            <img src="http://dl9.glitter-graphics.net/pub/223/223979qnh6dwmabq.gif" width=150 height=20 border=0></a><br><a href="https://www.glitter-graphics.com" target=_blank></a>            
+            <img src="http://dl.glitter-graphics.net/pub/705/705591ut0li6jmah.gif" width=150 height=51 border=0></a><br><a href="https://www.glitter-graphics.com" target=_blank></a>
+            <img src="http://dl5.glitter-graphics.net/pub/523/523135dk607du962.gif" width=150 height=20 border=0></a><br><a href="https://www.glitter-graphics.com" target=_blank></a>
+            <img src="images/683187kki8abof29.jpg" alt="hola caracola" style="max-width: 100%; height: auto; cursor: pointer;" onclick="uwu(true);">
         </div>
     </footer>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

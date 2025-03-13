@@ -1,21 +1,81 @@
 
 :root {
     --accent-color: #b50000;
+    --bg-image: url('../images/fondo.gif');
+    --content-bg: rgba(255, 255, 255, 0.9);
+    --text-color: rgb(54, 54, 54);
+    --heading-shadow: rgb(54, 54, 54);
+    --popup-bg: #ffffff;
+    --popup-text: #333;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --bg-image: url('../images/gatos.gif');
+    --content-bg: rgba(40, 40, 40, 0.9);
+    --text-color: rgb(220, 220, 220);
+    --heading-shadow: rgb(20, 20, 20);
+    --popup-bg: #333333;
+    --popup-text: #f0f0f0;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background-color: black;
+    color: white;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+@font-face {
+    font-family: 'Pally';
+    src: url('../Pally-Regular.otf') format('opentype');
 }
 
 body {
-    background-image: url('../images/fondo.gif');
+    font-family: 'Pally', sans-serif;
+    background-image: var(--bg-image);
     background-attachment: fixed;
     background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    transition: background-image 0.5s ease;
 }
 
 #model-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 90%;
+    width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 2;
     pointer-events: none;
 }
 
@@ -26,7 +86,7 @@ body {
     width: 90%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 1;
 }
 
 .bouncing-image {
@@ -39,7 +99,9 @@ h1 {
     color: var(--accent-color);
     margin: 20px;
     text-align: left;
-    text-shadow: 2px 2px 8px rgb(54, 54, 54);
+    text-shadow: 2px 2px 8px var(--heading-shadow);
+    position: relative;
+    z-index: 4;
 }
 
 h2 {
@@ -50,9 +112,27 @@ h2 {
 }
 
 p {
-    color: rgb(54, 54, 54);
+    color: var(--text-color);
     font-size: 10px;
     margin: 20px;
+    position: relative;
+    z-index: 4;
+    transition: color 0.3s ease;
+}
+
+.content-container {
+    background-color: var(--content-bg);
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 25px solid transparent;
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
 }
 
 /* Contenedor de los enlaces sociales */
@@ -107,6 +187,21 @@ a.bat-counter {
 }
 
 @media screen and (max-width: 780px) {
+    body {
+        background-image: var(--bg-image);
+        background-color: #000000;
+    }
+    
+    .content-container {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        border: none;
+        border-image: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
     a.link-button {
         padding: 15px 30px;
         font-size: 20px;
@@ -120,14 +215,29 @@ a.bat-counter {
         margin-left: 20px;
         margin-right: 5px;
         font-size: 33px;
+        color: var(--accent-color);
     }
     
     p {
         font-size: 15px;
+        color: var(--text-color);
     }
 }
 
 @media screen and (min-width: 780px) {
+    .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    .content-container .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    
     h1 {
         font-size: 60px; 
         margin: 5px;
@@ -158,12 +268,12 @@ a.bat-counter {
     display: flex;
     gap: 20px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--content-bg);
     border: 25px solid transparent;
     border-image: url('../images/marco.png') 25;
     border-image-repeat: repeat;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, background-color 0.3s ease;
 }
 
 .lastfm-content:hover {
@@ -193,18 +303,22 @@ a.bat-counter {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #202020;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 .lastfm-artist {
     font-size: 24px;
     margin-bottom: 5px;
-    color: #404040;
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
 .lastfm-album {
     font-size: 20px;
-    color: #606060;
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: color 0.3s ease;
 }
 
 .lastfm-error {
@@ -278,7 +392,7 @@ a.bat-counter {
 }
 
 .popup-content {
-    background-color: #ffffff;
+    background-color: var(--popup-bg);
     width: 80%;
     max-width: 500px;
     padding: 20px;
@@ -287,6 +401,7 @@ a.bat-counter {
     border-image-repeat: repeat;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .popup-content h2 {
@@ -295,9 +410,10 @@ a.bat-counter {
 }
 
 .popup-content p {
-    color: #333;
+    color: var(--popup-text);
     font-size: 18px;
     margin-bottom: 20px;
+    transition: color 0.3s ease;
 }
 
 .popup-content button {
@@ -449,6 +565,21 @@ a.hunt-button.hunting-active {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9); /* Casi negro */
     z-index: -1;
+}
+
+/* Atenuar ligeramente el fondo en modo oscuro para dispositivos móviles */
+@media screen and (max-width: 780px) {
+    [data-theme="dark"] body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Atenúa ligeramente */
+        z-index: -1;
+        pointer-events: none;
+    }
 }
 
 /* Ajuste para que los screamers sean más grandes y se muevan más rápido */

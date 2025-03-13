@@ -107,11 +107,13 @@ function showSpecialBatPopup() {
 // Texto en movimiento
 function setupMovingText() {
     const movingText = document.getElementById('moving-text');
+    const container = movingText.parentElement;
+    const containerWidth = container.clientWidth;
     let textPosition = -movingText.offsetWidth;
 
     function moveText() {
         textPosition += 1;
-        if (textPosition > window.innerWidth) {
+        if (textPosition > containerWidth) {
             textPosition = -movingText.offsetWidth;
         }
         movingText.style.transform = `translateX(${textPosition}px)`;
@@ -220,11 +222,62 @@ function setupBouncingImages() {
     });
 }
 
+// Theme toggle functionality
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Function to set the theme based on preference or stored value
+    function setTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '🌙';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            themeToggle.innerHTML = '☀️';
+        }
+    }
+    
+    // Set theme on initial load
+    setTheme();
+    
+    // Toggle theme when button is clicked
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '🌙';
+        }
+    });
+    
+    // Listen for system preference changes
+    prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '🌙';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeToggle.innerHTML = '☀️';
+            }
+        }
+    });
+}
+
 // Inicializar todo cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     setupMovingText();
     setup3DModel();
     setupBouncingImages();
+    setupThemeToggle();
 });
 
 
