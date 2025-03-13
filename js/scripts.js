@@ -278,7 +278,22 @@ document.addEventListener('DOMContentLoaded', function() {
     setup3DModel();
     setupBouncingImages();
     setupThemeToggle();
+    calculateStreak();
+    setInterval(calculateStreak, 86400000);
 });
+
+// Duolingo streak counter
+function calculateStreak() {
+    // Initialize deployment date in localStorage
+if(!localStorage.getItem('duolingoDeployDate')) {
+    localStorage.setItem('duolingoDeployDate', new Date().toISOString());
+}
+const deploymentDate = new Date(localStorage.getItem('duolingoDeployDate'));
+    const today = new Date();
+    const diffTime = Math.abs(today - deploymentDate);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.querySelector('#streak-counter .streak-number').textContent = `${diffDays + 479} días`;
+}
 
 
 // Array con diferentes títulos

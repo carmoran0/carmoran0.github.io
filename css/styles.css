@@ -41,8 +41,8 @@
 }
 
 [data-theme="dark"] .theme-toggle {
-    background-color: black;
-    color: white;
+    background-color: rgb(44, 44, 44);
+    color: rgb(231, 231, 231);
 }
 
 .theme-toggle:hover {
@@ -186,6 +186,20 @@ a.bat-counter {
     background-position: center;
 }
 
+a.duolingo { background-color: #58CC02; }
+a.duolingo:hover { background-color: #46a302; }
+
+.streak-number {
+    color: #FF9600;
+    font-weight: bold;
+}
+
+.streak-icon {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
 @media screen and (max-width: 780px) {
     body {
         background-image: var(--bg-image);
