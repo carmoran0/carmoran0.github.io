@@ -187,7 +187,12 @@ a.bat-counter {
 }
 
 a.duolingo { background-color: #58CC02; }
-a.duolingo:hover { background-color: #46a302; }
+a.duolingo:hover { 
+    background-color: #202020;
+    color: var(--accent-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    transform: translateY(-2px);
+}
 
 .streak-number {
     color: #FF9600;
