@@ -78,28 +78,65 @@ function addNewBat() {
     return false;
 }
 
-// Función para mostrar el pop-up cuando aparece un murciélago especial
+// Variables para gestionar la cola de notificaciones toast
+let toastQueue = [];
+let toastSpacing = 10; // Espacio entre notificaciones en píxeles
+
+// Función para mostrar la notificación toast cuando aparece un murciélago especial
 function showSpecialBatPopup() {
-    // Crear el elemento del pop-up
-    const popup = document.createElement('div');
-    popup.className = 'special-bat-popup';
-    popup.innerHTML = `
-        <div class="popup-content">
-            <h2>¡Un murciélago shiny ha spawneado!</h2>
-            <button id="close-popup">Cerrar</button>
+    // Crear el elemento de la notificación toast
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+        <div class="toast-content">
+            <h3>¡Un murciélago <span class="shiny-text">shiny</span> ha spawneado!</h3>
         </div>
     `;
     
-    // Añadir el pop-up al body
-    document.body.appendChild(popup);
+    // Añadir la notificación toast al body
+    document.body.appendChild(toast);
     
-    // Manejar el cierre del pop-up
-    document.getElementById('close-popup').addEventListener('click', function() {
-        popup.classList.add('popup-closing');
+    // Añadir a la cola y posicionar
+    toastQueue.push(toast);
+    positionToasts();
+    
+    // Mostrar la notificación con animación
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    // Cerrar automáticamente después de 4 segundos
+    setTimeout(() => {
+        toast.classList.add('hide');
         setTimeout(() => {
-            document.body.removeChild(popup);
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
+            // Eliminar de la cola
+            const index = toastQueue.indexOf(toast);
+            if (index > -1) {
+                toastQueue.splice(index, 1);
+                // Reposicionar las notificaciones restantes
+                positionToasts();
+            }
         }, 500); // Tiempo para la animación de cierre
-    });
+    }, 4000);
+}
+
+// Función para posicionar todas las notificaciones en la cola
+function positionToasts() {
+    let bottomPosition = 20; // Posición inicial desde abajo
+    
+    // Posicionar cada notificación desde abajo hacia arriba
+    for (let i = 0; i < toastQueue.length; i++) {
+        const toast = toastQueue[i];
+        toast.style.bottom = bottomPosition + 'px';
+        
+        // Calcular la altura para la siguiente notificación
+        // Usamos getBoundingClientRect para obtener la altura real incluyendo bordes y padding
+        const height = toast.getBoundingClientRect().height;
+        bottomPosition += height + toastSpacing;
+    }
 }
 
 // También necesitamos añadir este código al DOMContentLoaded para inicializar
