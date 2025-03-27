@@ -1,0 +1,27 @@
+/* Estilos para la sección Sobre mí */
+.about-section {
+    display: none; /* Oculto por defecto */
+    transition: all 0.3s ease;
+}
+
+.about-section.visible {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilo para el botón Sobre mí */
+a.about-button { 
+    background-color: #9c27b0; /* Color morado */
+    position: relative;
+}
+
+a.about-button.active {
+    background-color: #6a0080; /* Color morado más oscuro cuando está activo */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

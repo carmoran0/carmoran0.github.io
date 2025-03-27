@@ -260,6 +260,7 @@ a.duolingo:hover {
     h1 {
         font-size: 60px; 
         margin: 5px;
+        text-align: center; /* Centrar el título solo en versión de ordenador */
     }
     
     h2 {
