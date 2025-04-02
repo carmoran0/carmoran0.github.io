@@ -1,0 +1,222 @@
+/* Estilos para la versión formal del sitio */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --text-color: #333333;
+    --background-color: #f5f5f5;
+    --link-hover: #2980b9;
+    --card-background: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+main p {
+    margin: 15px 0;
+    padding: 0 10px;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--card-shadow);
+    padding: 30px;
+    position: relative;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 15px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.version-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.version-toggle:hover {
+    background-color: var(--link-hover);
+}
+
+/* Sección Sobre mí */
+.about-section {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px var(--card-shadow);
+    display: none;
+}
+
+.about-section.visible {
+    display: block;
+}
+
+.about-section p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.highlight {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Enlaces sociales */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.social-links div {
+    width: 100%;
+    max-width: 400px;
+}
+
+.link-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.link-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores de botones */
+a.about-button { background-color: var(--primary-color); }
+a.spotify { background-color: #1DB954; }
+a.letterbox { background-color: #FF8000; }
+a.steam { background-color: #171a21; }
+a.instagram { background-color: #E1306C; }
+a.discord { background-color: #5865F2; }
+a.bluesky { background-color: #1DA1F2; }
+a.correo { background-color: #4285F4; }
+a.duolingo { background-color: #58CC02; }
+a.linkedin { background-color: #0077B5; }
+a.github { background-color: #6e5494; }
+
+.streak-number {
+    color: #FF9600;
+    font-weight: bold;
+}
+
+.streak-icon {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 14px;
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 780px) {
+    body {
+        padding: 15px;
+    }
+    
+    .content-container {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .link-button {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    
+    main p {
+        padding: 0 5px;
+        text-align: left;
+    }
+}
+
+/* Móviles */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .content-container {
+        padding: 15px;
+        box-shadow: 0 2px 4px var(--card-shadow);
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    header {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    
+    .social-links div {
+        max-width: 100%;
+    }
+    
+    .link-button {
+        padding: 12px 15px;
+        margin-bottom: 12px;
+        font-size: 15px;
+    }
+    
+    footer {
+        margin-top: 25px;
+        font-size: 12px;
+    }
+}

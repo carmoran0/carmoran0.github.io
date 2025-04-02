@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página  de Carlos - Versión formal">
+    <title>Carlos Moreno</title>
+    <link rel="icon" type="image/gif" href="../images/favicon.png">
+    <link rel="shortcut icon" type="image/gif" href="../images/favicon.png">
+    <link rel="apple-touch-icon" type="image/gif" href="../images/favicon.png">
+    <link rel="stylesheet" href="../srs/css/styles-formal.css">
+</head>
+<body>
+    <div class="content-container">
+        <header>
+            <h1>Carlos Moreno Antorrena</h1>
+        </header>
+        
+        <main>
+            <p style="text-align: justify;"></p>
+                <p style="text-align: justify;">
+                    <span class="highlight">Presentación profesional</span>. Información personal:
+                    <br> - Estudiante de Ingeniería de Datos en la EUPLA
+                    <br> - Especialista en desarrollo web
+                    <br> - Entusiasta de Wikipedia
+                    <br> - Aficionado a la tecnología
+                    <br> - Defensor del código abierto
+                </p>
+                <p style="text-align: justify;">Última actualización: 27/03/2025</p>
+                <br>
+            </section>
+            <section class="social-links">
+                <div>
+                    <p><a class="link-button github" href="https://github.com/carmoran0">GitHub</a></p>
+                    <p><a class="link-button linkedin" href="https://www.linkedin.com/in/carlos-moreno-4430ba356/">LinkedIn</a></p>
+                    <p><a class="link-button bluesky" href="https://bsky.app/profile/koljoz.bsky.social">Bluesky</a></p>
+                    <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a></p>
+                    <p><a class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter">Duolingo: <img src="../streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a></p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div>
+                <p>© 2025 Carlos Moreno.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar la racha de Duolingo
+            const streakCounter = document.getElementById('streak-counter');
+            const streakNumber = streakCounter.querySelector('.streak-number');
+            
+            // Simulamos la carga de la racha (en una versión real, esto vendría de una API)
+            setTimeout(() => {
+                streakNumber.textContent = '365'; // Valor de ejemplo
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

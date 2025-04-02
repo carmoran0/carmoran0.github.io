@@ -1,0 +1,20 @@
+.version-toggle {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+}
+
+.version-toggle:hover {
+    background-color: #202020;
+    color: var(--accent-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    transform: translateY(-2px);
+}
