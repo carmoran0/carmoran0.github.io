@@ -321,15 +321,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Duolingo streak counter
 function calculateStreak() {
-    // Initialize deployment date in localStorage
-if(!localStorage.getItem('duolingoDeployDate')) {
-    localStorage.setItem('duolingoDeployDate', new Date().toISOString());
-}
-const deploymentDate = new Date(localStorage.getItem('duolingoDeployDate'));
+    // Fecha de inicio fija para el contador de Duolingo (fecha real del streak)
+    const streakStartDate = new Date('2023-11-23'); // Ajusta esta fecha según corresponda
     const today = new Date();
-    const diffTime = Math.abs(today - deploymentDate);
+    const diffTime = Math.abs(today - streakStartDate);
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.querySelector('#streak-counter .streak-number').textContent = `${diffDays + 479} días`;
+    document.querySelector('#streak-counter .streak-number').textContent = `${diffDays} días`;
 }
 
 
