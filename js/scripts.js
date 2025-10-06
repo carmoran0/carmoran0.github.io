@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Duolingo streak counter
 function calculateStreak() {
-    const streakStartDate = new Date('2023-11-23');
+    const streakStartDate = new Date('2023-12-09');
     const today = new Date();
     const diffTime = Math.abs(today - streakStartDate);
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));

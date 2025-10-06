@@ -4,7 +4,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background-color: #202020; /* page background */
-    color: rgb(201, 201, 201); /* text color */
+    color: #fff; /* text color */
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
@@ -42,7 +42,49 @@ h2 {
     max-width: 1600px;
     margin: 0 auto;
     align-items: stretch;
+    /* dejar espacio superior para la barra de anuncio */
+    margin-top: 36px;
 }
+
+/* Barra de anuncio fina en la parte superior */
+.announcement {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 14px;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Ajuste en pantallas pequeñas para no consumir mucho espacio */
+@media screen and (max-width: 780px) {
+    .announcement { height: 44px; font-size: 13px; padding: 0 10px; }
+    .page-wrapper { margin-top: 44px; padding-top: 6px; }
+}
+
+/* Badges container (fila horizontal al final) */
+.badges-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 9px 5px;
+    margin: 10px auto 20px auto;
+}
+
+.badges-container img {
+    width: auto;
+    max-height: 12px;
+    display: block;
+}
+
 
 /* Columnas para el diseño en ordenador */
 .left-column {
@@ -244,9 +286,11 @@ a.letterbox:hover { background-color: #ff8000; }
 a.steam:hover { background-color: #2a475e; }  
 a.instagram:hover { background-color: #ff0069; }
 a.github:hover { background-color: #6e5494; }
-a.correo:hover { background-color: #c8c8    c8; color: rgb(0, 0, 0); }
+a.correo:hover { background-color: #c8c8c8; color: rgb(0, 0, 0); }
 a.discord:hover { background-color: #7289da; }
 a.bluesky:hover { background-color: #1185FE; }
+a.duolingo:hover { background-color: #58CC02; }
+a.bat-counter:hover {background-color: #6b3fa0; }
 
 
 
@@ -267,10 +311,15 @@ a.bluesky:hover { background-color: #1185FE; }
     display: flex;
     gap: 20px;
     padding: 20px;
-    background-color: wheat;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s, background-color 0.3s ease;
+
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
 }
+
 
 .lastfm-album-art img {
     width: 200px;
@@ -319,6 +368,115 @@ a.bluesky:hover { background-color: #1185FE; }
     text-align: center;
     font-size: 20px;
     padding: 20px;
+}
+
+/* Contenedores inferiores (murciélagos y badges) */
+.bottom-containers {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 0 20px 30px 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.bottom-containers .main-container {
+    flex: 1;
+    min-height: auto;
+}
+
+/* Contenedor de murciélagos */
+.bats-container {
+    position: relative;
+}
+
+.bats-container h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    margin: 0;
+    /* allow clicks on the button inside */
+    pointer-events: auto;
+}
+
+.legacy-bats-button {
+    font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 11;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.legacy-bats-button:hover {
+    background: rgba(107, 63, 160, 0.8);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(107, 63, 160, 0.6);
+}
+
+.legacy-bats-button:active {
+    transform: scale(0.98);
+}
+
+.legacy-bats-button:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+#bats-bouncing-area {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.bouncing-bat {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Contenedor de badges */
+.badges-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.badges-container h2 {
+    margin-bottom: 15px;
+}
+
+.badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+}
+
+.badges-grid img {
+    height: 31px;
+    width: auto;
+    display: block;
+    image-rendering: pixelated;
 }
 
 @media screen and (max-width: 780px) {
@@ -385,6 +543,25 @@ a.bluesky:hover { background-color: #1185FE; }
 
     .lastfm-album {
         font-size: 18px;
+    }
+
+    /* Contenedores inferiores apilados en móvil */
+    .bottom-containers {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px 20px 10px;
+    }
+
+    #bats-bouncing-area {
+        height: 200px;
+    }
+
+    .bouncing-bat {
+        width: 60px;
+    }
+
+    .badges-grid img {
+        height: 24px;
     }
 }
 

@@ -11,6 +11,9 @@
     <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(https://cur.cursors-4u.net/nature/nat-11/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
 </head>
 <body>
+    <!-- Announcement bar -->
+    <div class="announcement" role="region" aria-label="anuncio"><a href="https://github.com/carmoran0/MOOdleUnizarCSS" style="color: beige;">¡Descarga  mi extensión para Moodle!</a></div>
+
     <!-- Background blur container updated by lastfm.js -->
     <div id="bg-blur" aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center;filter:blur(4px) brightness(0.6);transition:opacity 800ms ease;opacity:0"></div>
 
@@ -22,7 +25,8 @@
                 <header>
                     <h1 id="texto">Caldo <a class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a></h1>
                 </header>
-                <p class="ultima-actualizacion">ultima actualizacion de esta pagina web: 06/10/2025 te amo</p>
+                <p class="ultima-actualizacion">Última actualización de esta página web: 06/10/2025 a las 22:19<br><a href="legacy/index.html" style="color: beige;">(versión legacy)</a></p>
+                
                 
                 <div class="github-readme-container">
                     <p> carmoran0/README.md </p>
@@ -39,7 +43,6 @@
             <div class="main-container social-container">
                 <h2>Enlaces</h2>
                 <section class="social-links">
-                    <p><a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a></p>
                     <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a></p>
                     <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a></p>
                     <p><a class="link-button instagram" href="https://www.instagram.com/testriculo/">Instagram</a></p>
@@ -52,7 +55,9 @@
 
             <!-- Contenedor 3: Last.fm -->
             <div class="main-container lastfm-container-wrapper">
-                <h2>Música</h2>
+                <h2>Música: 
+                <a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a></p>
+                </h2>
                 <section class="lastfm-section">
                     <div id="lastfm-container">
                         <!-- Last.fm content will be loaded here by JavaScript -->
@@ -63,10 +68,41 @@
 
     </div>
 
+    <!-- Contenedor inferior con murciélagos y badges -->
+    <div class="bottom-containers">
+        <!-- Contenedor izquierdo: Murciélagos -->
+        <div class="main-container bats-container">
+            <h2>
+                <p><a class="link-button bat-counter" href="#" onclick="addNewBat(); return false;">Murciélago</a></p>
+            </h2>
+            <div id="bats-bouncing-area">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
+            </div>
+        </div>
+
+        <!-- Contenedor derecho: Badges -->
+        <div class="main-container badges-container" aria-label="badges">
+            <div class="badges-grid">
+                <img src="https://web.badges.world/badges/operated/getfirefox.gif" alt="Get Firefox badge">
+                <img src="https://web.badges.world/badges/politics/fucknazis.gif" alt="Badge">
+                <img src="https://web.badges.world/badges/other/lesmiz.png" alt="Badge">
+                <img src="https://web.badges.world/badges/humor/genitals.gif" alt="Badge">
+                <img src="https://web.badges.world/badges/humor/nerd.gif" alt="Badge">
+                <img src="https://web.badges.world/badges/humor/bald10.gif" alt="Badge">
+                <img src="https://web.badges.world/badges/humor/8015_familyguy.png" alt="Badge">
+                <img src="https://web.badges.world/badges/geography/spain.gif" alt="Badge">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/bestviewedcomp.gif" alt="Badge">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/archlinux.gif" alt="Badge">
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="/js/scripts.js" defer></script>
     <script src="/js/lastfm.js" defer></script>
     <script src="/js/github-readme.js" defer></script>
+    <script src="/js/bats.js" defer></script>
 
 </body>
 </html>
