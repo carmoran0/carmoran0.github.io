@@ -1,0 +1,605 @@
+/* Legacy copy of styles.css */
+:root {
+    --accent-color: #b50000;
+    --bg-image: url('../images/fondo.gif');
+    --content-bg: rgba(255, 255, 255, 0.9);
+    --text-color: rgb(54, 54, 54);
+    --heading-shadow: rgb(54, 54, 54);
+    --popup-bg: #ffffff;
+    --popup-text: #333;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --bg-image: url('../images/gatos.gif');
+    --content-bg: rgba(40, 40, 40, 0.9);
+    --text-color: rgb(220, 220, 220);
+    --heading-shadow: rgb(20, 20, 20);
+    --popup-bg: #333333;
+    --popup-text: #f0f0f0;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle {
+    background-color: rgb(44, 44, 44);
+    color: rgb(231, 231, 231);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+@font-face {
+    font-family: 'Pally';
+    src: url('../Pally-Regular.otf') format('opentype');
+}
+
+body {
+    font-family: 'Pally', sans-serif;
+    background-image: var(--bg-image);
+    background-attachment: fixed;
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    transition: background-image 0.5s ease;
+}
+
+#model-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#bouncing-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bouncing-image {
+    position: absolute;
+    width: 100px;
+    height: auto;
+}
+
+h1 {
+    color: var(--accent-color);
+    margin: 20px;
+    text-align: left;
+    text-shadow: 2px 2px 8px var(--heading-shadow);
+    position: relative;
+    z-index: 4;
+}
+
+h2 {
+    color: rgb(255, 255, 255);
+    margin: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+p {
+    color: var(--text-color);
+    font-size: 10px;
+    margin: 20px;
+    position: relative;
+    z-index: 4;
+    transition: color 0.3s ease;
+}
+
+.content-container {
+    background-color: var(--content-bg);
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 25px solid transparent;
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+/* Contenedor de los enlaces sociales */
+.social-links > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.social-links p {
+    margin: 10px;
+    flex: 0 0 auto;
+}
+
+a.link-button {
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    width: 180px;
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    border: 25px solid transparent;    
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+}
+
+a.link-button:hover {
+    background-color: #202020;
+    color: var(--accent-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    transform: translateY(-2px);
+}
+a.spotify { background-color: #1ED760; }
+a.letterbox { background-color: #ff8000; }
+a.steam { background-color: #2a475e; }  
+a.instagram { background-color: #ff0069; }
+a.github { background-color: #6e5494; }
+a.correo { background-color: #c8c8c8; color: rgb(0, 0, 0); }
+a.discord { background-color: #7289da; }
+a.bluesky { background-color: #1185FE; }
+a.bat-counter { 
+    background-color: #6b3fa0; 
+    background-image: url('../images/Naturalis_Biodiversity_Center_-_ZMA.MAM.28371.b_reg_-_Nycteris_woodi_-_skin.jpeg');
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-position: center;
+}
+
+a.duolingo { background-color: #58CC02; }
+a.duolingo:hover { 
+    background-color: #202020;
+    color: var(--accent-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+    transform: translateY(-2px);
+}
+
+.streak-number {
+    color: #FF9600;
+    font-weight: bold;
+}
+
+.streak-icon {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+@media screen and (max-width: 780px) {
+    body {
+        background-image: var(--bg-image);
+        background-color: #000000;
+    }
+    
+    .content-container {
+        width: 100%;
+        padding: 15px;
+        margin: 0;
+        border: none;
+        border-image: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    
+    a.link-button {
+        padding: 15px 30px;
+        font-size: 20px;
+        width: 200px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+    }
+    
+    h1 {
+        margin-left: 20px;
+        margin-right: 5px;
+        font-size: 33px;
+        color: var(--accent-color);
+    }
+    
+    p {
+        font-size: 15px;
+        color: var(--text-color);
+    }
+}
+
+@media screen and (min-width: 780px) {
+    .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    .content-container .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    
+    h1 {
+        font-size: 60px; 
+        margin: 5px;
+        text-align: center; /* Centrar el título solo en versión de ordenador */
+    }
+    
+    h2 {
+        font-size: 30px; 
+    }
+    
+    p {
+        font-size: 20px;
+    }
+}
+
+/* Last.fm container styles */
+.lastfm-section {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+#lastfm-container {
+    width: 90%;
+    max-width: 800px;
+}
+.lastfm-content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--content-bg);
+    border: 25px solid transparent;
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s, background-color 0.3s ease;
+}
+
+.lastfm-content:hover {
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 8px 15px var(--accent-color, #b50000);
+}
+.lastfm-album-art img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lastfm-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lastfm-status {
+    color: var(--accent-color);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.lastfm-track {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.lastfm-artist {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.lastfm-album {
+    font-size: 20px;
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: color 0.3s ease;
+}
+
+.lastfm-error {
+    color: var(--accent-color);
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 780px) {
+    .lastfm-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .lastfm-album-art img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .lastfm-track {
+        font-size: 24px;
+    }
+
+    .lastfm-artist {
+        font-size: 20px;
+    }
+
+    .lastfm-album {
+        font-size: 18px;
+    }
+}
+
+
+/* Añadir estos estilos al archivo styles.css */
+
+/* Estilo para el murciélago especial */
+.special-bat {
+    filter: hue-rotate(180deg) brightness(1.5); /* Da un efecto de color diferente */
+    animation: glow 1.5s infinite alternate; /* Animación de brillo */
+    z-index: 10; /* Para asegurar que esté por encima de los murciélagos normales */
+}
+
+@keyframes glow {
+    from {
+        filter: hue-rotate(180deg) brightness(1.5) drop-shadow(0 0 5px var(--accent-color));
+    }
+    to {
+        filter: hue-rotate(180deg) brightness(1.5) drop-shadow(0 0 15px var(--accent-color));
+    }
+}
+
+/* Estilos para la notificación toast */
+.toast-notification {
+    position: fixed;
+    right: 20px;
+    max-width: 350px;
+    background-color: var(--popup-bg);
+    border: 15px solid transparent;
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4), 0 4px 10px var(--accent-color, #b50000);
+    z-index: 1000;
+    transform: translateX(120%);
+    transition: transform 0.5s ease, bottom 0.3s ease, opacity 0.5s ease;
+    opacity: 0;
+    margin-bottom: 10px;
+}
+
+.toast-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast-notification.hide {
+    transform: translateX(120%);
+    opacity: 0;
+}
+
+.toast-content {
+    padding: 15px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.toast-content h3 {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 18px;
+}
+
+.shiny-text {
+    font-weight: bold;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent-color);
+    animation: shiny-glow 1.5s infinite alternate;
+}
+
+@keyframes shiny-glow {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent-color); }
+    to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--accent-color); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Ajuste para dispositivos móviles */
+@media screen and (max-width: 780px) {
+    .toast-notification {
+        bottom: 10px;
+        right: 10px;
+        max-width: 300px;
+        border-width: 10px;
+    }
+    
+    .toast-content h3 {
+        font-size: 16px;
+    }
+}
+
+
+/* Estilos para el botón de caza y elementos relacionados */
+a.hunt-button {
+    background-color: #2d572c;
+    background-image: url('../images/ANI3DbatHover.gif');
+    background-size: 30px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 50px;
+    transition: all 0.3s ease;
+}
+
+a.hunt-button:hover {
+    background-color: #3a723a;
+    transform: scale(1.05);
+}
+
+a.hunt-button.hunting-active {
+    background-color: #b50000;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(181, 0, 0, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(181, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(181, 0, 0, 0);
+    }
+}
+
+/* Estilo para el cursor cuando estamos en modo caza */
+.hunting-cursor {
+    cursor: crosshair !important;
+}
+
+/* Sobreescribir el cursor personalizado cuando estamos en modo caza */
+.hunting-cursor * {
+    cursor: crosshair !important;
+}
+
+/* Estilos para murciélagos en modo caza */
+.hunting-cursor .bouncing-image {
+    transition: transform 0.2s;
+}
+
+.hunting-cursor .bouncing-image:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* Animación de muerte para murciélagos */
+.dying-bat {
+    animation: die 0.5s forwards;
+    filter: grayscale(100%) brightness(0.5);
+}
+
+@keyframes die {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(0) rotate(30deg);
+        opacity: 0;
+    }
+}
+
+/* Estilos para el contador de puntuación */
+.score-display {
+    display: inline-block;
+    padding: 10px 15px;
+    width: 180px;
+    font-size: 20px;
+    color: white;
+    background-color: #8e44ad;
+    text-align: center;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    border: 25px solid transparent;
+    border-image: url('../images/marco.png') 25;
+    border-image-repeat: repeat;
+    margin: 10px;
+}
+
+/* Media queries para dispositivos móviles */
+@media screen and (max-width: 780px) {
+    .score-display {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+}
+/* Fondo negro cuando son las 3 AM */
+.dark-mode::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Casi negro */
+    z-index: -1;
+}
+
+/* Atenuar ligeramente el fondo en modo oscuro para dispositivos móviles */
+@media screen and (max-width: 780px) {
+    [data-theme="dark"] body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Atenúa ligeramente */
+        z-index: -1;
+        pointer-events: none;
+    }
+}
+
+/* Ajuste para que los screamers sean más grandes y se muevan más rápido */
+.screamer-effect {
+    width: 300px !important; /* Tamaño más grande */
+    height: auto;
+    animation: shake 0.1s infinite alternate; /* Mueve más rápido */
+}
+
+/* Animación de temblor para los screamers */
+@keyframes shake {
+    from { transform: translateX(-10px) rotate(-5deg); }
+    to { transform: translateX(10px) rotate(5deg); }
+}
