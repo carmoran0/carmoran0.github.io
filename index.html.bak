@@ -98,7 +98,8 @@
         </div>
         <!-- Contenedor central: Chatango (nuevo) -->
         <div class="main-container chat-container" aria-label="chatango-chat" style="display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
-            <div class="chatango-wrapper" style="height:200px;min-height:160px;">
+            <h2>Chat:</h2>
+            <div class="chatango-wrapper" style="height:260px;min-height:160px;">
                 <div id="chatango-container" style="width:100%;height:100%;"></div>
                 <script>
                     (function(){
@@ -137,7 +138,7 @@
                 <img src="/images/vlc.png" alt="Badge" loading="lazy">
                 <img src="/images/water.gif" alt="Badge" loading="lazy">
                 <img src="/images/anythingbut.gif" alt="Badge" loading="lazy">
-                <img src="/images/antifa.gif" alt="Badge" loading="lazy">
+                <img src="https://mfdook.neocities.org/buttons/antifa.gif" alt="Badge" loading="lazy">
             </div>
         </div>
     </div>
@@ -151,7 +152,6 @@
 
 </body>
 </html>
-
 
 
 
