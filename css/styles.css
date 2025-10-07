@@ -30,6 +30,7 @@ h2 {
     color: white;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 0px;
     font-size: 24px;
 }
 
@@ -71,17 +72,10 @@ h2 {
 }
 
 /* Badges container (fila horizontal al final) */
-.badges-container {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    padding: 9px 5px;
-    margin: 10px auto 20px auto;
-}
 
 .badges-container img {
     width: auto;
-    max-height: 12px;
+    max-height: 24px;
     display: block;
 }
 
@@ -111,9 +105,6 @@ h2 {
     height: 100%;
 }
 
-.main-container:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-}
 
 /* Contenedor 1: Header - ocupa toda la altura de la columna izquierda */
 .header-container {
@@ -126,10 +117,6 @@ h2 {
     margin: 15px 0;
     opacity: 0.8;
     font-size: 14px;
-}
-
-.github-readme-container {
-    margin-top: 25px;
 }
 
 #readme-content {
@@ -291,6 +278,9 @@ a.discord:hover { background-color: #7289da; }
 a.bluesky:hover { background-color: #1185FE; }
 a.duolingo:hover { background-color: #58CC02; }
 a.bat-counter:hover {background-color: #6b3fa0; }
+a.github:hover { background-color: #6e5494; }
+a.lastfm:hover { background-color: #D51007; }
+a.soundcloud:hover { background-color: #FF5500; }
 
 
 
@@ -307,7 +297,8 @@ a.bat-counter:hover {background-color: #6b3fa0; }
     width: 100%;
     max-width: 800px;
 }
-.lastfm-content {
+.lastfm-content,
+.chatango-wrapper {
     display: flex;
     gap: 20px;
     padding: 20px;
@@ -468,12 +459,11 @@ a.bat-counter:hover {background-color: #6b3fa0; }
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 2px;
     padding: 10px;
 }
 
 .badges-grid img {
-    height: 31px;
     width: auto;
     display: block;
     image-rendering: pixelated;
@@ -561,8 +551,11 @@ a.bat-counter:hover {background-color: #6b3fa0; }
     }
 
     .badges-grid img {
-        height: 24px;
+        height: 18px;
     }
+    #readme-content img {
+    width: 100%;
+}
 }
 
 

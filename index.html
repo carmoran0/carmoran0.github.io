@@ -26,9 +26,21 @@
                     <h1 id="texto">Caldo <a class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a></h1>
                 </header>
                 <p class="ultima-actualizacion">Última actualización de esta página web: 07/10/2025 a las 14:28<br><a href="legacy/index.html" style="color: beige;">(versión legacy)</a></p>
-                
-                
                 <div class="github-readme-container">
+                    <!-- Fila de etiquetas personales: editar los valores directamente en los spans -->
+                    <div class="profile-labels" aria-label="etiquetas-personales" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center;align-items:center;">
+                        <div class="label" style="background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:6px;font-size:0.95rem;text-align:center;">
+                            <strong>2005</strong> <span id="label-age"></span>
+                        </div>
+                        <div class="label" style="background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:6px;font-size:0.95rem;text-align:center;">
+                            <strong>he/they/she</strong> <span id="label-pronouns"></span>
+                        </div>
+                        <div class="label" style="background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:6px;font-size:0.95rem;text-align:center;">
+                            <strong>Zaragoza</strong> <span id="label-location"></span>
+                        </div>
+                        <img src="https://f2.toyhou.se/file/f2-toyhou-se/images/76776271_q9G81Q2ghI4CVDF.png" alt="Imagen de perfil" style="height: 29px;opacity: 0.8;">
+                    </div>
+
                     <p> carmoran0/README.md </p>
                     <div id="readme-content">
                         <p>Cargando README...</p>
@@ -41,7 +53,7 @@
         <div class="right-column">
             <!-- Contenedor 2: Social Links -->
             <div class="main-container social-container">
-                <h2>Enlaces</h2>
+                <h2>Links:</h2>
                 <section class="social-links">
                     <p><a class="link-button letterbox" href="https://boxd.it/9uosP">Letterbox</a></p>
                     <p><a class="link-button steam" href="https://steamcommunity.com/id/poopoopeepeeheehee/">Steam</a></p>
@@ -50,6 +62,9 @@
                     <p><a class="link-button mastodon" rel="me" href="https://mastodon.social/@copaco">Mastodon</a></p>
                     <p><a class="link-button bluesky" href="https://bsky.app/profile/koljoz.bsky.social">Bluesky</a></p>
                     <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a></p>
+                    <p><a class="link-button github" href="https://github.com/carmoran0">GitHub</a></p>
+                    <p><a class="link-button lastfm" href="https://www.last.fm/user/sobaco27">Last.fm</a></p>
+                    <p><a class="link-button soundcloud" href="https://soundcloud.com/koljoz">SoundCloud</a></p>
                 </section>
             </div>
 
@@ -57,7 +72,8 @@
             <div class="main-container lastfm-container-wrapper">
                 <h2>Música: 
                 <a class="link-button spotify" href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify</a></p>
-                </h2>
+
+            </h2>
                 <section class="lastfm-section">
                     <div id="lastfm-container">
                         <!-- Last.fm content will be loaded here by JavaScript -->
@@ -80,20 +96,49 @@
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
             </div>
         </div>
+        <!-- Contenedor central: Chatango (nuevo) -->
+        <div class="main-container chat-container" aria-label="chatango-chat" style="display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <h2>Chat:</h2>
+            <div class="chatango-wrapper" style="height:260px;min-height:160px;">
+                <div id="chatango-container" style="width:100%;height:100%;"></div>
+                <script>
+                    (function(){
+                        var cfg = {"handle":"cald0","arch":"js","styles":{"c":"000000","d":"000000","f":0,"i":0,"l":"FFFFFF","m":"FFFFFF","p":"10","usricon":0,"surl":0,"cnrs":"0.48"}};
+                        var s = document.createElement('script');
+                        s.id = 'cid0020000420850072125';
+                        s.setAttribute('data-cfasync','false');
+                        s.async = true;
+                        s.src = '//st.chatango.com/js/gz/emb.js';
+                        s.style.width = '100%';
+                        s.style.height = '100%';
+                        s.text = JSON.stringify(cfg);
+                        var mount = document.getElementById('chatango-container');
+                        if(mount) mount.appendChild(s);
+                    })();
+                </script>
+            </div>
+        </div>
 
         <!-- Contenedor derecho: Badges -->
         <div class="main-container badges-container" aria-label="badges">
             <div class="badges-grid">
-                <img src="https://web.badges.world/badges/operated/getfirefox.gif" alt="Get Firefox badge">
-                <img src="https://web.badges.world/badges/politics/fucknazis.gif" alt="Badge">
-                <img src="https://web.badges.world/badges/other/lesmiz.png" alt="Badge">
-                <img src="https://web.badges.world/badges/humor/genitals.gif" alt="Badge">
-                <img src="https://web.badges.world/badges/humor/nerd.gif" alt="Badge">
-                <img src="https://web.badges.world/badges/humor/bald10.gif" alt="Badge">
-                <img src="https://web.badges.world/badges/humor/8015_familyguy.png" alt="Badge">
-                <img src="https://web.badges.world/badges/geography/spain.gif" alt="Badge">
-                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/bestviewedcomp.gif" alt="Badge">
-                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/archlinux.gif" alt="Badge">
+                <img src="https://web.badges.world/badges/operated/getfirefox.gif" alt="Get Firefox badge" loading="lazy">
+                <img src="https://web.badges.world/badges/politics/fucknazis.gif" alt="Badge" loading="lazy">
+                <img src="https://web.badges.world/badges/other/lesmiz.png" alt="Badge" loading="lazy">
+                <img src="https://web.badges.world/badges/humor/genitals.gif" alt="Badge" loading="lazy">
+                <img src="https://web.badges.world/badges/humor/nerd.gif" alt="Badge" loading="lazy">
+                <img src="https://web.badges.world/badges/humor/bald10.gif" alt="Badge" loading="lazy">
+                <img src="https://web.badges.world/badges/humor/8015_familyguy.png" alt="Badge" loading="lazy">
+                <img src="https://blinkies.cafe/b/display/0028-computer.gif" alt="Badge" loading="lazy">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/bestviewedcomp.gif" alt="Badge" loading="lazy">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/archlinux.gif" alt="Badge" loading="lazy">
+                <img src="https://i4.glitter-graphics.org/pub/745/745784dfedrf30su.gif" alt="Badge" loading="lazy">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/firefox1.gif" alt="Badge" loading="lazy">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/jellyfin.gif" alt="Badge" loading="lazy">
+                <img src="https://bonkiscoolsite.neocities.org/images/geocitystuff/buttons/vlc.png" alt="Badge" loading="lazy">
+                <img src="https://mfdook.neocities.org/blinkies/water.gif" alt="Badge" loading="lazy">
+                <img src="https://mfdook.neocities.org/buttons/anythingbut.gif" alt="Badge" loading="lazy">
+                <img src="https://mfdook.neocities.org/buttons/antifa.gif" alt="Badge" loading="lazy">
             </div>
         </div>
     </div>
