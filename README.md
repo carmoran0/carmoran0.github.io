@@ -20,6 +20,7 @@ Directorios principales
 	- `lastfm.js` — Integración con la API de Last.fm.
 	- `github-readme.js` — Carga y conversión básica del README de GitHub.
 	- `bats.js` — Script que anima murciélagos dentro de un contenedor (legacy-adaptado).
+	- `oneko.js` — Script que añade un gato que sigue el cursor.
 
 - `images/` — Imágenes públicas usadas en la web (gifs, iconos, etc.).
 
@@ -28,8 +29,9 @@ Directorios principales
 	- `css/` — Estilos legacy.
 	- `js/` — Scripts legacy con animaciones y comportamientos originales.
 	- `images/` — Recursos gráficos legacy.
+	- `models/` — Modelos 3D y binarios (si aplica).
 
-- `models/` — Modelos 3D y binarios (si aplica).
+
 
 Notas rápidas
 
