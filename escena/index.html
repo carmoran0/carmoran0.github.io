@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escena - link(arlo)s</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body, html { height:100%; margin:0; background:#000; }
+    #overlay-instructions { position:fixed; top:12px; left:12px; color:#ddd; background:rgba(0,0,0,0.4); padding:8px 10px; border-radius:6px; z-index:2 }
+    #enter-pointer { display:inline-block; margin-left:8px; padding:6px 8px; background:#287; color:#fff; border-radius:4px; cursor:pointer }
+  </style>
+</head>
+<body>
+  <div id="overlay-instructions">
+    Usa WASD para moverte, mouse para mirar. Presiona <strong>Enter</strong> o haz clic en <span id="enter-pointer">aquí</span> para activar el control de puntero. Presiona <strong>E</strong> para interactuar con objetos.
+  </div>
+  <div id="container"></div>
+
+  <!-- Import map para resolver el bare specifier 'three' usado por los módulos examples/jsm -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.154.0/build/three.module.js"
+    }
+  }
+  </script>
+
+  <!-- Usamos módulos ES; scene.js importa Three.js y helpers como módulos desde unpkg (JS modules) -->
+  <script type="module" src="/escena/scene.js"></script>
+</body>
+</html>

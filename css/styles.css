@@ -23,6 +23,46 @@ h1{
     color: white;
     text-align: center;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Indicador de estado en línea */
+.online-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.5em;
+    font-weight: normal;
+    opacity: 0.9;
+}
+
+.online-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    }
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+    }
+}
+
+.online-text {
+    color: #7CFF52; /* green text for 'En línea' */
+    white-space: nowrap;
 }
 
 h2 {
@@ -490,6 +530,28 @@ a.soundcloud:hover { background-color: #FF5500; }
     .main-container {
         padding: 20px;
         height: auto;
+    }
+
+    /* keep the header horizontal on mobile so the indicator stays left of the title */
+    h1 {
+        /* ensure the indicator remains to the left of the title */
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    /* hide the text label on small screens, keep the green dot only */
+    .online-text {
+        display: none;
+    }
+
+    .online-indicator {
+        font-size: 0.45em;
+        margin-right: 8px;
+    }
+
+    .online-dot {
+        width: 10px;
+        height: 10px;
     }
 
     h2 {
