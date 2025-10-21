@@ -1,0 +1,83 @@
+/* Weather overlay system */
+#weather-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+/* Snow effect */
+.weather-overlay.snow {
+    background: linear-gradient(to bottom, rgba(200, 220, 255, 0.05) 0%, transparent 50%);
+}
+
+.snowflake {
+    position: absolute;
+    top: -10%;
+    color: #fff;
+    user-select: none;
+    animation: snowfall linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* Rain effect */
+.weather-overlay.rain {
+    background: linear-gradient(to bottom, rgba(100, 120, 150, 0.1) 0%, transparent 30%);
+}
+
+.raindrop {
+    position: absolute;
+    top: -10%;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(174, 194, 224, 0.8), rgba(174, 194, 224, 0.2));
+    animation: rainfall linear infinite;
+}
+
+@keyframes rainfall {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(110vh);
+    }
+}
+
+/* Thunder effect */
+.weather-overlay.thunder {
+    background: linear-gradient(to bottom, rgba(60, 70, 90, 0.15) 0%, transparent 30%);
+}
+
+.weather-overlay.thunder.lightning {
+    background: rgba(255, 255, 255, 0.4);
+    transition: background 0.1s ease-in-out;
+}
+
+.weather-overlay.thunder .raindrop {
+    background: linear-gradient(to bottom, rgba(174, 194, 224, 0.9), rgba(174, 194, 224, 0.3));
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 780px) {
+    .snowflake {
+        font-size: 8px !important;
+    }
+    
+    .raindrop {
+        width: 1px;
+        height: 15px;
+    }
+}

@@ -113,6 +113,10 @@ h2 {
 
 /* Badges container (fila horizontal al final) */
 
+.badges-container {
+    overflow: hidden;
+}
+
 .badges-container img {
     width: auto;
     max-height: 40px;
@@ -132,6 +136,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    max-width: 550px;
 }
 
 .main-container {
@@ -691,6 +696,7 @@ a.soundcloud:hover { background-color: #FF5500; }
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow: hidden;
 }
 
 .badges-container h2 {
@@ -702,6 +708,7 @@ a.soundcloud:hover { background-color: #FF5500; }
     flex-wrap: wrap;
     justify-content: center;
     gap: 2px;
+    width: 100%;
 }
 
 .badges-grid img {
