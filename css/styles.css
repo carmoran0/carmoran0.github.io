@@ -276,6 +276,7 @@ h2 {
 /* Letterboxd container styles */
 .letterboxd-container-wrapper {
     text-align: center;
+    max-width: 500px;
 }
 
 .letterboxd-section {
@@ -510,6 +511,113 @@ a.soundcloud:hover { background-color: #FF5500; }
     padding: 0 20px 30px 20px;
     max-width: 1600px;
     margin: 0 auto;
+}
+
+/* Fila especial para Letterboxd */
+.first-row {
+    padding-top: 0;
+}
+
+.first-row .letterboxd-container-wrapper {
+    flex: 1;
+}
+
+.first-row .for-rent-container {
+    flex: 1;
+}
+
+/* For Rent Container Styles */
+.for-rent-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.for-rent-content {
+    text-align: center;
+    width: 100%;
+}
+
+.for-rent-title {
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.for-rent-sign {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 208, 0, 0.1),
+        rgba(255, 208, 0, 0.1) 10px,
+        rgba(0, 0, 0, 0.2) 10px,
+        rgba(0, 0, 0, 0.2) 20px
+    );
+    border: 4px dashed rgba(255, 208, 0, 0.6);
+    border-radius: 15px;
+    padding: 40px 30px;
+    margin: 20px;
+    box-shadow: 
+        0 0 20px rgba(255, 208, 0, 0.3),
+        inset 0 0 30px rgba(255, 208, 0, 0.1);
+    animation: for-rent-pulse 3s ease-in-out infinite;
+}
+
+@keyframes for-rent-pulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px rgba(255, 208, 0, 0.3),
+            inset 0 0 30px rgba(255, 208, 0, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px rgba(255, 208, 0, 0.5),
+            inset 0 0 40px rgba(255, 208, 0, 0.2);
+    }
+}
+
+.for-rent-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: #FFD000;
+    text-shadow: 
+        0 0 10px rgba(255, 208, 0, 0.8),
+        0 0 20px rgba(255, 208, 0, 0.6),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 0 0 20px 0;
+    letter-spacing: 4px;
+    animation: for-rent-glow 2s ease-in-out infinite;
+}
+
+@keyframes for-rent-glow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px rgba(255, 208, 0, 0.8),
+            0 0 20px rgba(255, 208, 0, 0.6),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        text-shadow: 
+            0 0 20px rgba(255, 208, 0, 1),
+            0 0 30px rgba(255, 208, 0, 0.8),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.for-rent-details {
+    font-size: 18px;
+    color: #fff;
+    margin: 15px 0;
+    opacity: 0.9;
+}
+
+.for-rent-contact {
+    font-size: 16px;
+    color: #FFD000;
+    margin: 20px 0 0 0;
+    font-weight: bold;
 }
 
 .bottom-containers .main-container {
@@ -1022,6 +1130,29 @@ a:hover {
         flex-direction: column;
         gap: 20px;
         padding: 0 10px 20px 10px;
+    }
+
+    /* For rent móvil */
+    .for-rent-container {
+        min-height: 300px;
+    }
+
+    .for-rent-sign {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .for-rent-text {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+
+    .for-rent-details {
+        font-size: 16px;
+    }
+
+    .for-rent-contact {
+        font-size: 14px;
     }
 
     #bats-bouncing-area {
