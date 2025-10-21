@@ -273,6 +273,107 @@ h2 {
     text-align: center;
 }
 
+/* Letterboxd container styles */
+.letterboxd-container-wrapper {
+    text-align: center;
+}
+
+.letterboxd-section {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+#letterboxd-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.letterboxd-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.letterboxd-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: left;
+}
+
+.letterboxd-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.letterboxd-poster {
+    flex-shrink: 0;
+    width: 80px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.letterboxd-poster img {
+    width: 80px !important;
+    height: 120px !important;
+    max-width: 80px !important;
+    max-height: 120px !important;
+    object-fit: cover;
+    display: block;
+}
+
+.letterboxd-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.letterboxd-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.letterboxd-title a {
+    color: #ff8000 !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.letterboxd-title a:hover {
+    color: #ffa940 !important;
+    text-decoration: underline;
+}
+
+.letterboxd-date {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.letterboxd-preview {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+.letterboxd-error {
+    color: #ff8000;
+    text-align: center;
+    font-size: 16px;
+    padding: 20px;
+}
+
 #bg-blur {
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -886,6 +987,34 @@ a:hover {
 
     .lastfm-album {
         font-size: 18px;
+    }
+
+    /* Letterboxd móvil */
+    .letterboxd-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .letterboxd-poster {
+        width: 100px;
+        height: 150px;
+    }
+
+    .letterboxd-poster img {
+        width: 100px !important;
+        height: 150px !important;
+        max-width: 100px !important;
+        max-height: 150px !important;
+    }
+
+    .letterboxd-title {
+        font-size: 14px;
+    }
+
+    .letterboxd-preview {
+        font-size: 12px;
     }
 
     /* Contenedores inferiores apilados en móvil */
