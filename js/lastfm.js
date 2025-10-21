@@ -36,7 +36,7 @@ function updateNowPlayingUI(trackData) {
         const trackName = track.name;
         const artistName = track.artist['#text'];
         const albumName = track.album['#text'];
-    const albumArt = track.image[2]['#text'] || '/images/music-placeholder.png'; // Medium size image
+    const albumArt = track.image[2]['#text'] || '/images/cat-music.gif'; // Medium size image
         
         // Update the UI
         const statusText = isNowPlaying ? 'Escuchando ahora:' : 'Último escuchado:';

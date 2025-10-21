@@ -30,7 +30,7 @@ async function fetchLetterboxdActivity() {
         }
 
         // Display the most recent 4 items
-        const recentItems = Array.from(items).slice(0, 4);
+        const recentItems = Array.from(items).slice(0, 5);
         
         let html = '<div class="letterboxd-feed">';
         
