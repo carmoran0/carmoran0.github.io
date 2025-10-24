@@ -33,8 +33,10 @@ function initBats() {
         });
         
         // Posicionar el murciélago inicial
-        bat.style.left = startX + 'px';
-        bat.style.top = startY + 'px';
+        bat.style.position = 'absolute';
+        bat.style.left = '0';
+        bat.style.top = '0';
+        bat.style.transform = `translate(${startX}px, ${startY}px)`;
     });
     
     // Iniciar animación
@@ -87,8 +89,10 @@ function addNewBat() {
         height: batHeight
     };
 
-    newBat.style.left = startX + 'px';
-    newBat.style.top = startY + 'px';
+    newBat.style.position = 'absolute';
+    newBat.style.left = '0';
+    newBat.style.top = '0';
+    newBat.style.transform = `translate(${startX}px, ${startY}px)`;
 
     batsData.push(batData);
 }
@@ -96,7 +100,6 @@ function addNewBat() {
 function animateBats() {
     if (!bouncingArea) return;
     
-    const containerRect = bouncingArea.getBoundingClientRect();
     const containerWidth = bouncingArea.offsetWidth;
     const containerHeight = bouncingArea.offsetHeight;
     
@@ -108,19 +111,16 @@ function animateBats() {
         // Detectar colisión con bordes del contenedor y rebotar
         if (bat.x <= 0 || bat.x >= containerWidth - bat.width) {
             bat.speedX *= -1;
-            // Ajustar posición para evitar que se quede pegado
             bat.x = Math.max(0, Math.min(bat.x, containerWidth - bat.width));
         }
         
         if (bat.y <= 0 || bat.y >= containerHeight - bat.height) {
             bat.speedY *= -1;
-            // Ajustar posición para evitar que se quede pegado
             bat.y = Math.max(0, Math.min(bat.y, containerHeight - bat.height));
         }
         
-        // Aplicar nueva posición
-        bat.element.style.left = bat.x + 'px';
-        bat.element.style.top = bat.y + 'px';
+        // Usar transform para mejor rendimiento (GPU accelerated)
+        bat.element.style.transform = `translate(${bat.x}px, ${bat.y}px)`;
     });
     
     requestAnimationFrame(animateBats);
@@ -137,10 +137,14 @@ window.addEventListener('resize', () => {
         // Asegurar que los murciélagos no queden fuera del contenedor
         bat.x = Math.min(bat.x, containerWidth - bat.width);
         bat.y = Math.min(bat.y, containerHeight - bat.height);
-        bat.element.style.left = bat.x + 'px';
-        bat.element.style.top = bat.y + 'px';
+        bat.element.style.transform = `translate(${bat.x}px, ${bat.y}px)`;
     });
 });
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', initBats);
+// Inicializar cuando el DOM esté listo O inmediatamente si ya está listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBats);
+} else {
+    // El DOM ya está listo, ejecutar inmediatamente
+    initBats();
+}

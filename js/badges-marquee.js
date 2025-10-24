@@ -3,9 +3,21 @@
  * Crea múltiples filas de marquesina infinita con los badges
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+(function initBadgesMarquee() {
+    // Esperar a que el DOM esté listo si aún no lo está
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupBadgesMarquee);
+    } else {
+        // El DOM ya está listo, ejecutar inmediatamente
+        setupBadgesMarquee();
+    }
+
+function setupBadgesMarquee() {
     const badgesContainer = document.querySelector('.badges-container');
-    if (!badgesContainer) return;
+    if (!badgesContainer) {
+        console.warn('Badges Marquee: contenedor .badges-container no encontrado');
+        return;
+    }
 
     const badgesGrid = badgesContainer.querySelector('.badges-grid');
     if (!badgesGrid) return;
@@ -141,4 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     console.log('Marquesina de badges inicializada con', originalBadges.length, 'badges en', numberOfRows, 'filas');
-});
+}
+
+})();

@@ -1,0 +1,257 @@
+/* Mobile styles moved from css/styles.css */
+@media screen and (max-width: 780px) {
+    /* En móvil, cambiar a diseño apilado verticalmente */
+    .page-wrapper {
+        flex-direction: column;
+        padding: 20px 10px;
+        gap: 20px;
+    }
+
+    .left-column,
+    .right-column {
+        flex: none;
+        width: 100%;
+    }
+
+    .first-column {
+        display: none;
+    }
+
+    .right-column {
+        gap: 20px;
+    }
+
+    .main-container {
+        padding: 20px;
+        height: auto;
+    }
+
+    /* keep the header horizontal on mobile so the indicator stays left of the title */
+    h1 {
+        /* ensure the indicator remains to the left of the title */
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    /* hide the text label on small screens, keep the green dot only */
+    .online-text {
+        display: none;
+    }
+
+    .online-indicator {
+        font-size: 0.45em;
+        margin-right: 8px;
+    }
+
+    .online-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    a.link-button {
+        width: 120px;
+        font-size: 14px;
+        padding: 8  px 12px;
+    }
+
+    #readme-content {
+        max-height: 300px;
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .lastfm-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-height: none;
+    }
+    
+
+    .lastfm-album-art img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .lastfm-container-wrapper {
+        max-height: none;
+    }
+
+    .lastfm-track {
+        font-size: 24px;
+    }
+
+    .lastfm-artist {
+        font-size: 20px;
+    }
+
+    .lastfm-album {
+        font-size: 18px;
+    }
+
+    /* Letterboxd móvil */
+    .letterboxd-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .letterboxd-poster {
+        width: 100px;
+        height: 150px;
+    }
+
+    .letterboxd-poster img {
+        width: 100px !important;
+        height: 150px !important;
+        max-width: 100px !important;
+        max-height: 150px !important;
+    }
+
+    .letterboxd-title {
+        font-size: 14px;
+    }
+
+    .letterboxd-preview {
+        font-size: 12px;
+    }
+
+    /* Contenedores inferiores apilados en móvil */
+    .bottom-containers {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 10px 20px 10px;
+    }
+
+    /* For rent móvil */
+
+
+    .for-rent-sign {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .for-rent-text {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+
+    .for-rent-details {
+        font-size: 16px;
+    }
+
+    .for-rent-contact {
+        font-size: 14px;
+    }
+
+    #bats-bouncing-area {
+        height: 150px;
+    }
+
+    .bouncing-bat {
+        width: 60px;
+    }
+
+    .badges-grid img {
+        height: 18px;
+    }
+    #readme-content img {
+    width: 100%;
+}
+    
+    /* Ajustes móvil para uses, shrine y now */
+    .uses-section h3,
+    .shrine-section h3,
+    .now-section h3 {
+        font-size: 16px;
+    }
+
+    .uses-content li,
+    .now-content li {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+
+    .now-date {
+        font-size: 12px;
+    }
+
+    /* Moodboard en móvil */
+    .moodboard-area {
+        min-height: 400px;
+    }
+
+    .moodboard-item img {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    .pin {
+        width: 10px;
+        height: 10px;
+        top: -6px;
+    }
+
+    .pin::after {
+        height: 4px;
+        top: 8px;
+    }
+
+    /* Visor de imágenes en móvil */
+    .image-viewer-close {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .image-viewer-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .image-viewer-nav.prev {
+        left: 10px;
+    }
+
+    .image-viewer-nav.next {
+        right: 10px;
+    }
+
+    .image-viewer-counter {
+        bottom: 20px;
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .image-viewer-content {
+        max-width: 95vw;
+        max-height: 85vh;
+    }
+
+    .image-viewer-content img {
+        max-height: 85vh;
+    }
+
+    /* Mastodon móvil */
+    .mastodon-feed-wrapper {
+        max-height: 400px;
+    }
+
+    .mastodon-view-more {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 10px auto 5px;
+    }
+}

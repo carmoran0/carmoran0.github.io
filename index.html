@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>link(arlo)s</title>
+    
+    <link rel="preconnect" href="https://ws.audioscrobbler.com">
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+    <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
+    
     <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="shortcut icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="apple-touch-icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/weather.css">
+    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 780px)">
     <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(/images/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="/images/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
     <link rel="stylesheet" type="text/css" href="https://esm.sh/emfed@1/toots.css">
 </head>
@@ -21,6 +27,21 @@
 
     <div class="page-wrapper" style="position:relative;z-index:1;">
 
+        
+        <div class="first-column">
+            <div class="main-container">
+                <h2>TODOLIST:</h2>
+                <p>Decoraciones a mano en los contenedores?</p>
+                <p>Sobre todo debajo de los botones</p>
+                <p>Tocar las fuentes de mastodon y github</p>
+                <p>A lo mejor un titulo chulo</p>
+                
+                <img src="/images/constr.gif" style="max-width: 150px;">
+
+                <h2>Haiiii :3</h2>
+            </div>
+        </div>
+        
         <!-- Columna izquierda: Contenedor 1 (Header) -->
         <div class="left-column">
             <div class="main-container header-container">
@@ -51,7 +72,7 @@
 
                     <p> carmoran0/README.md </p>
                     <div id="readme-content">
-                        <img src="/images/screamer.gif">
+                        <img src="/images/screamer.gif" alt="Cargando...">
                     </div>
                     
                 </div>
@@ -104,17 +125,17 @@
 
     <!-- Fila de contenedores: Letterboxd y Espacio en Alquiler -->
     <div class="bottom-containers first-row">
-            <!-- Contenedor Letterboxd -->
-            <div class="main-container letterboxd-container-wrapper">
-                <h2>
-                    <a href="https://boxd.it/9uosP">Letterboxd:</a>
-                </h2>
-                <section class="letterboxd-section">
-                    <div id="letterboxd-container">
-                        <!-- Letterboxd content will be loaded here -->
-                    </div>
-                </section>
-            </div>
+        <!-- Contenedor Letterboxd -->
+        <div class="main-container letterboxd-container-wrapper">
+            <h2>
+                <a href="https://boxd.it/9uosP">Letterboxd:</a>
+            </h2>
+            <section class="letterboxd-section">
+                <div id="letterboxd-container">
+                    <!-- Letterboxd content will be loaded here -->
+                </div>
+            </section>
+        </div>
 
         <!-- Contenedor Mastodon -->
         <div class="main-container mastodon-container">
@@ -123,32 +144,21 @@
             </h2>
             <section class="mastodon-section">
                 <div class="mastodon-feed-wrapper">
-                    <a class="mastodon-feed" href="https://mastodon.social/@copaco" data-toot-limit="3">follow me into the Fediverse</a>
+                    <a class="mastodon-feed" href="https://mastodon.social/@copaco" data-toot-limit="5">follow me into the Fediverse</a>
                 </div>
-                <a href="https://mastodon.social/@copaco" class="mastodon-view-more" target="_blank" rel="noopener noreferrer">
-                    Ver más en mi perfil →
-                </a>
             </section>
         </div>
 
         <!-- Contenedor Espacio en Alquiler -->
         <div class="main-container ">
             <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
-            <img src="/images/under_construction_header.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
+            <img src="/images/brick.gif" alt="Espacio en construcción" style="width:100%;border-radius:8px;">
 
         </div>
     </div>
 
     <!-- Segunda fila de contenedores: Cosillas que uso, Shrine y Now -->
-    <div class="bottom-containers">
+    <div class="bottom-containers second-row">
         <!-- Contenedor izquierdo: Cosillas que uso -->
         <div class="main-container uses-container">
             <h2>Cosillas que uso:</h2>
@@ -163,6 +173,7 @@
                         <li><strong>OS:</strong> Windows (<a href="https://github.com/ravendevteam/talon">Talon</a> para debloatear) + Arch Linux</li>
                         <li><strong>Para leer:</strong> <a href="https://github.com/readest/readest">Readest</a> (lo que mejor me ha funcionado)</li>
                         <li><strong>Youtube:</strong> En ordenador las tipicas extensiones guays PERO EN ANDROID TV <a href="https://github.com/yuliskov/SmartTube">SmartTube</a> (cliente sin anuncios)</li>
+                        <li><strong>Mapas:</strong> Comaps me lo he descargado y tiene muy buena pinta usa openstreetmap así que tiene incluso mas información que Google Maps. Lo único malo que no salen los buses ni el tranvía :////</li>
                     </ul>
                 </div>
                 <div class="uses-section">
@@ -292,47 +303,46 @@
         <!-- Contenedor derecho: Badges -->
         <div class="main-container badges-container" aria-label="badges">
             <div class="badges-grid">
-                <img src="/images/getfirefox.gif" alt="Get Firefox badge" loading="lazy">
-                <img src="/images/fucknazis.gif" alt="Badge" loading="lazy">
-                <img src="/images/lesmiz.png" alt="Badge" loading="lazy">
-                <img src="/images/genitals.gif" alt="Badge" loading="lazy">
-                <img src="/images/nerd.gif" alt="Badge" loading="lazy">
-                <img src="/images/bald10.gif" alt="Badge" loading="lazy">
-                <img src="/images/8015_familyguy.png" alt="Badge" loading="lazy">
-                <img src="/images/0028-computer.gif" alt="Badge" loading="lazy">
-                <img src="/images/bestviewedcomp.gif" alt="Badge" loading="lazy">
-                <img src="/images/archlinux.gif" alt="Badge" loading="lazy">
-                <img src="/images/745784dfedrf30su.gif" alt="Badge" loading="lazy">
-                <img src="/images/firefox1.gif" alt="Badge" loading="lazy">
-                <img src="/images/jellyfin.gif" alt="Badge" loading="lazy">
-                <img src="/images/vlc.png" alt="Badge" loading="lazy">
-                <img src="/images/water.gif" alt="Badge" loading="lazy">
-                <img src="/images/anythingbut.gif" alt="Badge" loading="lazy">
-                <img src="/images/antifa.gif" alt="Badge" loading="lazy">
-                <img src="/images/theythemsnail.jpg" alt="Badge" loading="lazy">
-                <img src="/images/queer.png" alt="Badge" loading="lazy">
-                <img src="/images/graphicdesign.png" alt="Badge" loading="lazy">
-                <img src="/images/nonbinary.gif" alt="Badge" loading="lazy">
-                <img src="/images/Piracyblinkie.gif" alt="Badge" loading="lazy">
-                <img src="/images/wrenderblinkie.gif" alt="Badge" loading="lazy">
-                <img src="/images/gec.gif" alt="Badge" loading="lazy">
-                <img src="/images/lovebugs.gif" alt="Badge" loading="lazy">
+                <img src="/images/getfirefox.gif" alt="Get Firefox badge" >
+                <img src="/images/fucknazis.gif" alt="Badge" >
+                <img src="/images/lesmiz.png" alt="Badge" >
+                <img src="/images/genitals.gif" alt="Badge" >
+                <img src="/images/nerd.gif" alt="Badge" >
+                <img src="/images/bald10.gif" alt="Badge" >
+                <img src="/images/8015_familyguy.png" alt="Badge" >
+                <img src="/images/0028-computer.gif" alt="Badge" >
+                <img src="/images/bestviewedcomp.gif" alt="Badge" >
+                <img src="/images/archlinux.gif" alt="Badge" >
+                <img src="/images/745784dfedrf30su.gif" alt="Badge" >
+                <img src="/images/firefox1.gif" alt="Badge" >
+                <img src="/images/jellyfin.gif" alt="Badge" >
+                <img src="/images/vlc.png" alt="Badge" >
+                <img src="/images/water.gif" alt="Badge" >
+                <img src="/images/anythingbut.gif" alt="Badge" >
+                <img src="/images/antifa.gif" alt="Badge" >
+                <img src="/images/theythemsnail.jpg" alt="Badge" >
+                <img src="/images/queer.png" alt="Badge" >
+                <img src="/images/graphicdesign.png" alt="Badge" >
+                <img src="/images/nonbinary.gif" alt="Badge" >
+                <img src="/images/Piracyblinkie.gif" alt="Badge" >
+                <img src="/images/wrenderblinkie.gif" alt="Badge" >
+                <img src="/images/gec.gif" alt="Badge" >
+                <img src="/images/lovebugs.gif" alt="Badge" >
             </div>
         </div>
     </div>
     
 
-    <!-- Scripts -->
-    <script src="/js/zipbomb.js"></script>
-    <script src="/js/weather.js" defer></script>
+    <!-- Scripts esenciales primero -->
+    <script src="/js/zipbomb.js" defer></script>
     <script src="/js/scripts.js" defer></script>
     <script src="/js/lastfm.js" defer></script>
-    <script src="/js/letterboxd.js" defer></script>
     <script src="/js/github-readme.js" defer></script>
-    <script src="/js/bats.js" defer></script>
-    <script src="/js/moodboard.js" defer></script>
-    <script src="/js/oneko.js" defer></script>
-    <script src="/js/badges-marquee.js" defer></script>
+    
+    <!-- Lazy loader para scripts pesados (optimización) -->
+    <script src="/js/lazy-loader.js" defer></script>
+
+    
     <script type="module" src="https://esm.sh/emfed@1"></script>
         <script>
         // Click handler: set #bg-blur to screamer.gif without blur for 5s, then restore

@@ -1,8 +1,17 @@
 // GitHub README loader
 const githubReadmeUrl = 'https://raw.githubusercontent.com/carmoran0/carmoran0/refs/heads/main/README.md';
 
+// Cache para evitar reconversiones
+let cachedMarkdown = '';
+let cachedHTML = '';
+
 // Function to convert markdown to HTML (basic conversion)
 function convertMarkdownToHTML(markdown) {
+    // Retornar cache si no ha cambiado
+    if (markdown === cachedMarkdown && cachedHTML) {
+        return cachedHTML;
+    }
+    
     let html = markdown;
     
     // Code blocks (must be done first to protect content)
@@ -25,11 +34,27 @@ function convertMarkdownToHTML(markdown) {
     // Bold (before italic to handle *** correctly)
     html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+    // Only match __ that are NOT inside HTML tags
+    html = html.replace(/__(.+?)__/g, (match, p1, offset) => {
+        // Check if we're inside an HTML tag
+        const beforeMatch = html.substring(0, offset);
+        const lastOpenTag = beforeMatch.lastIndexOf('<');
+        const lastCloseTag = beforeMatch.lastIndexOf('>');
+        if (lastOpenTag > lastCloseTag) return match; // Inside a tag
+        return '<strong>' + p1 + '</strong>';
+    });
     
     // Italic
     html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+    // Only match _ that are NOT inside HTML tags
+    html = html.replace(/_([^_\s][^_]*)_/g, (match, p1, offset) => {
+        // Check if we're inside an HTML tag
+        const beforeMatch = html.substring(0, offset);
+        const lastOpenTag = beforeMatch.lastIndexOf('<');
+        const lastCloseTag = beforeMatch.lastIndexOf('>');
+        if (lastOpenTag > lastCloseTag) return match; // Inside a tag
+        return '<em>' + p1 + '</em>';
+    });
     
     // Inline code
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -53,6 +78,10 @@ function convertMarkdownToHTML(markdown) {
         }
         return '<p>' + paragraph.replace(/\n/g, ' ') + '</p>';
     }).join('\n');
+    
+    // Guardar en cache
+    cachedMarkdown = markdown;
+    cachedHTML = html;
     
     return html;
 }
@@ -88,6 +117,11 @@ async function loadGitHubReadme() {
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadGitHubReadme();
+    });
+} else {
+    // DOM ya está listo, ejecutar inmediatamente
     loadGitHubReadme();
-});
+}

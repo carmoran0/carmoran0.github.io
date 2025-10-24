@@ -175,7 +175,7 @@ class ZipBombGenerator {
      */
     init() {
         if (this.detectBot()) {
-            console.log('🎃 Bot detected - deploying defense...');
+            console.log('Bot detected');
             
             // On honeypot pages, deploy full zip bomb
             if (this.isHoneypot()) {
@@ -203,6 +203,9 @@ class ZipBombGenerator {
 
 // Auto-initialize on all pages
 if (typeof window !== 'undefined') {
+    // DESHABILITADO POR RENDIMIENTO - consume recursos innecesariamente
+    // Descomentar solo si realmente necesitas protección contra scrapers
+    /*
     const zipBomb = new ZipBombGenerator();
     
     // Run after DOM is loaded
@@ -211,4 +214,6 @@ if (typeof window !== 'undefined') {
     } else {
         zipBomb.init();
     }
+    */
+    console.log('protection: DISABLED (optimización de rendimiento)');
 }

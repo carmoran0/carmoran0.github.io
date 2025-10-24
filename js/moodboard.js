@@ -3,9 +3,21 @@
  * Permite arrastrar elementos y ver imágenes en pantalla completa con carrusel
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+(function initMoodboard() {
+    // Esperar a que el DOM esté listo si aún no lo está
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupMoodboard);
+    } else {
+        // El DOM ya está listo, ejecutar inmediatamente
+        setupMoodboard();
+    }
+
+function setupMoodboard() {
     const moodboard = document.getElementById('moodboard');
-    if (!moodboard) return;
+    if (!moodboard) {
+        console.warn('Moodboard: contenedor #moodboard no encontrado');
+        return;
+    }
 
     let isDragging = false;
     let currentItem = null;
@@ -257,4 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initDragAndDrop();
 
     console.log('🖼️ Moodboard inicializado. Escribe moodboardHelp() para ver las instrucciones.');
-});
+}
+
+})();

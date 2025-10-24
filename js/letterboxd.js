@@ -4,10 +4,22 @@
 const LETTERBOXD_USERNAME = 'klamstrakur0';
 const LETTERBOXD_RSS_URL = `https://letterboxd.com/${LETTERBOXD_USERNAME}/rss/`;
 
+// Cache para evitar múltiples requests
+let letterboxdCache = null;
+let cacheTimestamp = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+
 async function fetchLetterboxdActivity() {
     const container = document.getElementById('letterboxd-container');
     
     if (!container) return;
+    
+    // Usar cache si está disponible y es reciente
+    const now = Date.now();
+    if (letterboxdCache && (now - cacheTimestamp) < CACHE_DURATION) {
+        container.innerHTML = letterboxdCache;
+        return;
+    }
 
     try {
         // Using a CORS proxy to fetch the RSS feed
@@ -29,10 +41,11 @@ async function fetchLetterboxdActivity() {
             return;
         }
 
-        // Display the most recent 4 items
-        const recentItems = Array.from(items).slice(0, 5);
+        // Display the most recent 10 items
+        const recentItems = Array.from(items).slice(0, 10);
         
         let html = '<div class="letterboxd-feed">';
+        const fragment = document.createDocumentFragment(); // Para mejor rendimiento
         
         recentItems.forEach(item => {
             const title = item.querySelector('title')?.textContent || 'Unknown';
@@ -73,6 +86,10 @@ async function fetchLetterboxdActivity() {
         html += '</div>';
         container.innerHTML = html;
         
+        // Guardar en cache
+        letterboxdCache = html;
+        cacheTimestamp = Date.now();
+        
     } catch (error) {
         console.error('Error fetching Letterboxd feed:', error);
         container.innerHTML = '<p class="letterboxd-error">Error al cargar la actividad de Letterboxd</p>';
@@ -83,5 +100,6 @@ async function fetchLetterboxdActivity() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', fetchLetterboxdActivity);
 } else {
+    // DOM ya está listo, ejecutar inmediatamente
     fetchLetterboxdActivity();
 }

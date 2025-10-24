@@ -27,30 +27,28 @@
     }
     
     function createSnow(container) {
-        const snowflakeCount = 50;
+        const snowflakeCount = 25; // Reducido de 50 a 25 para mejor rendimiento
+        const fragment = document.createDocumentFragment(); // Optimización DOM
         for (let i = 0; i < snowflakeCount; i++) {
             const snowflake = document.createElement('div');
             snowflake.className = 'snowflake';
             snowflake.textContent = '❄';
-            snowflake.style.left = Math.random() * 100 + '%';
-            snowflake.style.animationDuration = (Math.random() * 9 + 4) + 's';
-            snowflake.style.animationDelay = Math.random() * 5 + 's';
-            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            snowflake.style.opacity = Math.random() * 0.6 + 0.4;
-            container.appendChild(snowflake);
+            snowflake.style.cssText = `left:${Math.random()*100}%;animation-duration:${Math.random()*9+4}s;animation-delay:${Math.random()*5}s;font-size:${Math.random()*10+10}px;opacity:${Math.random()*0.6+0.4}`;
+            fragment.appendChild(snowflake);
         }
+        container.appendChild(fragment); // Una sola operación DOM
     }
     
     function createRain(container) {
-        const dropCount = 100;
+        const dropCount = 50; // Reducido de 100 a 50 para mejor rendimiento
+        const fragment = document.createDocumentFragment(); // Optimización DOM
         for (let i = 0; i < dropCount; i++) {
             const drop = document.createElement('div');
             drop.className = 'raindrop';
-            drop.style.left = Math.random() * 100 + '%';
-            drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
-            drop.style.animationDelay = Math.random() * 2 + 's';
-            container.appendChild(drop);
+            drop.style.cssText = `left:${Math.random()*100}%;animation-duration:${Math.random()*0.5+0.5}s;animation-delay:${Math.random()*2}s`;
+            fragment.appendChild(drop);
         }
+        container.appendChild(fragment); // Una sola operación DOM
     }
     
     function createThunder(container) {
