@@ -12,9 +12,14 @@
     <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="shortcut icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="apple-touch-icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
+    
+    <!-- CSS principal y optimizado -->
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/bats-animation.css">
+    <link rel="stylesheet" href="/css/modal.css">
     <link rel="stylesheet" href="/css/weather.css">
     <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 780px)">
+    
     <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(/images/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="/images/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
     <link rel="stylesheet" type="text/css" href="https://esm.sh/emfed@1/toots.css">
 </head>
@@ -28,8 +33,8 @@
     <div class="page-wrapper" style="position:relative;z-index:1;">
 
         
-        <div class="first-column">
-            <div class="main-container">
+        <div class="first-column" >
+            <div class="main-container"style="height: 825px;">
                 <h2>TODOLIST:</h2>
                 <p>Decoraciones a mano en los contenedores?</p>
                 <p>Sobre todo debajo de los botones</p>
@@ -53,7 +58,7 @@
                             <span class="online-dot"></span>
                             <span class="online-text">En línea</span>
                         </span>
-                        Caldo <a class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a>
+                        Caldo <a style="width: 200px;" class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a>
                     </h1>
                 </header>
                 <p class="ultima-actualizacion">Última actualización de esta página web: 24/10/2025 a las 23:45<br><a href="legacy/index.html" style="color: beige;">(versión legacy)</a></p>
@@ -269,14 +274,14 @@
 
     <!-- Contenedor inferior con murciélagos y badges -->
     <div class="bottom-containers">
-        <!-- Contenedor izquierdo: Murciélagos -->
-        <div class="main-container bats-container">
-            <h2>
-                <p><a class="link-button bat-counter" href="#" onclick="addNewBat(); return false;">Murciélago</a></p>
-            </h2>
+        <!-- Contenedor izquierdo: Murciélagos (CSS-only animation) -->
+        <div class="main-container bats-container"style="padding-top: 18px;">
+            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">nuevos murciélagos CSS (Carlos Swag Sopa)</p>
             <div id="bats-bouncing-area">
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Murciélago animado">
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Murciélago animado">
             </div>
         </div>
         <!-- Contenedor central: Chatango (nuevo) -->
@@ -335,16 +340,14 @@
     </div>
     
 
-    <!-- Scripts esenciales primero -->
+    <!-- Scripts optimizados - Solo esenciales en carga inicial -->
     <script src="/js/zipbomb.js" defer></script>
     <script src="/js/scripts.js" defer></script>
-    <script src="/js/lastfm.js" defer></script>
-    <script src="/js/github-readme.js" defer></script>
     
-    <!-- Lazy loader para scripts pesados (optimización) -->
+    <!-- Lazy loader maneja carga diferida de APIs (lastfm, letterboxd, github) -->
     <script src="/js/lazy-loader.js" defer></script>
-
     
+    <!-- Mastodon feed -->
     <script type="module" src="https://esm.sh/emfed@1"></script>
         <script>
         // Click handler: set #bg-blur to screamer.gif without blur for 5s, then restore

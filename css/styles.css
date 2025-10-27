@@ -1,32 +1,114 @@
-
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	background-color: #202020; /* page background */
-    color: #fff; /* text color */
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
 @font-face {
     font-family: 'jgs9';
     src: url('/jgs9.ttf') format('opentype');
 }
 
+/* ========================================
+   CSS Variables para tematización
+   ======================================== */
+:root {
+    /* Colores principales */
+    --bg-page: #202020;
+    --bg-primary: rgba(255, 255, 255, 0.1);
+    --bg-secondary: rgba(0, 0, 0, 0.2);
+    --bg-tertiary: rgba(0, 0, 0, 0.3);
+    --border-default: rgba(255, 255, 255, 0.2);
+    --border-muted: rgba(255, 255, 255, 0.06);
+    
+    /* Texto */
+    --text-primary: #fff;
+    --text-link: beige;
+    --text-link-hover: #f5f5dc;
+    
+    /* Colores de acento */
+    --color-green: #00ff00;
+    --color-green-text: #7CFF52;
+    --color-orange: #FF9600;
+    
+    /* Colores de botones sociales */
+    --color-spotify: #1ED760;
+    --color-mastodon: #6364FF;
+    --color-letterbox: #ff8000;
+    --color-steam: #2a475e;
+    --color-instagram: #ff0069;
+    --color-github: #6e5494;
+    --color-discord: #7289da;
+    --color-bluesky: #1185FE;
+    --color-duolingo: #58CC02;
+    --color-bat: #6b3fa0;
+    --color-lastfm: #D51007;
+    --color-soundcloud: #FF5500;
+    
+    /* Espaciados */
+    --spacing-xs: 5px;
+    --spacing-sm: 8px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 60px;
+    
+    /* Animaciones y transiciones */
+    --transition-default: 0.3s ease;
+    --transition-fast: 0.2s ease;
+    --blur-amount: 20px;
+    --blur-bg: 4px;
+    
+    /* Sombras */
+    --shadow-default: 0 8px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.4);
+    --shadow-button: 0 6px 10px rgba(0, 0, 0, 0.3);
+    
+    /* Radios */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 15px;
+    
+    /* Tipografía */
+    --font-main: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-github: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif);
+}
+
+/* Soporte para modo claro (opcional) */
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-page: #f0f0f0;
+        --text-primary: #202020;
+        --bg-primary: rgba(0, 0, 0, 0.05);
+        --bg-secondary: rgba(255, 255, 255, 0.8);
+    }
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-page);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    font-family: var(--font-main);
+    width: 100%;
+    max-width: 100%;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 h1{
-    font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--font-main);
     margin: 0;
     padding: 0;
-    color: white;
+    color: var(--text-primary);
     text-align: center;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 /* Indicador de estado en línea */
@@ -42,7 +124,7 @@ h1{
 .online-dot {
     width: 12px;
     height: 12px;
-    background-color: #00ff00;
+    background-color: var(--color-green);
     border-radius: 50%;
     display: inline-block;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
@@ -61,15 +143,15 @@ h1{
 }
 
 .online-text {
-    color: #7CFF52; /* green text for 'En línea' */
+    color: var(--color-green-text);
     white-space: nowrap;
 }
 
 h2 {
-    font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: white;
+    font-family: var(--font-main);
+    color: var(--text-primary);
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
     margin-top: 0px;
     font-size: 24px;
 }
@@ -78,13 +160,15 @@ h2 {
 .page-wrapper {
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    padding: 30px 20px;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
     max-width: 1630px;
+    width: 100%;
     margin: 0 auto;
     align-items: stretch;
-    /* dejar espacio superior para la barra de anuncio */
-    margin-top: 36px;
+    margin-top: 24px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* Barra de anuncio fina en la parte superior */
@@ -129,6 +213,8 @@ h2 {
     display: flex;
     flex-direction: column;
     max-width: 215px;
+    min-width: 0;
+    flex-shrink: 0;
 }
 
 
@@ -136,75 +222,83 @@ h2 {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .right-column {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: var(--spacing-xl);
     max-width: 550px;
+    min-width: 0;
 }
 
 .main-container {
-    backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+    backdrop-filter: blur(var(--blur-amount));
+    background: var(--bg-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-default);
+    transition: transform var(--transition-default), box-shadow var(--transition-default);
+    box-sizing: border-box;
+    overflow: hidden;
+    
+    /* CSS Containment para mejor rendimiento */
+    contain: layout style paint;
 }
 
 
 /* Contenedor 1: Header - ocupa toda la altura de la columna izquierda */
 .header-container {
     text-align: center;
-    display: flex;
-    flex-direction: column;
 }
 
 .ultima-actualizacion {
-    margin: 15px 0;
+    margin: var(--spacing-md) 0;
     opacity: 0.8;
     font-size: 14px;
 }
 
 #readme-content {
     text-align: left;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    padding: var(--spacing-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
     overflow-y: auto;
     flex: 1;
-    font-family: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji");
+    font-family: var(--font-github);
     line-height: 1.1;
     word-wrap: break-word;
+    
+    /* Optimización de renderizado */
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
 }
 
 #readme-content h1,
 #readme-content h2,
 #readme-content h3 {
-    color: #fff;
+    color: var(--text-primary);
 }
 
 #readme-content h1 {
-    font-family: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji");
+    font-family: var(--font-github);
     padding-bottom: .3em;
     font-size: 2em;
-    border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));
+    border-bottom: 1px solid var(--border-muted);
 }
 
 #readme-content h2 {
-    font-family: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji");   
+    font-family: var(--font-github);   
     padding-bottom: .3em;
     font-size: 1.5em;
-    border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));
+    border-bottom: 1px solid var(--border-muted);
 }
 
 #readme-content h3 {
-    font-family: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji");   
+    font-family: var(--font-github);   
     font-size: 1.25em;
 }
 
@@ -217,7 +311,7 @@ h2 {
 
 
 #readme-content code {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-primary);
     padding: 2px 6px;
     border-radius: 3px;
     font-family: 'Courier New', Courier, monospace;
@@ -225,11 +319,11 @@ h2 {
 }
 
 #readme-content pre {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    background: var(--bg-tertiary);
+    padding: var(--spacing-md);
     border-radius: 5px;
     overflow-x: auto;
-    margin: 15px 0;
+    margin: var(--spacing-md) 0;
 }
 
 #readme-content pre code {
@@ -239,12 +333,15 @@ h2 {
 
 #readme-content img {
     display: block;
-    margin: 15px auto;
-    border-radius: 8px;
+    margin: var(--spacing-md) auto;
+    border-radius: var(--radius-md);
+    max-width: -webkit-fill-available;
+    max-width: -moz-available;
+    max-width: fill-available;
 }
 
 #readme-content strong {
-    color: #fff;
+    color: var(--text-primary);
     font-weight: bold;
 }
 
@@ -253,13 +350,13 @@ h2 {
 }
 
 #readme-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
 }
 
 #readme-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
+    background: var(--border-default);
+    border-radius: var(--radius-lg);
 }
 
 /* Contenedor 2: Social Links */
@@ -271,17 +368,11 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: var(--spacing-md);
 }
 
 .social-links p {
     margin: 0;
-}
-
-/* Contenedor 3: Last.fm */
-.lastfm-container-wrapper {
-    text-align: center;
-    max-height: 330px;
 }
 
 /* Letterboxd container styles */
@@ -310,11 +401,11 @@ h2 {
 
 .letterboxd-item {
     display: flex;
-    gap: 15px;
-    padding: 15px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-default), transform var(--transition-fast);
     text-align: left;
 }
 
@@ -330,6 +421,9 @@ h2 {
     overflow: hidden;
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    /* Optimización con aspect-ratio */
+    aspect-ratio: 2/3;
 }
 
 .letterboxd-poster img {
@@ -339,6 +433,9 @@ h2 {
     max-height: 120px !important;
     object-fit: cover;
     display: block;
+    
+    /* Lazy loading optimizado */
+    content-visibility: auto;
 }
 
 .letterboxd-info {
@@ -356,9 +453,9 @@ h2 {
 }
 
 .letterboxd-title a {
-    color: #ff8000 !important;
+    color: var(--color-letterbox) !important;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-default);
 }
 
 .letterboxd-title a:hover {
@@ -380,10 +477,10 @@ h2 {
 }
 
 .letterboxd-error {
-    color: #ff8000;
+    color: var(--color-letterbox);
     text-align: center;
     font-size: 16px;
-    padding: 20px;
+    padding: var(--spacing-lg);
 }
 
 #bg-blur {
@@ -397,43 +494,41 @@ h2 {
 }
 
 .streak-number {
-    color: #FF9600;
+    color: var(--color-orange);
     font-weight: bold;
 }
 
 /* Estilo para los botones de enlaces */
 a.link-button {
-    color: white;
+    color: var(--text-primary);
     padding: 10px 15px;
     text-align: center;
     width: 180px;
-    /* font-size: 20px; */
     text-decoration: none;
     display: inline-block;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-}
-a.link-button {
-backdrop-filter: blur(20px);
-background: rgba(255,255,255,0.1);
-border: 1px solid rgba(255,255,255,0.2);
+    transition: background-color var(--transition-default), 
+                color var(--transition-default), 
+                box-shadow var(--transition-default);
+    box-shadow: var(--shadow-button);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(var(--blur-amount));
+    background: var(--bg-primary);
+    border: 1px solid var(--border-default);
 }
 
-a.spotify:hover { background-color: #1ED760; }
-a.mastodon:hover { background-color: #6364FF; }
-a.letterbox:hover { background-color: #ff8000; }
-a.steam:hover { background-color: #2a475e; }  
-a.instagram:hover { background-color: #ff0069; }
-a.github:hover { background-color: #6e5494; }
+a.spotify:hover { background-color: var(--color-spotify); }
+a.mastodon:hover { background-color: var(--color-mastodon); }
+a.letterbox:hover { background-color: var(--color-letterbox); }
+a.steam:hover { background-color: var(--color-steam); }  
+a.instagram:hover { background-color: var(--color-instagram); }
+a.github:hover { background-color: var(--color-github); }
 a.correo:hover { background-color: #c8c8c8; color: rgb(0, 0, 0); }
-a.discord:hover { background-color: #7289da; }
-a.bluesky:hover { background-color: #1185FE; }
-a.duolingo:hover { background-color: #58CC02; }
-a.bat-counter:hover {background-color: #6b3fa0; }
-a.github:hover { background-color: #6e5494; }
-a.lastfm:hover { background-color: #D51007; }
-a.soundcloud:hover { background-color: #FF5500; }
+a.discord:hover { background-color: var(--color-discord); }
+a.bluesky:hover { background-color: var(--color-bluesky); }
+a.duolingo:hover { background-color: var(--color-duolingo); }
+a.bat-counter:hover { background-color: var(--color-bat); }
+a.lastfm:hover { background-color: var(--color-lastfm); }
+a.soundcloud:hover { background-color: var(--color-soundcloud); }
 
 
 
@@ -449,24 +544,23 @@ a.soundcloud:hover { background-color: #FF5500; }
 #lastfm-container {
     width: 100%;
     max-width: 800px;
-}
+}   
 .lastfm-content{
-    max-height: 250px;
+    max-height: 315px;
     overflow: scroll;
 }
 
 .lastfm-content,
 .chatango-wrapper {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s, background-color 0.3s ease;
-
-    backdrop-filter: blur(20px);
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 8px;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-button);
+    transition: box-shadow var(--transition-default), background-color var(--transition-default);
+    backdrop-filter: blur(var(--blur-amount));
+    background: var(--bg-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
 }
 
 
@@ -475,6 +569,12 @@ a.soundcloud:hover { background-color: #FF5500; }
     height: 200px;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+    /* Optimización con aspect-ratio */
+    aspect-ratio: 1;
+    
+    /* Lazy loading optimizado */
+    content-visibility: auto;
 }
 
 .lastfm-info {
@@ -519,14 +619,27 @@ a.soundcloud:hover { background-color: #FF5500; }
     padding: 20px;
 }
 
-/* Contenedores inferiores (murciélagos y badges) */
+/* Optimización de renderizado con content-visibility */
+.letterboxd-container-wrapper,
+.shrine-container,
+.bats-container,
+.badges-container,
+.uses-container,
+.now-container,
+.mastodon-container {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
 .bottom-containers {
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    padding: 0 20px 30px 20px;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-lg) var(--spacing-xl) var(--spacing-lg);
     max-width: 1630px;
+    width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* Fila especial para Letterboxd */
@@ -701,7 +814,7 @@ a.soundcloud:hover { background-color: #FF5500; }
 #bats-bouncing-area {
     position: relative;
     width: 100%;
-    height: 333px;
+    height: 250px;
     overflow: hidden;
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.2);
@@ -766,12 +879,14 @@ a.soundcloud:hover { background-color: #FF5500; }
     line-height: 1.6;
 }
 
-/* Enlaces: color por defecto y color para los ya visitados */
+/* Enlaces: color por defecto */
 a {
-    color: beige !important;
+    color: var(--text-link) !important;
+    transition: color var(--transition-default);
 }
 a:hover {
     text-decoration: underline;
+    color: var(--text-link-hover) !important;
 }
 
 
@@ -790,11 +905,11 @@ a:hover {
 .uses-section h3,
 .shrine-section h3,
 .now-section h3 {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 18px;
     margin-bottom: 10px;
     text-align: left;
-    font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--font-main);
 }
 
 .uses-content ul,
@@ -920,22 +1035,30 @@ a:hover {
     position: relative;
 }
 
-.mastodon-feed-wrapper::-webkit-scrollbar {
+/* Scrollbars globales: aplicadas a toda la página (WebKit/Blink y Firefox) */
+*::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
-.mastodon-feed-wrapper::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+*::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
 }
 
-.mastodon-feed-wrapper::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
 }
 
-.mastodon-feed-wrapper::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4);
+/* Soporte para Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) rgba(255,255,255,0.05);
 }
 
 .mastodon-view-more {

@@ -1,53 +1,23 @@
+// ========================================
+// Scripts optimizados - Solo funcionalidad esencial
+// Estilos de enlaces ahora manejados por CSS
+// ========================================
+
+// Duolingo streak counter
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         if (typeof calculateStreak === 'function') {
             calculateStreak();
             setInterval(calculateStreak, 86400000);
         }
-        // Aplicar style="color: beige;" inline a todos los enlaces
-        try {
-            document.querySelectorAll('a').forEach(function(el) {
-                // conservar estilos en línea existentes y añadir color beige
-                var existing = el.getAttribute('style') || '';
-                // si ya existe un color en inline, lo reemplazamos
-                if (/\bcolor\s*:/i.test(existing)) {
-                    existing = existing.replace(/color\s*:\s*[^;]+;?/i, 'color: beige;');
-                } else {
-                    if (existing && existing.trim() && !/;\s*$/.test(existing)) existing += ';';
-                    existing += 'color: beige;';
-                }
-                el.setAttribute('style', existing);
-            });
-        } catch (e) {
-            console.warn('No se pudieron aplicar estilos inline a los enlaces:', e);
-        }
     });
 } else {
-    // DOM ya está listo, ejecutar inmediatamente
     if (typeof calculateStreak === 'function') {
         calculateStreak();
         setInterval(calculateStreak, 86400000);
     }
-    // Aplicar style="color: beige;" inline a todos los enlaces
-    try {
-        document.querySelectorAll('a').forEach(function(el) {
-            // conservar estilos en línea existentes y añadir color beige
-            var existing = el.getAttribute('style') || '';
-            // si ya existe un color en inline, lo reemplazamos
-            if (/\bcolor\s*:/i.test(existing)) {
-                existing = existing.replace(/color\s*:\s*[^;]+;?/i, 'color: beige;');
-            } else {
-                if (existing && existing.trim() && !/;\s*$/.test(existing)) existing += ';';
-                existing += 'color: beige;';
-            }
-            el.setAttribute('style', existing);
-        });
-    } catch (e) {
-        console.warn('No se pudieron aplicar estilos inline a los enlaces:', e);
-    }
 }
 
-// Duolingo streak counter
 function calculateStreak() {
     const streakStartDate = new Date('2023-12-09');
     const today = new Date();

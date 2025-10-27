@@ -1,0 +1,118 @@
+/* ========================================
+   Animación CSS para murciélagos
+   Reemplaza bats.js con CSS puro
+   ======================================== */
+
+.bouncing-bat {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    
+    /* Animaciones independientes para X e Y */
+    animation: 
+        bat-bounce-x var(--bat-duration-x, 4s) ease-in-out infinite alternate,
+        bat-bounce-y var(--bat-duration-y, 3s) ease-in-out infinite alternate;
+    
+    /* Optimización de rendimiento */
+    contain: layout style;
+    will-change: transform;
+}
+
+/* Animación horizontal (izquierda-derecha) */
+@keyframes bat-bounce-x {
+    0% { 
+        left: 0%; 
+    }
+    100% { 
+        left: calc(100% - 80px);
+    }
+}
+
+/* Animación vertical (arriba-abajo) */
+@keyframes bat-bounce-y {
+    0% { 
+        top: 0%; 
+    }
+    100% { 
+        top: calc(100% - 80px);
+    }
+}
+
+/* Diferentes duraciones para cada murciélago para efecto natural */
+.bouncing-bat:nth-child(1) {
+    --bat-duration-x: 4s;
+    --bat-duration-y: 3s;
+    animation-delay: 0s, 0.2s;
+}
+
+.bouncing-bat:nth-child(2) {
+    --bat-duration-x: 5s;
+    --bat-duration-y: 3.5s;
+    animation-delay: 0.5s, 0s;
+}
+
+.bouncing-bat:nth-child(3) {
+    --bat-duration-x: 4.5s;
+    --bat-duration-y: 4s;
+    animation-delay: 0.3s, 0.7s;
+}
+
+.bouncing-bat:nth-child(4) {
+    --bat-duration-x: 5.5s;
+    --bat-duration-y: 3.2s;
+    animation-delay: 0.8s, 0.4s;
+}
+
+/* Botón checkbox oculto para agregar murciélago */
+#add-bat-checkbox {
+    display: none;
+}
+
+/* Efecto hover en el label (botón) */
+label.bat-counter {
+    cursor: pointer;
+}
+
+/* Agregar murciélago adicional con pseudo-elemento cuando checkbox está marcado */
+#add-bat-checkbox:checked ~ #bats-bouncing-area::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('/legacy/images/ANI3DbatHover.gif') no-repeat center/cover;
+    animation: 
+        bat-bounce-x 4.5s ease-in-out infinite alternate,
+        bat-bounce-y 3.2s ease-in-out infinite alternate;
+    animation-delay: 0.5s;
+    pointer-events: none;
+}
+
+/* Animación de entrada suave para nuevo murciélago */
+#add-bat-checkbox:checked ~ #bats-bouncing-area::after {
+    animation: 
+        bat-bounce-x 4.5s ease-in-out infinite alternate,
+        bat-bounce-y 3.2s ease-in-out infinite alternate,
+        bat-fade-in 0.5s ease;
+}
+
+@keyframes bat-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Optimización para reducción de motion */
+@media (prefers-reduced-motion: reduce) {
+    .bouncing-bat,
+    #add-bat-checkbox:checked ~ #bats-bouncing-area::after {
+        animation-duration: 10s !important;
+        animation-timing-function: linear !important;
+    }
+}

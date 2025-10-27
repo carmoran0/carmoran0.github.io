@@ -1,0 +1,212 @@
+/* ========================================
+   Modal de imágenes con CSS puro (:target)
+   Reemplaza el visor JavaScript del moodboard
+   ======================================== */
+
+/* Modal invisible por defecto */
+.css-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Visible cuando el hash del URL coincide con el ID */
+.css-modal:target {
+    display: flex;
+    opacity: 1;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { 
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to { 
+        opacity: 1;
+        backdrop-filter: blur(10px);
+    }
+}
+
+/* Contenedor de la imagen */
+.modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen del modal */
+.modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+    animation: imageZoomIn 0.3s ease;
+}
+
+@keyframes imageZoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Botón cerrar */
+.modal-close {
+    position: absolute;
+    top: -60px;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    line-height: 1;
+    padding-bottom: 4px;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(90deg);
+    color: white !important;
+}
+
+/* Contenedor de navegación */
+.modal-nav {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+/* Botones de navegación (anterior/siguiente) */
+.modal-nav a {
+    pointer-events: all;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white !important;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    user-select: none;
+    line-height: 1;
+}
+
+.modal-nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.modal-nav a.prev {
+    padding-right: 4px;
+}
+
+.modal-nav a.next {
+    padding-left: 4px;
+}
+
+/* Contador de imágenes */
+.modal-counter {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Soporte para teclado */
+.css-modal:target .modal-close:focus,
+.css-modal:target .modal-nav a:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* Mejorar accesibilidad del moodboard */
+.moodboard-item {
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.moodboard-item:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* Responsivo: ajustar en móviles */
+@media (max-width: 780px) {
+    .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
+    
+    .modal-nav a {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    
+    .modal-nav {
+        padding: 0 10px;
+    }
+    
+    .modal-content img {
+        max-width: 95vw;
+        max-height: 85vh;
+    }
+}
+
+/* Prevenir scroll del body cuando modal está abierto */
+.css-modal:target ~ body {
+    overflow: hidden;
+}
+
+/* Alternativa usando has() (navegadores modernos) */
+body:has(.css-modal:target) {
+    overflow: hidden;
+}
