@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://ws.audioscrobbler.com">
     <link rel="preconnect" href="https://raw.githubusercontent.com">
     <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
-    
     <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="shortcut icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
     <link rel="apple-touch-icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
@@ -23,6 +22,8 @@
     
     <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(/images/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="/images/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
     <link rel="stylesheet" type="text/css" href="https://esm.sh/emfed@1/toots.css">
+    <script src="https://iframe.chat/scripts/main.min.js"></script>
+    
 </head>
 <body>
     <!-- Announcement bar -->
@@ -41,7 +42,6 @@
                 <p>Sobre todo debajo de los botones</p>
                 <p>Tocar las fuentes de mastodon y github</p>
                 <p>A lo mejor un titulo chulo</p>
-                <p>Pasar de chatango a chattable</p>
                 <p>Meterme en algun webring</p>
                 <p>Pantalla de carga? landing/warning?</p>
                 <img src="/images/constr.gif" style="max-width: 150px;">
@@ -227,6 +227,10 @@
                     <img src="images/sos.jpg" alt="Item del altar">
                     <div class="pin"></div>
                 </div>
+                <div class="moodboard-item" style="top: 77%; left: 55%;" data-rotation="-3">
+                    <img src="images/payti.jpg" alt="Item del altar">
+                    <div class="pin"></div>
+                </div>
             </div>
         </div>
 
@@ -283,28 +287,17 @@
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Murciélago animado">
                 <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Murciélago animado">
+                
             </div>
         </div>
-        <!-- Contenedor central: Chatango (nuevo) -->
-        <div class="main-container chat-container" aria-label="chatango-chat" style="padding-top: 18px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+        <!-- Contenedor central: Chattable -->
+        <div class="main-container chat-container" aria-label="chat-chat" style="padding-top: 18px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
             <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">preguntame lo que quieras, pideme lo que quieras, di lo que quieras o deja un mensaje para otros visitantes; el chat es anónimo.</p>
-            <div class="chatango-wrapper" style="height:250px;min-height:160px;">
-                <div id="chatango-container" style="width:100%;height:100%;"></div>
-                <script>
-                    (function(){
-                        var cfg = {"handle":"cald0","arch":"js","styles":{"c":"000000","d":"000000","f":0,"i":0,"l":"FFFFFF","m":"FFFFFF","p":"10","usricon":0,"surl":0,"cnrs":"0.48"}};
-                        var s = document.createElement('script');
-                        s.id = 'cid0020000420850072125';
-                        s.setAttribute('data-cfasync','false');
-                        s.async = true;
-                        s.src = '//st.chatango.com/js/gz/emb.js';
-                        s.style.width = '100%';
-                        s.style.height = '100%';
-                        s.text = JSON.stringify(cfg);
-                        var mount = document.getElementById('chatango-container');
-                        if(mount) mount.appendChild(s);
-                    })();
-                </script>
+            <div class="chat-wrapper" style="
+            height:250px;
+            min-height:160px;
+            padding: 0;">
+                <iframe src="https://iframe.chat/embed?chat=10867815" id="chattable"style="width:100%;height:100%;"></iframe> 
             </div>
         </div>
 
@@ -400,10 +393,14 @@
     </div>
     
 
-    <!-- Scripts optimizados - Solo esenciales en carga inicial -->
+    <!-- Scripts esenciales en carga inicial -->
     <script src="/js/zipbomb.js" defer></script>
     <script src="/js/scripts.js" defer></script>
-    
+    <script>
+    chattable.initialize({
+        stylesheet: "/css/chattable.css"
+    });
+    </script>
     <!-- Lazy loader maneja carga diferida de APIs (lastfm, letterboxd, github) -->
     <script src="/js/lazy-loader.js" defer></script>
     

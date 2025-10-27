@@ -69,15 +69,6 @@
     --font-github: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif);
 }
 
-/* Soporte para modo claro (opcional) */
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg-page: #f0f0f0;
-        --text-primary: #202020;
-        --bg-primary: rgba(0, 0, 0, 0.05);
-        --bg-secondary: rgba(255, 255, 255, 0.8);
-    }
-}
 
 html, body {
 	height: 100%;
@@ -551,7 +542,7 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 }
 
 .lastfm-content,
-.chatango-wrapper {
+.chat-wrapper {
     display: flex;
     gap: var(--spacing-lg);
     padding: var(--spacing-lg);
@@ -562,6 +553,13 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
 }
+/* CHATTANGO */
+
+
+
+
+
+
 
 
 .lastfm-album-art img {

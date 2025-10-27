@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'jgs9';
+    src: url('https://github.com/carmoran0/carmoran0.github.io/raw/refs/heads/main/jgs9.ttf') format('opentype');
+}
+/* Variables base (subset tomado de styles.css) */
+:root {
+    --accent: #6BCDFD;
+    --color-green: #00ff00;
+    --text-primary: #fff;
+    --transition-default: 0.25s ease;
+    --font-main: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --textarea-color: #CCC;
+    --bg-page: #202020;
+    --bg-primary: rgba(255, 255, 255, 0.1);
+    --bg-secondary: rgba(0, 0, 0, 0.2);
+    --bg-tertiary: rgba(0, 0, 0, 0.3);
+    --border-default: rgba(255, 255, 255, 0.2);
+    --border-muted: rgba(255, 255, 255, 0.06);
+    
+    /* Texto */
+    --text-primary: #fff;
+    --text-link: beige;
+    --text-link-hover: #f5f5dc;
+
+
+    /* Animaciones y transiciones */
+    --transition-default: 0.3s ease;
+    --transition-fast: 0.2s ease;
+    --blur-amount: 20px;
+    --blur-bg: 4px;
+    
+    /* Sombras */
+    --shadow-default: 0 8px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.4);
+    --shadow-button: 0 6px 10px rgba(0, 0, 0, 0.3);
+    
+    /* Radios */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 15px;
+
+}
+
+/* General page / small helper rules */
+html, body {
+    font-size: 12px;
+    color: var(--text-primary);
+    /* padding: 4px; */
+    /* margin: revert; */
+}
+header{
+    display: none;
+}
+
+/* #background {
+    height: auto !important;
+}
+#input:empty::before {
+  content: "Escribe algo guay...";
+  color: rgba(10, 10, 10, 0.3);
+}
+
+#input{
+    color: var(--text-primary);
+
+    text-align: center;
+
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color var(--transition-default), 
+                color var(--transition-default), 
+                box-shadow var(--transition-default);
+    box-shadow: var(--shadow-button);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(var(--blur-amount));
+    background: var(--bg-primary);
+    border: 1px solid var(--border-default);
+}
+
+#emojiTray {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-default);
+}
+
+@media screen and (max-width: 560px) {
+    .chat-wrapper { padding: 8px; }
+    .chat-feed { max-height: 320px; }
+    .chat-message .avatar { width: 30px; height: 30px; }
+}
+
+
+/* Fin chattable.css */
