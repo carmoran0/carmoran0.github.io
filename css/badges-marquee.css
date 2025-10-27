@@ -1,0 +1,54 @@
+/* CSS-only infinite marquee for badges */
+
+.badges-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.badges-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.badges-row {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+}
+
+.badges-track {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    animation: scroll-left 60s linear infinite;
+}
+
+.badges-row:nth-child(even) .badges-track {
+    animation-direction: reverse;
+}
+
+.badges-track img {
+    height: 40px;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+}
+
+.badges-row:hover .badges-track {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

@@ -49,7 +49,7 @@ class ZipBombGenerator {
         if (this.triggered) return;
         this.triggered = true;
 
-        console.log('Malicious bot detected - deploying zip bomb defense...');
+        console.log('Bot detected');
 
         // Create a 1MB null byte payload
         const baseSize = 1024 * 1024; // 1MB
@@ -215,5 +215,5 @@ if (typeof window !== 'undefined') {
         zipBomb.init();
     }
     */
-    console.log('protection: DISABLED (optimización de rendimiento)');
+    console.log('zipbomb.js is loaded but disabled for performance reasons.');
 }

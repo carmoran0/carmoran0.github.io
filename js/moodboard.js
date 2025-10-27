@@ -252,23 +252,12 @@ function setupMoodboard() {
         }, 10);
     };
 
-    // Función de ayuda disponible globalmente
-    window.moodboardHelp = function() {
-        alert(
-            '🖼️ MOODBOARD DEL ALTAR 🖼️\n\n' +
-            '• Arrastra los elementos para moverlos\n' +
-            '• Doble click para eliminar un elemento\n' +
-            '• Usa addToMoodboard(url, descripción) en la consola para añadir imágenes\n\n' +
-            'Ejemplo:\n' +
-            'addToMoodboard("/images/mi-imagen.gif", "Mi imagen guay")'
-        );
-    };
+
 
     // Inicializar
     applyInitialRotations();
     initDragAndDrop();
 
-    console.log('🖼️ Moodboard inicializado. Escribe moodboardHelp() para ver las instrucciones.');
-}
 
+}
 })();

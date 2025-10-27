@@ -841,14 +841,6 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
     margin-bottom: 15px;
 }
 
-.badges-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2px;
-    width: 100%;
-}
-
 .badges-grid img {
     width: auto;
     display: block;
