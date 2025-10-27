@@ -160,6 +160,7 @@ h2 {
     margin-top: 24px;
     box-sizing: border-box;
     overflow-x: hidden;
+    min-height: 0;
 }
 
 /* Barra de anuncio fina en la parte superior */
@@ -206,14 +207,29 @@ h2 {
     max-width: 215px;
     min-width: 0;
     flex-shrink: 0;
+    min-height: 0;
 }
 
+.first-column .main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
 
 .left-column {
     flex: 1;
     display: flex;
     flex-direction: column;
     min-width: 0;
+    min-height: 0;
+}
+
+.left-column .main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto;
 }
 
 .right-column {
@@ -223,14 +239,27 @@ h2 {
     gap: var(--spacing-xl);
     max-width: 550px;
     min-width: 0;
+    min-height: 0;
+}
+
+.right-column .social-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.right-column .lastfm-container-wrapper {
+    flex-shrink: 0;
 }
 
 .main-container {
     backdrop-filter: blur(var(--blur-amount));
     background: var(--bg-primary);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-xl);
+    border-radius: 0.7rem;
+    border: 2px solid rgb(50, 50, 50);
+    border-bottom: 5px solid rgb(50, 50, 50);
+    box-shadow: 0px 1px 6px 0px var(--shadow-button);    padding: var(--spacing-xl);
     box-shadow: var(--shadow-default);
     transition: transform var(--transition-default), box-shadow var(--transition-default);
     box-sizing: border-box;
@@ -489,22 +518,30 @@ h2 {
     font-weight: bold;
 }
 
-/* Estilo para los botones de enlaces */
-a.link-button {
+/* Estilo para los botones de enlaces - From Uiverse.io by hakemdamer222 */
+a.link-button,
+a.link-button:focus {
     color: var(--text-primary);
-    padding: 10px 15px;
+    font-size: 17px;
+    padding: 10px 25px;
     text-align: center;
     width: 180px;
     text-decoration: none;
     display: inline-block;
-    transition: background-color var(--transition-default), 
-                color var(--transition-default), 
-                box-shadow var(--transition-default);
-    box-shadow: var(--shadow-button);
-    border-radius: var(--radius-md);
+    border-radius: 0.7rem;
+    border: 2px solid rgb(50, 50, 50);
+    border-bottom: 5px solid rgb(50, 50, 50);
+    box-shadow: 0px 1px 6px 0px var(--shadow-button);
+    transform: translate(0, -3px);
+    cursor: pointer;
+    transition: 0.2s;
+    transition-timing-function: linear;
     backdrop-filter: blur(var(--blur-amount));
-    background: var(--bg-primary);
-    border: 1px solid var(--border-default);
+}
+
+a.link-button:active {
+    transform: translate(0, 0);
+    border-bottom: 2px solid rgb(50, 50, 50);
 }
 
 a.spotify:hover { background-color: var(--color-spotify); }
