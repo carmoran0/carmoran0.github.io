@@ -23,9 +23,9 @@
 
 .badges-track {
     display: inline-flex;
-    gap: 8px;
+    gap: 0px;
     align-items: center;
-    animation: scroll-left 60s linear infinite;
+    animation: scroll-left 45s linear infinite;
 }
 
 .badges-row:nth-child(even) .badges-track {
@@ -33,7 +33,7 @@
 }
 
 .badges-track img {
-    height: 40px;
+    height: 30px;
     width: auto;
     flex-shrink: 0;
     display: block;
