@@ -38,6 +38,10 @@
     <link rel="preconnect" href="https://iframe.chat">
     
     <style>
+      @font-face {
+        font-family: 'jgs9';
+        src: url('/jgs9.ttf') format('opentype');
+        }
         * {
             margin: 0;
             padding: 0;
@@ -47,115 +51,163 @@
         body {
             font-family: 'Courier New', monospace;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
+            color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+  background-color: white;
+  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
+                    linear-gradient(45deg, #ccc 25%, white 25%, white 75%, #ccc 75%, #ccc);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;   
+  
+  
+  font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
         }
 
         .landing-container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
+          backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 0.7rem;
+          border: 2px solid rgb(165, 165, 165);
+          border-bottom: 5px solid rgb(163, 163, 163);
+          box-shadow: 0px 1px 6px 0px 0 6px 10px rgba(0, 0, 0, 0.3);    
+          padding: 30px;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+          box-sizing: border-box;
+          overflow: hidden;
+          max-width: 600px;
+
+
+          /* CSS Containment para mejor rendimiento */
+          contain: layout style paint;
+        }
+
+        @media screen and (max-width: 780px) {
+          .landing-container {
+              width: 90%;
+              padding: 20px;
+          }
         }
 
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #f39c12;
-            text-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
-            animation: glow 2s ease-in-out infinite alternate;
+            color: #3be9fd;
+            text-shadow: 1px 1px #000a;
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(243, 156, 18, 0.8);
-            }
-        }
 
         .subtitle {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
         }
+        /* From Uiverse.io by SelfMadeSystem */ 
+.frutiger-button {
+  cursor: pointer;
+  position: relative;
+  padding: 2px;
+  border-radius: 6px;
+  border: 0;
+  text-shadow: 1px 1px #000a;
+  background: linear-gradient(#006caa, #00c3ff);
+  box-shadow: 0px 4px 6px 0px #0008;
+  transition: 0.3s all;
+}
 
-        .enter-button {
-            display: inline-block;
-            padding: 1rem 3rem;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #1a1a2e;
-            background: #f39c12;
-            border: 3px solid #e67e22;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
-        }
+.frutiger-button:hover {
+  box-shadow: 0px 6px 12px 0px #0009;
+}
 
-        .enter-button:hover {
-            background: #e67e22;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.6);
-        }
+.frutiger-button:active {
+  box-shadow: 0px 0px 0px 0px #0000;
+}
 
-        .enter-button:active {
-            transform: translateY(-2px);
-        }
+.inner {
+  position: relative;
+  inset: 0px;
+  padding: 1em;
+  border-radius: 4px;
+  background: radial-gradient(circle at 50% 100%, #30f8f8 10%, #30f8f800 55%),
+    linear-gradient(#00526a, #009dcd);
+  overflow: hidden;
+  transition: inherit;
+}
 
-        .loading-dots {
-            margin-top: 2rem;
-            font-size: 2rem;
-            color: #f39c12;
-        }
+.inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: thing 3s ease infinite;
+}
 
-        .loading-dots span {
-            animation: blink 1.4s infinite;
-        }
+@keyframes thing {
+  0% {
+    background-position: 130%;
+    opacity: 1;
+  }
 
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
+  to {
+    background-position: -166%;
+    opacity: 0;
+  }
+}
 
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
+.top-white {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0 -8em;
+  background: radial-gradient(
+    circle at 50% -270%,
+    #fff 45%,
+    #fff6 60%,
+    #fff0 60%
+  );
+  transition: inherit;
+}
 
-        @keyframes blink {
-            0%, 20%, 100% {
-                opacity: 0.2;
-            }
-            40% {
-                opacity: 1;
-            }
-        }
+.inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transition: inherit;
+  box-shadow: inset 0px 2px 8px -2px #0000;
+}
 
-        .construction-img {
-            margin: 2rem 0;
-            max-width: 150px;
-        }
+.frutiger-button:active .inner::after {
+  box-shadow: inset 0px 2px 8px -2px #000a;
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-weight: 550;
+  transition: inherit;
+}
+
+
     </style>
 </head>
 <body>
     <div class="landing-container">
         <h1>link(arlo)s</h1>
-        <p class="subtitle">Bienvenido a mi espacio web</p>
-        
-        <img src="/images/constr.gif" alt="En construcción" class="construction-img">
-        
-        <div>
-            <a href="/linkarlos.html" class="enter-button">ENTRAR</a>
-        </div>
-        
-        <div class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-        </div>
+        <p class="subtitle"><b>Aviso: </b>Aunque en principio lo he hecho para que se pueda ver en móvil, es mejor verlo desde ordenador.<br> La página puede contener luces estroboscópicas.</p>
+        <button onclick="location.href='/linkarlos.html'" class="frutiger-button" >
+          <div class="inner">
+            <div class="top-white"></div>
+            <span class="text">Estoy preparade</span>
+          </div>
+        </button>
+
     </div>
 
     <script>
