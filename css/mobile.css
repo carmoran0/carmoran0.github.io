@@ -13,7 +13,8 @@
         width: 100%;
     }
 
-    .first-column {
+    .first-column,
+    .NO-MOVIL {
         display: none;
     }
 
@@ -162,7 +163,7 @@
     }
 
     .badges-grid img {
-        height: 18px;
+        height: 24px;
     }
     #readme-content img {
     width: 100%;
