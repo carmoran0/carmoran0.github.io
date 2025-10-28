@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://esm.sh/emfed@1/toots.css">
     <script src="https://iframe.chat/scripts/main.min.js"></script>
     
+
 </head>
 <body>
     <!-- Announcement bar -->
@@ -32,7 +33,7 @@
     <!-- Background blur container updated by lastfm.js -->
     <div id="bg-blur" aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center;filter:blur(4px) brightness(0.6);transition:opacity 800ms ease;opacity:0"></div>
 
-    <div class="page-wrapper" style="position:relative;z-index:1;">
+    <div  id="top" class="page-wrapper" style="position:relative;z-index:1;">
 
         
         <div class="first-column" >
@@ -43,16 +44,10 @@
                 <p>Tocar las fuentes de mastodon y github</p>
                 <p>A lo mejor un titulo chulo</p>
                 <p>Meterme en algun webring</p>
-                <p>Pantalla de carga? landing/warning? HACERLA BONITA</p>
-                <p>Hacer un footer</p>
                 <p>Arreglar chat en movil</p>
                 <p>Implementar modo oscuro</p>
-                <p>Mejorar la accesibilidad</p>
                 <p>Agregar soporte para múltiples idiomas</p>
-                <p>Hacer un sistema de estadísticas de visitas</p>
-                <img src="/images/constr.gif" style="max-width: 150px;">
-
-                <h2>Haiiii :3</h2>
+                <p>Hacer un sistema de estadísticas de visitas</p>  
             </div>
         </div>
         
@@ -443,6 +438,38 @@
             });
         })();
         </script>
+    
+    <!-- Footer with Back to Top button -->
+    <footer>
+        <!-- From Uiverse.io by satyamchaudharydev -->
+        <button onclick="location.href='#top'" id="back-to-top-btn">
+            <div class="text">
+                <span>Back</span>
+                <span>to</span>
+                <span>top</span>
+            </div>
+            <div class="clone">
+                <span>Back</span>
+                <span>to</span>
+                <span>top</span>
+            </div>
+            <svg
+                stroke-width="2"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20px"
+            >
+                <path
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                ></path>
+            </svg>
+        </button>
+    </footer>
 </body>
 </html>
 
