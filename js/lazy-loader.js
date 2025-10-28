@@ -16,7 +16,6 @@
     // Scripts opcionales (widgets, efectos)
     const optionalScripts = [
         '/js/moodboard.js',
-        '/js/weather.js',
         '/js/oneko.js'
     ];
     

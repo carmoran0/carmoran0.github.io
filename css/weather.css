@@ -22,6 +22,7 @@
     user-select: none;
     animation: snowfall linear infinite;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
 }
 
 @keyframes snowfall {
