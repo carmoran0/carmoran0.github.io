@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting... - link(arlo)s</title>
+    <title>link(arlo)s</title>
     
     <!-- Language alternates for SEO -->
     <link rel="alternate" hreflang="es" href="https://carmoran0.github.io/es/linkarlos.html" />
     <link rel="alternate" hreflang="en" href="https://carmoran0.github.io/en/linkarlos.html" />
     <link rel="alternate" hreflang="x-default" href="https://carmoran0.github.io/linkarlos.html" />
     
-    <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    
-    <!-- Automatic language detection and redirect -->
-    <script src="/js/language-redirect.js"></script>
+    <link rel="preconnect" href="https://ws.audioscrobbler.com">
     <link rel="preconnect" href="https://raw.githubusercontent.com">
     <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
     <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
@@ -35,6 +32,7 @@
 
 </head>
 <body>
+    
     <!-- CSS-only snow overlay -->
     <div id="weather-overlay" class="weather-overlay snow" aria-hidden="true">
         <div class="snowflake" style="left:5%;animation-duration:13s;animation-delay:0s;font-size:15px">❄</div>
@@ -64,7 +62,7 @@
         <div class="snowflake" style="left:58%;animation-duration:12s;animation-delay:1s;font-size:15px">❄</div>
     </div>
     <!-- Announcement bar -->
-    <div class="announcement" role="region" aria-label="anuncio"><a href="https://github.com/carmoran0/MOOdleUnizarCSS" style="color: beige;">¡Descarga  mi extensión para Moodle!</a></div>
+    <div class="announcement" role="region" aria-label="announcement"><a href="https://github.com/carmoran0/MOOdleUnizarCSS" style="color: beige;">Download my Moodle extension!</a></div>
 
     <!-- Background blur container updated by lastfm.js -->
     <div id="bg-blur" aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center;filter:blur(4px) brightness(0.6);transition:opacity 800ms ease;opacity:0"></div>
@@ -74,31 +72,38 @@
         
         <div class="first-column" >
             <div class="main-container">
-                <h2>TODOLIST:</h2>
-                <p>A lo mejor un titulo chulo</p>
-                <p>Agregar soporte para múltiples idiomas</p>
-                <p>Poner el letterbox en horizontal y que scrollee o algo</p>
-                <h2>MI BUTTON:</h2>
-                <a href="https://carmoran0.github.io/" style="text-align: center;" ><img src="/button.png" alt="Botón"></a>
+                <h2>LANGUAGE:</h2>
+                    <div class="language-selector">
+                        <label class="switch">
+                            <input class="cb" type="checkbox" id="lang-toggle" />
+                            <span class="toggle">
+                                <span class="left">ENG</span>
+                                <span class="right">ES</span>
+                            </span>
+                        </label>
+                    </div>
+                <h2>TODO LIST:</h2>
+                <p>Maybe a cool title</p>
+                <p>Make letterbox horizontal and scrollable or something</p>
+                <h2>MY BUTTON:</h2>
+                <a href="/en/" style="text-align: center;" ><img src="/button.png" alt="Button"></a>
             </div>
-        </div>
-        
-        <!-- Columna izquierda: Contenedor 1 (Header) -->
+        </div>        <!-- Columna izquierda: Contenedor 1 (Header) -->
         <div class="left-column">
             <div class="main-container header-container">
                 <header>
                     <h1 id="texto">
                         <span class="online-indicator">
                             <span class="online-dot"></span>
-                            <span class="online-text">En línea</span>
+                            <span class="online-text">Online</span>
                         </span>
-                        Caldo <a style="width: 200px;" class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Racha"> <span class="streak-number">Cargando...</span></a>
+                        Caldo <a style="width: 200px;" class="link-button duolingo" href="https://www.duolingo.com/profile/Cosaco27" id="streak-counter"><img src="/streakico.svg" class="streak-icon" alt="Streak"> <span class="streak-number">Loading...</span></a>
                     </h1>
                 </header>
-                <p class="ultima-actualizacion">Última actualización de esta página web: 27/10/2025 a las 23:10<br><a href="legacy/index.html" style="color: beige;">(versión legacy)</a></p>
+                <p class="ultima-actualizacion">Last update of this website: 29/10/2025 at 19:14<br><a href="/legacy/index.html" style="color: beige;">(legacy version)</a></p>
                 <div class="github-readme-container">
-                    <!-- Fila de etiquetas personales: editar los valores directamente en los spans -->
-                    <div class="profile-labels" aria-label="etiquetas-personales" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center;align-items:center;">
+                    <!-- Personal labels row: edit values directly in spans -->
+                    <div class="profile-labels" aria-label="personal-labels" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;justify-content:center;align-items:center;">
                         <div class="label" style="background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:6px;font-size:0.95rem;text-align:center;">
                             <strong>2005</strong> <span id="label-age"></span>
                         </div>
@@ -108,12 +113,12 @@
                         <div class="label" style="background:rgba(255,255,255,0.06);padding:6px 10px;border-radius:6px;font-size:0.95rem;text-align:center;">
                             <strong>Zaragoza</strong> <span id="label-location"></span>
                         </div>
-                        <img src="/images/76776271_q9G81Q2ghI4CVDF.png" alt="Imagen de perfil" style="height: 29px;opacity: 0.8;">
+                        <img src="/images/76776271_q9G81Q2ghI4CVDF.png" alt="Profile picture" style="height: 29px;opacity: 0.8;">
                     </div>
 
                     <p> carmoran0/README.md </p>
                     <div id="readme-content">
-                        <img src="/images/screamer.gif" alt="Cargando...">
+                        <img src="/images/screamer.gif" alt="Loading...">
                     </div>
                     
                 </div>
@@ -132,7 +137,7 @@
                     <p><a class="link-button discord" href="https://discordapp.com/users/357955189149532161">Discord</a></p>
                     <p><a class="link-button mastodon" rel="me" href="https://mastodon.social/@copaco">Mastodon</a></p>
                     <p><a class="link-button bluesky" href="https://bsky.app/profile/koljoz.bsky.social">Bluesky</a></p>
-                    <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Correo</a></p>
+                    <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com">Email</a></p>
                     <p><a class="link-button github" href="https://github.com/carmoran0">GitHub</a></p>
                     <p><a class="link-button lastfm" href="https://www.last.fm/user/sobaco27">Last.fm</a></p>
                     <p><a class="link-button soundcloud" href="https://soundcloud.com/koljoz">SoundCloud</a></p>
@@ -202,40 +207,38 @@
     <!-- Segunda fila de contenedores: Cosillas que uso, Shrine y Now -->
     <div class="bottom-containers second-row">
         <!-- Contenedor izquierdo: Cosillas que uso -->
-        <div class="main-container uses-container">
-            <h2>Cosillas que uso:</h2>
+            <div class="main-container uses-container">
+            <h2>Things I use:</h2>
             <div class="uses-content">
                 <div class="uses-section">
                     <h3>    Software </h3>
                     <ul>
-                        <li><strong>Navegador:</strong> LibreWolf + Firefox (Chromium si no queda remedio)</li>
-                        <li><strong>Correo:</strong> Proton Mail</li>
-                        <li><strong>Buscador:</strong> Qwant</li>
-                        <li><strong>Cliente torrent:</strong> qBittorrent</li>
-                        <li><strong>OS:</strong> Windows (<a href="https://github.com/ravendevteam/talon">Talon</a> para debloatear) + Arch Linux</li>
-                        <li><strong>Para leer:</strong> <a href="https://github.com/readest/readest">Readest</a> (lo que mejor me ha funcionado)</li>
-                        <li><strong>Youtube:</strong> En ordenador las tipicas extensiones guays PERO EN ANDROID TV <a href="https://github.com/yuliskov/SmartTube">SmartTube</a> (cliente sin anuncios)</li>
-                        <li><strong>Mapas:</strong> Comaps me lo he descargado y tiene muy buena pinta usa openstreetmap así que tiene incluso mas información que Google Maps. Lo único malo que no salen los buses ni el tranvía :////</li>
-                        <li><strong>lector PDF:</strong><a href="https://www.sumatrapdfreader.org/free-pdf-reader.html"> Sumatra PDF</a></li>
+                        <li><strong>Browser:</strong> LibreWolf + Firefox (Chromium if no choice)</li>
+                        <li><strong>Email:</strong> Proton Mail</li>
+                        <li><strong>Search engine:</strong> Qwant</li>
+                        <li><strong>Torrent client:</strong> qBittorrent</li>
+                        <li><strong>OS:</strong> Windows (<a href="https://github.com/ravendevteam/talon">Talon</a> to debloat) + Arch Linux</li>
+                        <li><strong>For reading:</strong> <a href="https://github.com/readest/readest">Readest</a> (what worked best for me)</li>
+                        <li><strong>Youtube:</strong> On PC the typical cool extensions BUT ON ANDROID TV <a href="https://github.com/yuliskov/SmartTube">SmartTube</a> (client without ads)</li>
+                        <li><strong>Maps:</strong> Downloaded Comaps and it looks great, uses openstreetmap so it even has more info than Google Maps. The only bad thing is that buses and trams don't show up :////</li>
+                        <li><strong>PDF reader:</strong><a href="https://www.sumatrapdfreader.org/free-pdf-reader.html"> Sumatra PDF</a></li>
                     </ul>
                 </div>
                 <div class="uses-section">
-                    <h3>    Webs guays </h3>
+                    <h3>    Cool websites </h3>
                     <ul>
-                        <li><strong>Descargar juegos:</strong> <a href="https://fitgirl-repacks.site/">FitGirl Repacks</a> / <a href="https://dodi-repacks.site/">Dodi</a></li>
-                        <li><strong>Activar Windows:</strong> <a href="https://github.com/massgravel/Microsoft-Activation-Scripts">MAS</a> (mola mucho y también activa office pero eso no lo he probado)</li>
-                        <li><strong>Desbloquear DLC steam:</strong> <a href ="https://github.com/acidicoala/SmokeAPI">SmokeAPI</a> y a lo mejor necesitas <a href="https://cs.rin.ru/forum/">cs.rin.ru   </a> </li>
-                        <li><strong>Descargar juegos online:</strong> <a href="https://online-fix.me/">Online-Fix</a></li>
-                        <li><strong>Descargar Pelis/Software:</strong> La piratebay!!!! (merece mucho la pena los <a href="https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins">plugins de qbittorrent</a>)</li>
-                        <li><strong>Menciones honorables:</strong> <a href="https://fmhy.net/">esta pedazo de web</a> que me pasó un amigo</li>
+                        <li><strong>Download games:</strong> <a href="https://fitgirl-repacks.site/">FitGirl Repacks</a> / <a href="https://dodi-repacks.site/">Dodi</a></li>
+                        <li><strong>Activate Windows:</strong> <a href="https://github.com/massgravel/Microsoft-Activation-Scripts">MAS</a> (really cool and also activates office but haven't tried that)</li>
+                        <li><strong>Unlock Steam DLC:</strong> <a href ="https://github.com/acidicoala/SmokeAPI">SmokeAPI</a> and you might need <a href="https://cs.rin.ru/forum/">cs.rin.ru   </a> </li>
+                        <li><strong>Download online games:</strong> <a href="https://online-fix.me/">Online-Fix</a></li>
+                        <li><strong>Download Movies/Software:</strong> The pirate bay!!!! (<a href="https://github.com/qbittorrent/search-plugins/wiki/Unofficial-search-plugins">qbittorrent plugins</a> are rlly worth it!!!)</li>
+                        <li><strong>Honorable mentions:</strong> <a href="https://fmhy.net/">this amazing website</a> a friend sent me</li>
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <!-- Contenedor central: Altar Moodboard -->
+        </div>        <!-- Contenedor central: Altar Moodboard -->
         <div class="main-container shrine-container">
-            <h2>Tablon de fotos:</h2>
+            <h2>Photo board:</h2>
             <div id="moodboard" class="moodboard-area">
                 <!-- Las imágenes/items se cargarán aquí dinámicamente -->
                 <div class="moodboard-item" style="top: 7%; left: 9%;" data-rotation="-5">
@@ -251,61 +254,61 @@
                     <div class="pin"></div>
                 </div>
                 <div class="moodboard-item" style="top: 8%; left: 55%;" data-rotation="12">
-                    <img src="legacy/images/logoministerioMOD.png" alt="Item del altar">
+                    <img src="/legacy/images/logoministerioMOD.png" alt="Item del altar">
                     <div class="pin"></div>
                 </div>
                 <div class="moodboard-item" style="top: 54%; left: 17%;" data-rotation="-5">
-                    <img src="images/patos.jpg" alt="Item del altar">
+                    <img src="/images/patos.jpg" alt="Item del altar">
                     <div class="pin"></div>
                 </div>
                 <div class="moodboard-item" style="top: 50%; left: 60%;" data-rotation="8">
-                    <img src="images/sos.jpg" alt="Item del altar">
+                    <img src="/images/sos.jpg" alt="Item del altar">
                     <div class="pin"></div>
                 </div>
                 <div class="moodboard-item" style="top: 77%; left: 55%;" data-rotation="-3">
-                    <img src="images/payti.jpg" alt="Item del altar">
+                    <img src="/images/payti.jpg" alt="Item del altar">
                     <div class="pin"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Contenedor derecho: Now -->
+        <!-- Right container: Now -->
         <div class="main-container now-container">
-            <h2>Qué hago ahora:</h2>
+            <h2>What I'm doing rn:</h2>
             <div class="now-content">
-                <p class="now-date">Actualizado: 20 de octubre de 2025</p>
+                <p class="now-date">Updated: October 20, 2025</p>
                 
                 <div class="now-section">
-                    <h3>Leyendo</h3>
+                    <h3>Reading</h3>
                     <ul>
                         <li>"The palestine laboratory" - Antony Loewenstein</li>
                     </ul>
                 </div>
                 <div class="now-section">
-                    <h3>Viendo</h3>
+                    <h3>Watching</h3>
                     <ul>
-                        <li>Me estoy viendo la de Weeds que es como si breaking bad y modern family tuvieran un hijo que odian</li>
-                        <li>Smiling friends la temporada nueva</li>
+                        <li>I'm watching Weeds which is like if breaking bad and modern family had a son they hate</li>
+                        <li>new season of Smiling friends</li>
                     </ul>
                 </div>
 
                 <div class="now-section">
-                    <h3>Jugando</h3>
+                    <h3>Playing</h3>
                     <ul>
-                        <li>Baldur's Gate 3 como ansia oscura</li>
+                        <li>Baldur's Gate 3 as a dark urge</li>
                         <li>Stellaris</li>
-                        <li>Y esperando a que en nada saquen <a href="https://store.steampowered.com/app/3315530/Crusader_Kings_III_All_Under_Heaven/">el nuevo dlc del crusader kings 3</a></li>
+                        <li>And waiting for the release of <a href="https://store.steampowered.com/app/3315530/Crusader_Kings_III_All_Under_Heaven/">the new crusader kings 3 dlc</a></li>
                     </ul>
                 </div>
 
                 <div class="now-section">
-                    <h3>Otros</h3>
+                    <h3>Other</h3>
                     <ul>
-                        <li>Haciendo un caldo perpetuo</li>
-                        <li>Esta web</li>
-                        <li>La extensión de Moodle</li>
-                        <li>Estudiando (a lo mejor)</li>
-                        <li>Leyendo/Editando wikipedia</li>
+                        <li>Making a perpetual broth</li>
+                        <li>This website</li>
+                        <li>The Moodle extension</li>
+                        <li>Studying (maybe)</li>
+                        <li>Reading/Editing wikipedia</li>
                     </ul>
                 </div>
             </div>
@@ -316,18 +319,18 @@
     <div class="bottom-containers">
         <!-- Contenedor izquierdo: Murciélagos (CSS-only animation) -->
         <div class="main-container bats-container"style="padding-top: 18px;">
-            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">nuevos murciélagos CSS (Carlos Swag Sopa)</p>
+            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">new CSS bats (Carlos Swag Sopa)</p>
             <div id="bats-bouncing-area">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Animated bat">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Animated bat">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Animated bat">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Animated bat">
                 
             </div>
         </div>
         <!-- Contenedor central: Chattable -->
         <div class="main-container chat-container" aria-label="chat-chat" style="padding-top: 18px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
-            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">preguntame lo que quieras, pideme lo que quieras, di lo que quieras o deja un mensaje para otros visitantes; el chat es anónimo.</p>
+            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">ask me whatever you want, request whatever you want, say whatever you want or leave a message for other visitors; the chat is anonymous.</p>
             <div class="chat-wrapper" style="
             height:250px;
             min-height:160px;
@@ -453,7 +456,35 @@
     
     <!-- Mastodon feed -->
     <script type="module" src="https://esm.sh/emfed@1"></script>
-        <script>
+    
+    <!-- Language toggle functionality -->
+    <script>
+        (function() {
+            const toggle = document.getElementById('lang-toggle');
+            const currentLang = window.location.pathname.includes('/en/') ? 'en' : 'es';
+            
+            // Set initial state (unchecked = English, checked = Spanish)
+            toggle.checked = (currentLang === 'es');
+            
+            // Handle toggle change
+            toggle.addEventListener('change', function() {
+                const currentPath = window.location.pathname;
+                let newPath;
+                
+                if (this.checked) {
+                    // Switch to Spanish
+                    newPath = currentPath.replace('/en/', '/es/');
+                } else {
+                    // Switch to English
+                    newPath = currentPath.replace('/es/', '/en/');
+                }
+                
+                window.location.href = newPath;
+            });
+        })();
+    </script>
+    
+    <script>
         // Click handler: set #bg-blur to screamer.gif without blur for 5s, then restore
         (function(){
             var trigger = document.getElementById('freddy-trigger');

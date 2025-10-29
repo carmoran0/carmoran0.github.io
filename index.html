@@ -1,41 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido - link(arlo)s</title>
+    <title>Redirecting... - link(arlo)s</title>
     <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
-    <!-- Preload critical resources for linkarlos.html -->
-    <link rel="prefetch" href="/linkarlos.html" as="document">
-    <link rel="prefetch" href="/css/styles.css" as="style">
-    <link rel="prefetch" href="/css/bats-animation.css" as="style">
-    <link rel="prefetch" href="/css/modal.css" as="style">
-    <link rel="prefetch" href="/css/weather.css" as="style">
-    <link rel="prefetch" href="/css/badges-marquee.css" as="style">
-    <link rel="prefetch" href="/css/mobile.css" as="style">
-    <link rel="prefetch" href="/css/chattable.css" as="style">
-    <link rel="prefetch" href="/js/zipbomb.js" as="script">
-    <link rel="prefetch" href="/js/scripts.js" as="script">
-    <link rel="prefetch" href="/js/lazy-loader.js" as="script">
-    <link rel="prefetch" href="/js/lastfm.js" as="script">
-    <link rel="prefetch" href="/js/letterboxd.js" as="script">
-    <link rel="prefetch" href="/js/github-readme.js" as="script">
-    <link rel="prefetch" href="/js/moodboard.js" as="script">
-
-    <link rel="prefetch" href="/images/screamer.gif" as="image">
-    <link rel="prefetch" href="/images/cursor.png" as="image">
-    <link rel="prefetch" href="/images/nat1027.gif" as="image">
-    <link rel="prefetch" href="/images/freddy.gif" as="image">
-    <link rel="prefetch" href="/images/gato.escuchando.gif" as="image">
-    <link rel="prefetch" href="/images/constr.gif" as="image">
-    <link rel="prefetch" href="/legacy/images/ANI3DbatHover.gif" as="image">
-    <link rel="prefetch" href="/legacy/images/logoministerioMOD.png" as="image">
-    <link rel="prefetch" href="/jgs9.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preconnect" href="https://ws.audioscrobbler.com">
-    <link rel="preconnect" href="https://raw.githubusercontent.com">
-    <link rel="preconnect" href="https://esm.sh">
-    <link rel="preconnect" href="https://iframe.chat">
+    
+    <!-- Language alternates for SEO -->
+    <link rel="alternate" hreflang="es" href="https://carmoran0.github.io/es/" />
+    <link rel="alternate" hreflang="en" href="https://carmoran0.github.io/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://carmoran0.github.io/" />
+    
+    <!-- Automatic language detection and redirect -->
+    <script src="/js/language-redirect.js"></script>
     
     <style>
       @font-face {
@@ -51,230 +28,96 @@
         body {
             font-family: 'Courier New', monospace;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #000000;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-  background-color: white;
-  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
-                    linear-gradient(45deg, #ccc 25%, white 25%, white 75%, #ccc 75%, #ccc);
-  background-size: 30px 30px;
-  background-position: 0 0, 15px 15px;   
-  
-  
-  font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+            background-color: white;
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
+                            linear-gradient(45deg, #ccc 25%, white 25%, white 75%, #ccc 75%, #ccc);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;   
+            font-family: 'jgs9', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        .landing-container {
+        .redirect-container {
           backdrop-filter: blur(20px);
           background: rgba(255, 255, 255, 0.1);
           border-radius: 0.7rem;
           border: 2px solid rgb(165, 165, 165);
           border-bottom: 5px solid rgb(163, 163, 163);
-          box-shadow: 0px 1px 6px 0px 0 6px 10px rgba(0, 0, 0, 0.3);    
+          box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.3);    
           padding: 30px;
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-          box-sizing: border-box;
-          overflow: hidden;
-          max-width: 600px;
-
-
-          /* CSS Containment para mejor rendimiento */
-          contain: layout style paint;
-        }
-
-        @media screen and (max-width: 780px) {
-          .landing-container {
-              width: 90%;
-              padding: 20px;
-          }
+          text-align: center;
+          max-width: 500px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             color: #3be9fd;
             text-shadow: 1px 1px #000a;
         }
 
-
-        .subtitle {
+        p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
             opacity: 0.9;
+            margin: 10px 0;
         }
-        /* From Uiverse.io by SelfMadeSystem */ 
-.frutiger-button {
-  cursor: pointer;
-  position: relative;
-  padding: 2px;
-  border-radius: 6px;
-  border: 0;
-  text-shadow: 1px 1px #000a;
-  background: linear-gradient(#006caa, #00c3ff);
-  box-shadow: 0px 4px 6px 0px #0008;
-  transition: 0.3s all;
-}
+        
+        .manual-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .manual-links a {
+            padding: 10px 20px;
+            background: rgba(59, 233, 253, 0.3);
+            border: 2px solid #3be9fd;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .manual-links a:hover {
+            background: rgba(59, 233, 253, 0.5);
+            transform: translateY(-2px);
+        }
 
-.frutiger-button:hover {
-  box-shadow: 0px 6px 12px 0px #0009;
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-.frutiger-button:active {
-  box-shadow: 0px 0px 0px 0px #0000;
-}
-
-.inner {
-  position: relative;
-  inset: 0px;
-  padding: 1em;
-  border-radius: 4px;
-  background: radial-gradient(circle at 50% 100%, #30f8f8 10%, #30f8f800 55%),
-    linear-gradient(#00526a, #009dcd);
-  overflow: hidden;
-  transition: inherit;
-}
-
-.inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-65deg, #0000 40%, #fff7 50%, #0000 70%);
-  background-size: 200% 100%;
-  background-repeat: no-repeat;
-  animation: thing 3s ease infinite;
-}
-
-@keyframes thing {
-  0% {
-    background-position: 130%;
-    opacity: 1;
-  }
-
-  to {
-    background-position: -166%;
-    opacity: 0;
-  }
-}
-
-.top-white {
-  position: absolute;
-  border-radius: inherit;
-  inset: 0 -8em;
-  background: radial-gradient(
-    circle at 50% -270%,
-    #fff 45%,
-    #fff6 60%,
-    #fff0 60%
-  );
-  transition: inherit;
-}
-
-.inner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  transition: inherit;
-  box-shadow: inset 0px 2px 8px -2px #0000;
-}
-
-.frutiger-button:active .inner::after {
-  box-shadow: inset 0px 2px 8px -2px #000a;
-}
-
-.text {
-  position: relative;
-  z-index: 1;
-  color: white;
-  font-weight: 550;
-  transition: inherit;
-}
-
-
+        .loader {
+            border: 4px solid rgba(59, 233, 253, 0.3);
+            border-top: 4px solid #3be9fd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
-    <div class="landing-container">
+    <div class="redirect-container">
         <h1>link(arlo)s</h1>
-        <p class="subtitle"><b>Aviso: </b>Aunque en principio lo he hecho para que se pueda ver en móvil, es mejor verlo desde ordenador.<br> La página puede contener luces estroboscópicas.</p>
-        <button onclick="location.href='/linkarlos.html'" class="frutiger-button" >
-          <div class="inner">
-            <div class="top-white"></div>
-            <span class="text">Estoy preparade</span>
-          </div>
-        </button>
-
+        <div class="loader"></div>
+        <p>Detecting your language...</p>
+        <p>Detectando tu idioma...</p>
+        
+        <div class="manual-links">
+            <a href="/es/">Español</a>
+            <a href="/en/">English</a>
+        </div>
     </div>
-
-    <script>
-        // Preload main page resources while on landing page
-        window.addEventListener('load', function() {
-            // Preload main HTML page
-            preloadResource('/index.html', 'document');
-            
-            // Preload all CSS files
-            preloadResource('/css/styles.css', 'style');
-            preloadResource('/css/bats-animation.css', 'style');
-            preloadResource('/css/modal.css', 'style');
-            preloadResource('/css/weather.css', 'style');
-            preloadResource('/css/badges-marquee.css', 'style');
-            preloadResource('/css/mobile.css', 'style');
-            preloadResource('/css/chattable.css', 'style');
-            preloadResource('https://esm.sh/emfed@1/toots.css', 'style');
-            
-            // Preload all JavaScript files
-            preloadResource('/js/zipbomb.js', 'script');
-            preloadResource('/js/scripts.js', 'script');
-            preloadResource('/js/lazy-loader.js', 'script');
-            preloadResource('/js/lastfm.js', 'script');
-            preloadResource('/js/letterboxd.js', 'script');
-            preloadResource('/js/github-readme.js', 'script');
-            preloadResource('/js/moodboard.js', 'script');
-
-            preloadResource('https://iframe.chat/scripts/main.min.js', 'script');
-            preloadResource('https://esm.sh/emfed@1', 'script');
-            
-            // Preload key images
-            preloadResource('/images/77363yjcyzuk8gh.gif', 'image');
-            preloadResource('/images/constr.gif', 'image');
-            preloadResource('/images/screamer.gif', 'image');
-            preloadResource('/images/cursor.png', 'image');
-            preloadResource('/images/nat1027.gif', 'image');
-            preloadResource('/images/freddy.gif', 'image');
-            preloadResource('/images/gato.escuchando.gif', 'image');
-            preloadResource('/legacy/images/ANI3DbatHover.gif', 'image');
-            preloadResource('/legacy/images/logoministerioMOD.png', 'image');
-            
-            // Preload fonts
-            preloadResource('/jgs9.ttf', 'font');
-            
-            // Preconnect to external domains
-            preconnect('https://ws.audioscrobbler.com');
-            preconnect('https://raw.githubusercontent.com');
-            preconnect('https://cur.cursors-4u.net');
-            preconnect('https://esm.sh');
-            preconnect('https://iframe.chat');
-            
-            function preloadResource(href, as) {
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = href;
-                if (as) link.as = as;
-                document.head.appendChild(link);
-            }
-            
-            function preconnect(href) {
-                const link = document.createElement('link');
-                link.rel = 'preconnect';
-                link.href = href;
-                document.head.appendChild(link);
-            }
-        });
-    </script>
 </body>
 </html>
 
