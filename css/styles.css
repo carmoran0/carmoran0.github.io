@@ -276,7 +276,7 @@ h2 {
     border-radius: var(--radius-lg);
     overflow-y: auto;
     flex: 1;
-    font-family: var(--font-github);
+    font-family: var(--font-main);
     line-height: 1.1;
     word-wrap: break-word;
     
@@ -292,21 +292,21 @@ h2 {
 }
 
 #readme-content h1 {
-    font-family: var(--font-github);
+    font-family: var(--font-main);
     padding-bottom: .3em;
     font-size: 2em;
     border-bottom: 1px solid var(--border-muted);
 }
 
 #readme-content h2 {
-    font-family: var(--font-github);   
+    font-family: var(--font-main);   
     padding-bottom: .3em;
     font-size: 1.5em;
     border-bottom: 1px solid var(--border-muted);
 }
 
 #readme-content h3 {
-    font-family: var(--font-github);   
+    font-family: var(--font-main);   
     font-size: 1.25em;
 }
 
@@ -870,6 +870,14 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
     image-rendering: pixelated;
 }
 
+/* Forzar fuente en el chat */
+.chat-container,
+.chat-container *,
+.chat-wrapper,
+.chat-wrapper * {
+    font-family: var(--font-main) !important;
+}
+
 /* Estilos para Uses, Shrine y Now containers */
 @media screen and (min-width: 780px) {
     .uses-container,
@@ -1048,6 +1056,13 @@ a:hover {
     padding-right: 5px;
     max-height: 750px; /* Altura máxima similar a otros contenedores */
     position: relative;
+}
+
+/* Forzar la fuente por defecto en todos los elementos de Mastodon */
+.mastodon-feed-wrapper *,
+.mastodon-feed-wrapper,
+.mastodon-feed {
+    font-family: var(--font-main) !important;
 }
 
 /* Scrollbars globales: aplicadas a toda la página (WebKit/Blink y Firefox) */
