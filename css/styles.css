@@ -119,18 +119,6 @@ h1{
     border-radius: 50%;
     display: inline-block;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
-    animation: pulse-green 2s ease-in-out infinite;
-}
-
-@keyframes pulse-green {
-    0%, 100% {
-        opacity: 1;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
-    }
-    50% {
-        opacity: 0.7;
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
-    }
 }
 
 .online-text {
