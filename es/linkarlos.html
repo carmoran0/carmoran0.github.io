@@ -67,7 +67,7 @@
     <!-- Background blur container updated by lastfm.js -->
     <div id="bg-blur" aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-size:cover;background-position:center;filter:blur(4px) brightness(0.6);transition:opacity 800ms ease;opacity:0"></div>
 
-    <div  id="top" class="page-wrapper" style="position:relative;z-index:1;">
+    <div  id="top" class="page-wrapper" style="position:relative;z-index:1;padding-bottom: 0px;">
 
         
         <div class="first-column" >
@@ -91,8 +91,6 @@
                 <a href="/es/" style="text-align: center;" ><img src="/button.png" alt="Botón"></a>
             </div>
         </div>
-        
-        <!-- Columna izquierda: Contenedor 1 (Header) -->
         <div class="left-column">
             <div class="main-container header-container">
                 <header>
@@ -144,7 +142,8 @@
                     <p><a class="link-button correo" href="mailto:metricas_mensulas.0p@icloud.com"><span class="link-icon"><img src="/images/logos/email-svgrepo-com.svg" alt="Email logo"></span>Email</a></p>
                     <p><a class="link-button github" href="https://github.com/carmoran0"><span class="link-icon"><img src="/images/logos/github.svg" alt="GitHub logo"></span>GitHub</a></p>
                     <p><a class="link-button lastfm" href="https://www.last.fm/user/sobaco27"><span class="link-icon"><img src="/images/logos/lastfm-svgrepo-com.svg" alt="Last.fm logo"></span>Last.fm</a></p>
-                    <p><a class="link-button soundcloud" href="https://soundcloud.com/koljoz"><span class="link-icon"><img src="/images/logos/soundcloud%20%5B%23164%5D.svg" alt="SoundCloud logo"></span>SoundCloud</a></p>                </section>
+                    <p><a class="link-button soundcloud" href="https://soundcloud.com/koljoz"><span class="link-icon"><img src="/images/logos/soundcloud%20%5B%23164%5D.svg" alt="SoundCloud logo"></span>SoundCloud</a></p>                
+                </section>
             </div>
             <img id="freddy-trigger" src="images/freddy.gif" style="
             position: absolute; 
@@ -172,9 +171,8 @@
 
     </div>
 
-    <!-- Fila de contenedores: Letterboxd y Espacio en Alquiler -->
-    <div class="bottom-containers first-row">
-        <!-- Contenedor Letterboxd -->
+    <!-- Contenedor horizontal de Letterboxd -->
+    <div class="letterboxd-horizontal-wrapper">
         <div class="main-container letterboxd-container-wrapper">
             <h2>
                 <a href="https://boxd.it/9uosP">Letterboxd:</a>
@@ -185,7 +183,17 @@
                 </div>
             </section>
         </div>
+    </div>
 
+    <!-- Fila de contenedores: Espacio en blanco y otros -->
+    <div class="bottom-containers first-row">
+        <!-- Contenedor en blanco (antes Letterboxd) -->
+        <div class="main-container placeholder-container">
+            <h2>Espacio disponible:</h2>
+            <div class="placeholder-content">
+                <!-- Contenido pendiente -->
+            </div>
+        </div>
         <!-- Contenedor Mastodon -->
         <div class="main-container mastodon-container">
             <h2>
@@ -241,8 +249,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Contenedor central: Altar Moodboard -->
         <div class="main-container shrine-container">
             <h2>Tablon de fotos:</h2>
             <div id="moodboard" class="moodboard-area">
@@ -278,7 +284,7 @@
             </div>
         </div>
 
-        <!-- Contenedor derecho: Now -->
+
         <div class="main-container now-container">
             <h2>Qué hago ahora:</h2>
             <div class="now-content">

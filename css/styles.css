@@ -384,27 +384,28 @@ h2 {
 }
 
 /* Letterboxd container styles */
+.letterboxd-horizontal-wrapper {
+    margin: var(--spacing-lg);
+}
+
 .letterboxd-container-wrapper {
-    text-align: center;
-    max-width: 500px;
 }
 
 .letterboxd-section {
-    display: flex;
+    overflow: auto;
     justify-content: center;
     margin: 0;
     padding: 0;
 }
 
 #letterboxd-container {
-    width: 100%;
-    max-width: 800px;
 }
 
 .letterboxd-feed {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 15px;
+    flex-wrap: nowrap;
 }
 
 .letterboxd-item {
