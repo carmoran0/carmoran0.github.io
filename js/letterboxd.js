@@ -18,6 +18,8 @@ async function fetchLetterboxdActivity() {
     const now = Date.now();
     if (letterboxdCache && (now - cacheTimestamp) < CACHE_DURATION) {
         container.innerHTML = letterboxdCache;
+        // Agregar listeners también cuando se usa cache
+        setTimeout(addFlipListeners, 100);
         return;
     }
 
@@ -72,16 +74,31 @@ async function fetchLetterboxdActivity() {
             });
             
             html += `
-                <div class="letterboxd-item">
-                    ${imageUrl ? `<div class="letterboxd-poster"><img src="${imageUrl}" alt="${title}" loading="lazy"></div>` : ''}
-                    <div class="letterboxd-info">
-                        <h3 class="letterboxd-title"><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
-                        <p class="letterboxd-date">${formattedDate}</p>
-                        ${previewText ? `<p class="letterboxd-preview">${previewText}</p>` : ''}
+                <div class="letterboxd-item card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            ${imageUrl ? `<img src="${imageUrl}" alt="${title}" loading="lazy">` : '<p>Sin póster</p>'}
+                        </div>
+                        <div class="card-back">
+                            <div class="letterboxd-info">
+                                <h3 class="letterboxd-title"><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
+                                <p class="letterboxd-date">${formattedDate}</p>
+                                ${previewText ? `<p class="letterboxd-preview">${previewText}</p>` : ''}
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
         });
+        
+        // Agregar tarjeta "Ver más..." al final
+        html += `
+            <a href="https://boxd.it/9uosP" target="_blank" rel="noopener" class="letterboxd-item letterboxd-more">
+                <div class="letterboxd-more-content">
+                    <p class="letterboxd-more-text">Ver más...</p>
+                </div>
+            </a>
+        `;
         
         html += '</div>';
         container.innerHTML = html;
@@ -90,10 +107,39 @@ async function fetchLetterboxdActivity() {
         letterboxdCache = html;
         cacheTimestamp = Date.now();
         
+        // Agregar event listeners para flip en móvil/tablet después de un pequeño delay
+        // para asegurar que el DOM esté listo
+        setTimeout(addFlipListeners, 100);
+        
     } catch (error) {
         console.error('Error fetching Letterboxd feed:', error);
         container.innerHTML = '<p class="letterboxd-error">Error al cargar la actividad de Letterboxd</p>';
     }
+}
+
+// Función para agregar listeners de click/tap para voltear tarjetas
+function addFlipListeners() {
+    const cards = document.querySelectorAll('.letterboxd-item.card');
+    
+    cards.forEach(card => {
+        // Usar touchstart para mejor respuesta en móvil, click como fallback
+        card.addEventListener('click', function(e) {
+            // Prevenir que el click en el enlace voltee la tarjeta
+            if (e.target.tagName === 'A') return;
+            
+            // Toggle la clase flipped
+            this.classList.toggle('flipped');
+        });
+        
+        // Prevenir que el hover interfiera en dispositivos táctiles
+        card.addEventListener('touchstart', function(e) {
+            // Prevenir que el click en el enlace voltee la tarjeta
+            if (e.target.tagName === 'A') return;
+            
+            this.classList.toggle('flipped');
+            e.preventDefault(); // Prevenir el hover en touch devices
+        }, { passive: false });
+    });
 }
 
 // Load Letterboxd activity when DOM is ready

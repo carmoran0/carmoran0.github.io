@@ -23,7 +23,7 @@
     }
 
     .main-container {
-        padding: 20px;
+        padding: 10px;
         height: auto;
     }
 
@@ -99,6 +99,15 @@
     }
 
     /* Letterboxd móvil */
+    .letterboxd-container-wrapper {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .letterboxd-feed {
+        gap: 0px;
+    }
+
     .letterboxd-item {
         flex-direction: column;
         align-items: center;
@@ -243,6 +252,21 @@
 
     .image-viewer-content img {
         max-height: 85vh;
+    }
+
+    /* Webrings en móvil */
+    .webrings-container {
+        overflow-x: hidden;
+    }
+
+    .webrings-container #euroring {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .webrings-container #euroring img {
+        max-width: 100%;
+        height: auto;
     }
 
     /* Mastodon móvil */

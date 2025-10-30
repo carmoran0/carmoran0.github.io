@@ -408,81 +408,112 @@ h2 {
     flex-wrap: nowrap;
 }
 
-.letterboxd-item {
-    display: flex;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-md);
-    transition: background var(--transition-default), transform var(--transition-fast);
-    text-align: left;
-}
-
-.letterboxd-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(5px);
-}
-
-.letterboxd-poster {
+/* Flip Card Styles for Letterboxd Items */
+.letterboxd-item.card {
+    width: 150px;
+    height: 225px;
+    perspective: 1000px;
     flex-shrink: 0;
-    width: 80px;
-    height: 120px;
-    overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
-    /* Optimización con aspect-ratio */
-    aspect-ratio: 2/3;
 }
 
-.letterboxd-poster img {
-    width: 80px !important;
-    height: 120px !important;
-    max-width: 80px !important;
-    max-height: 120px !important;
+.letterboxd-item .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+/* Flip on hover (desktop) or when .flipped class is added (mobile) */
+.letterboxd-item.card:hover .card-inner,
+.letterboxd-item.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.letterboxd-item .card-front,
+.letterboxd-item .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.letterboxd-item .card-front {
+    background-color: rgb(50, 50, 50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgb(50, 50, 50);
+    transform: rotateY(0deg);
+}
+
+.letterboxd-item .card-front img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
-    
-    /* Lazy loading optimizado */
-    content-visibility: auto;
+}
+
+.letterboxd-item .card-back {
+backdrop-filter: blur(var(--blur-amount));
+background: var(--bg-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgb(50, 50, 50);
+    transform: rotateY(180deg);
+    padding: 10px;
 }
 
 .letterboxd-info {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
+    text-align: center;
+    width: 100%;
 }
 
 .letterboxd-title {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #fff;
+    line-height: 1.2;
 }
 
 .letterboxd-title a {
-    color: var(--color-letterbox) !important;
+    color: #fff !important;
     text-decoration: none;
     transition: color var(--transition-default);
 }
 
 .letterboxd-title a:hover {
-    color: #ffa940 !important;
+    color: #FFE5B4 !important;
     text-decoration: underline;
 }
 
 .letterboxd-date {
     margin: 0;
-    font-size: 12px;
-    opacity: 0.6;
+    font-size: 11px;
+    opacity: 0.8;
 }
 
 .letterboxd-preview {
     margin: 0;
-    font-size: 13px;
-    opacity: 0.8;
-    line-height: 1.4;
+    font-size: 11px;
+    opacity: 0.9;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .letterboxd-error {
@@ -490,6 +521,41 @@ h2 {
     text-align: center;
     font-size: 16px;
     padding: var(--spacing-lg);
+}
+
+/* Tarjeta "Ver más..." al final del feed */
+.letterboxd-more {
+    width: 150px;
+    height: 225px;
+    flex-shrink: 0;
+    backdrop-filter: blur(var(--blur-amount));
+    background: var(--bg-primary);
+    border: 5px solid rgb(50, 50, 50);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.letterboxd-more:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.letterboxd-more-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.letterboxd-more-text {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #bg-blur {
@@ -1034,6 +1100,35 @@ a:hover {
     height: 6px;
     background: linear-gradient(to bottom, #999, #666);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el contenedor de webrings */
+.webrings-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.webrings-container #euroring,
+.webrings-container #euroring * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.webrings-container #euroring img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.webrings-container #euroring table {
+    width: 100% !important;
+    max-width: 100%;
+    table-layout: auto;
+}
+
+.webrings-container #euroring td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Estilos específicos para el contenedor de Mastodon */
