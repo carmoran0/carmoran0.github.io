@@ -1263,9 +1263,11 @@ html {
         width: 100%;
         padding: 1em 0;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between; /* mostrar badge a la izquierda y botón a la derecha */
         align-items: center;
         margin-top: 2em;
+        gap: 1rem;
+        padding-inline: var(--spacing-lg);
         backdrop-filter: blur(var(--blur-amount));
         background: var(--bg-primary);
         border-top: 2px solid rgb(50, 50, 50);
@@ -1289,7 +1291,8 @@ html {
         position: relative;
         padding-bottom: 2em;
         cursor: pointer;
-        margin-right: 2em;
+        margin-right: 0; /* ya no empuja hacia la derecha, usamos space-between */
+        margin-left: 1rem;
         font-family: inherit;
     }
 
