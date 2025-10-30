@@ -37,14 +37,14 @@ function addNewBat() {
     const isSpecialBat = Math.random() < 0.1;
     
     if (isSpecialBat) {
-        newBat.src = '/images/ANI3DbatHover.gif';
+        newBat.src = '/legacy/images/ANI3DbatHover.gif';
         newBat.id = 'special-bat-' + batCount;
         newBat.className = 'bouncing-image special-bat';
         newBat.alt = 'Special Bat Animation';
         newBat.style.width = '120px';
         showSpecialBatPopup();
     } else {
-        newBat.src = '/images/ANI3DbatHover.gif';
+        newBat.src = '/legacy/images/ANI3DbatHover.gif';
         newBat.id = 'image' + (batCount + 2);
         newBat.className = 'bouncing-image';
         newBat.alt = 'Bat Animation';
@@ -143,7 +143,7 @@ function setup3DModel() {
     const loadingManager = new THREE.LoadingManager();
     loadingManager.setURLModifier(function(url) {
         if(url.includes('carlos%20supremo.png')) {
-            return '/images/carlos supremo.png';
+            return '/legacy/images/carlos supremo.png';
         }
         return url;
     });
@@ -305,7 +305,7 @@ function activateDarkMode() {
     document.body.classList.add("dark-mode");
     let bats = document.querySelectorAll(".bouncing-image");
     bats.forEach((bat, index) => {
-        let screamerImg = index % 2 === 0 ? "/images/screamer1.jpeg" : "/images/screemer2.jpeg";
+        let screamerImg = index % 2 === 0 ? "/legacy/images/screamer1.jpeg" : "/legacy/images/screemer2.jpeg";
         bat.src = screamerImg;
         bat.classList.add("screamer-effect");
     });
@@ -314,7 +314,7 @@ function deactivateDarkMode() {
     document.body.classList.remove("dark-mode");
     let bats = document.querySelectorAll(".bouncing-image");
     bats.forEach(bat => {
-        bat.src = "/images/ANI3DbatHover.gif";
+        bat.src = "/legacy/images/ANI3DbatHover.gif";
         bat.classList.remove("screamer-effect");
     });
 }
