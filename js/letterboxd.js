@@ -20,6 +20,8 @@ async function fetchLetterboxdActivity() {
         container.innerHTML = letterboxdCache;
         // Agregar listeners también cuando se usa cache
         setTimeout(addFlipListeners, 100);
+        // Hide spinner
+        hideLetterboxdSpinner();
         return;
     }
 
@@ -40,6 +42,7 @@ async function fetchLetterboxdActivity() {
         
         if (items.length === 0) {
             container.innerHTML = '<p class="letterboxd-error">No hay actividad reciente en Letterboxd</p>';
+            hideLetterboxdSpinner();
             return;
         }
 
@@ -111,9 +114,13 @@ async function fetchLetterboxdActivity() {
         // para asegurar que el DOM esté listo
         setTimeout(addFlipListeners, 100);
         
+        // Hide spinner after content is loaded
+        hideLetterboxdSpinner();
+        
     } catch (error) {
         console.error('Error fetching Letterboxd feed:', error);
         container.innerHTML = '<p class="letterboxd-error">Error al cargar la actividad de Letterboxd</p>';
+        hideLetterboxdSpinner();
     }
 }
 
@@ -140,6 +147,14 @@ function addFlipListeners() {
             e.preventDefault(); // Prevenir el hover en touch devices
         }, { passive: false });
     });
+}
+
+// Function to hide the spinner when content is loaded
+function hideLetterboxdSpinner() {
+    const section = document.querySelector('.letterboxd-section');
+    if (section) {
+        section.classList.add('loaded');
+    }
 }
 
 // Load Letterboxd activity when DOM is ready
