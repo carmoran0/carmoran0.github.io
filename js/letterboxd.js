@@ -9,6 +9,26 @@ let letterboxdCache = null;
 let cacheTimestamp = 0;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 
+const PROXY_URLS = [
+    'https://corsproxy.io/?',
+    'https://api.codetabs.com/v1/proxy?quest=',
+    'https://proxy.cors.sh/'
+];
+
+async function fetchWithFallback(url) {
+    for (const proxy of PROXY_URLS) {
+        try {
+            const response = await fetch(proxy + encodeURIComponent(url));
+            if (response.ok) {
+                return response;
+            }
+        } catch (e) {
+            console.warn(`Proxy ${proxy} falló, intentando siguiente...`);
+        }
+    }
+    throw new Error('Todos los proxies fallaron');
+}
+
 async function fetchLetterboxdActivity() {
     const container = document.getElementById('letterboxd-container');
     
@@ -27,13 +47,8 @@ async function fetchLetterboxdActivity() {
 
     try {
         // Using a CORS proxy to fetch the RSS feed
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const response = await fetch(proxyUrl + encodeURIComponent(LETTERBOXD_RSS_URL));
+        const response = await fetchWithFallback(LETTERBOXD_RSS_URL);
         
-        if (!response.ok) {
-            throw new Error('Failed to fetch Letterboxd feed');
-        }
-
         const text = await response.text();
         const parser = new DOMParser();
         const xml = parser.parseFromString(text, 'text/xml');
@@ -47,7 +62,7 @@ async function fetchLetterboxdActivity() {
         }
 
         // Display the most recent 10 items
-        const recentItems = Array.from(items).slice(0, 10);
+        const recentItems = Array.from(items);
         
         let html = '<div class="letterboxd-feed">';
         const fragment = document.createDocumentFragment(); // Para mejor rendimiento
