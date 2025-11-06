@@ -1,4 +1,4 @@
-/* Weather overlay system */
+/* Weather overlay system (snow-only trimmed) */
 #weather-overlay {
     position: fixed;
     top: 0;
@@ -18,67 +18,53 @@
 .snowflake {
     position: absolute;
     top: -10%;
+    left: 0;
     color: #fff;
     user-select: none;
-    animation: snowfall linear infinite;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-    opacity: 0.8;
+    pointer-events: none;
+    /* Use transform-only animations and GPU acceleration */
+    will-change: transform, opacity;
+    transform: translate3d(0,0,0);
+    animation-name: snowfall;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.85);
+    opacity: 0.85;
 }
 
 @keyframes snowfall {
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translate3d(0,0,0) rotate(0deg);
+        opacity: 0.9;
     }
     100% {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translate3d(0,110vh,0) rotate(360deg);
+        opacity: 0.7;
     }
 }
 
-/* Rain effect */
-.weather-overlay.rain {
-    background: linear-gradient(to bottom, rgba(100, 120, 150, 0.1) 0%, transparent 30%);
-}
+/* Stagger positions, sizes and durations using nth-child to avoid inline styles */
+.weather-overlay.snow .snowflake:nth-child(1){ left:4%;  font-size:12px; animation-duration:10s; animation-delay:0s; }
+.weather-overlay.snow .snowflake:nth-child(2){ left:12%; font-size:10px; animation-duration:9s;  animation-delay:1.2s; }
+.weather-overlay.snow .snowflake:nth-child(3){ left:20%; font-size:14px; animation-duration:12s; animation-delay:0.4s; }
+.weather-overlay.snow .snowflake:nth-child(4){ left:28%; font-size:11px; animation-duration:8s;  animation-delay:2.0s; }
+.weather-overlay.snow .snowflake:nth-child(5){ left:36%; font-size:15px; animation-duration:13s; animation-delay:0.6s; }
+.weather-overlay.snow .snowflake:nth-child(6){ left:44%; font-size:12px; animation-duration:11s; animation-delay:1.6s; }
+.weather-overlay.snow .snowflake:nth-child(7){ left:52%; font-size:13px; animation-duration:10s; animation-delay:0.9s; }
+.weather-overlay.snow .snowflake:nth-child(8){ left:60%; font-size:9px;  animation-duration:9s;  animation-delay:2.2s; }
+.weather-overlay.snow .snowflake:nth-child(9){ left:68%; font-size:16px; animation-duration:14s; animation-delay:0.3s; }
+.weather-overlay.snow .snowflake:nth-child(10){ left:76%; font-size:11px; animation-duration:10s; animation-delay:1.8s; }
+.weather-overlay.snow .snowflake:nth-child(11){ left:84%; font-size:13px; animation-duration:12s; animation-delay:0.7s; }
+.weather-overlay.snow .snowflake:nth-child(12){ left:92%; font-size:10px; animation-duration:9s;  animation-delay:1.1s; }
 
-.raindrop {
-    position: absolute;
-    top: -10%;
-    width: 2px;
-    height: 20px;
-    background: linear-gradient(to bottom, rgba(174, 194, 224, 0.8), rgba(174, 194, 224, 0.2));
-    animation: rainfall linear infinite;
-}
-
-@keyframes rainfall {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(110vh);
-    }
-}
-
-/* Thunder effect */
-.weather-overlay.thunder {
-    background: linear-gradient(to bottom, rgba(60, 70, 90, 0.15) 0%, transparent 30%);
-}
-
-.weather-overlay.thunder.lightning {
-    background: rgba(255, 255, 255, 0.4);
-    transition: background 0.1s ease-in-out;
-}
-
-.weather-overlay.thunder .raindrop {
-    background: linear-gradient(to bottom, rgba(174, 194, 224, 0.9), rgba(174, 194, 224, 0.3));
+/* Disable heavy animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .weather-overlay.snow { display: none; }
 }
 
 /* Mobile optimizations */
 @media screen and (max-width: 780px) {
     .snowflake {
         font-size: 8px !important;
-    }
-    
-    .raindrop {
-        width: 1px;
-        height: 15px;
     }
 }

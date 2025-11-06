@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'jgs9';
     src: url('https://carmoran0.github.io/jgs9.ttf') format('truetype');
+    font-display: swap;
 }
 /* Variables base (subset tomado de styles.css) */
 :root {

@@ -5,63 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting... - link(arlo)s</title>
     
-    <!-- Language alternates for SEO -->
-    <link rel="alternate" hreflang="es" href="https://carmoran0.github.io/es/linkarlos.html" />
-    <link rel="alternate" hreflang="en" href="https://carmoran0.github.io/en/linkarlos.html" />
-    <link rel="alternate" hreflang="x-default" href="https://carmoran0.github.io/linkarlos.html" />
-    
-    <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    
-    <!-- Automatic language detection and redirect -->
-    <script src="/js/language-redirect.js"></script>
-    <link rel="preconnect" href="https://raw.githubusercontent.com">
-    <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
-    <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    <link rel="shortcut icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    <link rel="apple-touch-icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    
-    <!-- CSS principal y optimizado -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/bats-animation.css">
-    <link rel="stylesheet" href="/css/modal.css">
-    <link rel="stylesheet" href="/css/weather.css">
-    <link rel="stylesheet" href="/css/badges-marquee.css">
-    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 780px)">
-    
-    <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/nature/nat-11/nat1027.ani), url(/images/nat1027.gif), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2012/01/29/pink-bobblehead-bunny.html" target="_blank" title="Pink Bobblehead Bunny"><img src="/images/cursor.png" border="0" alt="Pink Bobblehead Bunny" style="position:absolute; top: 0px; right: 0px;" /></a>
-    <link rel="stylesheet" type="text/css" href="https://esm.sh/emfed@1/toots.css">
-    <script src="https://iframe.chat/scripts/main.min.js"></script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        (function () {
+            var toggle = document.getElementById('lang-toggle');
+            if (toggle) {
+                var currentLang = window.location.pathname.includes('/en/') ? 'en' : 'es';
+                toggle.checked = (currentLang === 'es');
+                toggle.addEventListener('change', function () {
+                    var currentPath = window.location.pathname;
+                    var newPath = this.checked ? currentPath.replace('/en/', '/es/') : currentPath.replace('/es/', '/en/');
+                    window.location.href = newPath;
+                });
+            }
 
-</head>
-<body>
-    <!-- CSS-only snow overlay -->
-    <div id="weather-overlay" class="weather-overlay snow" aria-hidden="true">
-        <div class="snowflake" style="left:5%;animation-duration:13s;animation-delay:0s;font-size:15px">❄</div>
-        <div class="snowflake" style="left:10%;animation-duration:9s;animation-delay:7s;font-size:12px">❄</div>
-        <div class="snowflake" style="left:15%;animation-duration:11s;animation-delay:14s;font-size:18px">❄</div>
-        <div class="snowflake" style="left:20%;animation-duration:8s;animation-delay:3s;font-size:14px">❄</div>
-        <div class="snowflake" style="left:25%;animation-duration:12s;animation-delay:10s;font-size:16px">❄</div>
-        <div class="snowflake" style="left:30%;animation-duration:10s;animation-delay:18s;font-size:13px">❄</div>
-        <div class="snowflake" style="left:35%;animation-duration:14s;animation-delay:5s;font-size:19px">❄</div>
-        <div class="snowflake" style="left:40%;animation-duration:9s;animation-delay:22s;font-size:11px">❄</div>
-        <div class="snowflake" style="left:45%;animation-duration:11s;animation-delay:8s;font-size:17px">❄</div>
-        <div class="snowflake" style="left:50%;animation-duration:13s;animation-delay:16s;font-size:15px">❄</div>
-        <div class="snowflake" style="left:55%;animation-duration:10s;animation-delay:2s;font-size:14px">❄</div>
-        <div class="snowflake" style="left:60%;animation-duration:12s;animation-delay:12s;font-size:12px">❄</div>
-        <div class="snowflake" style="left:65%;animation-duration:8s;animation-delay:20s;font-size:16px">❄</div>
-        <div class="snowflake" style="left:70%;animation-duration:14s;animation-delay:6s;font-size:18px">❄</div>
-        <div class="snowflake" style="left:75%;animation-duration:11s;animation-delay:4s;font-size:13px">❄</div>
-        <div class="snowflake" style="left:80%;animation-duration:9s;animation-delay:15s;font-size:11px">❄</div>
-        <div class="snowflake" style="left:85%;animation-duration:13s;animation-delay:9s;font-size:19px">❄</div>
-        <div class="snowflake" style="left:90%;animation-duration:10s;animation-delay:19s;font-size:15px">❄</div>
-        <div class="snowflake" style="left:95%;animation-duration:12s;animation-delay:24s;font-size:14px">❄</div>
-        <div class="snowflake" style="left:8%;animation-duration:11s;animation-delay:11s;font-size:17px">❄</div>
-        <div class="snowflake" style="left:18%;animation-duration:14s;animation-delay:21s;font-size:12px">❄</div>
-        <div class="snowflake" style="left:28%;animation-duration:9s;animation-delay:13s;font-size:16px">❄</div>
-        <div class="snowflake" style="left:38%;animation-duration:13s;animation-delay:17s;font-size:18px">❄</div>
-        <div class="snowflake" style="left:48%;animation-duration:10s;animation-delay:23s;font-size:13px">❄</div>
-        <div class="snowflake" style="left:58%;animation-duration:12s;animation-delay:1s;font-size:15px">❄</div>
+            var trigger = document.getElementById('freddy-trigger');
+            if (trigger) {
+                trigger.style.cursor = 'pointer';
+                trigger.addEventListener('click', function () {
+                    var bg = document.getElementById('bg-blur');
+                    if (!bg) return;
+                    var prevBackground = bg.style.backgroundImage || '';
+                    var prevFilter = bg.style.filter || '';
+                    var prevOpacity = bg.style.opacity || '';
+                    bg.style.backgroundImage = "url('/images/screamer.gif')";
+                    bg.style.filter = 'none';
+                    bg.style.opacity = '1';
+                    setTimeout(function () {
+                        bg.style.backgroundImage = prevBackground;
+                        bg.style.filter = prevFilter;
+                        bg.style.opacity = prevOpacity;
+                    }, 5000);
+                });
+            }
+        })();
+    });
+    </script>
+        <!-- CSS-only snow overlay (optimised: fewer DOM nodes, styles in css/weather.css) -->
+        <div id="weather-overlay" class="weather-overlay snow" aria-hidden="true">
+            <!-- Reduced to 12 flakes; positions/durations/delays controlled in CSS via nth-child -->
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❄</div>
+        </div>
     </div>
     <!-- Announcement bar -->
     <div class="announcement" role="region" aria-label="anuncio"><a href="https://github.com/carmoran0/MOOdleUnizarCSS" style="color: beige;">¡Descarga  mi extensión para Moodle!</a></div>
@@ -138,7 +133,7 @@
                     <p><a class="link-button soundcloud" href="https://soundcloud.com/koljoz">SoundCloud</a></p>
                 </section>
             </div>
-            <img id="freddy-trigger" src="images/freddy.gif" style="
+            <img id="freddy-trigger" src="/images/freddy.gif" style="
             position: absolute; 
             top: 200px; 
             right: -50px; 
@@ -193,8 +188,8 @@
         <!-- Contenedor webrings -->
         <div class="main-container webrings-container" >
             <div id='euroring'>
-                <script type="text/javascript" src="https://euroring.neocities.org/scripts/onionring-variables.js"></script>
-                <script type="text/javascript" src="https://euroring.neocities.org/scripts/euroringbanner.js"></script>
+                <script type="text/javascript" src="https://euroring.neocities.org/scripts/onionring-variables.js" defer></script>
+                <script type="text/javascript" src="https://euroring.neocities.org/scripts/euroringbanner.js" defer></script>
             </div>   
         </div>
     </div>
@@ -441,18 +436,49 @@
     
 
     <!-- Scripts esenciales en carga inicial -->
-    <script src="/js/zipbomb.js" defer></script>
+    <!--<script src="/js/zipbomb.js" defer></script>-->
     <script src="/js/scripts.js" defer></script>
     <script>
-    chattable.initialize({
-        stylesheet: "/css/chattable.css"
+    document.addEventListener('DOMContentLoaded', function () {
+        function tryInitChattable() {
+            if (window.chattable && typeof chattable.initialize === 'function') {
+                chattable.initialize({ stylesheet: "/css/chattable.css" });
+                return true;
+            }
+            return false;
+        }
+
+        if (!tryInitChattable()) {
+            var attempts = 0;
+            var maxAttempts = 20; // ~2s
+            var poll = setInterval(function () {
+                attempts += 1;
+                if (tryInitChattable() || attempts >= maxAttempts) {
+                    clearInterval(poll);
+                }
+            }, 100);
+        }
     });
     </script>
     <!-- Lazy loader maneja carga diferida de APIs (lastfm, letterboxd, github) -->
     <script src="/js/lazy-loader.js" defer></script>
     
-    <!-- Mastodon feed -->
-    <script type="module" src="https://esm.sh/emfed@1"></script>
+    <!-- Mastodon feed (load during idle to avoid main-thread work at parse time) -->
+    <script>
+    (function(){
+        function loadFed() {
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = 'https://esm.sh/emfed@1';
+            document.body.appendChild(s);
+        }
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadFed, {timeout:2000});
+        } else {
+            window.addEventListener('load', loadFed);
+        }
+    })();
+    </script>
         <script>
         // Click handler: set #bg-blur to screamer.gif without blur for 5s, then restore
         (function(){

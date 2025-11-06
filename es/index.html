@@ -20,7 +20,7 @@
     <link rel="prefetch" href="/css/badges-marquee.css" as="style">
     <link rel="prefetch" href="/css/mobile.css" as="style">
     <link rel="prefetch" href="/css/chattable.css" as="style">
-    <link rel="prefetch" href="/js/zipbomb.js" as="script">
+    <!--<link rel="prefetch" href="/js/zipbomb.js" as="script">-->
     <link rel="prefetch" href="/js/scripts.js" as="script">
     <link rel="prefetch" href="/js/lazy-loader.js" as="script">
     <link rel="prefetch" href="/js/lastfm.js" as="script">
@@ -46,6 +46,7 @@
       @font-face {
         font-family: 'jgs9';
         src: url('/jgs9.ttf') format('opentype');
+        font-display: swap;
         }
         * {
             margin: 0;
@@ -368,7 +369,7 @@
             preloadResource('https://esm.sh/emfed@1/toots.css', 'style');
             
             // Preload all JavaScript files
-            preloadResource('/js/zipbomb.js', 'script');
+            // preloadResource('/js/zipbomb.js', 'script');
             preloadResource('/js/scripts.js', 'script');
             preloadResource('/js/lazy-loader.js', 'script');
             preloadResource('/js/lastfm.js', 'script');
