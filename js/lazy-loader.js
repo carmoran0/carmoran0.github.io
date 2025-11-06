@@ -9,8 +9,8 @@
     // Scripts de APIs externas que necesitan cargarse
     const apiScripts = [
         '/js/lastfm.js',
-        '/js/letterboxd.js',
-        '/js/github-readme.js'
+        '/js/letterboxd.js'
+        // Nota: github-readme.js eliminado; el README ahora se inserta estáticamente vía GitHub Actions
     ];
     
     // Scripts opcionales (widgets, efectos)

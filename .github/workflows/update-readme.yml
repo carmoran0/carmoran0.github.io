@@ -1,0 +1,37 @@
+name: Update README snippet
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [readme-updated]
+  # Opcional: mantener schedule como backup por si el dispatch falla
+  # schedule:
+  #   - cron: '0 0 * * *' # una vez al día como respaldo
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Update README HTML in pages
+        run: node developer/update-readme.js
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: actualizar README estático (autogenerado)'
+          branch: main
+          file_pattern: |
+            linkarlos.html
+            en/linkarlos.html
+            es/linkarlos.html
