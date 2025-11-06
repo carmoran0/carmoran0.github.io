@@ -31,7 +31,4 @@ jobs:
         with:
           commit_message: 'chore: actualizar README estático (autogenerado)'
           branch: main
-          file_pattern: |
-            linkarlos.html
-            en/linkarlos.html
-            es/linkarlos.html
+          file_pattern: '*.html */*.html'
