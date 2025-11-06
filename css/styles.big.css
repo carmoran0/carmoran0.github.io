@@ -386,7 +386,9 @@ h2 {
 
 /* Letterboxd container styles */
 .letterboxd-horizontal-wrapper {
-    margin: var(--spacing-lg);
+    margin: auto;
+    max-width: 1630px;
+    padding: var(--spacing-xl) var(--spacing-lg);
 }
 
 .letterboxd-container-wrapper {
