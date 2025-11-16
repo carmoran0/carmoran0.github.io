@@ -25,10 +25,6 @@ function setupMoodboard() {
     let offsetY = 0;
     let dragStartTime = 0;
     let hasMoved = false;
-    let moodboardRect = null;
-    let latestClientX = 0;
-    let latestClientY = 0;
-    let animationFrameId = null;
 
     // Crear el visor de imágenes
     let imageViewer = null;
@@ -149,10 +145,6 @@ function setupMoodboard() {
         });
     }
 
-    function updateMoodboardRect() {
-        moodboardRect = moodboard.getBoundingClientRect();
-    }
-
     function startDrag(e) {
         // Solo prevenir default si es touch, para no interferir con clicks
         if (e.type === 'touchstart') {
@@ -165,37 +157,17 @@ function setupMoodboard() {
         currentItem = e.currentTarget;
         currentItem.style.zIndex = '200';
 
-    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-
-    const rect = currentItem.getBoundingClientRect();
-    offsetX = clientX - rect.left;
-    offsetY = clientY - rect.top;
-
-    updateMoodboardRect();
-    window.addEventListener('resize', updateMoodboardRect);
-
-    latestClientX = clientX;
-    latestClientY = clientY;
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        
+        const rect = currentItem.getBoundingClientRect();
+        offsetX = clientX - rect.left;
+        offsetY = clientY - rect.top;
 
         document.addEventListener('mousemove', drag);
         document.addEventListener('touchmove', drag, { passive: false });
         document.addEventListener('mouseup', stopDrag);
         document.addEventListener('touchend', stopDrag);
-    }
-
-    function applyDragPosition() {
-        animationFrameId = null;
-        if (!currentItem || !moodboardRect) return;
-
-        const x = latestClientX - moodboardRect.left - offsetX;
-        const y = latestClientY - moodboardRect.top - offsetY;
-
-        const xPercent = (x / moodboardRect.width) * 100;
-        const yPercent = (y / moodboardRect.height) * 100;
-
-        currentItem.style.left = `${xPercent}%`;
-        currentItem.style.top = `${yPercent}%`;
     }
 
     function drag(e) {
@@ -210,12 +182,19 @@ function setupMoodboard() {
 
         e.preventDefault();
 
-        latestClientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-        latestClientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
 
-        if (!animationFrameId) {
-            animationFrameId = requestAnimationFrame(applyDragPosition);
-        }
+        const moodboardRect = moodboard.getBoundingClientRect();
+        const x = clientX - moodboardRect.left - offsetX;
+        const y = clientY - moodboardRect.top - offsetY;
+
+        // Calcular porcentajes relativos al contenedor
+        const xPercent = (x / moodboardRect.width) * 100;
+        const yPercent = (y / moodboardRect.height) * 100;
+
+        currentItem.style.left = `${xPercent}%`;
+        currentItem.style.top = `${yPercent}%`;
     }
 
     function stopDrag() {
@@ -224,13 +203,6 @@ function setupMoodboard() {
             currentItem.style.cursor = '';
         }
         
-        window.removeEventListener('resize', updateMoodboardRect);
-
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
-        }
-
         // Resetear después de un pequeño delay para permitir que el click se procese
         setTimeout(() => {
             isDragging = false;
