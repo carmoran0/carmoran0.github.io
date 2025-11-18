@@ -1,0 +1,67 @@
+/* Estilos para galería de imágenes simple */
+.container {
+    width: 100%;
+    height: 100%;
+    --color: rgba(114, 114, 114, 0.3);
+    background-color: #191a1a;
+    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+    background-size: 55px 55px;
+}
+.page-gallery {
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.gallery-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.gallery-content h2 {
+    font-size: 1.8em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    color: #34495e;
+    padding-bottom: 0.5em;
+}
+
+.gallery-content p {
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}

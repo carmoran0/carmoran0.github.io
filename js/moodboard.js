@@ -1,32 +1,23 @@
 /**
- * Moodboard - Sistema interactivo para el altar
- * Permite arrastrar elementos y ver imágenes en pantalla completa con carrusel
+ * Image Gallery Viewer - Visor de galería de imágenes
+ * Permite ver imágenes en pantalla completa con navegación por carrusel
  */
 
-(function initMoodboard() {
-    // Esperar a que el DOM esté listo si aún no lo está
+(function initImageGallery() {
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupMoodboard);
+        document.addEventListener('DOMContentLoaded', setupGallery);
     } else {
-        // El DOM ya está listo, ejecutar inmediatamente
-        setupMoodboard();
+        setupGallery();
     }
 
-function setupMoodboard() {
-    const moodboard = document.getElementById('moodboard');
-    if (!moodboard) {
-        console.warn('Moodboard: contenedor #moodboard no encontrado');
+function setupGallery() {
+    // Buscar contenedores de galería (tanto #moodboard como #gallery)
+    const container = document.getElementById('gallery') || document.getElementById('moodboard');
+    if (!container) {
+        console.warn('Gallery: contenedor no encontrado');
         return;
     }
 
-    let isDragging = false;
-    let currentItem = null;
-    let offsetX = 0;
-    let offsetY = 0;
-    let dragStartTime = 0;
-    let hasMoved = false;
-
-    // Crear el visor de imágenes
     let imageViewer = null;
     let currentImageIndex = 0;
     let allImages = [];
@@ -47,19 +38,16 @@ function setupMoodboard() {
         `;
         document.body.appendChild(imageViewer);
 
-        // Event listeners del visor
         imageViewer.querySelector('.image-viewer-close').addEventListener('click', closeImageViewer);
         imageViewer.querySelector('.prev').addEventListener('click', showPreviousImage);
         imageViewer.querySelector('.next').addEventListener('click', showNextImage);
         
-        // Cerrar al hacer clic en el fondo
         imageViewer.addEventListener('click', function(e) {
             if (e.target === imageViewer) {
                 closeImageViewer();
             }
         });
 
-        // Navegación con teclado
         document.addEventListener('keydown', function(e) {
             if (!imageViewer.classList.contains('active')) return;
             
@@ -72,9 +60,9 @@ function setupMoodboard() {
     function openImageViewer(index) {
         if (!imageViewer) createImageViewer();
         
-        // Recopilar todas las imágenes del moodboard
-        const items = Array.from(moodboard.querySelectorAll('.moodboard-item img'));
-        allImages = items.map(img => ({
+        // Buscar imágenes con clase .gallery-img o .draggable-img
+        const selector = '.gallery-img, .draggable-img, .moodboard-item img';
+        allImages = Array.from(container.querySelectorAll(selector)).map(img => ({
             src: img.src,
             alt: img.alt
         }));
@@ -82,7 +70,7 @@ function setupMoodboard() {
         currentImageIndex = index;
         updateViewerImage();
         imageViewer.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevenir scroll
+        document.body.style.overflow = 'hidden';
     }
 
     function closeImageViewer() {
@@ -118,146 +106,32 @@ function setupMoodboard() {
         imageViewer.querySelector('.total').textContent = allImages.length;
     }
 
-    // Aplicar rotaciones iniciales desde data-rotation
-    function applyInitialRotations() {
-        const items = moodboard.querySelectorAll('.moodboard-item');
-        items.forEach(item => {
-            const rotation = item.getAttribute('data-rotation') || '0';
-            item.style.transform = `rotate(${rotation}deg)`;
-        });
-    }
-
-    // Inicializar interacciones para todos los items
-    function initDragAndDrop() {
-        const items = moodboard.querySelectorAll('.moodboard-item');
+    // Inicializar clicks en las imágenes
+    function initGalleryImages() {
+        // Buscar todas las imágenes clickeables
+        const selector = '.gallery-img, .draggable-img, .moodboard-item img';
+        const images = container.querySelectorAll(selector);
         
-        items.forEach((item, index) => {
-            item.addEventListener('mousedown', startDrag);
-            item.addEventListener('touchstart', startDrag, { passive: false });
-            
-            // Click para abrir visor (solo si no se arrastró)
-            item.addEventListener('click', function(e) {
-                if (!hasMoved && Date.now() - dragStartTime < 200) {
-                    e.preventDefault();
-                    openImageViewer(index);
-                }
+        images.forEach((img, index) => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                openImageViewer(index);
             });
         });
     }
 
-    function startDrag(e) {
-        // Solo prevenir default si es touch, para no interferir con clicks
-        if (e.type === 'touchstart') {
-            e.preventDefault();
-        }
-        
-        isDragging = false; // No marcamos como arrastre hasta que se mueva
-        hasMoved = false;
-        dragStartTime = Date.now();
-        currentItem = e.currentTarget;
-        currentItem.style.zIndex = '200';
-
-        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-        
-        const rect = currentItem.getBoundingClientRect();
-        offsetX = clientX - rect.left;
-        offsetY = clientY - rect.top;
-
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('touchmove', drag, { passive: false });
-        document.addEventListener('mouseup', stopDrag);
-        document.addEventListener('touchend', stopDrag);
-    }
-
-    function drag(e) {
-        if (!currentItem) return;
-        
-        // Marcar como arrastre al primer movimiento
-        if (!isDragging) {
-            isDragging = true;
-            hasMoved = true;
-            currentItem.style.cursor = 'grabbing';
-        }
-
-        e.preventDefault();
-
-        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-
-        const moodboardRect = moodboard.getBoundingClientRect();
-        const x = clientX - moodboardRect.left - offsetX;
-        const y = clientY - moodboardRect.top - offsetY;
-
-        // Calcular porcentajes relativos al contenedor
-        const xPercent = (x / moodboardRect.width) * 100;
-        const yPercent = (y / moodboardRect.height) * 100;
-
-        currentItem.style.left = `${xPercent}%`;
-        currentItem.style.top = `${yPercent}%`;
-    }
-
-    function stopDrag() {
-        if (currentItem) {
-            currentItem.style.zIndex = '';
-            currentItem.style.cursor = '';
-        }
-        
-        // Resetear después de un pequeño delay para permitir que el click se procese
-        setTimeout(() => {
-            isDragging = false;
-            currentItem = null;
-        }, 10);
-
-        document.removeEventListener('mousemove', drag);
-        document.removeEventListener('touchmove', drag);
-        document.removeEventListener('mouseup', stopDrag);
-        document.removeEventListener('touchend', stopDrag);
-    }
-
-    // Función para añadir un nuevo elemento al moodboard
-    window.addToMoodboard = function(imageUrl, altText = 'Item del altar') {
-        const item = document.createElement('div');
-        item.className = 'moodboard-item';
-        
-        // Posición aleatoria
-        const randomTop = Math.random() * 70 + 10; // 10% a 80%
-        const randomLeft = Math.random() * 70 + 10; // 10% a 80%
-        const randomRotation = (Math.random() - 0.5) * 20; // -10 a 10 grados
-        
-        item.style.top = `${randomTop}%`;
-        item.style.left = `${randomLeft}%`;
-        item.setAttribute('data-rotation', randomRotation.toFixed(1));
-        item.style.transform = `rotate(${randomRotation}deg)`;
-        
-        item.innerHTML = `
-            <img src="${imageUrl}" alt="${altText}">
-            <div class="pin"></div>
-        `;
-        
-        // Animación de entrada
-        item.style.opacity = '0';
-        item.style.transform = `rotate(${randomRotation}deg) scale(0)`;
-        moodboard.appendChild(item);
-        
-        setTimeout(() => {
-            item.style.transition = 'all 0.5s ease';
-            item.style.opacity = '1';
-            item.style.transform = `rotate(${randomRotation}deg) scale(1)`;
-            
-            setTimeout(() => {
-                item.style.transition = '';
-                initDragAndDrop();
-            }, 500);
-        }, 10);
-    };
-
-
-
     // Inicializar
-    applyInitialRotations();
-    initDragAndDrop();
+    initGalleryImages();
 
-
+    // Mantener compatibilidad con moodboards existentes
+    const moodboardItems = container.querySelectorAll('.moodboard-item');
+    if (moodboardItems.length > 0) {
+        // Aplicar rotaciones iniciales si existen
+        moodboardItems.forEach(item => {
+            const rotation = item.getAttribute('data-rotation') || '0';
+            item.style.transform = `rotate(${rotation}deg)`;
+        });
+    }
 }
 })();

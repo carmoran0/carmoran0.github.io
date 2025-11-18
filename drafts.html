@@ -1,0 +1,108 @@
+<!-- Contenedor izquierdo: Murciélagos (CSS-only animation) -->
+        <div class="main-container bats-container"style="padding-top: 18px;">
+            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">nuevos murciélagos CSS (Carlos Swag Sopa)</p>
+            <div id="bats-bouncing-area">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Murciélago animado">
+                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Murciélago animado">
+                
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fotos — Tablón</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Layout mínimo para que el moodboard ocupe la página
+           y permita texto encima/abajo. Preferible mover a CSS central si se desea. */
+        html, body { height: 100%; }
+        body { margin: 0; }
+        .main-container.shrine-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .page-header, .page-footer {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            background: transparent;
+            color: inherit;
+        }
+        .moodboard-area {
+            position: relative;
+            flex: 1 1 auto;
+            overflow: auto;
+            touch-action: none; /* para arrastrar con pointer events */
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        .moodboard-item { position: absolute; cursor: grab; }
+        .moodboard-item:active { cursor: grabbing; }
+    </style>
+</head>
+<body>
+    <div class="main-container shrine-container">
+        <header class="page-header">
+            <h1>Fotos — Tablón</h1>
+            <p class="intro">Arrastra las imágenes para reorganizarlas. Añade aquí texto introductorio o instrucciones.</p>
+        </header>
+
+        <div id="moodboard" class="moodboard-area" aria-label="Tablón de fotos">
+            <!-- Items movidos desde es/linkarlos.html -->
+            <div class="moodboard-item" style="top: 7%; left: 9%;" data-rotation="-5">
+                <img src="/images/gato.escuchando.gif" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 30%; left: 9%;" data-rotation="8">
+                <img src="/images/sunfish.jpg" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 25%; left: 55%;" data-rotation="-3">
+                <img src="/images/fallout.jpg" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 8%; left: 55%;" data-rotation="12">
+                <img src="/legacy/images/logoministerioMOD.png" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 54%; left: 17%;" data-rotation="-5">
+                <img src="/images/patos.jpg" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 50%; left: 60%;" data-rotation="8">
+                <img src="/images/sos.jpg" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+            <div class="moodboard-item" style="top: 77%; left: 55%;" data-rotation="-3">
+                <img src="/images/payti.jpg" alt="Item del altar">
+                <div class="pin"></div>
+            </div>
+        </div>
+
+        <footer class="page-footer">
+            <p>Texto opcional bajo el tablón. Puedes dejar notas, créditos o enlaces aquí.</p>
+        </footer>
+    </div>
+    <script src="/js/moodboard.js" defer></script>
+</body>
+</html>

@@ -13,9 +13,9 @@
     <link rel="preconnect" href="https://ws.audioscrobbler.com">
     <link rel="preconnect" href="https://raw.githubusercontent.com">
     <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
-    <link rel="icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    <link rel="shortcut icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
-    <link rel="apple-touch-icon" type="image/gif" href="/images/77363yjcyzuk8gh.gif">
+    <link rel="icon" type="image/gif" href="/images/favicon.gif">
+    <link rel="shortcut icon" type="image/gif" href="/images/favicon.gif">
+    <link rel="apple-touch-icon" type="image/gif" href="/images/favicon.gif">
     
     <!-- CSS crítico (blocking) -->
     <link rel="stylesheet" href="/css/styles.css">
@@ -84,6 +84,10 @@
                             </span>
                         </label>
                     </div>
+                <h2>SITEMAP:</h2>
+                <ul style="margin-top: 0px;">
+                    <li><a href="/es/fotos.html">fotitos</a></li>
+                </ul>
                 <h2>TODOLIST:</h2>
                 <ul style="margin-top: 0px;">
                     <li>A lo mejor un titulo chulo</li>
@@ -225,44 +229,7 @@
         </div>
     </div>
 
-    <!-- Fila de contenedores: Espacio en blanco y otros -->
-    <div class="bottom-containers first-row">
-        <!-- Contenedor en blanco (antes Letterboxd) -->
-        <div class="main-container NO-MOVIL">
-            <h2>Espacio disponible:</h2>
-            <div class="placeholder-content">
-                <!-- Contenido pendiente -->
-            </div>
-        </div>
-        <!-- Contenedor Mastodon -->
-        <div class="main-container mastodon-container">
-            <h2>
-                <a href="https://mastodon.social/@copaco">Mastodon:</a>
-            </h2>
-            <section class="mastodon-section">
-                <div class="mastodon-feed-wrapper">
-                    <a class="mastodon-feed" href="https://mastodon.social/@copaco" data-toot-limit="5">follow me into the Fediverse</a>
-                </div>
-            </section>
-        </div>
-
-        <!-- Contenedor webrings -->
-        <div class="main-container webrings-container" >
-            <h2>Webrings:</h2>
-            <div id='euroring'>
-                <script type="text/javascript" src="https://euroring.neocities.org/scripts/onionring-variables.js" defer></script>
-                <script type="text/javascript" src="https://euroring.neocities.org/scripts/euroringbanner.js" defer></script>
-            </div>   
-            <div id="palestine">
-                <script src="https://sitesforpalestine.neocities.org/ring.js"></script>
-            </div>
-            <div id="transing">
-                <script src="https://transring.neocities.org/ring.js" data-widget="nb"></script>
-            </div>
-        </div>
-    </div>
-
-    <!-- Segunda fila de contenedores: Cosillas que uso, Shrine y Now -->
+    <!-- Segunda fila -->
     <div class="bottom-containers second-row">
         <!-- Contenedor izquierdo: Cosillas que uso -->
         <div class="main-container uses-container">
@@ -295,39 +262,16 @@
                 </div>
             </div>
         </div>
-        <div class="main-container shrine-container">
-            <h2>Tablon de fotos:</h2>
-            <div id="moodboard" class="moodboard-area">
-                <!-- Las imágenes/items se cargarán aquí dinámicamente -->
-                <div class="moodboard-item" style="top: 7%; left: 9%;" data-rotation="-5">
-                    <img src="/images/gato.escuchando.gif" alt="Item del altar">
-                    <div class="pin"></div>
+        <!-- Contenedor Mastodon -->
+        <div class="main-container mastodon-container">
+            <h2>
+                <a href="https://mastodon.social/@copaco">Mastodon:</a>
+            </h2>
+            <section class="mastodon-section">
+                <div class="mastodon-feed-wrapper">
+                    <a class="mastodon-feed" href="https://mastodon.social/@copaco" data-toot-limit="5">follow me into the Fediverse</a>
                 </div>
-                <div class="moodboard-item" style="top: 30%; left: 9%;" data-rotation="8">
-                    <img src="/images/sunfish.jpg" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-                <div class="moodboard-item" style="top: 25%; left: 55%;" data-rotation="-3">
-                    <img src="/images/fallout.jpg" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-                <div class="moodboard-item" style="top: 8%; left: 55%;" data-rotation="12">
-                    <img src="/legacy/images/logoministerioMOD.png" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-                <div class="moodboard-item" style="top: 54%; left: 17%;" data-rotation="-5">
-                    <img src="/images/patos.jpg" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-                <div class="moodboard-item" style="top: 50%; left: 60%;" data-rotation="8">
-                    <img src="/images/sos.jpg" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-                <div class="moodboard-item" style="top: 77%; left: 55%;" data-rotation="-3">
-                    <img src="/images/payti.jpg" alt="Item del altar">
-                    <div class="pin"></div>
-                </div>
-            </div>
+            </section>
         </div>
 
 
@@ -385,20 +329,23 @@
         </div>
     </div>
 
-    <!-- Contenedor inferior con murciélagos y badges -->
+    <!-- Contenedores inferiores-->
     <div class="bottom-containers">
-        <!-- Contenedor izquierdo: Murciélagos (CSS-only animation) -->
-        <div class="main-container bats-container"style="padding-top: 18px;">
-            <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">nuevos murciélagos CSS (Carlos Swag Sopa)</p>
-            <div id="bats-bouncing-area">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat1" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat2" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat3" alt="Murciélago animado">
-                <img src="/legacy/images/ANI3DbatHover.gif" class="bouncing-bat" id="bat4" alt="Murciélago animado">
-                
+        <!-- Contenedor webrings -->
+        <div class="main-container webrings-container" >
+            <h2>Webrings:</h2>
+            <div id='euroring'>
+                <script type="text/javascript" src="https://euroring.neocities.org/scripts/onionring-variables.js" defer></script>
+                <script type="text/javascript" src="https://euroring.neocities.org/scripts/euroringbanner.js" defer></script>
+            </div>   
+            <div id="palestine">
+                <script src="https://sitesforpalestine.neocities.org/ring.js"></script>
+            </div>
+            <div id="transing">
+                <script src="https://transring.neocities.org/ring.js" data-widget="nb"></script>
             </div>
         </div>
-        <!-- Contenedor central: Chattable -->
+        <!-- Contenedor: Chattable -->
         <div class="main-container chat-container" aria-label="chat-chat" style="padding-top: 18px;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
             <p style="opacity: 0.8;margin-top: 0;margin-bottom: 7px;font-size: 14px;">preguntame lo que quieras, pideme lo que quieras, di lo que quieras o deja un mensaje para otros visitantes; el chat es anónimo.</p>
             <div class="chat-wrapper" style="

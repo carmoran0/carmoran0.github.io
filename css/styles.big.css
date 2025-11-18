@@ -459,9 +459,6 @@ h2 {
     padding: var(--spacing-xl) var(--spacing-lg);
 }
 
-.letterboxd-container-wrapper {
-}
-
 .letterboxd-section {
     overflow: auto;
     justify-content: center;
@@ -813,8 +810,6 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 /* Segunda fila: Uses, Shrine y Now - misma altura (del contenedor más grande)
    Los estilos móviles han sido movidos a css/mobile.css */
 .second-row .main-container {
-    height: 1000px;
-    max-height: 1000px;
     overflow-y: auto;
 }
 
@@ -1196,6 +1191,7 @@ a:hover {
 
 /* Estilos específicos para el contenedor de Mastodon */
 .mastodon-container {
+    max-height: 1200px;
     display: flex;
     flex-direction: column;
 }
@@ -1213,7 +1209,6 @@ a:hover {
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 5px;
-    max-height: 750px; /* Altura máxima similar a otros contenedores */
     position: relative;
 }
 

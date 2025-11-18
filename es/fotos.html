@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fotos — Galería</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/fotos.css">
+</head>
+<body class="container">
+    <div id="gallery" class="page-gallery" style="display: flex; align-items: flex-start;max-width: 1630px;">
+        <nav id="category-index" style="position: sticky; top: 1rem; align-self: flex-start; min-width: 160px; margin-right: 2rem;">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="#animales">Animales</a></li>
+                <li><a href="#yo">Yo</a></li>
+                <li><a href="#varios">Varios</a></li>
+            </ul>
+        </nav>
+        <div class="main-container" style="flex: 1;">
+            <h1>Galería de Fotos</h1>
+            <p>Bienvenido a mi galería de fotos. Haz clic en cualquier imagen para verla en grande.</p>
+            <h2 id="animales">Animales</h2>
+            <div class="gallery-grid">
+                <img src="/images/gato.escuchando.gif" alt="Gato escuchando" class="gallery-img">
+                <img src="/images/patos.jpg" alt="Patos" class="gallery-img">
+            </div>
+            <h2 id="yo">Yo</h2>
+            <div class="gallery-grid">
+                <img src="/images/fallout.jpg" alt="Fallout" class="gallery-img">
+                <img src="/images/sunfish.jpg" alt="Pez luna" class="gallery-img">
+                <img src="/images/sos.jpg" alt="SOS" class="gallery-img">
+            </div>
+            <h2 id="varios">Varios</h2>
+            <div class="gallery-grid">
+                <img src="/legacy/images/logoministerioMOD.png" alt="Logo ministerio" class="gallery-img">
+                <img src="/images/payti.jpg" alt="Payti" class="gallery-img">
+            </div>
+        </div>
+    </div>
+    <script src="/js/moodboard.js" defer></script>
+</body>
+</html>
+
+
+
