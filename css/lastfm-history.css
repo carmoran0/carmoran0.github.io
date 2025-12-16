@@ -1,0 +1,408 @@
+/* Last.fm history styles */
+
+.lastfm-content {
+    padding-bottom: 6px;
+    margin-top: 12px;
+    padding-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-muted);
+    box-shadow: var(--shadow-default);
+    position: relative;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    overflow: hidden;
+}
+.lastfm-status-banner {
+    margin-top: 12px;
+}
+  
+.lastfm-history {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 6px;
+    scroll-behavior: smooth;
+}
+
+.lastfm-history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.lastfm-history::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+}
+
+.lastfm-history::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+
+.lastfm-track-card {
+    animation: fadeIn 0.3s ease-out;
+    display: flex;
+    gap: var(--spacing-md);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-muted);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    align-items: center;
+    transition: all 0.35s cubic-bezier(.4,1.3,.5,1), box-shadow var(--transition-default), border-color var(--transition-default), background-color var(--transition-default);
+    will-change: padding, gap, background, box-shadow, width, height, font-size;
+    position: relative;
+}
+
+.lastfm-track-card:hover {
+    box-shadow: none;
+}
+
+.lastfm-track-card:not(.is-now-playing) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    background: rgba(0, 0, 0, 0.25);
+    align-items: center;
+}
+
+.lastfm-track-card:not(.is-now-playing) .lastfm-track-meta {
+    gap: var(--spacing-xs);
+}
+
+.lastfm-track-card:not(.is-now-playing) .lastfm-track-time {
+    display: none;
+    pointer-events: none;
+}
+.lastfm-track-card:not(.is-now-playing):hover .lastfm-track-time,
+.lastfm-track-card:not(.is-now-playing):focus-within .lastfm-track-time {
+    display: inline;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.lastfm-track-card:not(.is-now-playing) .lastfm-preview-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+.lastfm-track-card.is-now-playing {
+    border-color: var(--color-lastfm);
+    box-shadow: 0 0 0 2px rgba(213, 16, 7, 0.25), 0 15px 30px rgba(213, 16, 7, 0.25);
+    padding: calc(var(--spacing-lg) + 4px);
+    gap: var(--spacing-lg);
+    background: linear-gradient(145deg, rgba(213, 16, 7, 0.2), rgba(0, 0, 0, 0.6));
+    transition: all 0.35s cubic-bezier(.4,1.3,.5,1), box-shadow var(--transition-default), border-color var(--transition-default), background-color var(--transition-default);
+}
+
+.lastfm-track-card.is-previewing:not(.is-now-playing) {
+    border-color: rgba(213, 16, 7, 0.4);
+    background: rgba(213, 16, 7, 0.12);
+}
+
+.lastfm-card-art {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lastfm-track-card.is-now-playing .lastfm-card-art {
+    width: 108px;
+    height: 108px;
+    box-shadow: 0 12px 30px rgba(213, 16, 7, 0.35);
+}
+
+.lastfm-card-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lastfm-track-meta {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    min-width: 0;
+}
+
+.lastfm-track-title {
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.lastfm-track-card.is-now-playing .lastfm-track-title {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+}
+
+.lastfm-track-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.lastfm-track-title a:hover,
+.lastfm-track-title a:focus {
+    text-decoration: underline;
+}
+
+.lastfm-track-artist {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin: 0;
+}
+
+.lastfm-track-album {
+    font-size: 0.9rem;
+    opacity: 0.65;
+    margin: 0;
+}
+
+.lastfm-track-meta small {
+    font-size: 0.9rem;
+    opacity: 0.75;
+}
+
+.lastfm-track-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-left: auto;
+}
+
+.lastfm-track-card.is-now-playing .lastfm-track-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-sm);
+}
+
+.lastfm-preview-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    background: linear-gradient(135deg, rgba(213, 16, 7, 0.9), rgba(213, 16, 7, 0.65));
+    color: #fff;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform var(--transition-default), box-shadow var(--transition-default), opacity var(--transition-default);
+}
+
+.lastfm-preview-btn:hover:not([disabled]),
+.lastfm-preview-btn:focus:not([disabled]) {
+    transform: none;
+    box-shadow: none;
+}
+
+.lastfm-preview-btn.is-active {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(213, 16, 7, 0.6));
+    box-shadow: 0 0 0 1px rgba(213, 16, 7, 0.4), 0 8px 16px rgba(213, 16, 7, 0.25);
+}
+
+.lastfm-preview-btn[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.lastfm-track-time {
+    /* Tooltip para el último scrobble */
+    .lastfm-track-card:not(.is-now-playing):first-child .lastfm-track-time {
+        display: none !important;
+    }
+    .lastfm-track-card:not(.is-now-playing):first-child:hover .lastfm-track-time,
+    .lastfm-track-card:not(.is-now-playing):first-child:focus-within .lastfm-track-time {
+        display: none !important;
+    }
+    .lastfm-track-card:not(.is-now-playing):first-child .lastfm-track-title {
+        position: relative;
+        cursor: pointer;
+    }
+    .lastfm-track-card:not(.is-now-playing):first-child .lastfm-track-title::after {
+        content: attr(data-timestamp);
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translateX(-50%) translateY(6px);
+        background: rgba(30,30,30,0.98);
+        color: #fff;
+        font-size: 0.85rem;
+        padding: 5px 12px;
+        border-radius: 7px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+        opacity: 0;
+        pointer-events: none;
+        white-space: pre;
+        z-index: 10;
+        transition: opacity 0.18s cubic-bezier(.4,1.3,.5,1), transform 0.18s cubic-bezier(.4,1.3,.5,1);
+    }
+    .lastfm-track-card:not(.is-now-playing):first-child .lastfm-track-title:hover::after,
+    .lastfm-track-card:not(.is-now-playing):first-child .lastfm-track-title:focus::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(12px);
+        pointer-events: auto;
+    }
+    font-size: 0.9rem;
+    opacity: 0.7;
+    white-space: nowrap;
+    pointer-events: auto;
+}
+
+/* Compactar tipografías y botón en no actuales */
+.lastfm-track-card:not(.is-now-playing) .lastfm-track-title {
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+}
+.lastfm-track-card:not(.is-now-playing) .lastfm-track-artist {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+.lastfm-track-card:not(.is-now-playing) .lastfm-track-album {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+.lastfm-track-card:not(.is-now-playing) .lastfm-preview-btn {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+}
+
+/* Neutralizar hover en enlaces dentro del historial */
+.lastfm-history .lastfm-track-title a:hover,
+.lastfm-history .lastfm-track-title a:focus {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.lastfm-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.lastfm-load-more {
+    margin-top: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+        
+        
+    flex: 1;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.45);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform var(--transition-default), box-shadow var(--transition-default), background var(--transition-default);
+}
+
+.lastfm-load-more:hover:not([disabled]) {
+    background: rgba(213, 16, 7, 0.4);
+    box-shadow: 0 10px 18px rgba(213, 16, 7, 0.25);
+}
+
+.lastfm-load-more[disabled] {
+    gap: var(--spacing-md);
+}
+
+.lastfm-preview-dialog header img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+            width: 96px;
+            height: 96px;
+
+.lastfm-preview-dialog h3 {
+        .lastfm-track-actions {
+            width: 100%;
+            justify-content: space-between;
+        }
+    opacity: 0.75;
+}
+
+.lastfm-preview-dialog audio {
+    width: 100%;
+    outline: none;
+}
+
+.lastfm-preview-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+body.lastfm-modal-open {
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .lastfm-track-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .lastfm-card-art {
+        width: 120px;
+        height: 120px;
+    }
+
+    .lastfm-track-actions {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .lastfm-track-time {
+        white-space: normal;
+    }
+
+    .lastfm-history {
+        max-height: none;
+    }
+}
+
+@media (max-width: 780px) {
+    .lastfm-content {
+        padding: var(--spacing-md);
+    }
+
+    .lastfm-track-card {
+        gap: var(--spacing-md);
+    }
+
+    .lastfm-track-title {
+        font-size: 1.1rem;
+    }
+
+    .lastfm-preview-dialog {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+}

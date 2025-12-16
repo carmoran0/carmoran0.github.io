@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://ws.audioscrobbler.com">
     <link rel="preconnect" href="https://raw.githubusercontent.com">
     <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
+    <meta name="lastfm-api-key" content="c34e2201253c0fb7ff1d0b56101b4391">
     <link rel="icon" type="image/gif" href="/images/favicon.gif">
     <link rel="shortcut icon" type="image/gif" href="/images/favicon.gif">
     <link rel="apple-touch-icon" type="image/gif" href="/images/favicon.gif">
@@ -26,6 +27,7 @@
     <link rel="stylesheet" href="/css/weather.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/css/badges-marquee.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/css/spinner.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/lastfm-history.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/css/mobile.css" media="print" onload="this.media='(max-width: 780px)'">
     
     <!-- Preload CSS externo -->
@@ -36,6 +38,7 @@
         <link rel="stylesheet" href="/css/weather.css">
         <link rel="stylesheet" href="/css/badges-marquee.css">
         <link rel="stylesheet" href="/css/spinner.css">
+        <link rel="stylesheet" href="/css/lastfm-history.css">
         <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 780px)">
         <link rel="stylesheet" href="https://esm.sh/emfed@1/toots.css">
     </noscript>
@@ -184,14 +187,11 @@
             <!-- Contenedor 3: Last.fm -->
             <div class="main-container lastfm-container-wrapper">
                 <h2>
-                <a href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify:</a></p>
-
-            </h2>
-                <section class="lastfm-section">
-                    <div id="lastfm-container">
-                        <!-- Last.fm content will be loaded here by JavaScript -->
-                    </div>
-                </section>
+                  <a href="https://open.spotify.com/user/21ekd643rqqyxhssbnqjycrfy?si=f6f29d6814664eab">Spotify:</a>
+                </h2>
+                <div id="lastfm-container" data-lastfm-user="sobaco27">
+                    <!-- Last.fm content will be loaded here by JavaScript -->
+                </div>
             </div>
         </div>
 
@@ -313,7 +313,7 @@
                     <h3>Watching</h3>
                     <ul>
                         <li>I'm watching Weeds which is like if breaking bad and modern family had a son they hate</li>
-                        <li>new season of Smiling friends</li>
+                        <li>pluribus</li>
                     </ul>
                 </div>
 

@@ -691,14 +691,9 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 
 #lastfm-container {
     width: 100%;
-    max-width: 800px;
-}   
-.lastfm-content{
-    max-height: 315px;
-    overflow: scroll;
+    max-width: 820px;
 }
 
-.lastfm-content,
 .chat-wrapper {
     display: flex;
     gap: var(--spacing-lg);
@@ -713,61 +708,6 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 
 
 
-
-.lastfm-album-art img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
-    /* Optimización con aspect-ratio */
-    aspect-ratio: 1;
-    
-    /* Lazy loading optimizado */
-    content-visibility: auto;
-}
-
-.lastfm-info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.lastfm-status {
-    color: var(--accent-color);
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.lastfm-track {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--text-color);
-    transition: color 0.3s ease;
-}
-
-.lastfm-artist {
-    font-size: 24px;
-    margin-bottom: 5px;
-    color: var(--text-color);
-    transition: color 0.3s ease;
-}
-
-.lastfm-album {
-    font-size: 20px;
-    color: var(--text-color);
-    opacity: 0.8;
-    transition: color 0.3s ease;
-}
-
-.lastfm-error {
-    color: var(--accent-color);
-    text-align: center;
-    font-size: 20px;
-    padding: 20px;
-}
 
 /* Optimización de renderizado con content-visibility */
 .letterboxd-container-wrapper,
@@ -1534,7 +1474,9 @@ html {
    From Uiverse.io by r7chardgh
    ======================================== */
 .language-selector {
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* The switch - the box around the slider */
