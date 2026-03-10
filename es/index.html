@@ -109,6 +109,7 @@
   cursor: pointer;
   position: relative;
   padding: 2px;
+  height: 52px;
   border-radius: 6px;
   border: 0;
   text-shadow: 1px 1px #000a;
@@ -128,7 +129,11 @@
 .inner {
   position: relative;
   inset: 0px;
-  padding: 1em;
+  height: 100%;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   background: radial-gradient(circle at 50% 100%, #30f8f8 10%, #30f8f800 55%),
     linear-gradient(#00526a, #009dcd);
@@ -190,6 +195,41 @@
   color: white;
   font-weight: 550;
   transition: inherit;
+}
+
+.cta-buttons {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.secondary-button {
+  cursor: pointer;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 1.3em;
+  border-radius: 6px;
+  border: 2px solid #5d6772;
+  background: linear-gradient(#d9dee3, #b8c1cb);
+  color: #1d2a33;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-shadow: 0 1px #fff8;
+  box-shadow: 0px 4px 6px 0px #0005;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.secondary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 6px 10px 0px #0006;
+}
+
+.secondary-button:active {
+  transform: translateY(0);
+  box-shadow: 0px 2px 4px 0px #0005;
 }
 
 /* Language selector */
@@ -335,12 +375,15 @@
     <div class="landing-container">
         <h1>link(arlo)s</h1>
         <p class="subtitle"><b>Aviso: </b>Aunque en principio lo he hecho para que se pueda ver en móvil, es mejor verlo desde ordenador.<br> La página puede contener luces estroboscópicas.</p>
-        <button onclick="location.href='/es/linkarlos.html'" class="frutiger-button" >
-          <div class="inner">
-            <div class="top-white"></div>
-            <span class="text">Estoy preparade</span>
-          </div>
-        </button>
+        <div class="cta-buttons">
+          <button onclick="location.href='/es/linkarlos.html'" class="frutiger-button" >
+            <div class="inner">
+              <div class="top-white"></div>
+              <span class="text">Estoy preparade</span>
+            </div>
+          </button>
+          <button onclick="location.href='https://carmoran0.github.io/cv/'" class="secondary-button">CV</button>
+        </div>
 
     </div>
 
