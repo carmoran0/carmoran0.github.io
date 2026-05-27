@@ -715,7 +715,6 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 .bats-container,
 .badges-container,
 .uses-container,
-.now-container,
 .mastodon-container {
     content-visibility: auto;
     contain-intrinsic-size: 0 500px;
@@ -730,6 +729,18 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
     margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
+}
+
+.stacked-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    flex: 1;
+    min-width: 0;
+}
+
+.stacked-column .main-container {
+    width: 100%;
 }
 
 /* Fila especial para Letterboxd */
@@ -947,7 +958,7 @@ a.soundcloud:hover { background-color: var(--color-soundcloud); }
 @media screen and (min-width: 780px) {
     .uses-container,
     .shrine-container,
-    .now-container {
+    .mastodon-container {
             display: flex;
             flex-direction: column;
     }
@@ -1100,38 +1111,9 @@ a:hover {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para el contenedor de webrings */
-.webrings-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.webrings-container #euroring,
-.webrings-container #euroring * {
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-.webrings-container #euroring img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.webrings-container #euroring table {
-    width: 100% !important;
-    max-width: 100%;
-    table-layout: auto;
-}
-
-.webrings-container #euroring td {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
 /* Estilos específicos para el contenedor de Mastodon */
 .mastodon-container {
-    max-height: 1200px;
+    max-height: 1000px;
     display: flex;
     flex-direction: column;
 }
