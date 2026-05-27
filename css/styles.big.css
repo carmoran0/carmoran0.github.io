@@ -205,6 +205,32 @@ h2 {
 }
 
 /* Estilos para los 3 contenedores principales */
+.main-site-title {
+    text-align: center;
+    font-size: 3.4rem;
+    margin: 24px auto 8px auto;
+    position: relative;
+    z-index: 1;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -0.02em;
+}
+
+.main-site-title::before,
+.main-site-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    width: 22%;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    opacity: 0.45;
+    transform: translateY(-50%);
+}
+.main-site-title::before { left: 4%; }
+.main-site-title::after { right: 4%; }
+
 .page-wrapper {
     display: flex;
     flex-direction: row;
@@ -214,7 +240,7 @@ h2 {
     width: 100%;
     margin: 0 auto;
     align-items: stretch;
-    margin-top: 24px;
+    margin-top: 8px;
     box-sizing: border-box;
     overflow-x: hidden;
     min-height: 0;
@@ -241,7 +267,9 @@ h2 {
 /* Ajuste en pantallas pequeñas para no consumir mucho espacio */
 @media screen and (max-width: 780px) {
     .announcement { height: 44px; font-size: 13px; padding: 0 10px; }
-    .page-wrapper { margin-top: 44px; padding-top: 6px; }
+    .main-site-title { margin-top: 40px; font-size: 2.2rem; margin-bottom: 6px; }
+    .main-site-title::before, .main-site-title::after { width: 18%; }
+    .page-wrapper { margin-top: 8px; padding-top: 6px; }
 }
 
 /* Badges container (fila horizontal al final) */
