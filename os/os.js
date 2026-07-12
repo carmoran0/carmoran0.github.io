@@ -277,16 +277,46 @@
   // ---------------------------------------------------------------------------
   // Last.fm (now playing + scrobbles)
   // ---------------------------------------------------------------------------
+  function formatDuration(ms) {
+    var totalSec = Math.round(Number(ms) / 1000);
+    if (!totalSec) return '';
+    var m = Math.floor(totalSec / 60);
+    var s = totalSec % 60;
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function renderHistorial(tracks, key) {
+    var el = document.getElementById('musica-historial');
+    if (!el) return;
+    el.innerHTML = '';
+    tracks.forEach(function (track, i) {
+      var artist = (track.artist && (track.artist['#text'] || track.artist)) || '';
+      var name = track.name || '';
+      var div = document.createElement('div');
+      div.className = 'historial-linea';
+      div.textContent = String(i + 1).padStart(2, '0') + '. ' + artist + ' — ' + name;
+      el.appendChild(div);
+      var infoUrl = 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=' +
+        encodeURIComponent(artist) + '&track=' + encodeURIComponent(name) +
+        '&api_key=' + key + '&format=json';
+      fetch(infoUrl).then(function (r) { return r.json(); }).then(function (info) {
+        var dur = info && info.track && info.track.duration;
+        if (dur && Number(dur) > 0) div.textContent += ' — ' + formatDuration(dur);
+      }).catch(function () {});
+    });
+  }
+
   function initLastfm() {
     var key = (document.querySelector('meta[name="lastfm-api-key"]') || {}).content;
     if (!key) return;
     var user = 'sobaco27';
     var url = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' +
-      user + '&api_key=' + key + '&format=json&limit=1';
+      user + '&api_key=' + key + '&format=json&limit=4';
     fetch(url).then(function (r) { return r.json(); }).then(function (data) {
       var rt = data && data.recenttracks;
-      var track = rt && rt.track && (Array.isArray(rt.track) ? rt.track[0] : rt.track);
-      if (!track) return;
+      var list = rt && rt.track && (Array.isArray(rt.track) ? rt.track : [rt.track]);
+      if (!list || !list.length) return;
+      var track = list[0];
       var artist = (track.artist && (track.artist['#text'] || track.artist)) || '';
       var name = track.name || '';
       var nowPlaying = track['@attr'] && track['@attr'].nowplaying;
@@ -303,6 +333,8 @@
       var big = imgs.filter(function (i) { return i.size === 'large' || i.size === 'extralarge'; });
       var src = big.length ? big[big.length - 1]['#text'] : '';
       if (src) document.getElementById('musica-caratula').src = src;
+      // Últimas escuchadas
+      renderHistorial(list.slice(1, 4), key);
     }).catch(function () {
       document.getElementById('musica-marquee').textContent = '♪ LAST.FM NO DISPONIBLE ♪';
     });
