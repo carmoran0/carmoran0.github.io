@@ -520,7 +520,7 @@
     '¿Sabías que el panel_de_control.exe puede cambiar el tema? Prueba "Verde fósforo".',
     'Las ventanas recuerdan dónde las dejaste. Vuelve cuando quieras.',
     'El explorador de la izquierda es el mapa del sitio. Un ✓ significa que la ventana está abierta.',
-    'Si te aburres, mira mis pelis en la ventana pelis_vistas 🎬.'
+    'Si te aburres, mira mis pelis en la ventana pelis_vistas.'
   ];
   function initAssistant() {
     var asistente = document.getElementById('asistente');
