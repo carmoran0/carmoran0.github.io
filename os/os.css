@@ -156,8 +156,8 @@ button.bevel:active, button.bevel.pressed {
 /* Posiciones por defecto (persisten en localStorage) */
 #win-mapa    { top: 20px; left: 20px; bottom: 64px; width: 250px; display: flex; flex-direction: column; }
 #win-perfil  { top: 24px; left: 300px; width: 520px; }
-#win-musica  { top: 450px; left: 350px; width: 480px; }
-#win-mastodon{ top: 256px; left: 420px; width: 500px; }
+#win-musica  { top: 660px; left: 350px; width: 480px; }
+#win-mastodon{ top: 256px; left: 420px; width: 520px; height: 380px; }
 #win-pelis   { top: 430px; left: 300px; width: 620px; }
 #win-links   { top: 60px; left: 860px; width: 400px; }
 #win-panel   { top: 90px; left: 380px; width: 420px; }
@@ -241,7 +241,9 @@ button.bevel:active, button.bevel.pressed {
 .musica-controles button.bevel { flex: 1; padding: 4px 12px; }
 
 /* Mastodon */
-#win-mastodon .win-inset { display: flex; flex-direction: column; gap: 8px; }
+#win-mastodon { display: flex; flex-direction: column; }
+#win-mastodon .win-inset { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; }
+.mastodon-toots { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow-y: auto; }
 .bubble-mastodon {
   align-self: flex-start;
   max-width: 85%;
@@ -251,7 +253,7 @@ button.bevel:active, button.bevel.pressed {
   padding: 8px 10px;
 }
 .bubble-mastodon .toot-fecha { opacity: 0.5; font-size: var(--text-caption); }
-#win-mastodon .responder { align-self: center; color: var(--titlebar-purple-solid); }
+#win-mastodon .responder { align-self: center; color: var(--titlebar-purple-solid); flex-shrink: 0; }
 
 /* Pelis vistas */
 .pelis-fila {
@@ -541,6 +543,7 @@ button.bevel:active, button.bevel.pressed {
   .window {
     position: static !important;
     width: auto !important;
+    height: auto !important;
     margin: 0 8px;
     box-shadow: var(--shadow-window);
   }

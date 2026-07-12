@@ -398,33 +398,39 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Mastodon (último toot de @copaco)
+  // Mastodon (últimos 3 toots de @copaco)
   // ---------------------------------------------------------------------------
   function initMastodon() {
-    var tootEl = document.getElementById('mastodon-toot');
+    var contEl = document.getElementById('mastodon-toots');
     fetch('https://mastodon.social/api/v1/accounts/lookup?acct=copaco')
       .then(function (r) { return r.json(); })
       .then(function (acc) {
         if (!acc || !acc.id) throw new Error('sin cuenta');
         return fetch('https://mastodon.social/api/v1/accounts/' + acc.id +
-          '/statuses?limit=1&exclude_replies=true&exclude_reblogs=true');
+          '/statuses?limit=3&exclude_replies=true&exclude_reblogs=true');
       })
       .then(function (r) { return r.json(); })
       .then(function (statuses) {
-        var s = statuses && statuses[0];
-        if (!s) { tootEl.textContent = 'sin toots recientes.'; return; }
-        var tmp = document.createElement('div');
-        tmp.innerHTML = s.content;
-        var texto = (tmp.textContent || '').trim() || '(sin texto)';
-        var fecha = relativeTime(new Date(s.created_at));
-        tootEl.textContent = 'último toot: ' + texto + ' ';
-        var span = document.createElement('span');
-        span.className = 'toot-fecha';
-        span.textContent = '· ' + fecha;
-        tootEl.appendChild(span);
-        document.querySelector('#win-mastodon .responder').href = s.url || 'https://mastodon.social/@copaco';
+        if (!statuses || !statuses.length) { contEl.textContent = 'sin toots recientes.'; return; }
+        contEl.textContent = '';
+        statuses.slice(0, 3).forEach(function (s) {
+          var tmp = document.createElement('div');
+          tmp.innerHTML = s.content;
+          var texto = (tmp.textContent || '').trim() || '(sin texto)';
+          var fecha = relativeTime(new Date(s.created_at));
+          var bubble = document.createElement('div');
+          bubble.className = 'bubble-mastodon';
+          bubble.textContent = texto + ' ';
+          var span = document.createElement('span');
+          span.className = 'toot-fecha';
+          span.textContent = '· ' + fecha;
+          bubble.appendChild(span);
+          contEl.appendChild(bubble);
+        });
+        var ultimo = statuses[0];
+        document.querySelector('#win-mastodon .responder').href = (ultimo && ultimo.url) || 'https://mastodon.social/@copaco';
       })
-      .catch(function () { tootEl.textContent = 'no se pudo cargar el último toot.'; });
+      .catch(function () { contEl.textContent = 'no se pudieron cargar los toots.'; });
   }
 
   function relativeTime(date) {
