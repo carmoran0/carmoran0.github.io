@@ -228,6 +228,8 @@ button.bevel:active, button.bevel.pressed {
   padding: 8px;
   font-family: var(--font-mono);
   font-size: var(--text-small);
+  max-height: 150px;
+  overflow-y: auto;
 }
 .musica-historial .historial-linea {
   white-space: nowrap;
