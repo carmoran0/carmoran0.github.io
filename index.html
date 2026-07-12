@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GNU GRUB — carmoran.dev</title>
+<link rel="icon" href="/carlos-design-system/assets/favicon.gif">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/carlos-design-system/styles.css">
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--grub-bg);
+    color: var(--grub-fg);
+    font-family: var(--font-grub);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  /* Overlay CRT: scanlines + viñeta */
+  .crt-scanlines {
+    position: fixed; inset: 0; pointer-events: none; z-index: 10;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,0.22) 3px);
+    mix-blend-mode: multiply;
+  }
+  .crt-vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 10;
+    box-shadow: inset 0 0 160px rgba(0,0,0,0.9);
+  }
+
+  .grub-title {
+    font-size: 14px;
+    color: var(--grub-title);
+    text-align: center;
+    margin: 0 0 18px;
+    font-weight: 400;
+  }
+  .grub-box {
+    border: 1px solid var(--grub-border);
+    width: 100%;
+    max-width: 860px;
+  }
+  .grub-box-header {
+    font-size: 12px;
+    color: var(--grub-dimmer);
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--grub-border-inner);
+  }
+  .grub-menu { padding: 6px 0; }
+  .grub-entry {
+    padding: 7px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .grub-entry .marker { width: 1.2em; flex: none; visibility: hidden; }
+  .grub-entry .label { font-size: 19px; font-weight: 500; }
+  .grub-entry .sub { font-size: 12.5px; opacity: 0.62; }
+  .grub-entry .hint { margin-left: auto; font-size: 12.5px; visibility: hidden; }
+  .grub-entry.selected {
+    background: var(--grub-fg);
+    color: var(--grub-fg-selected);
+  }
+  .grub-entry.selected .marker,
+  .grub-entry.selected .hint { visibility: visible; }
+  .grub-instructions {
+    font-size: 12px;
+    color: var(--grub-dim);
+    margin-top: 16px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  .grub-status {
+    font-size: 13px;
+    color: var(--grub-status);
+    margin-top: 10px;
+    text-align: center;
+    min-height: 1.4em;
+  }
+
+  /* Pantalla de boot */
+  .boot-screen {
+    position: fixed; inset: 0; z-index: 5;
+    background: var(--grub-bg);
+    display: none;
+    padding: 28px 32px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+  }
+  .boot-screen.active { display: block; }
+  .boot-ok { color: var(--accent-green, #7CFF52); }
+  .boot-cursor {
+    display: inline-block;
+    width: 9px; height: 17px;
+    background: var(--grub-fg);
+    vertical-align: text-bottom;
+    animation: grubCursor 1s step-end infinite;
+  }
+
+  @media (max-width: 600px) {
+    .grub-entry .label { font-size: 16px; }
+    .grub-entry .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+  <h1 class="grub-title">GNU GRUB  versión 2.12</h1>
+
+  <div class="grub-box" id="grubBox">
+    <div class="grub-box-header">selecciona una versión y pulsa Intro para arrancar</div>
+    <div class="grub-menu" id="grubMenu"></div>
+  </div>
+
+  <div class="grub-instructions">
+    Usa las teclas ↑ y ↓ para resaltar una entrada.<br>
+    Pulsa Intro para arrancar la versión seleccionada.
+  </div>
+  <div class="grub-status" id="grubStatus"></div>
+
+  <div class="boot-screen" id="bootScreen"></div>
+
+  <div class="crt-scanlines"></div>
+  <div class="crt-vignette"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const ENTRIES = [
+    { label: 'CarlOS', sub: 'Opción por defecto', url: '/os/' },
+    { label: 'curriculum vitae', sub: 'versión formal', url: 'https://cv.carmoran.dev/' },
+    { label: 'legacy1', sub: 'Hola', url: '/legacy1/es/linkarlos.html' },
+    { label: 'legacy0', sub: 'Primera versión. 2024', url: '/legacy/index.html' }
+  ];
+  const COUNTDOWN_START = 8;
+
+  const menuEl = document.getElementById('grubMenu');
+  const statusEl = document.getElementById('grubStatus');
+  const bootEl = document.getElementById('bootScreen');
+
+  let selected = 0;
+  let countdown = COUNTDOWN_START;
+  let countdownTimer = null;
+  let booting = false;
+
+  const rows = ENTRIES.map((entry, i) => {
+    const row = document.createElement('div');
+    row.className = 'grub-entry';
+    row.innerHTML =
+      '<span class="marker">▶</span>' +
+      '<span class="label"></span>' +
+      '<span class="sub"></span>' +
+      '<span class="hint">Intro ↵</span>';
+    row.querySelector('.label').textContent = entry.label;
+    row.querySelector('.sub').textContent = entry.sub;
+    row.addEventListener('mouseenter', () => select(i));
+    row.addEventListener('click', () => boot(i));
+    menuEl.appendChild(row);
+    return row;
+  });
+
+  function select(i) {
+    selected = (i + ENTRIES.length) % ENTRIES.length;
+    rows.forEach((row, j) => row.classList.toggle('selected', j === selected));
+  }
+
+  function updateStatus() {
+    statusEl.textContent =
+      'La entrada resaltada arrancará automáticamente en ' + countdown + 's.';
+  }
+
+  function cancelCountdown() {
+    if (!countdownTimer) return;
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+    statusEl.textContent = 'Arranque automático cancelado.';
+  }
+
+  function startCountdown() {
+    updateStatus();
+    countdownTimer = setInterval(() => {
+      countdown -= 1;
+      if (countdown <= 0) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+        boot(selected);
+        return;
+      }
+      updateStatus();
+    }, 1000);
+  }
+
+  function bootLines(label) {
+    return [
+      'Cargando CarlOS 2.12 ...',
+      'Cargando disco RAM inicial ...',
+      '[    0.000000] Arrancando: ' + label,
+      '[    0.041228] systemd-carlos: iniciando servicios del sistema ...',
+      '[  OK  ] Montado /home/carlos/links',
+      '[  OK  ] Iniciado scrobbler de last.fm',
+      '[  OK  ] Iniciado compositor Frutiger Aero',
+      '[  OK  ] Alcanzado objetivo Interfaz Gráfica',
+      'Iniciando servidor X ...'
+    ];
+  }
+
+  function boot(i) {
+    if (booting) return;
+    booting = true;
+    cancelCountdown();
+    statusEl.textContent = '';
+
+    const entry = ENTRIES[i];
+    const lines = bootLines(entry.label);
+    bootEl.classList.add('active');
+
+    const cursor = document.createElement('span');
+    cursor.className = 'boot-cursor';
+    bootEl.appendChild(cursor);
+
+    lines.forEach((line, n) => {
+      setTimeout(() => {
+        const div = document.createElement('div');
+        if (line.startsWith('[  OK  ]')) {
+          div.innerHTML = '<span class="boot-ok">[  OK  ]</span>' ;
+          div.appendChild(document.createTextNode(line.slice(8)));
+        } else {
+          div.textContent = line;
+        }
+        bootEl.insertBefore(div, cursor);
+      }, 150 * (n + 1));
+    });
+
+    setTimeout(() => {
+      window.location.href = entry.url;
+    }, 150 * lines.length + 450);
+  }
+
+  document.addEventListener('keydown', (ev) => {
+    if (booting) return;
+    switch (ev.key) {
+      case 'ArrowUp':
+      case 'k':
+        ev.preventDefault();
+        cancelCountdown();
+        select(selected - 1);
+        break;
+      case 'ArrowDown':
+      case 'j':
+        ev.preventDefault();
+        cancelCountdown();
+        select(selected + 1);
+        break;
+      case 'Enter':
+        ev.preventDefault();
+        boot(selected);
+        break;
+      default:
+        cancelCountdown();
+    }
+  });
+
+  select(0);
+  startCountdown();
+})();
+</script>
+</body>
+</html>

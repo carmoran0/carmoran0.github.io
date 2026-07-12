@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarlOS — excepción 404</title>
+<link rel="icon" href="/carlos-design-system/assets/favicon.gif">
+<link rel="stylesheet" href="/carlos-design-system/styles.css">
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bsod-blue);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .bsod {
+    max-width: 620px;
+    line-height: 1.9;
+    text-align: center;
+  }
+  .bsod-badge {
+    display: inline-block;
+    background: #c0c0c0;
+    color: var(--bsod-blue);
+    font-weight: 700;
+    padding: 2px 12px;
+    margin-bottom: 22px;
+  }
+  .bsod p { margin: 0 0 14px; }
+  .bsod-cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: #ffffff;
+    vertical-align: text-bottom;
+    margin-left: 4px;
+    animation: pulseGlow 1.2s steps(2) infinite;
+  }
+</style>
+</head>
+<body>
+  <div class="bsod">
+    <span class="bsod-badge">CarlOS</span>
+    <p>Se ha producido una excepción 404 en la página <span id="bsodPath">C:\CarlOS\desconocida.html</span></p>
+    <p>*&nbsp; El contenido que buscas fue movido a la papelera<br>
+       *&nbsp; o nunca existió. Nadie lo sabe.</p>
+    <p>Pulsa aquí para volver…<span class="bsod-cursor"></span></p>
+  </div>
+<script>
+  (function () {
+    var ruta = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html?$/i, '') || 'desconocida';
+    document.getElementById('bsodPath').textContent =
+      'C:\\CarlOS\\' + ruta.replace(/\//g, '\\') + '.html';
+    document.body.addEventListener('click', function () { location.href = '/'; });
+    document.addEventListener('keydown', function () { location.href = '/'; });
+  })();
+</script>
+</body>
+</html>
