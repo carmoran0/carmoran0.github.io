@@ -48,18 +48,29 @@
 
   <!-- música -->
   <div class="window" id="win-musica" data-nombre="música" hidden>
-    <div class="titlebar"><span>🎵 música — reproductor.exe</span><button class="tb-btn" data-close aria-label="cerrar">×</button></div>
-    <div class="musica-row">
-      <img class="caratula sunken" id="musica-caratula" src="/carlos-design-system/assets/gato.escuchando.gif" alt="carátula">
-      <div class="marquee-box sunken">
-        <span class="marquee-text" id="musica-marquee">♪ CARGANDO LAST.FM… ♪</span>
-        <span class="marquee-sub" id="musica-scrobbles"></span>
-      </div>
+    <div class="titlebar">
+      <span>🎵 música — reproductor.exe</span>
+      <span class="tb-btns">
+        <button class="tb-btn" aria-label="minimizar">_</button>
+        <button class="tb-btn" data-close aria-label="cerrar">×</button>
+      </span>
     </div>
-    <div class="musica-controles">
-      <button class="bevel" aria-label="anterior">⏮</button>
-      <button class="bevel" aria-label="reproducir">▶</button>
-      <button class="bevel" aria-label="siguiente">⏭</button>
+    <div class="musica-body">
+      <div class="musica-row">
+        <img class="caratula sunken" id="musica-caratula" src="/carlos-design-system/assets/gato.escuchando.gif" alt="carátula">
+        <div class="marquee-box sunken">
+          <span class="marquee-text" id="musica-marquee">♪ CARGANDO LAST.FM… ♪</span>
+          <span class="marquee-sub" id="musica-scrobbles"></span>
+        </div>
+      </div>
+      <div class="musica-historial sunken" id="musica-historial">
+        <div class="historial-linea">cargando últimas escuchas…</div>
+      </div>
+      <div class="musica-controles">
+        <button class="bevel" aria-label="anterior">⏮</button>
+        <button class="bevel" id="musica-play" aria-label="reproducir preview">▶</button>
+        <button class="bevel" aria-label="siguiente">⏭</button>
+      </div>
     </div>
   </div>
 

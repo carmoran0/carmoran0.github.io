@@ -277,22 +277,107 @@
   // ---------------------------------------------------------------------------
   // Last.fm (now playing + scrobbles)
   // ---------------------------------------------------------------------------
+  function formatDuration(ms) {
+    var totalSec = Math.round(Number(ms) / 1000);
+    if (!totalSec) return '';
+    var m = Math.floor(totalSec / 60);
+    var s = totalSec % 60;
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function renderHistorial(tracks, key) {
+    var el = document.getElementById('musica-historial');
+    if (!el) return;
+    el.innerHTML = '';
+    tracks.forEach(function (track, i) {
+      var artist = (track.artist && (track.artist['#text'] || track.artist)) || '';
+      var name = track.name || '';
+      var div = document.createElement('div');
+      div.className = 'historial-linea';
+      div.textContent = String(i + 1).padStart(2, '0') + '. ' + artist + ' — ' + name;
+      el.appendChild(div);
+      var infoUrl = 'https://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=' +
+        encodeURIComponent(artist) + '&track=' + encodeURIComponent(name) +
+        '&api_key=' + key + '&format=json';
+      fetch(infoUrl).then(function (r) { return r.json(); }).then(function (info) {
+        var dur = info && info.track && info.track.duration;
+        if (dur && Number(dur) > 0) div.textContent += ' — ' + formatDuration(dur);
+      }).catch(function () {});
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Preview de la canción actual (iTunes 30s, como en legacy1/js/lastfm.js)
+  // ---------------------------------------------------------------------------
+  var musicaCurrentTrack = null;
+  var previewAudio = new Audio();
+  previewAudio.preload = 'none';
+  var previewState = { id: null, button: null };
+
+  function resetPreviewButton() {
+    if (previewState.button) {
+      previewState.button.textContent = '▶';
+      previewState.button.setAttribute('aria-label', 'reproducir preview');
+    }
+    previewState.id = null;
+    previewState.button = null;
+  }
+  previewAudio.addEventListener('ended', resetPreviewButton);
+  previewAudio.addEventListener('error', resetPreviewButton);
+
+  function fetchItunesPreview(artist, name) {
+    var q = 'term=' + encodeURIComponent(artist + ' ' + name) + '&entity=song&limit=1';
+    return fetch('https://itunes.apple.com/search?' + q)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var first = data && Array.isArray(data.results) && data.results[0];
+        return first && first.previewUrl;
+      });
+  }
+
+  function togglePreview(button) {
+    if (!musicaCurrentTrack) return;
+    var id = musicaCurrentTrack.artist.toLowerCase() + '|' + musicaCurrentTrack.name.toLowerCase();
+    if (previewState.id === id) {
+      previewAudio.pause();
+      previewAudio.currentTime = 0;
+      resetPreviewButton();
+      return;
+    }
+    previewAudio.pause();
+    resetPreviewButton();
+    button.disabled = true;
+    fetchItunesPreview(musicaCurrentTrack.artist, musicaCurrentTrack.name).then(function (url) {
+      button.disabled = false;
+      if (!url) return;
+      previewAudio.src = url;
+      return previewAudio.play().then(function () {
+        previewState.id = id;
+        previewState.button = button;
+        button.textContent = '⏸';
+        button.setAttribute('aria-label', 'detener preview');
+      });
+    }).catch(function () { button.disabled = false; });
+  }
+
   function initLastfm() {
     var key = (document.querySelector('meta[name="lastfm-api-key"]') || {}).content;
     if (!key) return;
     var user = 'sobaco27';
     var url = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=' +
-      user + '&api_key=' + key + '&format=json&limit=1';
+      user + '&api_key=' + key + '&format=json&limit=10';
     fetch(url).then(function (r) { return r.json(); }).then(function (data) {
       var rt = data && data.recenttracks;
-      var track = rt && rt.track && (Array.isArray(rt.track) ? rt.track[0] : rt.track);
-      if (!track) return;
+      var list = rt && rt.track && (Array.isArray(rt.track) ? rt.track : [rt.track]);
+      if (!list || !list.length) return;
+      var track = list[0];
       var artist = (track.artist && (track.artist['#text'] || track.artist)) || '';
       var name = track.name || '';
       var nowPlaying = track['@attr'] && track['@attr'].nowplaying;
       var prefix = nowPlaying ? '♪ ' : '♪ (últ.) ';
       document.getElementById('musica-marquee').textContent =
         (prefix + artist + ' — ' + name + ' ♪').toUpperCase();
+      musicaCurrentTrack = { artist: artist, name: name };
       var total = rt['@attr'] && rt['@attr'].total;
       if (total) {
         document.getElementById('musica-scrobbles').textContent =
@@ -303,9 +388,13 @@
       var big = imgs.filter(function (i) { return i.size === 'large' || i.size === 'extralarge'; });
       var src = big.length ? big[big.length - 1]['#text'] : '';
       if (src) document.getElementById('musica-caratula').src = src;
+      // Últimas escuchadas
+      renderHistorial(list.slice(1, 10), key);
     }).catch(function () {
       document.getElementById('musica-marquee').textContent = '♪ LAST.FM NO DISPONIBLE ♪';
     });
+    var playBtn = document.getElementById('musica-play');
+    if (playBtn) playBtn.addEventListener('click', function () { togglePreview(playBtn); });
   }
 
   // ---------------------------------------------------------------------------
