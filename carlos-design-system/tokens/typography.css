@@ -1,0 +1,17 @@
+:root {
+  /* Solo dos familias: pixel para UI, monospace para terminal/log */
+  --font-ui: 'jgs9', 'Segoe UI', sans-serif;
+  --font-mono: monospace;
+
+  /* Escala pequeña y densa (px exactos, sin redondear) */
+  --text-tiny: 9px;      /* etiquetas de icono, scrobbles */
+  --text-caption: 10px;  /* subtexto, timestamps */
+  --text-small: 11px;    /* hints, contadores */
+  --text-body: 12px;     /* cuerpo por defecto, títulos de ventana móvil */
+  --text-titlebar: 13px; /* títulos de ventana escritorio */
+  --text-button: 14px;   /* botón Inicio, badges */
+  --text-heading: 15px;  /* encabezado dentro de contenido */
+  --text-display: 24px;  /* nombre "CarlOS" en perfil */
+
+  --font-weight-bold: 700; /* único peso alternativo usado */
+}

@@ -12,9 +12,9 @@ const path = require('path');
 
 const RAW_URL = 'https://raw.githubusercontent.com/carmoran0/carmoran0/refs/heads/main/README.md';
 const TARGET_FILES = [
-  'linkarlos.html',
-  path.join('en', 'linkarlos.html'),
-  path.join('es', 'linkarlos.html'),
+  path.join('legacy1', 'linkarlos.html'),
+  path.join('legacy1', 'en', 'linkarlos.html'),
+  path.join('legacy1', 'es', 'linkarlos.html'),
 ];
 const BEGIN_MARK = '<!-- README:BEGIN'; // coincide con comentarios con metadatos
 const END_MARK = '<!-- README:END -->';

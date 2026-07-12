@@ -31,4 +31,4 @@ jobs:
         with:
           commit_message: 'chore: actualizar README estático (autogenerado)'
           branch: main
-          file_pattern: '*.html */*.html'
+          file_pattern: 'legacy1/**/*.html'

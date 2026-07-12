@@ -1,0 +1,90 @@
+<!-- @dsCard group="CarlOS" viewport="1190x700" subtitle="Escritorio 7b — referencia canónica" name="Demo escritorio" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CarlOS — demo escritorio</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin:0; padding:20px; background:var(--page-bg); font-family:var(--font-ui); color:#fff; }
+  a { color:var(--link-on-dark); } a:hover { color:var(--link-on-dark-hover); }
+  .raised { border:var(--bevel-width) solid; border-color:var(--bevel-raised-colors); }
+  .sunken { border:var(--bevel-width) solid; border-color:var(--bevel-sunken-colors); }
+  .window { background:var(--chrome); box-shadow:var(--shadow-window); color:var(--text-on-chrome); }
+  .titlebar { color:var(--text-on-titlebar); padding:3px 6px; display:flex; justify-content:space-between; align-items:center; font-size:var(--text-titlebar); }
+  .tb-btn { width:16px; height:14px; background:var(--chrome); border:1px solid; border-color:var(--bevel-raised-colors); font-size:9px; text-align:center; color:var(--text-on-chrome); line-height:12px; }
+</style>
+</head>
+<body>
+<div style="width:1150px;height:640px;position:relative;border-radius:var(--radius-monitor);overflow:hidden;background:var(--desktop-bg);border:2px solid #323232;">
+  <!-- explorador-mapa -->
+  <div class="window raised" style="position:absolute;top:20px;left:20px;bottom:64px;width:250px;display:flex;flex-direction:column;">
+    <div class="titlebar" style="background:var(--titlebar-active);font-size:var(--text-body);"><span>📁 C:\CarlOS\ — mapa</span><span class="tb-btn">_</span></div>
+    <div class="sunken" style="background:var(--content-bg);margin:6px;padding:10px;font-size:var(--text-body);display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);flex:1;">
+      <span style="font-weight:700;">🖥 C:\CarlOS\</span>
+      <a href="#" style="background:var(--link-selected-bg);padding:1px 4px;text-decoration:none;color:#fff;margin-left:14px;">📂 perfil ✓</a>
+      <a href="#" style="background:var(--link-selected-bg);padding:1px 4px;text-decoration:none;color:#fff;margin-left:14px;">📂 música ✓</a>
+      <a href="#" style="background:var(--link-selected-bg);padding:1px 4px;text-decoration:none;color:#fff;margin-left:14px;">📂 mastodon ✓</a>
+      <a href="#" style="color:var(--link-on-light);margin-left:14px;text-decoration:none;">📂 blog</a>
+      <a href="#" style="color:var(--link-on-light);margin-left:14px;text-decoration:none;">📂 pelis_vistas</a>
+      <a href="#" style="color:var(--link-on-light);margin-left:14px;text-decoration:none;">📂 links</a>
+      <span style="margin-top:auto;opacity:0.55;font-size:var(--text-small);">clic: abre/enfoca la ventana en el escritorio →</span>
+    </div>
+  </div>
+  <!-- perfil (inactiva) -->
+  <div class="window raised" style="position:absolute;top:24px;left:300px;width:520px;">
+    <div class="titlebar" style="background:var(--titlebar-inactive);"><span>👤 perfil — carlos.exe</span><span class="tb-btn">×</span></div>
+    <div style="padding:12px 14px;display:flex;align-items:center;gap:14px;">
+      <strong style="font-size:var(--text-display);">CarlOS</strong>
+      <span style="font-size:var(--text-body);opacity:0.75;">2005 · he/they/she · Zaragoza · DE @ UNIZAR</span>
+      <span class="sunken" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:var(--text-body);background:var(--chrome-pressed);padding:3px 10px;"><img src="../assets/streakico.svg" alt="racha" style="height:14px;"><strong style="color:var(--streak-orange);">404</strong></span>
+    </div>
+  </div>
+  <!-- música -->
+  <div class="window raised" style="position:absolute;top:140px;left:360px;width:480px;">
+    <div class="titlebar" style="background:var(--titlebar-active);"><span>🎵 música — reproductor.exe</span><span class="tb-btn">×</span></div>
+    <div style="padding:10px;display:flex;gap:10px;align-items:center;">
+      <img src="../assets/gato.escuchando.gif" alt="carátula" class="sunken" style="width:52px;height:52px;object-fit:cover;">
+      <div class="sunken" style="background:#000;padding:5px 8px;flex:1;overflow:hidden;position:relative;height:38px;">
+        <span style="position:absolute;white-space:nowrap;color:var(--terminal-green);font-family:var(--font-mono);font-size:11px;animation:marquee 8s linear infinite;">♪ ARTISTA — CANCIÓN SONANDO AHORA ♪</span>
+        <span style="position:absolute;bottom:3px;left:8px;color:var(--terminal-green-dim);font-family:var(--font-mono);font-size:9px;">84.201 scrobbles</span>
+      </div>
+    </div>
+  </div>
+  <!-- mastodon (foco) -->
+  <div class="window raised" style="position:absolute;top:266px;left:430px;width:500px;box-shadow:var(--shadow-window-focus);">
+    <div class="titlebar" style="background:var(--titlebar-purple);"><span>🐘 mastodon — @copaco</span><span class="tb-btn">×</span></div>
+    <div class="sunken" style="background:var(--content-bg);margin:6px;padding:10px;display:flex;flex-direction:column;gap:8px;font-size:var(--text-body);">
+      <div style="align-self:flex-start;max-width:85%;background:var(--bubble-purple-bg);border:1px solid var(--bubble-purple-border);border-radius:0 10px 10px 10px;padding:8px 10px;">último toot: contenido del toot aquí… <span style="opacity:0.5;font-size:var(--text-caption);">· hace 2 h</span></div>
+      <a href="https://mastodon.social/@copaco" style="align-self:center;color:var(--titlebar-purple-solid);">responder en mastodon.social ↗</a>
+    </div>
+  </div>
+  <!-- accesos directos -->
+  <div style="position:absolute;top:30px;right:24px;display:flex;flex-direction:column;gap:16px;">
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#fff;width:70px;"><span class="raised" style="width:38px;height:38px;background:#ff8000;display:flex;align-items:center;justify-content:center;"><img src="../assets/logos/letterboxd-svgrepo-com.svg" style="width:20px;filter:brightness(0) invert(1);" alt=""></span><span style="font-size:var(--text-caption);background:rgba(10,36,106,0.8);padding:1px 4px;">letterboxd</span></a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#fff;width:70px;"><span class="raised" style="width:38px;height:38px;background:#6e5494;display:flex;align-items:center;justify-content:center;"><img src="../assets/logos/github.svg" style="width:20px;filter:brightness(0) invert(1);" alt=""></span><span style="font-size:var(--text-caption);background:rgba(10,36,106,0.8);padding:1px 4px;">github</span></a>
+    <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:#fff;width:70px;"><span class="raised" style="width:38px;height:38px;background:#D51007;display:flex;align-items:center;justify-content:center;"><img src="../assets/logos/lastfm-svgrepo-com.svg" style="width:20px;filter:brightness(0) invert(1);" alt=""></span><span style="font-size:var(--text-caption);background:rgba(10,36,106,0.8);padding:1px 4px;">last.fm</span></a>
+  </div>
+  <!-- asistente -->
+  <div style="position:absolute;bottom:64px;right:40px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+    <div style="background:var(--tooltip-bg);border:1px solid var(--tooltip-border);border-radius:var(--radius-bubble);padding:10px 14px;font-size:var(--text-body);color:#000;max-width:260px;box-shadow:var(--shadow-small);">
+      Parece que estás visitando mi web. ¿Necesitas ayuda? Prueba a arrastrar las ventanas o escribe <strong>help</strong> en la consola.
+    </div>
+    <img src="../assets/gato.escuchando.gif" alt="asistente" class="raised" style="width:80px;height:80px;object-fit:cover;box-shadow:var(--shadow-window);">
+  </div>
+  <!-- taskbar -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--chrome);border-top:2px solid var(--bevel-light);display:flex;align-items:center;gap:8px;padding:0 8px;color:#000;z-index:2;">
+    <button class="raised" style="display:flex;align-items:center;gap:6px;background:var(--chrome);padding:4px 12px;font-weight:700;font-family:inherit;font-size:var(--text-button);cursor:pointer;"><span style="width:16px;height:16px;background:conic-gradient(var(--accent-cyan) 0 25%, var(--accent-green) 0 50%, var(--accent-orange) 0 75%, var(--accent-red) 0);display:inline-block;border:1px solid var(--bevel-dark);"></span>Inicio</button>
+    <span class="raised" style="background:var(--chrome);padding:3px 10px;font-size:var(--text-body);">mapa</span>
+    <span class="raised" style="background:var(--chrome);padding:3px 10px;font-size:var(--text-body);">perfil</span>
+    <span class="raised" style="background:var(--chrome);padding:3px 10px;font-size:var(--text-body);">música</span>
+    <span class="sunken" style="background:var(--chrome-pressed);padding:3px 10px;font-size:var(--text-body);">mastodon</span>
+    <div class="sunken" style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--chrome-pressed);padding:3px 10px;font-size:var(--text-body);">
+      <span style="display:inline-flex;align-items:center;gap:4px;"><img src="../assets/streakico.svg" alt="racha" style="height:14px;"><strong style="color:var(--streak-orange);">404</strong></span>
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--online-dot);box-shadow:0 0 4px var(--online-dot);"></span>
+      <span>19:05</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

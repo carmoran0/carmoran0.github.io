@@ -1,0 +1,6 @@
+/* Fuente pixel propia del proyecto (jgs9) — ÚNICA fuente de UI */
+@font-face {
+  font-family: 'jgs9';
+  src: url('../assets/jgs9.ttf') format('opentype');
+  font-display: swap;
+}

@@ -1,0 +1,56 @@
+:root {
+  /* ---- Superficies base ---- */
+  --page-bg: #17181c;                 /* fondo de página fuera del "monitor" */
+  --desktop-bg: radial-gradient(circle at 50% 35%, #2c6e6a, #17383c 70%, #0d2225); /* escritorio */
+  --desktop-teal-1: #2c6e6a;
+  --desktop-teal-2: #17383c;
+  --desktop-teal-3: #0d2225;
+
+  /* Fondos alternativos (panel de control / temas) */
+  --desktop-alt-plum: radial-gradient(circle at 50% 35%, #6a2c5e, #3c1738 80%);
+  --desktop-alt-navy: radial-gradient(circle at 50% 35%, #2c3e6a, #17203c 80%);
+
+  /* ---- Chrome (gris de ventana) ---- */
+  --chrome: #d4d0c8;                  /* superficie de ventana/botón */
+  --chrome-pressed: #bdb9b0;          /* botón/tab activo-hundido */
+  --bevel-light: #ffffff;
+  --bevel-dark: #404040;
+  --bevel-mid: #808080;
+  --content-bg: #ffffff;              /* área de contenido blanca hundida */
+  --text-on-chrome: #000000;
+
+  /* ---- Barras de título ---- */
+  --titlebar-active: linear-gradient(90deg, #0a246a, #a6caf0);
+  --titlebar-inactive: linear-gradient(90deg, #7a7a7a, #b8b8b8);
+  --titlebar-purple: linear-gradient(90deg, #5a2a8a, #c0a6f0); /* ventanas mastodon/social */
+  --titlebar-blue-solid: #0a246a;
+  --titlebar-purple-solid: #5a2a8a;
+  --text-on-titlebar: #ffffff;
+
+  /* ---- Acentos (logo Inicio, badges de opciones) ---- */
+  --accent-cyan: #3be9fd;
+  --accent-green: #7CFF52;
+  --accent-orange: #FF9600;
+  --accent-red: #ff5252;
+
+  /* ---- Estados / semánticos ---- */
+  --terminal-green: #00ff00;          /* texto LED/marquee sobre negro */
+  --terminal-green-dim: #00aa00;
+  --online-dot: #00c000;
+  --streak-orange: #c86400;           /* número de racha */
+  --bsod-blue: #0000aa;               /* pantallazo 404 */
+
+  /* ---- Tooltip asistente (clippy-gato) ---- */
+  --tooltip-bg: #ffffc8;
+  --tooltip-border: #808040;
+
+  /* ---- Burbuja mastodon ---- */
+  --bubble-purple-bg: #e8e0f8;
+  --bubble-purple-border: #b8a6e0;
+
+  /* ---- Enlaces ---- */
+  --link-on-dark: beige;
+  --link-on-dark-hover: #ffffff;
+  --link-on-light: #0a246a;
+  --link-selected-bg: #0a246a;        /* item seleccionado: fondo azul, texto blanco */
+}
