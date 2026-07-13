@@ -552,6 +552,9 @@ button.bevel:active, button.bevel.pressed {
   #win-links    { order: 2; display: block !important; }
   #win-pelis    { order: 3; display: block !important; }
   #win-mastodon { order: 4; display: block !important; }
+  /* En móvil solo caben 2 toots; el resto se ocultan */
+  .mastodon-toots .bubble-mastodon:nth-child(n+3) { display: none; }
+  .bubble-mastodon .toot-media img { max-height: 90px; }
   #win-mapa, #win-perfil, #win-panel { display: none !important; }
   #win-musica[hidden], #win-links[hidden], #win-pelis[hidden], #win-mastodon[hidden] { display: block !important; }
 
