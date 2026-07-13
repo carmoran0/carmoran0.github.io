@@ -319,7 +319,7 @@
     if (s.reblog) {
       var repost = document.createElement('div');
       repost.className = 'toot-repost';
-      repost.textContent = '🔁 repost de @' + (original.account && original.account.acct || '¿?');
+      repost.textContent = '↻ repost de @' + (original.account && original.account.acct || '¿?');
       bubble.appendChild(repost);
     }
 
