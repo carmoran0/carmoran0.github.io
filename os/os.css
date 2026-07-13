@@ -157,7 +157,7 @@ button.bevel:active, button.bevel.pressed {
 #win-mapa    { top: 20px; left: 20px; bottom: 64px; width: 250px; display: flex; flex-direction: column; }
 #win-perfil  { top: 24px; left: 300px; width: 520px; }
 #win-musica  { top: 660px; left: 350px; width: 480px; }
-#win-mastodon{ top: 256px; left: 420px; width: 520px; height: 380px; }
+#win-mastodon{ top: 132px; left: 420px; width: 520px; height: 520px; }
 #win-pelis   { top: 430px; left: 300px; width: 620px; }
 #win-links   { top: 60px; left: 860px; width: 400px; }
 #win-panel   { top: 90px; left: 380px; width: 420px; }
@@ -251,8 +251,22 @@ button.bevel:active, button.bevel.pressed {
   border: 1px solid var(--bubble-purple-border);
   border-radius: 0 10px 10px 10px;
   padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-.bubble-mastodon .toot-fecha { opacity: 0.5; font-size: var(--text-caption); }
+.bubble-mastodon .toot-repost { opacity: 0.65; font-size: var(--text-caption); font-style: italic; }
+.bubble-mastodon .toot-cw { font-size: var(--text-caption); font-weight: 700; }
+.bubble-mastodon .toot-media { display: flex; flex-wrap: wrap; gap: 4px; }
+.bubble-mastodon .toot-media img {
+  max-width: 45%;
+  max-height: 120px;
+  border: 1px solid var(--bubble-purple-border);
+  border-radius: 4px;
+  object-fit: cover;
+}
+.bubble-mastodon .toot-media img:only-child { max-width: 100%; }
+.bubble-mastodon .toot-fecha { opacity: 0.5; font-size: var(--text-caption); align-self: flex-end; color: inherit; }
 #win-mastodon .responder { align-self: center; color: var(--titlebar-purple-solid); flex-shrink: 0; }
 
 /* Pelis vistas */
