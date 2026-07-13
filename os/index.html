@@ -36,13 +36,28 @@
     </div>
   </div>
 
-  <!-- perfil -->
+  <!-- perfil: Propiedades del sistema -->
   <div class="window" id="win-perfil" data-nombre="perfil" hidden>
-    <div class="titlebar"><span>perfil — carlos.exe</span><button class="tb-btn" data-close aria-label="cerrar">×</button></div>
-    <div class="perfil-row">
-      <strong class="perfil-nombre">CarlOS</strong>
-      <span class="perfil-sub">2005 · he/they/she · Zaragoza · DE @ UNIZAR</span>
-      <span class="streak-badge sunken"><img src="/carlos-design-system/assets/streakico.svg" alt="racha"><strong>404</strong></span>
+    <div class="titlebar"><span>⚙ Propiedades del sistema: CarlOS</span><button class="tb-btn" data-close aria-label="cerrar">×</button></div>
+    <div class="sysprops-tabs">
+      <button class="sysprops-tab active" data-tab="general">General</button>
+      <button class="sysprops-tab" data-tab="rendimiento">Rendimiento</button>
+    </div>
+    <div class="sysprops-panel" data-panel="general">
+      <div><strong>Sistema:</strong> CarlOS 98 SE · build 2005</div>
+      <div><strong>Usuario registrado:</strong> Carlos · Zaragoza</div>
+      <div><strong>Procesador:</strong> cafeína @ 3.5 GHz</div>
+      <div><strong>Memoria:</strong> <span class="num-racha">404</span> días de racha instalados</div>
+      <div><strong>Sonido:</strong> 84.201 scrobbles acumulados</div>
+      <div class="sysprops-barra"><div class="sysprops-barra-relleno" style="width:87%"></div></div>
+      <div class="sysprops-tenue">uso de personalidad: 87% — funcionando con normalidad</div>
+    </div>
+    <div class="sysprops-panel" data-panel="rendimiento" hidden>
+      <div><strong>Recursos del sistema:</strong> 13% libres hasta el próximo café</div>
+      <div><strong>Procesos en segundo plano:</strong> scrobblear, ver pelis, duolingo.exe</div>
+      <div><strong>Memoria virtual:</strong> se vacía sola a las 3:00 AM</div>
+      <div><strong>Última desfragmentación:</strong> siesta del domingo</div>
+      <div class="sysprops-tenue">consejo: cierre las aplicaciones que no use (no lo hará)</div>
     </div>
   </div>
 
