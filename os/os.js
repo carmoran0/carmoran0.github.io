@@ -309,8 +309,62 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Mastodon (últimos 3 toots de @copaco)
+  // Mastodon (últimos 4 toots de @copaco, con reposts y fotos)
   // ---------------------------------------------------------------------------
+  function renderToot(s) {
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble-mastodon';
+
+    var original = s.reblog || s; // si es repost, el contenido vive en .reblog
+    if (s.reblog) {
+      var repost = document.createElement('div');
+      repost.className = 'toot-repost';
+      repost.textContent = '🔁 repost de @' + (original.account && original.account.acct || '¿?');
+      bubble.appendChild(repost);
+    }
+
+    if (original.spoiler_text) {
+      var cw = document.createElement('div');
+      cw.className = 'toot-cw';
+      cw.textContent = '⚠ ' + original.spoiler_text;
+      bubble.appendChild(cw);
+    }
+
+    var tmp = document.createElement('div');
+    tmp.innerHTML = original.content;
+    var texto = (tmp.textContent || '').trim();
+    if (texto) {
+      var cuerpo = document.createElement('div');
+      cuerpo.className = 'toot-texto';
+      cuerpo.textContent = texto;
+      bubble.appendChild(cuerpo);
+    }
+
+    var fotos = (original.media_attachments || []).filter(function (m) { return m.preview_url; });
+    if (fotos.length) {
+      var media = document.createElement('div');
+      media.className = 'toot-media';
+      fotos.forEach(function (m) {
+        var img = document.createElement('img');
+        img.src = m.preview_url;
+        img.alt = m.description || 'adjunto del toot';
+        img.loading = 'lazy';
+        if (m.type !== 'image') img.title = '▶ ' + m.type;
+        media.appendChild(img);
+      });
+      bubble.appendChild(media);
+    }
+
+    var pie = document.createElement('a');
+    pie.className = 'toot-fecha';
+    pie.href = original.url || s.url || 'https://mastodon.social/@copaco';
+    pie.target = '_blank';
+    pie.rel = 'noopener';
+    pie.textContent = '· ' + relativeTime(new Date(s.created_at)) + ' ↗';
+    bubble.appendChild(pie);
+    return bubble;
+  }
+
   function initMastodon() {
     var contEl = document.getElementById('mastodon-toots');
     fetch('https://mastodon.social/api/v1/accounts/lookup?acct=copaco')
@@ -318,26 +372,13 @@
       .then(function (acc) {
         if (!acc || !acc.id) throw new Error('sin cuenta');
         return fetch('https://mastodon.social/api/v1/accounts/' + acc.id +
-          '/statuses?limit=3&exclude_replies=true&exclude_reblogs=true');
+          '/statuses?limit=4&exclude_replies=true');
       })
       .then(function (r) { return r.json(); })
       .then(function (statuses) {
         if (!statuses || !statuses.length) { contEl.textContent = 'sin toots recientes.'; return; }
         contEl.textContent = '';
-        statuses.slice(0, 3).forEach(function (s) {
-          var tmp = document.createElement('div');
-          tmp.innerHTML = s.content;
-          var texto = (tmp.textContent || '').trim() || '(sin texto)';
-          var fecha = relativeTime(new Date(s.created_at));
-          var bubble = document.createElement('div');
-          bubble.className = 'bubble-mastodon';
-          bubble.textContent = texto + ' ';
-          var span = document.createElement('span');
-          span.className = 'toot-fecha';
-          span.textContent = '· ' + fecha;
-          bubble.appendChild(span);
-          contEl.appendChild(bubble);
-        });
+        statuses.slice(0, 4).forEach(function (s) { contEl.appendChild(renderToot(s)); });
         var ultimo = statuses[0];
         document.querySelector('#win-mastodon .responder').href = (ultimo && ultimo.url) || 'https://mastodon.social/@copaco';
       })
@@ -350,6 +391,17 @@
     if (diff < 3600) return 'hace ' + Math.floor(diff / 60) + ' min';
     if (diff < 86400) return 'hace ' + Math.floor(diff / 3600) + ' h';
     return 'hace ' + Math.floor(diff / 86400) + ' d';
+  }
+
+  // ---------------------------------------------------------------------------
+  // Racha de Duolingo (misma fórmula que /legacy1: días desde el 2023-12-09)
+  // ---------------------------------------------------------------------------
+  function initStreak() {
+    var inicio = new Date('2023-12-09');
+    var dias = Math.floor(Math.abs(Date.now() - inicio.getTime()) / 86400000);
+    document.querySelectorAll('.racha strong, .streak-badge strong').forEach(function (el) {
+      el.textContent = dias;
+    });
   }
 
   // ---------------------------------------------------------------------------
@@ -618,6 +670,7 @@
   initLastfm();
   initMastodon();
   initLetterboxd();
+  initStreak();
 
   // Re-evaluar layout al cruzar el breakpoint
   var wasMobile = isMobile();
