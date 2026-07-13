@@ -181,6 +181,17 @@
       closeWindow(win.id.replace('win-', ''));
     });
   });
+  // Pestañas de Propiedades del sistema (win-perfil)
+  document.querySelectorAll('.sysprops-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.sysprops-tab').forEach(function (t) {
+        t.classList.toggle('active', t === tab);
+      });
+      document.querySelectorAll('.sysprops-panel').forEach(function (p) {
+        p.hidden = p.dataset.panel !== tab.dataset.tab;
+      });
+    });
+  });
   // Botón minimizar del mapa (no cierra; solo lo trae al frente para simplicidad)
   document.querySelectorAll('.tb-btn:not([data-close])').forEach(function (btn) {
     btn.addEventListener('click', function (ev) { ev.stopPropagation(); });

@@ -155,7 +155,7 @@ button.bevel:active, button.bevel.pressed {
 
 /* Posiciones por defecto (persisten en localStorage) */
 #win-mapa    { top: 20px; left: 20px; bottom: 64px; width: 250px; display: flex; flex-direction: column; }
-#win-perfil  { top: 24px; left: 300px; width: 520px; }
+#win-perfil  { top: 24px; left: 300px; width: 420px; }
 #win-musica  { top: 660px; left: 350px; width: 480px; }
 #win-mastodon{ top: 132px; left: 420px; width: 520px; height: 520px; }
 #win-pelis   { top: 430px; left: 300px; width: 620px; }
@@ -182,19 +182,72 @@ button.bevel:active, button.bevel.pressed {
 .tree-item.open { background: var(--link-selected-bg); color: var(--link-selected-fg); }
 .tree-foot { margin-top: auto; opacity: 0.55; font-size: var(--text-small); }
 
-/* Perfil */
-#win-perfil .perfil-row { padding: 12px 14px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-#win-perfil .perfil-nombre { font-size: var(--text-display); }
-#win-perfil .perfil-sub { font-size: var(--text-body); opacity: 0.75; }
-.streak-badge {
-  margin-left: auto;
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: var(--text-body);
-  background: var(--chrome-pressed);
-  padding: 3px 10px;
+/* Perfil: Propiedades del sistema (Win98 clásico, colores fijos) */
+#win-perfil {
+  background: #d4d0c8;
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.45);
+  color: #000;
 }
-.streak-badge img { height: 14px; }
-.streak-badge strong { color: var(--streak-orange); }
+#win-perfil > .titlebar {
+  background: linear-gradient(90deg, #0a246a, #a6caf0);
+  color: #fff;
+  padding: 3px 6px;
+}
+#win-perfil .tb-btn {
+  background: #d4d0c8;
+  border-color: #fff #404040 #404040 #fff;
+  color: #000;
+}
+.sysprops-tabs {
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 8px 0;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+}
+.sysprops-tab {
+  position: relative;
+  font-family: inherit;
+  font-size: 12px;
+  color: #000;
+  background: #bdb9b0;
+  border: 1px solid;
+  border-color: #fff #404040 #404040 #fff;
+  padding: 3px 12px;
+  cursor: pointer;
+}
+.sysprops-tab.active {
+  background: #d4d0c8;
+  font-weight: 700;
+  top: 2px;
+  border-bottom-color: transparent;
+}
+.sysprops-panel {
+  border: 2px solid;
+  border-color: #404040 #fff #fff #404040;
+  margin: 0 8px 8px;
+  padding: 12px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sysprops-panel[hidden] { display: none; }
+.sysprops-panel .num-racha { color: #c86400; font-weight: 700; }
+.sysprops-barra {
+  border: 2px solid;
+  border-color: #404040 #fff #fff #404040;
+  height: 16px;
+  margin-top: 6px;
+}
+.sysprops-barra-relleno {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #0a246a 0 8px, transparent 8px 10px);
+}
+.sysprops-tenue { opacity: 0.6; font-size: 11px; }
 
 /* Música */
 #win-musica .musica-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
