@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CarlOS</title>
+<meta name="description" content="Carlos: links, lo que suena y las últimas pelis.">
+<link rel="icon" type="image/gif" href="/assets/favicon.gif">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ws.audioscrobbler.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<script defer src="/assets/main.js"></script>
+<style>
+:root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#8a877f;--accent:#b0412e;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.45;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}}
+:root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);font-family:'Schibsted Grotesk',Helvetica,sans-serif;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+html:not(.js) .js-only{display:none}
+.mono{font-family:'IBM Plex Mono',monospace}
+.caps{font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+
+.wrap{position:relative;min-height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:flex-start;padding:clamp(16px,5vw,64px) clamp(12px,4vw,56px)}
+#cover{position:fixed;inset:-80px;background-size:cover;background-position:center;filter:blur(60px) saturate(1.1);opacity:var(--cover-op);pointer-events:none}
+.card{position:relative;width:100%;max-width:1120px;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--ink)}
+.pad{padding-left:clamp(16px,2vw,20px);padding-right:clamp(16px,2vw,20px)}
+
+/* Barra de etiquetas */
+.tags{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--ink);font-size:11px}
+.tags-r{display:flex;align-items:center;gap:12px}
+.tags-r img{height:12px}
+.btn{display:flex;align-items:center;gap:8px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--paper)}
+#theme{gap:6px;padding:2px 8px;background:transparent;font-size:inherit}
+
+/* Cabecera */
+.head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;padding-top:clamp(22px,3vw,28px);padding-bottom:clamp(18px,2.4vw,22px);border-bottom:1px solid var(--ink)}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10vw,120px);line-height:.8;letter-spacing:-.03em}
+.streak{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.streak-n{display:flex;align-items:center;gap:6px;font-size:clamp(22px,2.6vw,30px);font-weight:500}
+.streak-n img{height:.85em}
+.streak-l{font-size:10px;color:var(--muted)}
+
+/* Links */
+.links-wrap{overflow:hidden;border-bottom:1px solid var(--ink)}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:0 -1px -1px 0}
+@media (min-width:960px){.links{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:clamp(13px,1.6vw,16px) clamp(14px,1.6vw,18px);background:var(--paper);border-right:1px solid var(--sep);border-bottom:1px solid var(--sep);font-size:clamp(15px,1.3vw,16px)}
+.links a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
+.links span{display:flex;align-items:center;gap:10px}
+.links img{width:16px;height:16px;filter:var(--icon)}
+.links a:hover img{filter:var(--icon-inv)}
+.links i{font-family:'IBM Plex Mono',monospace;font-size:12px;font-style:normal}
+
+/* Actividad */
+.act{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:1px;background:var(--ink)}
+.act>section{display:flex;flex-direction:column;background:var(--paper)}
+.label{font-size:10px;color:var(--muted)}
+
+.np{display:grid;grid-template-columns:clamp(88px,9vw,120px) minmax(0,1fr);gap:16px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink)}
+#cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:var(--ph)}
+#cover-btn:hover{filter:brightness(.92)}
+#cover-btn img{width:100%;height:100%;object-fit:cover;display:block}
+#play-dot{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
+.np-info{display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-width:0}
+#np-when{font-size:10px;color:var(--accent)}
+.np-txt{display:flex;flex-direction:column;gap:2px}
+#np-title{font-family:'Instrument Serif',serif;font-size:clamp(24px,2.4vw,30px);line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#np-artist{font-size:14px;color:var(--muted)}
+.np-ctrl{display:flex;flex-direction:column;gap:6px}
+#prev-btn{align-self:flex-start;padding:6px 10px;font-size:11px}
+.bar{height:2px;background:var(--sep)}
+#bar{height:2px;width:0;background:var(--accent)}
+
+.top{display:flex;flex-direction:column;gap:6px;padding-top:14px;padding-bottom:18px}
+#top-list{display:flex;flex-direction:column;gap:6px}
+#top-list>*{display:flex;justify-content:space-between;gap:10px;font-size:15px;padding:4px 0;border-bottom:1px dotted var(--dot)}
+#top-list>*>span:first-child{display:flex;gap:10px;min-width:0}
+.rk{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted2);width:14px;flex-shrink:0}
+.nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)}
+
+.films{gap:14px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px)}
+.films-h{display:flex;justify-content:space-between}
+#posters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,14px)}
+#posters a{display:flex;flex-direction:column;gap:5px}
+#posters a:hover{text-decoration:none}
+.poster{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--ph);border:1px solid var(--ink)}
+.stars{font-size:12px}
+
+/* Pie */
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
+.foot span{display:flex;gap:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="cover"></div>
+  <main class="card">
+    <div class="tags pad caps">
+      <span>2005 · he/they/she · Zaragoza</span>
+      <span class="tags-r">
+        <img src="/assets/nb-flag.png" alt="No binarie">
+        <button id="theme" class="btn js-only" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
+      </span>
+    </div>
+
+    <header class="head pad">
+      <h1>Carl<em>OS</em></h1>
+      <a class="streak mono" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener">
+        <span class="streak-n"><img src="/assets/streakico.svg" alt=""><span id="streak">1043</span></span>
+        <span class="streak-l caps">días de racha</span>
+      </a>
+    </header>
+
+    <div class="links-wrap">
+      <nav class="links" aria-label="Links">
+        <a href="https://boxd.it/9uosP" target="_blank" rel="noopener me"><span><img src="/assets/logos/letterboxd.svg" alt="">Letterboxd</span><i>↗</i></a>
+        <a href="https://www.instagram.com/testriculo/" target="_blank" rel="noopener me"><span><img src="/assets/logos/instagram.svg" alt="">Instagram</span><i>↗</i></a>
+        <a href="https://discordapp.com/users/357955189149532161" target="_blank" rel="noopener me"><span><img src="/assets/logos/discord.svg" alt="">Discord</span><i>↗</i></a>
+        <a href="https://mastodon.social/@copaco" target="_blank" rel="noopener me"><span><img src="/assets/logos/mastodon.svg" alt="">Mastodon</span><i>↗</i></a>
+        <a href="https://bsky.app/profile/koljoz.bsky.social" target="_blank" rel="noopener me"><span><img src="/assets/logos/bluesky.svg" alt="">Bluesky</span><i>↗</i></a>
+        <a href="https://github.com/carmoran0" target="_blank" rel="noopener me"><span><img src="/assets/logos/github.svg" alt="">GitHub</span><i>↗</i></a>
+        <a href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener me"><span><img src="/assets/logos/lastfm.svg" alt="">Last.fm</span><i>↗</i></a>
+        <a href="https://soundcloud.com/koljoz" target="_blank" rel="noopener me"><span><img src="/assets/logos/soundcloud.svg" alt="">SoundCloud</span><i>↗</i></a>
+        <a href="https://steamcommunity.com/id/poopoopeepeeheehee/" target="_blank" rel="noopener me"><span><img src="/assets/logos/steam.svg" alt="">Steam</span><i>↗</i></a>
+        <a href="mailto:metricas_mensulas.0p@icloud.com" rel="me"><span><img src="/assets/logos/email.svg" alt="">Email</span><i>↗</i></a>
+      </nav>
+    </div>
+
+    <div class="act">
+      <section aria-label="Música">
+        <div class="np pad">
+          <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
+            <img id="np-img" src="https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" alt="">
+            <span id="play-dot" class="js-only">▶</span>
+          </button>
+          <div class="np-info">
+            <span id="np-when" class="caps">● Spotify</span>
+            <div class="np-txt">
+              <a id="np-title" href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener">Cargando…</a>
+              <span id="np-artist">Last.fm</span>
+            </div>
+            <div class="np-ctrl js-only">
+              <button id="prev-btn" class="btn" type="button">▶ Escuchar preview</button>
+              <div class="bar"><div id="bar"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="top pad">
+          <span class="label caps">Top artistas · 7 días</span>
+          <div id="top-list">
+            <span><span><span class="rk">1</span><span class="nm">&nbsp;</span></span></span>
+            <span><span><span class="rk">2</span><span class="nm">&nbsp;</span></span></span>
+            <span><span><span class="rk">3</span><span class="nm">&nbsp;</span></span></span>
+            <span><span><span class="rk">4</span><span class="nm">&nbsp;</span></span></span>
+            <span><span><span class="rk">5</span><span class="nm">&nbsp;</span></span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="films pad" aria-label="Últimas pelis">
+        <div class="films-h label caps"><span>Últimas pelis</span><a href="https://boxd.it/9uosP" target="_blank" rel="noopener">Letterboxd ↗</a></div>
+        <div id="posters">
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+        </div>
+      </section>
+    </div>
+
+    <footer class="foot pad caps">
+      <span>Desde agosto 2024</span>
+      <span><span>Versiones anteriores:</span><a href="/legacy/index.html">v0</a><a href="/v1/">v1</a></span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
