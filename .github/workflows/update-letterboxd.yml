@@ -1,0 +1,32 @@
+name: Update Letterboxd feed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # una vez al día
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download RSS feed
+        run: |
+          mkdir -p data
+          curl -fsSL --retry 3 -A "Mozilla/5.0 (carmoran0.github.io feed sync)" \
+            https://letterboxd.com/klamstrakur0/rss/ -o /tmp/letterboxd.xml
+          # Solo reemplazar si el feed es válido (evita guardar páginas de error)
+          grep -q "<item>" /tmp/letterboxd.xml
+          mv /tmp/letterboxd.xml data/letterboxd.xml
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: actualizar feed de Letterboxd (autogenerado)'
+          branch: main
+          file_pattern: 'data/letterboxd.xml'

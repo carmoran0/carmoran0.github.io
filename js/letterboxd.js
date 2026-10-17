@@ -3,19 +3,29 @@
 
 const LETTERBOXD_USERNAME = 'klamstrakur0';
 const LETTERBOXD_RSS_URL = `https://letterboxd.com/${LETTERBOXD_USERNAME}/rss/`;
+// Copia local del feed, actualizada por GitHub Actions (.github/workflows/update-letterboxd.yml)
+const LETTERBOXD_LOCAL_URL = '/data/letterboxd.xml';
 
 // Cache para evitar múltiples requests
 let letterboxdCache = null;
 let cacheTimestamp = 0;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 
+// Solo como respaldo si falta la copia local
 const PROXY_URLS = [
-    'https://corsproxy.io/?',
     'https://api.codetabs.com/v1/proxy?quest=',
-    'https://proxy.cors.sh/'
+    'https://api.allorigins.win/raw?url='
 ];
 
 async function fetchWithFallback(url) {
+    try {
+        const response = await fetch(LETTERBOXD_LOCAL_URL);
+        if (response.ok) {
+            return response;
+        }
+    } catch (e) {
+        console.warn('Copia local del feed no disponible, probando proxies...');
+    }
     for (const proxy of PROXY_URLS) {
         try {
             const response = await fetch(proxy + encodeURIComponent(url));
