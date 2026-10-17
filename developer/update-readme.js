@@ -2,7 +2,7 @@
 /**
  * update-readme.js
  * Descarga el README del perfil (carmoran0/carmoran0), lo convierte a HTML sencillo
- * y reemplaza el bloque entre marcadores en: linkarlos.html, en/linkarlos.html, es/linkarlos.html
+ * y reemplaza el bloque entre marcadores en: v1/en/linkarlos.html, v1/es/linkarlos.html
  *
  * No requiere dependencias externas (Node >= 18 recomendado por fetch nativo).
  */
@@ -12,9 +12,8 @@ const path = require('path');
 
 const RAW_URL = 'https://raw.githubusercontent.com/carmoran0/carmoran0/refs/heads/main/README.md';
 const TARGET_FILES = [
-  'linkarlos.html',
-  path.join('en', 'linkarlos.html'),
-  path.join('es', 'linkarlos.html'),
+  path.join('v1', 'en', 'linkarlos.html'),
+  path.join('v1', 'es', 'linkarlos.html'),
 ];
 const BEGIN_MARK = '<!-- README:BEGIN'; // coincide con comentarios con metadatos
 const END_MARK = '<!-- README:END -->';

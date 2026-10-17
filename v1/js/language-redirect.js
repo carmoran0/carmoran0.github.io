@@ -16,10 +16,10 @@
     const currentPath = window.location.pathname;
     
     // If we're on a language-specific page, save that preference
-    if (currentPath.startsWith('/es/')) {
+    if (currentPath.startsWith('/v1/es/')) {
         localStorage.setItem('preferred-language', 'es');
         return; // Don't redirect if already on a language page
-    } else if (currentPath.startsWith('/en/')) {
+    } else if (currentPath.startsWith('/v1/en/')) {
         localStorage.setItem('preferred-language', 'en');
         return; // Don't redirect if already on a language page
     }
@@ -38,14 +38,14 @@
     
     // Build redirect URL
     let redirectPath;
-    if (currentPath === '/' || currentPath === '/index.html') {
-        redirectPath = `/${targetLang}/`;
+    if (currentPath === '/v1/' || currentPath === '/v1/index.html') {
+        redirectPath = `/v1/${targetLang}/`;
     } else if (currentPath.endsWith('.html')) {
         // Extract filename and redirect to language folder
         const filename = currentPath.split('/').pop();
-        redirectPath = `/${targetLang}/${filename}`;
+        redirectPath = `/v1/${targetLang}/${filename}`;
     } else {
-        redirectPath = `/${targetLang}/`;
+        redirectPath = `/v1/${targetLang}/`;
     }
     
     // Redirect

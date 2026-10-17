@@ -105,7 +105,7 @@ window.addEventListener('keydown', (e) => { if (e.code === 'KeyE') onInteract();
 
 // Cargar modelo si existe
 const loader = new GLTFLoader();
-loader.load('/escena/model.glb', (gltf) => {
+loader.load('/v1/escena/model.glb', (gltf) => {
   gltf.scene.traverse((c) => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } });
   scene.add(gltf.scene);
   // Marcar algún mesh interactuable si existe con nombre "Interactable"
