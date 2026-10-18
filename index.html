@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://ws.audioscrobbler.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<script defer src="/assets/theme.js"></script>
 <script defer src="/assets/main.js"></script>
 <style>
 :root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#8a877f;--accent:#b0412e;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.45;color-scheme:light}
@@ -62,6 +63,14 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 .act{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:1px;background:var(--ink)}
 .act>section{display:flex;flex-direction:column;background:var(--paper)}
 .label{font-size:10px;color:var(--muted)}
+
+.sub{display:flex;flex-direction:column;border-bottom:1px solid var(--ink)}
+.sub a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:clamp(14px,1.8vw,16px) clamp(16px,2vw,20px);border-bottom:1px solid var(--sep);margin-bottom:-1px}
+.sub a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
+.sub-t{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.sub-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
+.sub-t small{font-size:11px;opacity:.7}
+.sub i{font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal}
 
 .np{display:grid;grid-template-columns:clamp(88px,9vw,120px) minmax(0,1fr);gap:16px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink)}
 #cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:var(--ph)}
@@ -136,6 +145,9 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 
     <div class="act">
       <section aria-label="Música">
+        <nav class="sub" aria-label="Subpáginas">
+          <a href="/uso/"><span class="sub-t"><b>Cosillas <em>que uso</em></b><small class="caps">Software y webs</small></span><i>→</i></a>
+        </nav>
         <div class="np pad">
           <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
             <img id="np-img" src="https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" alt="">

@@ -1,10 +1,9 @@
-// CarlOS: racha, tema, Last.fm (ahora suena + top artistas + preview) y Letterboxd.
+// CarlOS: racha, Last.fm (ahora suena + top artistas + preview) y Letterboxd.
 (() => {
     'use strict';
 
     const USER = 'sobaco27';
     const KEY = 'c34e2201253c0fb7ff1d0b56101b4391';
-    const root = document.documentElement;
     const $ = (id) => document.getElementById(id);
     const h = (tag, props, ...kids) => {
         const el = Object.assign(document.createElement(tag), props);
@@ -14,18 +13,6 @@
 
     // Racha de Duolingo
     $('streak').textContent = Math.floor((Date.now() - new Date('2023-12-09')) / 864e5);
-
-    // Tema claro/oscuro (el <head> ya aplica ?theme= o localStorage antes de pintar)
-    const darkQuery = matchMedia('(prefers-color-scheme: dark)');
-    const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches);
-    const syncThemeLabel = () => { $('theme-label').textContent = isDark() ? 'Claro' : 'Oscuro'; };
-    $('theme').addEventListener('click', () => {
-        root.dataset.theme = isDark() ? 'light' : 'dark';
-        try { localStorage.setItem('carlos-theme', root.dataset.theme); } catch (e) {}
-        syncThemeLabel();
-    });
-    darkQuery.addEventListener('change', syncThemeLabel);
-    syncThemeLabel();
 
     // Last.fm
     const api = (method, extra) =>
