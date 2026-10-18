@@ -64,9 +64,8 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 .act>section{display:flex;flex-direction:column;background:var(--paper)}
 .label{font-size:10px;color:var(--muted)}
 
-.sub{display:flex;flex-direction:column;border-bottom:1px solid var(--ink)}
-.sub a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:clamp(14px,1.8vw,16px) clamp(16px,2vw,20px);border-bottom:1px solid var(--sep);margin-bottom:-1px}
-.sub a:last-child{border-bottom:0;margin-bottom:0}
+.sub{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:1px;background:var(--ink);border-bottom:1px solid var(--ink)}
+.sub a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:clamp(14px,1.8vw,16px) clamp(16px,2vw,20px);background:var(--paper)}
 .sub a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
 .sub-t{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
 .sub-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
@@ -148,6 +147,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
       <section aria-label="Música">
         <nav class="sub" aria-label="Subpáginas">
           <a href="/uso/"><span class="sub-t"><b>Cosillas <em>que uso</em></b><small class="caps">Software y webs</small></span><i>→</i></a>
+          <a href="/estanteria/"><span class="sub-t"><b>Estante<em>ría</em></b><small class="caps">Libros leídos</small></span><i>→</i></a>
         </nav>
         <div class="np pad">
           <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
