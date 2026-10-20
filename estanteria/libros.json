@@ -2,5 +2,12 @@
   { "title": "El arte de la guerra", "author": "Sun Tzu", "date": "2025", "rating": 2 },
   { "title": "Cuadernos de la cárcel", "author": "Antonio Gramsci", "date": "2025", "rating": 4 },
   { "title": "The Palestine Laboratory", "author": "Antony Loewenstein", "date": "2026", "rating": 5 },
-  { "title": "Neuromancer", "author": "William Gibson", "reading": true }
+  { "title": "Ecodefense: A Field Guide to Monkeywrenching", "author": "Edward Abbey", "date": "2025", "rating": 4 },
+  { "title": "Padres e hijos", "author": "Ivan Turgenev", "date": "2025", "rating": 3 },
+  { "title": "Anarchist cookbook", "author": "William Powell", "date": "2025", "rating": 4 },
+  { "title": "Guía del autoestopista galáctico", "author": "Douglas Adams", "date": "2023", "rating": 3 },
+  { "title": "Simple Sabotage Field Manual ", "author": "US Office of Strategic Services", "date": "2025", "rating": 3 },
+  { "title": "Neuromancer", "author": "William Gibson", "reading": true },
+  { "title": "Revolutionary Suicide", "author": "Huey P. Newton", "pending": true },
+  { "title": "The Nerd Reich", "pending": true }
 ]
