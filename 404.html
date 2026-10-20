@@ -1,25 +1,112 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="3; url=/">
 <title>404 · CarlOS</title>
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<script defer src="/assets/theme.js"></script>
 <style>
-:root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--muted:#5d5b55;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--muted:#a6a39a;color-scheme:dark}}
+:root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--muted:#5d5b55;--accent:#b0412e;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--muted:#a6a39a;--accent:#e57a63;color-scheme:dark}}
+:root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--muted:#a6a39a;--accent:#e57a63;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg);color:var(--ink);font-family:'IBM Plex Mono',ui-monospace,monospace}
-main{width:100%;max-width:420px;padding:24px 20px;background:var(--paper);border:1px solid var(--ink);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:Georgia,serif;font-weight:400;font-size:64px;line-height:.9;letter-spacing:-.03em;text-transform:none;color:var(--ink);margin-bottom:16px}
-a{color:var(--ink)}
+body{background:var(--bg);font-family:'Schibsted Grotesk',Helvetica,sans-serif;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+html:not(.js) .js-only{display:none}
+[hidden]{display:none!important}
+.caps{font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.pad{padding-left:clamp(16px,2vw,20px);padding-right:clamp(16px,2vw,20px)}
+
+.wrap{min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:clamp(16px,5vw,64px) clamp(12px,4vw,56px)}
+.card{width:100%;max-width:720px;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--ink)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--ink);font-size:11px}
+#theme{display:flex;align-items:center;gap:6px;padding:2px 8px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+#theme:hover{background:var(--ink);color:var(--paper)}
+
+.head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;padding-top:clamp(22px,3vw,28px);padding-bottom:clamp(18px,2.4vw,22px);border-bottom:1px solid var(--ink)}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16vw,160px);line-height:.8;letter-spacing:-.03em}
+.path{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;max-width:100%;font-family:'IBM Plex Mono',monospace}
+#path{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(16px,2vw,20px);font-weight:500}
+.path small{font-size:10px;color:var(--muted)}
+.msg{padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink);font-size:15px;line-height:1.5;color:var(--muted);text-wrap:pretty}
+
+.sug{display:flex;flex-direction:column}
+.sug-h{padding-top:14px;padding-bottom:10px;font-size:10px;color:var(--muted)}
+.sug a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:clamp(14px,1.8vw,16px);padding-bottom:clamp(14px,1.8vw,16px);border-top:1px solid var(--sep)}
+.sug a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
+.sug-t{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.sug-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
+.sug-t small{font-size:11px;opacity:.7}
+#v1-path{font-family:'IBM Plex Mono',monospace;overflow-wrap:anywhere}
+.sug i{font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal}
+
+.foot{display:flex;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
+#back{padding:0;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+#back:hover{text-decoration:underline}
 </style>
 </head>
 <body>
-<main>
-<h1>404</h1>
-<p>Esta página no existe. Volviendo a <a href="/">la portada</a>…</p>
-</main>
+<div class="wrap">
+  <main class="card">
+    <div class="bar pad caps">
+      <a href="/">← CarlOS</a>
+      <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
+    </div>
+
+    <header class="head pad">
+      <h1>4<em>04</em></h1>
+      <p class="path js-only"><span id="path"></span><small class="caps">No existe</small></p>
+    </header>
+
+    <p class="msg pad">Aquí no hay nada. Si venías de un enlace antiguo, puede que esté en la v1.</p>
+
+    <nav class="sug" aria-label="Quizá buscabas">
+      <span class="sug-h pad caps">Quizá buscabas</span>
+      <a id="v1" class="pad" href="/v1/" hidden><span class="sug-t"><b>Lo mismo en la <em>v1</em></b><small id="v1-path"></small></span><i>→</i></a>
+      <a class="pad" href="/"><span class="sug-t"><b>Carl<em>OS</em></b><small class="caps">Portada</small></span><i>→</i></a>
+      <a class="pad" href="/uso/"><span class="sug-t"><b>Cosillas <em>que uso</em></b><small class="caps">Software y webs</small></span><i>→</i></a>
+    </nav>
+
+    <footer class="foot pad caps">
+      <button id="back" class="js-only" type="button">← Volver</button>
+      <span>Desde agosto 2024</span>
+    </footer>
+  </main>
+</div>
+<script>
+(() => {
+    'use strict';
+    const $ = (id) => document.getElementById(id);
+    let path = location.pathname;
+    try { path = decodeURI(path); } catch (e) {}
+    $('path').textContent = path;
+    $('path').title = path;
+
+    $('back').addEventListener('click', () => {
+        if (history.length > 1) history.back();
+        else location.href = '/';
+    });
+
+    // ¿Existe la misma ruta en la v1? (lo que había antes de la mudanza)
+    if (!/^\/(v1|legacy)(\/|$)/.test(location.pathname)) {
+        const url = '/v1' + location.pathname;
+        fetch(url, { method: 'HEAD' }).then((r) => {
+            if (!r.ok) return;
+            $('v1').href = url;
+            $('v1-path').textContent = '/v1' + path;
+            $('v1').hidden = false;
+        }).catch(() => {});
+    }
+})();
+</script>
 </body>
 </html>

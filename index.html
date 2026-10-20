@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CarlOS</title>
 <meta name="description" content="Carlos: links, lo que suena y las últimas pelis.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CarlOS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="CarlOS">
+<meta property="og:description" content="Carlos: links, lo que suena y las últimas pelis.">
+<meta property="og:url" content="https://carmoran.dev/">
+<meta property="og:image" content="https://carmoran.dev/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CarlOS · carmoran.dev">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
 <script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,7 +117,8 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 
 /* Pie */
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
-.foot span{display:flex;gap:12px}
+.foot>span{display:flex;flex-wrap:wrap;gap:12px}
+.foot [hidden]{display:none}
 </style>
 </head>
 <body>
@@ -194,7 +206,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
     </div>
 
     <footer class="foot pad caps">
-      <span>Desde agosto 2024</span>
+      <span><span>Desde agosto 2024</span><a id="upd" href="https://github.com/carmoran0/carmoran0.github.io/commits/main" target="_blank" rel="noopener" hidden></a></span>
       <span><span>Versiones anteriores:</span><a href="/legacy/index.html">v0</a><a href="/v1/">v1</a></span>
     </footer>
   </main>

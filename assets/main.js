@@ -114,4 +114,25 @@
                 h('span', { className: 'stars', textContent: stars || ' ' }));
         }));
     }).catch(() => {});
+
+    // Pie: «Actualizada hace X», con el último commit hecho a mano.
+    // Se saltan los commits de las Actions (Letterboxd y README), que llevan «(autogenerado)».
+    fetch('https://api.github.com/repos/carmoran0/carmoran0.github.io/commits?per_page=20')
+        .then((r) => r.json())
+        .then((commits) => {
+            const c = Array.isArray(commits)
+                ? commits.find((x) => x.committer?.login !== 'github-actions[bot]' && !/\(autogenerado\)/.test(x.commit?.message || ''))
+                : null;
+            const date = c?.commit?.committer?.date;
+            if (!date) return;
+            const msg = c.commit.message.split('\n')[0];
+            const when = new Date(date).toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' });
+            Object.assign($('upd'), {
+                href: c.html_url,
+                textContent: 'Actualizada ' + ago(Date.parse(date) / 1000),
+                title: `«${msg}» · ${when}`,
+                hidden: false,
+            });
+        })
+        .catch(() => {});
 })();
