@@ -107,7 +107,8 @@
             const get = (tag) => it.getElementsByTagName(tag)[0]?.textContent || '';
             const rating = parseFloat(get('letterboxd:memberRating')) || 0;
             const title = `${get('letterboxd:filmTitle')} (${get('letterboxd:filmYear')})`;
-            const poster = (get('description').match(/src="([^"]+)"/) || [])[1] || '';
+            // El RSS trae el cartel a 600×900; a 300×450 sobra para el tamaño al que se ve (y pesa ~3 veces menos)
+            const poster = ((get('description').match(/src="([^"]+)"/) || [])[1] || '').replace('-0-600-0-900-', '-0-300-0-450-');
             const stars = '★'.repeat(Math.floor(rating)) + (rating % 1 ? '½' : '');
             return h('a', { href: get('link'), target: '_blank', rel: 'noopener', title },
                 h('img', { className: 'poster', src: poster, alt: title, loading: 'lazy' }),

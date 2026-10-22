@@ -1,13 +1,13 @@
 [
-  { "title": "El arte de la guerra", "author": "Sun Tzu", "date": "2025", "rating": 2 },
-  { "title": "Cuadernos de la cárcel", "author": "Antonio Gramsci", "date": "2025", "rating": 4 },
-  { "title": "The Palestine Laboratory", "author": "Antony Loewenstein", "date": "2026", "rating": 5 },
-  { "title": "Ecodefense: A Field Guide to Monkeywrenching", "author": "Edward Abbey", "date": "2025", "rating": 4 },
-  { "title": "Padres e hijos", "author": "Ivan Turgenev", "date": "2025", "rating": 3 },
-  { "title": "Anarchist cookbook", "author": "William Powell", "date": "2025", "rating": 4 },
-  { "title": "Guía del autoestopista galáctico", "author": "Douglas Adams", "date": "2023", "rating": 3 },
-  { "title": "Simple Sabotage Field Manual ", "author": "US Office of Strategic Services", "date": "2025", "rating": 3 },
-  { "title": "Neuromancer", "author": "William Gibson", "reading": true },
-  { "title": "Revolutionary Suicide", "author": "Huey P. Newton", "pending": true },
-  { "title": "The Nerd Reich", "pending": true }
+  { "title": "El arte de la guerra", "author": "Sun Tzu", "date": "2025", "rating": 2, "pages": 90, "year": 1900, "cover": 4849549, "ol": "/works/OL244537W" },
+  { "title": "Cuadernos de la cárcel", "author": "Antonio Gramsci", "date": "2025", "rating": 4, "pages": 514, "year": 1984, "cover": 5248134, "ol": "/works/OL77348W" },
+  { "title": "The Palestine Laboratory", "author": "Antony Loewenstein", "date": "2026", "rating": 5, "pages": 304, "year": 2023, "cover": 14623906, "ol": "/works/OL28805341W" },
+  { "title": "Ecodefense: A Field Guide to Monkeywrenching", "author": "Edward Abbey", "date": "2025", "rating": 4, "ol": null },
+  { "title": "Padres e hijos", "author": "Ivan Turgenev", "date": "2025", "rating": 3, "pages": 247, "year": 1867, "cover": 8236420, "ol": "/works/OL43370W" },
+  { "title": "Anarchist cookbook", "author": "William Powell", "date": "2025", "rating": 4, "pages": 160, "year": 1971, "cover": 740051, "ol": "/works/OL2347897W" },
+  { "title": "Guía del autoestopista galáctico", "author": "Douglas Adams", "date": "2023", "rating": 3, "pages": 216, "year": 1979, "cover": 12986869, "ol": "/works/OL2163649W" },
+  { "title": "Simple Sabotage Field Manual ", "author": "US Office of Strategic Services", "date": "2025", "rating": 3, "pages": 40, "year": 1944, "cover": 10553067, "ol": "/works/OL15186897W" },
+  { "title": "Neuromancer", "author": "William Gibson", "reading": true, "pages": 317, "year": 1984, "cover": 283860, "ol": "/works/OL27258W" },
+  { "title": "Revolutionary Suicide", "author": "Huey P. Newton", "pending": true, "pages": 333, "year": 1973, "cover": 4501385, "ol": "/works/OL3110334W" },
+  { "title": "The Nerd Reich", "author": "Gil Durán", "pending": true, "pages": 352, "year": 2026, "cover": 15256812, "ol": "/works/OL45908582W" }
 ]
