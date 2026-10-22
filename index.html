@@ -18,14 +18,18 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
 <script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://ws.audioscrobbler.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
 <script defer src="/assets/theme.js"></script>
 <script defer src="/assets/main.js"></script>
 <style>
+@font-face{font-family:'Instrument Serif';font-display:swap;src:url(/assets/fonts/instrument-serif.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-display:swap;src:url(/assets/fonts/instrument-serif-italic.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-display:swap;src:url(/assets/fonts/ibm-plex-mono-400.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/assets/fonts/ibm-plex-mono-500.woff2) format('woff2')}
+@font-face{font-family:'Schibsted Grotesk';font-weight:400 900;font-display:swap;src:url(/assets/fonts/schibsted-grotesk.woff2) format('woff2')}
 :root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#8a877f;--accent:#b0412e;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.45;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}}
 :root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}
@@ -46,7 +50,7 @@ html:not(.js) .js-only{display:none}
 /* Barra de etiquetas */
 .tags{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--ink);font-size:11px}
 .tags-r{display:flex;align-items:center;gap:12px}
-.tags-r img{height:12px}
+.tags-r img{height:12px;width:auto}
 .btn{display:flex;align-items:center;gap:8px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .btn:hover{background:var(--ink);color:var(--paper)}
 #theme{gap:6px;padding:2px 8px;background:transparent;font-size:inherit}
@@ -56,7 +60,7 @@ html:not(.js) .js-only{display:none}
 h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10vw,120px);line-height:.8;letter-spacing:-.03em}
 .streak{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
 .streak-n{display:flex;align-items:center;gap:6px;font-size:clamp(22px,2.6vw,30px);font-weight:500}
-.streak-n img{height:.85em}
+.streak-n img{height:.85em;width:auto}
 .streak-l{font-size:10px;color:var(--muted)}
 
 /* Links */
@@ -115,7 +119,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 .stars{font-size:12px}
 
 /* Pie */
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:12px;color:var(--muted)}
 .foot>span{display:flex;flex-wrap:wrap;gap:12px}
 .foot [hidden]{display:none}
 </style>
@@ -127,7 +131,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
     <div class="tags pad caps">
       <span>he/they/she</span>
       <span class="tags-r">
-        <img src="/assets/nb-flag.png" alt="No binarie">
+        <img src="/assets/nb-flag.png" width="30" height="22" alt="No binarie">
         <button id="theme" class="btn js-only" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
       </span>
     </div>
@@ -135,7 +139,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
     <header class="head pad">
       <h1>Carl<em>OS</em></h1>
       <a class="streak mono" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener">
-        <span class="streak-n"><img src="/assets/streakico.svg" alt=""><span id="streak">1043</span></span>
+        <span class="streak-n"><img src="/assets/streakico.svg" width="16" height="20" alt=""><span id="streak">1043</span></span>
         <span class="streak-l caps">días de racha</span>
       </a>
     </header>

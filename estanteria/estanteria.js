@@ -1,7 +1,8 @@
 // Estantería: lee /estanteria/libros.json y completa lo que falte con Open Library.
 // Campos de cada libro: title (obligatorio), author, pages, year, date ('AAAA' | 'AAAA-MM'),
 // rating (0–5, admite .5), review, color (0–8), cover (id de Open Library), reading (true),
-// pending (true: va a la pila «Por leer») y slug (enlace directo /estanteria/#slug; por defecto sale del título).
+// pending (true: va a la pila «Por leer»), slug (enlace directo /estanteria/#slug; por defecto sale del título)
+// y ol (clave de Open Library, '/works/…'; si el campo está, aunque sea null, no se consulta Open Library).
 (function () {
   const PALETTE = [
     ['oklch(0.5 0.12 35)', '#f7f3ec'], ['oklch(0.7 0.11 80)', '#1a1a1a'], ['oklch(0.5 0.08 125)', '#f7f3ec'],
@@ -10,7 +11,6 @@
   ];
   const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   const OL_CACHE = 'carlos-shelf-ol';
-  const SORTS = [['fecha', 'Fecha'], ['autor', 'Autor'], ['tamano', 'Tamaño'], ['nota', 'Nota'], ['color', 'Color']];
   const THIS_YEAR = new Date().getFullYear();
   // Reparto en baldas: ancho de la placa entre años, del sujetalibros y separación entre piezas. Alto máximo de una pila.
   const SEP_W = 12, END_W = 25, GAP = 2, PILE_MAX = 192;
@@ -48,14 +48,15 @@
 
   const books = () => RAW.map((b, i) => {
     const o = ol[keyOf(b)] || {};
-    return { ...b, id: i, slug: SLUGS[i], pending: !!b.pending && !b.reading, author: b.author || o.author || '', pages: b.pages || o.pages || null, year: b.year || o.year || null, cover: b.cover || o.cover || null, olKey: o.key };
+    return { ...b, id: i, slug: SLUGS[i], pending: !!b.pending && !b.reading, author: b.author || o.author || '', pages: b.pages || o.pages || null, year: b.year || o.year || null, cover: b.cover || o.cover || null, olKey: b.ol || o.key };
   });
   const colorIdx = b => b.color >= 0 ? b.color : hash(b.title + (b.author || '')) % PALETTE.length;
   const dims = b => {
     const p = Math.max(1, +b.pages || 250);
     const j = hash(b.title || '') % 9 - 4;
     const ht = Math.round(146 + Math.min(p, 1100) / 1100 * 66 + j);
-    const w = Math.round(Math.min(62, Math.max(18, 14 + p * 0.042)));
+    // Nunca menos de 24 px: es el mínimo de un objetivo táctil (WCAG 2.5.8)
+    const w = Math.round(Math.min(62, Math.max(24, 14 + p * 0.042)));
     const [bg, fg] = PALETTE[colorIdx(b)];
     return { p, h: ht, w, fs: Math.round(Math.min(17, Math.max(10, w * 0.44))), bg, fg };
   };
@@ -73,24 +74,27 @@
   };
 
   // Lomo: en la balda es un botón; en la ficha, un bloque con borde completo.
+  // El nombre accesible es el texto visible (título y apellido); el autor completo va en el title.
   const spine = (b, d, tag, extra) => h(tag, {
     class: tag === 'button' ? 'lomo' : 'lomo solo',
     style: `width:${d.w}px;height:${d.h}px;background:${d.bg};color:${d.fg};${extra || ''}`,
-    ...(tag === 'button' ? { type: 'button', title: tip(b), 'aria-label': tip(b), onclick: () => open(b.id) } : { 'aria-hidden': 'true' })
+    ...(tag === 'button' ? { type: 'button', title: tip(b), onclick: () => open(b.id) } : { 'aria-hidden': 'true' })
   },
     h('span', { class: 'fil', 'aria-hidden': 'true' }),
     h('span', { class: 'lt', style: `font-size:${d.fs}px` }, b.title),
-    tag === 'button' && d.w >= 24 && b.author ? h('span', { class: 'la' }, surname(b.author)) : null,
-    tag === 'button' && b.reading ? h('span', { class: 'cinta', 'aria-hidden': 'true' }) : null
+    tag === 'button' && b.author ? h('span', { class: 'la' }, surname(b.author)) : null,
+    tag === 'button' && b.reading ? h('span', { class: 'cinta', 'aria-hidden': 'true' }) : null,
+    tag === 'button' && b.reading ? h('span', { class: 'sr' }, ' (leyendo)') : null
   );
   // Libro tumbado (pila «Por leer»): las medidas de su lomo, giradas. La cabeza (doble filete) queda a la derecha.
   const tumbado = (b, d, len, extra) => h('button', {
-    class: 'tumbado', type: 'button', title: tip(b), 'aria-label': tip(b), onclick: () => open(b.id),
+    class: 'tumbado', type: 'button', title: tip(b), onclick: () => open(b.id),
     style: `--off:${hash(b.title) % 13}px;width:${len}px;height:${d.w}px;background:${d.bg};color:${d.fg};${extra || ''}`
   },
     h('span', { class: 'ta' }, surname(b.author)),
     h('span', { class: 'tt', style: `font-size:${d.fs}px` }, b.title),
-    h('span', { class: 'tf', 'aria-hidden': 'true' })
+    h('span', { class: 'tf', 'aria-hidden': 'true' }),
+    h('span', { class: 'sr' }, ' (por leer)')
   );
   const tip = b => (b.author ? `${b.title} — ${b.author}` : b.title) + (b.reading ? ' (leyendo)' : b.pending ? ' (por leer)' : '');
 
@@ -292,7 +296,7 @@
 
   async function loadOl() {
     try { ol = JSON.parse(localStorage.getItem(OL_CACHE)) || {}; } catch (e) {}
-    const missing = RAW.filter(b => !(keyOf(b) in ol));
+    const missing = RAW.filter(b => !('ol' in b) && !(keyOf(b) in ol));
     if (!missing.length) return;
     await Promise.all(missing.map(async b => {
       try {
@@ -307,7 +311,8 @@
   }
 
   async function init() {
-    $('sorts').append(...SORTS.map(([k, label]) => h('button', { type: 'button', 'data-k': k, onclick: () => { sort = k; render(); } }, label)));
+    // Los botones de ordenar ya vienen en el HTML (así no se mueve nada al cargar)
+    for (const btn of $('sorts').querySelectorAll('button')) btn.onclick = () => { sort = btn.dataset.k; render(); };
     try { RAW = await (await fetch('/estanteria/libros.json', { cache: 'no-cache' })).json(); } catch (e) { RAW = []; }
     SLUGS = makeSlugs(RAW);
     try { ol = JSON.parse(localStorage.getItem(OL_CACHE)) || {}; } catch (e) {}

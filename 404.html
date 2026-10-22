@@ -7,12 +7,16 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
 <script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<script defer src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
 <script defer src="/assets/theme.js"></script>
 <style>
+@font-face{font-family:'Instrument Serif';font-display:swap;src:url(/assets/fonts/instrument-serif.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-display:swap;src:url(/assets/fonts/instrument-serif-italic.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-display:swap;src:url(/assets/fonts/ibm-plex-mono-400.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/assets/fonts/ibm-plex-mono-500.woff2) format('woff2')}
+@font-face{font-family:'Schibsted Grotesk';font-weight:400 900;font-display:swap;src:url(/assets/fonts/schibsted-grotesk.woff2) format('woff2')}
 :root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--muted:#5d5b55;--accent:#b0412e;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--muted:#a6a39a;--accent:#e57a63;color-scheme:dark}}
 :root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--muted:#a6a39a;--accent:#e57a63;color-scheme:dark}
@@ -49,7 +53,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16v
 #v1-path{font-family:'IBM Plex Mono',monospace;overflow-wrap:anywhere}
 .sug i{font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal}
 
-.foot{display:flex;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:12px;color:var(--muted)}
 #back{padding:0;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 #back:hover{text-decoration:underline}
 </style>
@@ -97,10 +101,13 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16v
     });
 
     // ¿Existe la misma ruta en la v1? (lo que había antes de la mudanza)
+    // Se mira en /data/v1.json, la lista de archivos de /v1: preguntar al servidor con HEAD
+    // dejaba un 404 en la consola cada vez que no estaba. La v1 está congelada; si cambia, hay que regenerar la lista.
     if (!/^\/(v1|legacy)(\/|$)/.test(location.pathname)) {
         const url = '/v1' + location.pathname;
-        fetch(url, { method: 'HEAD' }).then((r) => {
-            if (!r.ok) return;
+        const rel = path.slice(1);
+        fetch('/data/v1.json').then((r) => r.json()).then((files) => {
+            if (![rel, rel + 'index.html', rel + '/index.html'].some((f) => files.includes(f))) return;
             $('v1').href = url;
             $('v1-path').textContent = '/v1' + path;
             $('v1').hidden = false;
