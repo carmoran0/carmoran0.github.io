@@ -152,7 +152,7 @@ function setup3DModel() {
     let model, speedX = 0, speedY = 0.005;
     let posX = 0, posY = 0;
 
-    loader.load('/models/carlos2.gltf', function(gltf) {
+    loader.load('/legacy/models/carlos2.gltf', function(gltf) {
         model = gltf.scene;
         model.scale.set(3.1, 3.1, 3.1);
         scene.add(model);
