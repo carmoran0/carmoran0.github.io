@@ -238,11 +238,44 @@
         $('heat-box').hidden = false;
     }).catch(() => {});
 
+    // Pósters: con la música al lado, tantas filas como quepan en su altura (así no queda hueco debajo).
+    // Se prueba con 4, 5 y 6 por fila y se queda la que menos sobra, sin bajar de 64px por póster.
+    // En una sola columna, 4 por fila y 2 filas.
+    const fitPosters = () => {
+        const box = $('posters'), films = box.parentElement, music = films.previousElementSibling;
+        const posters = [...box.children];
+        const setCols = (n) => { box.style.gridTemplateColumns = `repeat(${n},minmax(0,1fr))`; };
+        const show = (n) => posters.forEach((a, i) => { a.hidden = i >= n; });
+        if (films.offsetTop !== music.offsetTop) {
+            setCols(4);
+            return show(8);
+        }
+        show(6); // una fila para medir
+        const top = films.getBoundingClientRect().top;
+        const musicH = Math.max(...[...music.children].filter((c) => !c.hidden).map((c) => c.getBoundingClientRect().bottom)) - top;
+        const gap = parseFloat(getComputedStyle(box).rowGap) || 0;
+        const avail = musicH - (box.getBoundingClientRect().top - top) - parseFloat(getComputedStyle(films).paddingBottom);
+        let best;
+        for (const cols of [4, 5, 6]) {
+            if (cols > 4 && (box.clientWidth - (cols - 1) * gap) / cols < 64) break;
+            setCols(cols);
+            const rowH = posters[0].getBoundingClientRect().height;
+            const rows = Math.max(1, Math.floor((avail + gap) / (rowH + gap)));
+            const left = avail - rows * rowH - (rows - 1) * gap;
+            if (!best || left < best.left - 8) best = { cols, rows, left }; // más columnas solo si se nota
+        }
+        setCols(best.cols);
+        show(best.cols * best.rows);
+    };
+    let fitting = 0;
+    const refit = () => { cancelAnimationFrame(fitting); fitting = requestAnimationFrame(fitPosters); };
+    new ResizeObserver(refit).observe($('posters').parentElement.previousElementSibling);
+
     // Letterboxd: copia local del RSS (la actualiza .github/workflows/update-letterboxd.yml)
     fetch('/data/letterboxd.xml').then((r) => r.text()).then((txt) => {
         const items = [...new DOMParser().parseFromString(txt, 'text/xml').querySelectorAll('item')]
             .filter((it) => it.getElementsByTagName('letterboxd:filmTitle').length)
-            .slice(0, 8);
+            .slice(0, 40);
         if (!items.length) return;
         $('posters').replaceChildren(...items.map((it) => {
             const get = (tag) => it.getElementsByTagName(tag)[0]?.textContent || '';
@@ -255,6 +288,7 @@
                 h('img', { className: 'poster', src: poster, alt: title, loading: 'lazy' }),
                 h('span', { className: 'stars', textContent: stars || ' ' }));
         }));
+        fitPosters();
     }).catch(() => {});
 
     // Pie: «Actualizada hace X», con el último commit hecho a mano.
