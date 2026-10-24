@@ -1,0 +1,31 @@
+name: Update Last.fm scrobbles
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 23 * * *' # justo después de medianoche en Madrid: el día anterior ya está completo
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Count scrobbles per day
+        run: node developer/update-scrobbles.js
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: actualizar escuchas de Last.fm (autogenerado)'
+          branch: main
+          file_pattern: 'data/scrobbles.json'
