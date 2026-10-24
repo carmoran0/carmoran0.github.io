@@ -27,6 +27,77 @@
         return rtf.format(-Math.round(m / 1440), 'day');
     };
 
+    // Acento sacado de la portada: el tono más vivo del disco, con la luz ajustada
+    // para que se lea sobre el papel (contraste 4,5:1 en claro y en oscuro).
+    // Portadas grises o casi negras se quedan con el acento de siempre.
+    const root = document.documentElement;
+    const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+    const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches);
+    const hsl2rgb = (h, s, l) => {
+        const f = (n) => {
+            const k = (n + h / 30) % 12;
+            return l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+        };
+        return [f(0), f(8), f(4)];
+    };
+    const lum = ([r, g, b]) => {
+        const c = (v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+        return 0.2126 * c(r) + 0.7152 * c(g) + 0.0722 * c(b);
+    };
+    const PAPER = { light: lum([251 / 255, 250 / 255, 247 / 255]), dark: lum([23 / 255, 22 / 255, 21 / 255]) };
+    let hue = null;
+    const applyTint = () => {
+        if (!hue) return root.style.removeProperty('--accent');
+        const dark = isDark();
+        const paper = dark ? PAPER.dark : PAPER.light;
+        const ratio = (l) => {
+            const a = lum(hsl2rgb(hue.h, hue.s, l)) + 0.05;
+            return dark ? a / (paper + 0.05) : (paper + 0.05) / a;
+        };
+        let l = 0.5;
+        while (ratio(l) < 4.5 && l > 0.05 && l < 0.95) l += dark ? 0.02 : -0.02;
+        root.style.setProperty('--accent', `hsl(${Math.round(hue.h)} ${Math.round(hue.s * 100)}% ${Math.round(l * 100)}%)`);
+    };
+    const tintFrom = (src) => {
+        const im = new Image();
+        im.crossOrigin = 'anonymous';
+        im.onload = () => {
+            const N = 24;
+            const ctx = Object.assign(document.createElement('canvas'), { width: N, height: N }).getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(im, 0, 0, N, N);
+            let px;
+            try { px = ctx.getImageData(0, 0, N, N).data; } catch (e) { return; }
+            // 24 cubos de tono; cada píxel pesa más cuanto más saturado y menos extremo de luz
+            const bins = Array.from({ length: 24 }, () => ({ w: 0, x: 0, y: 0, s: 0 }));
+            let vivid = 0;
+            for (let i = 0; i < px.length; i += 4) {
+                const r = px[i] / 255, g = px[i + 1] / 255, b = px[i + 2] / 255;
+                const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+                const l = (max + min) / 2;
+                const s = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+                if (s < 0.3 || l < 0.12 || l > 0.9) continue;
+                const h = (max === r ? ((g - b) / d + 6) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4) * 60;
+                const w = s * (1 - Math.abs(2 * l - 1));
+                const bin = bins[Math.floor(h / 15) % 24];
+                bin.w += w;
+                bin.x += Math.cos(h * Math.PI / 180) * w;
+                bin.y += Math.sin(h * Math.PI / 180) * w;
+                bin.s += s * w;
+                vivid++;
+            }
+            const top = bins.reduce((a, b) => (b.w > a.w ? b : a));
+            if (vivid < N * N * 0.04) return;
+            hue = {
+                h: (Math.atan2(top.y, top.x) * 180 / Math.PI + 360) % 360,
+                s: Math.min(top.s / top.w, 0.8),
+            };
+            applyTint();
+        };
+        im.src = src;
+    };
+    new MutationObserver(applyTint).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    darkQuery.addEventListener('change', applyTint);
+
     let track = null;
     api('user.getrecenttracks', '&limit=1').then((d) => {
         const t = [].concat(d?.recenttracks?.track || [])[0];
@@ -39,6 +110,7 @@
         if (img) {
             $('np-img').src = img;
             $('cover').style.backgroundImage = `url(${JSON.stringify(img)})`;
+            tintFrom(img);
         }
     }).catch(() => {});
 
