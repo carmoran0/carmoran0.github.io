@@ -29,6 +29,10 @@
 :root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#8a877f;--accent:#b0412e;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.45;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}}
 :root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#7e7b73;--accent:#e57a63;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}
+/* --accent cambia con la portada que suena (main.js); registrado para que la transición sea suave */
+@property --accent{syntax:'<color>';inherits:true;initial-value:#b0412e}
+:root{transition:--accent .8s ease}
+@media (prefers-reduced-motion:reduce){:root{transition:none}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);font-family:'Schibsted Grotesk',Helvetica,sans-serif;color:var(--ink)}
 a{color:inherit;text-decoration:none}
@@ -87,7 +91,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 #cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:var(--ph)}
 #cover-btn:hover{filter:brightness(.92)}
 #cover-btn img{width:100%;height:100%;object-fit:cover;display:block}
-#play-dot{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
+#play-dot{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
 .np-info{display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-width:0}
 #np-when{font-size:10px;color:var(--accent)}
 .np-txt{display:flex;flex-direction:column;gap:2px}
