@@ -61,6 +61,16 @@ li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:7px 0}
 .note{font-size:13px;line-height:1.4;color:var(--muted);text-wrap:pretty}
 
 .foot{display:flex;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:11px;color:var(--muted)}
+
+/* Transiciones entre páginas: el marco se queda y el título viaja */
+@view-transition{navigation:auto}
+.card{view-transition-name:card}
+h1{view-transition-name:title}
+::view-transition-group(*){animation-duration:.38s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-image-pair(card){overflow:clip}
+::view-transition-old(card),::view-transition-new(card){height:auto;object-fit:none;object-position:top}
+::view-transition-old(title),::view-transition-new(title){width:auto;height:100%}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 </style>
 </head>
 <body>
