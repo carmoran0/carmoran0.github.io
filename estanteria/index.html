@@ -141,6 +141,16 @@ button.lomo.sel{margin-bottom:18px}
 .acc{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:11px}
 .acc button{padding:0;border:0;background:transparent;letter-spacing:inherit;text-transform:inherit;text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px;cursor:pointer}
 .acc button:hover{color:var(--accent);text-decoration-color:var(--accent)}
+
+/* Transiciones entre páginas: el marco se queda y el título viaja */
+@view-transition{navigation:auto}
+.card{view-transition-name:card}
+h1{view-transition-name:title}
+::view-transition-group(*){animation-duration:.38s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-image-pair(card){overflow:clip}
+::view-transition-old(card),::view-transition-new(card){height:auto;object-fit:none;object-position:top}
+::view-transition-old(title),::view-transition-new(title){width:auto;height:100%}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 </style>
 </head>
 <body>

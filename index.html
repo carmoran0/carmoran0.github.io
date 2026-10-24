@@ -18,6 +18,27 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
 <script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<link rel="expect" href="#subs" blocking="render">
+<script>
+// Al ir a una subpágina (o volver de ella), su título sale del enlace pulsado y no del h1 «CarlOS».
+(function(){
+  var named=[];
+  var reset=function(){named.forEach(function(el){el.style.viewTransitionName=''});named=[]};
+  var swap=function(url,vt){
+    if(!vt||!url)return;
+    reset();
+    var b=document.querySelector('#subs a[href="'+new URL(url).pathname+'"] b');
+    if(!b)return;
+    var h1=document.querySelector('h1');
+    b.style.viewTransitionName='title';
+    h1.style.viewTransitionName='none';
+    named=[b,h1];
+    vt.finished.then(reset,reset);
+  };
+  addEventListener('pageswap',function(e){swap(e.activation&&e.activation.entry.url,e.viewTransition)});
+  addEventListener('pagereveal',function(e){var a=window.navigation&&navigation.activation;swap(a&&a.from&&a.from.url,e.viewTransition)});
+})();
+</script>
 <link rel="preconnect" href="https://ws.audioscrobbler.com">
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
@@ -122,6 +143,16 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:12px;color:var(--muted)}
 .foot>span{display:flex;flex-wrap:wrap;gap:12px}
 .foot [hidden]{display:none}
+
+/* Transiciones entre páginas: el marco se queda y el título viaja */
+@view-transition{navigation:auto}
+.card{view-transition-name:card}
+h1{view-transition-name:title}
+::view-transition-group(*){animation-duration:.38s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-image-pair(card){overflow:clip}
+::view-transition-old(card),::view-transition-new(card){height:auto;object-fit:none;object-position:top}
+::view-transition-old(title),::view-transition-new(title){width:auto;height:100%}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 </style>
 </head>
 <body>
@@ -161,7 +192,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 
     <div class="act">
       <section aria-label="Música">
-        <nav class="sub" aria-label="Subpáginas">
+        <nav class="sub" id="subs" aria-label="Subpáginas">
           <a href="/uso/"><span class="sub-t"><b>Cosillas <em>que uso</em></b><small class="caps">Software y webs</small></span><i>→</i></a>
           <a href="/estanteria/"><span class="sub-t"><b>Estante<em>ría</em></b><small class="caps">Libros leídos</small></span><i>→</i></a>
         </nav>
