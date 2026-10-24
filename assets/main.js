@@ -97,6 +97,75 @@
     $('cover-btn').addEventListener('click', togglePreview);
     $('prev-btn').addEventListener('click', togglePreview);
 
+    // Mapa de escuchas del último año: copia local (la actualiza .github/workflows/update-scrobbles.yml)
+    fetch('/data/scrobbles.json').then((r) => r.json()).then(({ days }) => {
+        const keys = Object.keys(days || {}).sort();
+        if (!keys.length) return;
+        const noon = (k) => Date.parse(k + 'T12:00:00Z');
+        const last = keys[keys.length - 1];
+        // 53 columnas de lunes a domingo; la última es la semana de hoy
+        const start = noon(last) - ((new Date(noon(last)).getUTCDay() + 6) % 7 + 52 * 7) * 864e5;
+        const cells = Array.from({ length: 53 * 7 }, (_, i) => {
+            const k = new Date(start + i * 864e5).toISOString().slice(0, 10);
+            return { k, n: days[k] };
+        });
+        // Cuatro niveles por cuartiles de los días con escuchas, para que un día raro no aplane el resto
+        const counts = cells.map((c) => c.n).filter((n) => n > 0).sort((a, b) => a - b);
+        const q = (p) => counts[Math.floor(p * (counts.length - 1))] || 0;
+        const cuts = [q(0.25), q(0.5), q(0.8)];
+        const level = (n) => (!n ? 0 : n <= cuts[0] ? 1 : n <= cuts[1] ? 2 : n <= cuts[2] ? 3 : 4);
+        const date = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+        const month = new Intl.DateTimeFormat('es-ES', { month: 'short', timeZone: 'UTC' });
+        const num = new Intl.NumberFormat('es-ES');
+        const songs = (n) => `${num.format(n)} ${n === 1 ? 'canción' : 'canciones'}`;
+        const total = cells.reduce((s, c) => s + (c.n || 0), 0);
+        const best = cells.reduce((a, c) => ((c.n || 0) > (a.n || 0) ? c : a));
+        const describe = (c) => `${date.format(noon(c.k))}: ${songs(c.n || 0)}`;
+
+        const els = cells.map((c) => {
+            const el = h('i', { className: c.n === undefined ? 'off' : '', title: c.n === undefined ? '' : describe(c) });
+            el.dataset.l = level(c.n);
+            return el;
+        });
+        const read = $('heat-read');
+        const summary = songs(total);
+        read.textContent = summary;
+        const grid = $('heat');
+        grid.replaceChildren(...els);
+        Object.assign(grid, { tabIndex: 0 });
+        grid.setAttribute('role', 'group');
+        grid.setAttribute('aria-label', `Escuchas por día del último año: ${summary}. El día con más, ${describe(best)}. Usa las flechas para recorrerlo.`);
+
+        // Etiquetas de mes sobre la columna de la semana en la que empieza cada mes
+        $('heat-m').replaceChildren(...Array.from({ length: 51 }, (_, w) => cells.slice(w * 7, w * 7 + 7).find((c) => c.k.endsWith('-01')))
+            .flatMap((c, w) => (c ? [h('span', { textContent: month.format(noon(c.k)), style: `grid-column:${w + 1}` })] : [])));
+
+        // Pasar el ratón o moverse con las flechas muestra el día en la cabecera
+        let sel = -1;
+        const show = (i) => {
+            els[sel]?.classList.remove('on');
+            sel = i;
+            if (i < 0) return (read.textContent = summary);
+            els[i].classList.add('on');
+            read.textContent = describe(cells[i]);
+        };
+        grid.addEventListener('pointerover', (e) => {
+            const i = els.indexOf(e.target);
+            if (i >= 0 && cells[i].n !== undefined) show(i);
+        });
+        grid.addEventListener('pointerleave', () => show(-1));
+        grid.addEventListener('blur', () => show(-1));
+        grid.addEventListener('keydown', (e) => {
+            const step = { ArrowUp: -1, ArrowDown: 1, ArrowLeft: -7, ArrowRight: 7 }[e.key];
+            if (!step) return;
+            e.preventDefault();
+            const from = sel < 0 ? cells.findLastIndex((c) => c.n !== undefined) : sel;
+            const to = sel < 0 ? from : from + step;
+            if (cells[to]?.n !== undefined) show(to);
+        });
+        $('heat-box').hidden = false;
+    }).catch(() => {});
+
     // Letterboxd: copia local del RSS (la actualiza .github/workflows/update-letterboxd.yml)
     fetch('/data/letterboxd.xml').then((r) => r.text()).then((txt) => {
         const items = [...new DOMParser().parseFromString(txt, 'text/xml').querySelectorAll('item')]
