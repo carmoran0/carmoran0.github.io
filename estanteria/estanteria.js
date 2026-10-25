@@ -181,7 +181,7 @@
           it.pi ? null : h('span', { class: 'pila-tag caps' }, `Por leer · ${pend.length}`), els);
       });
       return h('div', { class: 'balda' },
-        h('div', { class: 'hueco' }, kids, all.length ? null : h('span', { class: 'vacia caps' }, 'Todavía vacía')),
+        h('div', { class: 'hueco' }, kids, all.length ? null : h('span', { class: 'vacia' }, 'Todavía vacía')),
         h('div', { class: 'tablero', 'aria-hidden': 'true' }, labels)
       );
     }));
@@ -251,7 +251,7 @@
     const pos = list.indexOf(b) + 1;
     card.setAttribute('aria-label', b.title);
     card.replaceChildren(
-      h('div', { class: 'dbar caps' },
+      h('div', { class: 'dbar' },
         h('span', null, `Nº ${pad2(pos)} / ${pad2(list.length)}`),
         h('div', null,
           h('button', { type: 'button', 'aria-label': 'Anterior', onclick: () => step(-1) }, '←'),
@@ -265,11 +265,11 @@
               ? h('img', { class: 'portada', src: `https://covers.openlibrary.org/b/id/${b.cover}-M.jpg`, alt: `Portada de ${b.title}`, width: cw, height: d.h, style: `width:${cw}px;height:${d.h}px` })
               : h('div', { class: 'portada-ph', style: `width:${cw}px;height:${d.h}px;background:${d.bg};color:${d.fg}` },
                   h('b', null, b.title), h('small', { class: 'caps' }, b.author))),
-          h('span', { class: 'caps' }, `${b.pages ? d.p + ' págs' : 'Páginas desconocidas'} · lomo ${d.w} × ${d.h} px`)),
+          h('span', null, `${b.pages ? d.p + ' páginas' : 'Páginas desconocidas'}, lomo de ${d.w} × ${d.h} px`)),
         h('div', { class: 'dr' },
           h('header', null,
-            b.reading ? h('span', { class: 'now caps' }, '● Leyendo ahora') : null,
-            b.pending ? h('span', { class: 'todo caps' }, '○ Por leer') : null,
+            b.reading ? h('span', { class: 'now' }, '● Leyendo ahora') : null,
+            b.pending ? h('span', { class: 'todo' }, '○ Por leer') : null,
             h('h2', null, b.title),
             h('span', null, b.author)),
           b.reading || b.pending ? null : h('div', { class: 'rate' },
@@ -279,11 +279,11 @@
             h('span', { 'aria-hidden': 'true' }, r ? `${comma(r)} / 5` : 'Sin valorar')),
           h('div', { class: 'meta' },
             [['Páginas', b.pages || '—'], ['Leído', b.reading ? 'Ahora' : b.pending ? 'Pendiente' : fmtDate(b.date)], ['Publicado', b.year || '—']]
-              .map(([k, v]) => h('div', null, h('small', { class: 'caps' }, k), h('b', null, String(v))))),
+              .map(([k, v]) => h('div', null, h('small', null, k), h('b', null, String(v))))),
           b.review ? h('p', { class: 'review' }, b.review) : null,
-          h('div', { class: 'acc caps' },
+          h('div', { class: 'acc' },
             h('button', { type: 'button', 'aria-live': 'polite', onclick: copyLink }, 'Copiar enlace'),
-            b.olKey ? h('a', { href: `https://openlibrary.org${b.olKey}`, target: '_blank', rel: 'noopener' }, 'Ver en Open Library ↗') : null)))
+            b.olKey ? h('a', { href: `https://openlibrary.org${b.olKey}`, target: '_blank', rel: 'noopener' }, 'Ver en Open Library') : null)))
     );
   }
 
