@@ -306,8 +306,9 @@
     }).catch(() => {});
 
     // Pie: «Actualizada hace X», con el último commit hecho a mano.
-    // committer= deja fuera los de las Actions (los firma github-actions[bot]), por muchos que haya seguidos.
-    fetch('https://api.github.com/repos/carmoran0/carmoran0.github.io/commits?committer=carmoran0&per_page=1')
+    // author= deja fuera los de las Actions (autor github-actions[bot]), por muchos que haya seguidos,
+    // y cuenta los hechos en github.com (ahí el committer es GitHub, no carmoran0).
+    fetch('https://api.github.com/repos/carmoran0/carmoran0.github.io/commits?author=carmoran0&per_page=1')
         .then((r) => r.json())
         .then(([c]) => {
             const date = c?.commit?.committer?.date;
