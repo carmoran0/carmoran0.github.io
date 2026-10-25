@@ -20,7 +20,7 @@
             .then((r) => r.json());
     const rtf = new Intl.RelativeTimeFormat('es', { numeric: 'auto' });
     const ago = (uts) => {
-        if (!uts) return 'Hace un momento';
+        if (!uts) return 'hace un momento';
         const m = Math.round((Date.now() / 1000 - uts) / 60);
         if (m < 60) return rtf.format(-m, 'minute');
         if (m < 1440) return rtf.format(-Math.round(m / 60), 'hour');
@@ -104,7 +104,7 @@
         if (!t) return;
         track = { name: t.name, artist: t.artist?.['#text'] || '' };
         const img = (t.image || []).find((i) => i.size === 'extralarge')?.['#text'];
-        $('np-when').textContent = '● ' + (t['@attr']?.nowplaying ? 'Sonando ahora' : ago(t.date?.uts));
+        $('np-when').textContent = t['@attr']?.nowplaying ? '● Sonando ahora' : 'Escuchado ' + ago(t.date?.uts);
         Object.assign($('np-title'), { textContent: track.name, href: t.url });
         $('np-artist').textContent = track.artist;
         if (img) {
@@ -134,7 +134,7 @@
         $('play-dot').textContent = { idle: '▶', loading: '…', playing: '❚❚' }[s];
         $('cover-btn').setAttribute('aria-label', aria);
         $('cover-btn').title = aria;
-        if (s === 'idle') $('bar').style.width = '0';
+        if (s === 'idle') $('prog').style.width = '0';
     };
     const togglePreview = async () => {
         if (!track || state === 'loading') return;
@@ -153,7 +153,7 @@
             if (!audio) {
                 audio = new Audio();
                 audio.ontimeupdate = () => {
-                    $('bar').style.width = (audio.currentTime / (audio.duration || 30)) * 100 + '%';
+                    $('prog').style.width = (audio.currentTime / (audio.duration || 30)) * 100 + '%';
                 };
                 audio.onended = () => setState('idle');
             }
@@ -199,7 +199,7 @@
             const level = (n) => (!n ? 0 : n <= cuts[0] ? 1 : n <= cuts[1] ? 2 : n <= cuts[2] ? 3 : 4);
             const total = cells.reduce((s, c) => s + (c.n || 0), 0);
             const best = cells.reduce((a, c) => ((c.n || 0) > (a.n || 0) ? c : a));
-            const range = weeks === 53 ? 'último año' : 'últimos seis meses';
+            const range = weeks === 53 ? 'Un año de escuchas' : 'Medio año de escuchas';
 
             els = cells.map((c) => {
                 const el = h('i', { className: c.n === undefined ? 'off' : '', title: c.n === undefined ? '' : describe(c) });
@@ -209,9 +209,9 @@
             sel = -1;
             summary = songs(total);
             read.textContent = summary;
-            $('heat-t').textContent = `Escuchas · ${range}`;
+            $('heat-t').textContent = range;
             grid.replaceChildren(...els);
-            grid.setAttribute('aria-label', `Escuchas por día del ${range}: ${summary}. El día con más, ${describe(best)}. Usa las flechas para recorrerlo.`);
+            grid.setAttribute('aria-label', `${range}, día a día: ${summary}. El día con más, ${describe(best)}. Usa las flechas para recorrerlo.`);
 
             // Etiquetas de mes sobre la columna de la semana en la que empieza cada mes
             // (no en las dos últimas, que no hay sitio); «sept» se recorta a tres letras como los demás

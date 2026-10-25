@@ -23,18 +23,17 @@ a:hover{text-decoration:underline}
 h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16vw,160px);line-height:.8;letter-spacing:-.03em}
 .path{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;max-width:100%;font-family:'IBM Plex Mono',monospace}
 #path{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(16px,2vw,20px);font-weight:500}
-.path small{font-size:10px;color:var(--muted)}
+.path small{font-family:'Schibsted Grotesk',Helvetica,sans-serif;font-size:13px;color:var(--muted)}
 .msg{padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink);font-size:15px;line-height:1.5;color:var(--muted);text-wrap:pretty}
 
 .sug{display:flex;flex-direction:column}
-.sug-h{padding-top:14px;padding-bottom:10px;font-size:10px;color:var(--muted)}
+.sug-h{padding-top:14px;padding-bottom:10px;font-size:13px;color:var(--muted)}
 .sug a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:clamp(14px,1.8vw,16px);padding-bottom:clamp(14px,1.8vw,16px);border-top:1px solid var(--sep)}
-.sug a:hover{background:var(--ink);color:var(--paper);text-decoration:none}
-.sug-t{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-width:0}
+.sug a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
+.sug-t{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
 .sug-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
-.sug-t small{font-size:11px;opacity:.7}
+.sug-t small{font-size:14px;opacity:.75}
 #v1-path{font-family:'IBM Plex Mono',monospace;overflow-wrap:anywhere}
-.sug i{font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal}
 
 #back{padding:0;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 #back:hover{text-decoration:underline}
@@ -43,28 +42,28 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16v
 <body>
 <div class="wrap">
   <main class="card">
-    <div class="bar pad caps">
+    <div class="bar pad">
       <a href="/">← CarlOS</a>
       <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
     </div>
 
     <header class="head pad">
-      <h1>4<em>04</em></h1>
-      <p class="path js-only"><span id="path"></span><small class="caps">No existe</small></p>
+      <h1>404</h1>
+      <p class="path js-only"><span id="path"></span><small>Esta página no existe</small></p>
     </header>
 
     <p class="msg pad">Aquí no hay nada. Si venías de un enlace antiguo, puede que esté en la v1.</p>
 
     <nav class="sug" aria-label="Quizá buscabas">
-      <span class="sug-h pad caps">Quizá buscabas</span>
-      <a id="v1" class="pad" href="/v1/" hidden><span class="sug-t"><b>Lo mismo en la <em>v1</em></b><small id="v1-path"></small></span><i>→</i></a>
-      <a class="pad" href="/"><span class="sug-t"><b>Carl<em>OS</em></b><small class="caps">Portada</small></span><i>→</i></a>
-      <a class="pad" href="/uso/"><span class="sug-t"><b>Cosillas <em>que uso</em></b><small class="caps">Software y webs</small></span><i>→</i></a>
+      <span class="sug-h pad">Quizá buscabas</span>
+      <a id="v1" class="pad" href="/v1/" hidden><span class="sug-t"><b>Lo mismo en la v1</b><small id="v1-path"></small></span></a>
+      <a class="pad" href="/"><span class="sug-t"><b>Carl<em>OS</em></b><small>Portada</small></span></a>
+      <a class="pad" href="/uso/"><span class="sug-t"><b>Cosillas que uso</b><small>Software y webs de cada día</small></span></a>
     </nav>
 
-    <footer class="foot pad caps">
+    <footer class="foot pad">
       <button id="back" class="js-only" type="button">← Volver</button>
-      <span>Desde agosto 2024</span>
+      <span>Desde agosto de 2024</span>
     </footer>
   </main>
 </div>
