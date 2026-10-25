@@ -1,2 +1,10 @@
+# Los bots de vista previa de enlaces (X, LinkedIn, Slack, Facebook) respetan este archivo:
+# sin esto no ven og.png y el enlace sale sin tarjeta. Los buscadores siguen fuera.
+User-agent: Twitterbot
+User-agent: LinkedInBot
+User-agent: Slackbot-LinkExpanding
+User-agent: facebookexternalhit
+Allow: /
+
 User-agent: *
 Disallow: /

@@ -11,8 +11,9 @@
         return el;
     };
 
-    // Racha de Duolingo
-    $('streak').textContent = Math.floor((Date.now() - new Date('2023-12-09')) / 864e5);
+    // Racha de Duolingo: días de calendario en Madrid, como el mapa de escuchas
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(Date.now());
+    $('streak').textContent = Math.round((Date.parse(today) - Date.parse('2023-12-09')) / 864e5);
 
     // Last.fm
     const api = (method, extra) =>
@@ -23,7 +24,7 @@
         if (!uts) return 'hace un momento';
         const m = Math.round((Date.now() / 1000 - uts) / 60);
         if (m < 60) return rtf.format(-m, 'minute');
-        if (m < 1440) return rtf.format(-Math.round(m / 60), 'hour');
+        if (m < 1410) return rtf.format(-Math.round(m / 60), 'hour'); // desde 23,5 h ya es «ayer», no «hace 24 horas»
         return rtf.format(-Math.round(m / 1440), 'day');
     };
 
@@ -305,13 +306,11 @@
     }).catch(() => {});
 
     // Pie: «Actualizada hace X», con el último commit hecho a mano.
-    // Se saltan los commits de las Actions (Letterboxd y README), que llevan «(autogenerado)».
-    fetch('https://api.github.com/repos/carmoran0/carmoran0.github.io/commits?per_page=20')
+    // author= deja fuera los de las Actions (autor github-actions[bot]), por muchos que haya seguidos,
+    // y cuenta los hechos en github.com (ahí el committer es GitHub, no carmoran0).
+    fetch('https://api.github.com/repos/carmoran0/carmoran0.github.io/commits?author=carmoran0&per_page=1')
         .then((r) => r.json())
-        .then((commits) => {
-            const c = Array.isArray(commits)
-                ? commits.find((x) => x.committer?.login !== 'github-actions[bot]' && !/\(autogenerado\)/.test(x.commit?.message || ''))
-                : null;
+        .then(([c]) => {
             const date = c?.commit?.committer?.date;
             if (!date) return;
             const msg = c.commit.message.split('\n')[0];

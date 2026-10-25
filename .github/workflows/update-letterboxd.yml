@@ -24,9 +24,10 @@ jobs:
           grep -q "<item>" /tmp/letterboxd.xml
           mv /tmp/letterboxd.xml data/letterboxd.xml
 
+      # git a mano en vez de una Action de terceros con permiso para empujar a main
       - name: Commit and push if changed
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore: actualizar feed de Letterboxd (autogenerado)'
-          branch: main
-          file_pattern: 'data/letterboxd.xml'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/letterboxd.xml
+          git diff --cached --quiet || { git commit -m 'chore: actualizar feed de Letterboxd (autogenerado)' && git push origin HEAD; }

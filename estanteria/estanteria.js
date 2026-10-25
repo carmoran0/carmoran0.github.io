@@ -212,7 +212,7 @@
     setTimeout(() => { btn.textContent = 'Copiar enlace'; }, 1600);
   }
 
-  // Ficha
+  // Ficha. Mientras está abierta, la página de detrás es inert: ni Tab ni el lector de pantalla llegan a ella.
   let ov = null, card = null, lastFocus = null;
   function open(id) {
     const prev = sel;
@@ -225,6 +225,7 @@
       card = h('div', { class: 'dlg', role: 'dialog', 'aria-modal': 'true', onclick: e => e.stopPropagation() });
       ov = h('div', { id: 'ov', onclick: close }, card);
       document.body.append(ov);
+      document.querySelector('.wrap').inert = true;
     }
     renderCard();
     card.querySelector('[aria-label=Cerrar]').focus();
@@ -235,6 +236,7 @@
     sel = null;
     setHash(null);
     if (ov) { ov.remove(); ov = card = null; }
+    document.querySelector('.wrap').inert = false;
     (spines.get(id) || lastFocus)?.focus();
   }
   function step(dir) {
@@ -295,7 +297,6 @@
   });
 
   async function loadOl() {
-    try { ol = JSON.parse(localStorage.getItem(OL_CACHE)) || {}; } catch (e) {}
     const missing = RAW.filter(b => !('ol' in b) && !(keyOf(b) in ol));
     if (!missing.length) return;
     await Promise.all(missing.map(async b => {
