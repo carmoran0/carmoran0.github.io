@@ -68,22 +68,9 @@ h2{font:inherit}
 .streak img{height:14px;width:auto}
 .streak b{font-family:'IBM Plex Mono',monospace;font-weight:500}
 
-/* Cabecera: el nombre y lo que suena */
-.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);align-items:end;gap:24px 32px;padding-top:clamp(22px,3vw,28px);padding-bottom:clamp(18px,2.4vw,22px);border-bottom:1px solid var(--ink)}
-@media (max-width:760px){.head{grid-template-columns:minmax(0,1fr)}}
+/* Cabecera */
+.head{display:flex;align-items:flex-end;padding-top:clamp(22px,3vw,28px);padding-bottom:clamp(18px,2.4vw,22px);border-bottom:1px solid var(--ink)}
 h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10vw,120px);line-height:.8;letter-spacing:-.03em}
-.np{display:grid;grid-template-columns:clamp(96px,11vw,128px) minmax(0,1fr);gap:16px;align-items:end}
-#cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:1px solid var(--ink);cursor:pointer;background:var(--ph)}
-#cover-btn:hover{filter:brightness(.92)}
-#cover-btn img{width:100%;height:100%;object-fit:cover;display:block}
-#play-dot{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
-.np-info{display:flex;flex-direction:column;gap:10px;min-width:0}
-#np-when{font-size:13px;color:var(--accent)}
-.np-txt{display:flex;flex-direction:column;gap:4px}
-#np-title{font-family:'Instrument Serif',serif;font-size:clamp(26px,2.6vw,32px);line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-#np-artist{font-size:15px;color:var(--muted)}
-.track{height:2px;background:var(--sep)}
-#prog{height:2px;width:0;background:var(--accent)}
 
 /* Links: icono y nombre; en pantallas estrechas el nombre va debajo para que quepan cinco por fila */
 .links-wrap{overflow:hidden;border-bottom:1px solid var(--ink)}
@@ -100,17 +87,30 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 }
 @media (max-width:420px){.links a{padding-left:0;padding-right:0;font-size:11px}}
 
-/* Subpáginas */
-.sub{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1px;background:var(--ink);border-bottom:1px solid var(--ink)}
-.sub a{display:flex;flex-direction:column;gap:6px;padding:clamp(16px,2vw,20px);background:var(--paper)}
-.sub a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
-.sub b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,2.8vw,34px);line-height:1}
-.sub small{font-size:14px;color:var(--muted)}
-.sub a:hover small{color:inherit}
-
 /* Actividad */
 .act{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:1px;background:var(--ink)}
 .act>section{display:flex;flex-direction:column;background:var(--paper)}
+
+.sub{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:1px;background:var(--ink);border-bottom:1px solid var(--ink)}
+.sub a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:clamp(14px,1.8vw,16px) clamp(16px,2vw,20px);background:var(--paper)}
+.sub a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
+.sub-t{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.sub-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
+.sub-t small{font-size:13px;opacity:.75}
+.sub i{font-family:'IBM Plex Mono',monospace;font-size:14px;font-style:normal}
+
+.np{display:grid;grid-template-columns:clamp(88px,9vw,120px) minmax(0,1fr);gap:16px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink)}
+#cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:var(--ph)}
+#cover-btn:hover{filter:brightness(.92)}
+#cover-btn img{width:100%;height:100%;object-fit:cover;display:block}
+#play-dot{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
+.np-info{display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-width:0}
+#np-when{font-size:13px;color:var(--accent)}
+.np-txt{display:flex;flex-direction:column;gap:2px}
+#np-title{font-family:'Instrument Serif',serif;font-size:clamp(24px,2.4vw,30px);line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#np-artist{font-size:14px;color:var(--muted)}
+.track{height:2px;background:var(--sep)}
+#prog{height:2px;width:0;background:var(--accent)}
 
 .top{display:flex;flex-direction:column;gap:8px;padding-top:clamp(16px,2vw,20px);padding-bottom:18px}
 #top-list{display:flex;flex-direction:column;gap:6px}
@@ -161,27 +161,13 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
     <div class="bar pad">
       <span class="bar-l">he/they/she <img src="/assets/nb-flag.png" width="30" height="22" alt="Bandera no binaria"></span>
       <span class="bar-r">
-        <a class="streak" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener"><img src="/assets/streakico.svg" width="16" height="20" alt=""><span><b id="streak">1051</b> días seguidos en Duolingo</span></a>
+        <a class="streak" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener"><span>Racha de Duolingo</span><img src="/assets/streakico.svg" width="16" height="20" alt=""><b id="streak">1051</b></a>
         <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
       </span>
     </div>
 
     <header class="head pad">
       <h1>Carl<em>OS</em></h1>
-      <div class="np">
-        <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
-          <img id="np-img" src="https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" alt="">
-          <span id="play-dot" class="js-only">▶</span>
-        </button>
-        <div class="np-info">
-          <span id="np-when">Lo último que ha sonado</span>
-          <div class="np-txt">
-            <a id="np-title" href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener">Cargando…</a>
-            <span id="np-artist">Last.fm</span>
-          </div>
-          <div class="track js-only"><div id="prog"></div></div>
-        </div>
-      </div>
     </header>
 
     <div class="links-wrap">
@@ -199,13 +185,26 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
       </nav>
     </div>
 
-    <nav class="sub" id="subs" aria-label="Más páginas">
-      <a href="/uso/"><b>Cosillas que uso</b><small>Software y webs de cada día</small></a>
-      <a href="/estanteria/"><b>Estantería</b><small>Libros que he leído</small></a>
-    </nav>
-
     <div class="act">
       <section aria-label="Música">
+        <nav class="sub" id="subs" aria-label="Más páginas">
+          <a href="/uso/"><span class="sub-t"><b>Cosillas que uso</b><small>Software y webs</small></span><i>→</i></a>
+          <a href="/estanteria/"><span class="sub-t"><b>Estantería</b><small>Libros leídos</small></span><i>→</i></a>
+        </nav>
+        <div class="np pad">
+          <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
+            <img id="np-img" src="https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" alt="">
+            <span id="play-dot" class="js-only">▶</span>
+          </button>
+          <div class="np-info">
+            <span id="np-when">Lo último que ha sonado</span>
+            <div class="np-txt">
+              <a id="np-title" href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener">Cargando…</a>
+              <span id="np-artist">Last.fm</span>
+            </div>
+            <div class="track js-only"><div id="prog"></div></div>
+          </div>
+        </div>
         <div class="top pad">
           <h2 class="label">Lo más escuchado esta semana</h2>
           <div id="top-list">
