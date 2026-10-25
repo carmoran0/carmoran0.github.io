@@ -130,9 +130,8 @@
     let state = 'idle';
     const setState = (s) => {
         state = s;
-        const aria = s === 'playing' ? 'Parar preview' : 'Escuchar preview de 30 s';
-        $('play-dot').textContent = s === 'playing' ? '❚❚' : '▶';
-        $('prev-btn').textContent = { idle: '▶ Escuchar preview', loading: '▶ Buscando…', playing: '❚❚ Parar' }[s];
+        const aria = { idle: 'Escuchar preview de 30 s', loading: 'Buscando preview…', playing: 'Parar preview' }[s];
+        $('play-dot').textContent = { idle: '▶', loading: '…', playing: '❚❚' }[s];
         $('cover-btn').setAttribute('aria-label', aria);
         $('cover-btn').title = aria;
         if (s === 'idle') $('bar').style.width = '0';
@@ -167,53 +166,61 @@
         }
     };
     $('cover-btn').addEventListener('click', togglePreview);
-    $('prev-btn').addEventListener('click', togglePreview);
 
     // Mapa de escuchas del último año: copia local (la actualiza .github/workflows/update-scrobbles.yml)
+    // En pantallas estrechas, 53 semanas dejan celdas de 4px y los meses se pisan: ahí se enseñan 26.
     fetch('/data/scrobbles.json').then((r) => r.json()).then(({ days }) => {
         const keys = Object.keys(days || {}).sort();
         if (!keys.length) return;
         const noon = (k) => Date.parse(k + 'T12:00:00Z');
         const last = keys[keys.length - 1];
-        // 53 columnas de lunes a domingo; la última es la semana de hoy
-        const start = noon(last) - ((new Date(noon(last)).getUTCDay() + 6) % 7 + 52 * 7) * 864e5;
-        const cells = Array.from({ length: 53 * 7 }, (_, i) => {
-            const k = new Date(start + i * 864e5).toISOString().slice(0, 10);
-            return { k, n: days[k] };
-        });
-        // Cuatro niveles por cuartiles de los días con escuchas, para que un día raro no aplane el resto
-        const counts = cells.map((c) => c.n).filter((n) => n > 0).sort((a, b) => a - b);
-        const q = (p) => counts[Math.floor(p * (counts.length - 1))] || 0;
-        const cuts = [q(0.25), q(0.5), q(0.8)];
-        const level = (n) => (!n ? 0 : n <= cuts[0] ? 1 : n <= cuts[1] ? 2 : n <= cuts[2] ? 3 : 4);
         const date = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
         const month = new Intl.DateTimeFormat('es-ES', { month: 'short', timeZone: 'UTC' });
         const num = new Intl.NumberFormat('es-ES');
         const songs = (n) => `${num.format(n)} ${n === 1 ? 'canción' : 'canciones'}`;
-        const total = cells.reduce((s, c) => s + (c.n || 0), 0);
-        const best = cells.reduce((a, c) => ((c.n || 0) > (a.n || 0) ? c : a));
         const describe = (c) => `${date.format(noon(c.k))}: ${songs(c.n || 0)}`;
-
-        const els = cells.map((c) => {
-            const el = h('i', { className: c.n === undefined ? 'off' : '', title: c.n === undefined ? '' : describe(c) });
-            el.dataset.l = level(c.n);
-            return el;
-        });
         const read = $('heat-read');
-        const summary = songs(total);
-        read.textContent = summary;
         const grid = $('heat');
-        grid.replaceChildren(...els);
         Object.assign(grid, { tabIndex: 0 });
         grid.setAttribute('role', 'group');
-        grid.setAttribute('aria-label', `Escuchas por día del último año: ${summary}. El día con más, ${describe(best)}. Usa las flechas para recorrerlo.`);
 
-        // Etiquetas de mes sobre la columna de la semana en la que empieza cada mes
-        $('heat-m').replaceChildren(...Array.from({ length: 51 }, (_, w) => cells.slice(w * 7, w * 7 + 7).find((c) => c.k.endsWith('-01')))
-            .flatMap((c, w) => (c ? [h('span', { textContent: month.format(noon(c.k)), style: `grid-column:${w + 1}` })] : [])));
+        let cells = [], els = [], summary = '', sel = -1;
+        const draw = (weeks) => {
+            // Columnas de lunes a domingo; la última es la semana de hoy
+            const start = noon(last) - ((new Date(noon(last)).getUTCDay() + 6) % 7 + (weeks - 1) * 7) * 864e5;
+            cells = Array.from({ length: weeks * 7 }, (_, i) => {
+                const k = new Date(start + i * 864e5).toISOString().slice(0, 10);
+                return { k, n: days[k] };
+            });
+            // Cuatro niveles por cuartiles de los días con escuchas, para que un día raro no aplane el resto
+            const counts = cells.map((c) => c.n).filter((n) => n > 0).sort((a, b) => a - b);
+            const q = (p) => counts[Math.floor(p * (counts.length - 1))] || 0;
+            const cuts = [q(0.25), q(0.5), q(0.8)];
+            const level = (n) => (!n ? 0 : n <= cuts[0] ? 1 : n <= cuts[1] ? 2 : n <= cuts[2] ? 3 : 4);
+            const total = cells.reduce((s, c) => s + (c.n || 0), 0);
+            const best = cells.reduce((a, c) => ((c.n || 0) > (a.n || 0) ? c : a));
+            const range = weeks === 53 ? 'último año' : 'últimos seis meses';
+
+            els = cells.map((c) => {
+                const el = h('i', { className: c.n === undefined ? 'off' : '', title: c.n === undefined ? '' : describe(c) });
+                el.dataset.l = level(c.n);
+                return el;
+            });
+            sel = -1;
+            summary = songs(total);
+            read.textContent = summary;
+            $('heat-t').textContent = `Escuchas · ${range}`;
+            grid.replaceChildren(...els);
+            grid.setAttribute('aria-label', `Escuchas por día del ${range}: ${summary}. El día con más, ${describe(best)}. Usa las flechas para recorrerlo.`);
+
+            // Etiquetas de mes sobre la columna de la semana en la que empieza cada mes
+            // (no en las dos últimas, que no hay sitio); «sept» se recorta a tres letras como los demás
+            $('heat-m').style.setProperty('--weeks', weeks);
+            $('heat-m').replaceChildren(...Array.from({ length: weeks - 2 }, (_, w) => cells.slice(w * 7, w * 7 + 7).find((c) => c.k.endsWith('-01')))
+                .flatMap((c, w) => (c ? [h('span', { textContent: month.format(noon(c.k)).slice(0, 3), style: `grid-column:${w + 1}` })] : [])));
+        };
 
         // Pasar el ratón o moverse con las flechas muestra el día en la cabecera
-        let sel = -1;
         const show = (i) => {
             els[sel]?.classList.remove('on');
             sel = i;
@@ -235,7 +242,13 @@
             const to = sel < 0 ? from : from + step;
             if (cells[to]?.n !== undefined) show(to);
         });
-        $('heat-box').hidden = false;
+        const box = $('heat-box');
+        box.hidden = false;
+        let weeks = 0;
+        new ResizeObserver(() => {
+            const w = box.clientWidth < 420 ? 26 : 53;
+            if (w !== weeks) draw((weeks = w));
+        }).observe(box);
     }).catch(() => {});
 
     // Pósters: con la música al lado, tantas filas como quepan en su altura (así no queda hueco debajo).
