@@ -6,7 +6,8 @@
  *
  * Last.fm no da recuentos por día, pero user.getrecenttracks con from/to y limit=1
  * devuelve el total del intervalo en @attr.total: una petición por día.
- * Solo se piden los días que faltan y los dos últimos (hoy va cambiando).
+ * Solo se piden los días que faltan y la última semana: hoy va cambiando, y así un día
+ * que se guardó a medias (una noche sin Action o con Last.fm caído) se corrige solo.
  *
  * Sin dependencias (Node >= 18 por fetch nativo).
  */
@@ -54,7 +55,7 @@ async function count(day) {
     return null;
 }
 
-(async () => {
+async function main() {
     let old = {};
     try { old = JSON.parse(fs.readFileSync(FILE, 'utf8')).days || {}; } catch (e) {}
 
@@ -63,7 +64,7 @@ async function count(day) {
     let fetched = 0, failed = 0;
     for (let i = DAYS - 1; i >= 0; i--) {
         const day = addDays(today, -i);
-        if (i > 1 && old[day] !== undefined) {
+        if (i > 6 && old[day] !== undefined) {
             days[day] = old[day];
             continue;
         }
@@ -82,4 +83,7 @@ async function count(day) {
     fs.writeFileSync(FILE, JSON.stringify({ updated: new Date().toISOString(), tz: TZ, days }) + '\n');
     console.log(`${FILE}: ${Object.keys(days).length} días, ${fetched} pedidos, ${failed} fallidos`);
     if (failed > DAYS / 2) process.exit(1);
-})();
+}
+
+if (require.main === module) main();
+else module.exports = { midnight };

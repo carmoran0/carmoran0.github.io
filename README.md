@@ -9,7 +9,7 @@ Raíz del repositorio
 - `index.html` — Portada: racha, música (Last.fm), mapa de escuchas, últimas pelis (Letterboxd) y contacto.
 - `404.html` — Página de error 404. Usa `data/v1.json` para buscar la ruta en `v1/`.
 - `CNAME` — Dominio de GitHub Pages.
-- `robots.txt` — Reglas para los rastreadores.
+- `robots.txt` — Buscadores fuera; los bots de vista previa (X, LinkedIn, Slack) pueden entrar para ver la tarjeta.
 - `README.md` — (este archivo) estructura del proyecto.
 
 Directorios principales
@@ -30,18 +30,16 @@ Directorios principales
 - `data/` — Datos de la web, la mayoría generados por las Actions.
 	- `scrobbles.json` — Escuchas por día del último año, para el mapa de escuchas.
 	- `letterboxd.xml` — Copia local del RSS de Letterboxd.
-	- `v1.json` — Lista de ficheros de `v1/`.
+	- `v1.json` — Lista de ficheros de `v1/`. Si cambia `v1/`, hay que regenerarla.
 
 - `developer/` — Scripts de mantenimiento.
-	- `update-scrobbles.js` — Cuenta las escuchas por día (hora de Madrid) con `user.getrecenttracks` y guarda `data/scrobbles.json`. Solo pide los días que faltan y los dos últimos.
-	- `update-readme.js` — Descarga el README del perfil de GitHub y lo inserta en `v1/en/linkarlos.html` y `v1/es/linkarlos.html`.
-	- `download-images.ps1` — Descarga a local las imágenes externas y sustituye sus URLs. Ver `developer/README-images.md`.
-	- `list-images-only.ps1` — Solo lista las imágenes externas, sin descargarlas.
+	- `update-scrobbles.js` — Cuenta las escuchas por día (hora de Madrid) con `user.getrecenttracks` y guarda `data/scrobbles.json`. Solo pide los días que faltan y la última semana.
+	- `update-scrobbles.test.js` — Comprueba la medianoche de Madrid en los cambios de hora: `node --test developer/update-scrobbles.test.js`.
 
 - `.github/workflows/` — Automatizaciones.
 	- `update-scrobbles.yml` — Diaria, justo después de medianoche en Madrid.
 	- `update-letterboxd.yml` — Diaria: descarga el RSS de Letterboxd.
-	- `update-readme.yml` — Manual, o al recibir el evento `readme-updated`.
+	- Las dos hacen el commit con `git` a mano, sin Actions de terceros.
 
 - `en/`, `es/` — Redirecciones a `/` de las URLs antiguas.
 
@@ -55,6 +53,6 @@ Notas rápidas
 
 - Los scripts de `assets/` se cargan con `defer` en cada página.
 - Las transiciones entre páginas usan la View Transitions API cuando el navegador la soporta. Con movimiento reducido no hay animación.
-- Los commits de las Actions llevan «(autogenerado)» en el mensaje. El pie de la portada los ignora para mostrar el último cambio hecho a mano.
+- Los commits de las Actions llevan «(autogenerado)» en el mensaje y los firma `github-actions[bot]`. El pie de la portada pide a GitHub solo los de `carmoran0` para mostrar el último cambio hecho a mano.
 - La analítica es Umami, cargada en la portada, las subpáginas y el 404.
 - Para desarrollo local, servir con un servidor estático (por ejemplo `npx serve`). Las rutas absolutas como `/assets/…` no funcionan abriendo `index.html` directamente.
