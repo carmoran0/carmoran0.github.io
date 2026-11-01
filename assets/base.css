@@ -8,9 +8,9 @@
 
 /* --muted y --muted2 pasan 4,5:1 sobre --paper en los dos modos.
    --accent es el morado de la bandera no binaria; en la portada lo pisa el color del disco que suena. */
-:root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#75726a;--accent:#8a47c0;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.45;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#858279;--accent:#b88ae6;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}}
-:root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#858279;--accent:#b88ae6;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.32;color-scheme:dark}
+:root{--ink:#1a1a1a;--paper:#fbfaf7;--bg:#f3f1ec;--sep:#e1ded6;--dot:#c9c6bd;--muted:#5d5b55;--muted2:#75726a;--accent:#8a47c0;--ph:#ddd;--icon:brightness(0);--icon-inv:brightness(0) invert(.98);--cover-op:.25;--ease:cubic-bezier(.22,1,.36,1);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#858279;--accent:#b88ae6;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.22;color-scheme:dark}}
+:root[data-theme=dark]{--ink:#ebe9e3;--paper:#171615;--bg:#0d0c0b;--sep:#2d2b28;--dot:#3b3935;--muted:#a6a39a;--muted2:#858279;--accent:#b88ae6;--ph:#2a2826;--icon:brightness(0) invert(.92);--icon-inv:brightness(0);--cover-op:.22;color-scheme:dark}
 
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);font-family:'Schibsted Grotesk',Helvetica,sans-serif;color:var(--ink)}
@@ -22,16 +22,16 @@ html:not(.js) .js-only{display:none}
 
 .wrap{min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:clamp(16px,5vw,64px) clamp(12px,4vw,56px)}
 .card{width:100%;max-width:1120px;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--ink)}
-.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;border-bottom:1px solid var(--ink);font-size:13px}
-#theme{display:flex;align-items:center;gap:6px;padding:3px 10px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;padding-top:8px;padding-bottom:8px;border-bottom:1px solid var(--ink);font-size:13px}
+#theme{display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 #theme:hover{background:var(--ink);color:var(--paper)}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:10px;padding-bottom:10px;border-top:1px solid var(--ink);font-size:13px;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;min-height:44px;padding-top:8px;padding-bottom:8px;border-top:1px solid var(--ink);font-size:13px;color:var(--muted)}
 
 /* Transiciones entre páginas: el marco se queda y el título viaja */
 @view-transition{navigation:auto}
 .card{view-transition-name:card}
 h1{view-transition-name:title}
-::view-transition-group(*){animation-duration:.38s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+::view-transition-group(*){animation-duration:.38s;animation-timing-function:cubic-bezier(.22,1,.36,1)}
 ::view-transition-image-pair(card){overflow:clip}
 ::view-transition-old(card),::view-transition-new(card){height:auto;object-fit:none;object-position:top}
 ::view-transition-old(title),::view-transition-new(title){width:auto;height:100%}

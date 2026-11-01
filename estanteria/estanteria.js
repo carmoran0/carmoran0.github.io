@@ -161,7 +161,8 @@
 
     spines.clear();
     let n = 0;
-    const anim = () => fresh ? `animation:shelfIn .7s cubic-bezier(.2,.8,.3,1) ${n++ * 90}ms both;` : '';
+    // Entran de izquierda a derecha; a partir del noveno, todos a la vez para que la entrada no pase de ~0,7 s
+    const anim = () => fresh ? `animation:shelfIn .4s var(--ease) ${Math.min(n++, 8) * 40}ms both;` : '';
     const mark = (b, el) => { if (sel === b.id) el.classList.add('sel'); spines.set(b.id, el); return el; };
     $('fondo').replaceChildren(...rows.map(row => {
       const items = row[0] && row[0].k === 'sep' ? row.slice(1) : row; // una placa al principio de balda sobra
@@ -178,7 +179,7 @@
         // Pila: el primero de libros.json abajo y el último arriba; entran de abajo arriba
         const els = it.books.map(b => mark(b, tumbado(b, dims(b), lenOf(b), anim()))).reverse();
         return h('div', { class: 'pila', style: `width:${it.pw}px;margin-left:${it.pi ? '10px' : 'auto'}` },
-          it.pi ? null : h('span', { class: 'pila-tag caps' }, `Por leer · ${pend.length}`), els);
+          it.pi ? null : h('span', { class: 'pila-tag' }, `Por leer · ${pend.length}`), els);
       });
       return h('div', { class: 'balda' },
         h('div', { class: 'hueco' }, kids, all.length ? null : h('span', { class: 'vacia' }, 'Todavía vacía')),
@@ -323,7 +324,7 @@
     fromHash();
     addEventListener('hashchange', fromHash);
     // Al acabar la entrada se quita la animación: con fill-mode both seguía aplicada y anulaba el hover.
-    setTimeout(() => { fresh = false; for (const el of spines.values()) el.style.animation = ''; }, 900 + RAW.length * 90);
+    setTimeout(() => { fresh = false; for (const el of spines.values()) el.style.animation = ''; }, 800);
     new ResizeObserver(() => { const w = fondo.clientWidth; if (w !== width) { width = w; render(); } }).observe(fondo);
     loadOl();
   }

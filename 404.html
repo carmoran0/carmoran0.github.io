@@ -19,7 +19,7 @@ a:hover{text-decoration:underline}
 
 .card{max-width:720px}
 
-.head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;padding-top:clamp(22px,3vw,28px);padding-bottom:clamp(18px,2.4vw,22px);border-bottom:1px solid var(--ink)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;padding-top:clamp(20px,3vw,28px);padding-bottom:clamp(16px,2.4vw,24px);border-bottom:1px solid var(--ink)}
 h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16vw,160px);line-height:.8;letter-spacing:-.03em}
 .path{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;max-width:100%;font-family:'IBM Plex Mono',monospace}
 #path{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(16px,2vw,20px);font-weight:500}
@@ -27,12 +27,13 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16v
 .msg{padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink);font-size:15px;line-height:1.5;color:var(--muted);text-wrap:pretty}
 
 .sug{display:flex;flex-direction:column}
-.sug-h{padding-top:14px;padding-bottom:10px;font-size:13px;color:var(--muted)}
-.sug a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:clamp(14px,1.8vw,16px);padding-bottom:clamp(14px,1.8vw,16px);border-top:1px solid var(--sep)}
+.sug-h{padding-top:16px;padding-bottom:8px;font-size:13px;color:var(--muted)}
+.sug a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:16px;padding-bottom:16px;border-top:1px solid var(--sep)}
 .sug a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
-.sug-t{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.sug-t{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
 .sug-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
-.sug-t small{font-size:14px;opacity:.75}
+.sug-t small{font-size:13px;color:var(--muted)}
+.sug a:hover small{color:inherit}
 #v1-path{font-family:'IBM Plex Mono',monospace;overflow-wrap:anywhere}
 
 #back{padding:0;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
@@ -58,7 +59,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16v
       <span class="sug-h pad">Quizá buscabas</span>
       <a id="v1" class="pad" href="/v1/" hidden><span class="sug-t"><b>Lo mismo en la v1</b><small id="v1-path"></small></span></a>
       <a class="pad" href="/"><span class="sug-t"><b>Carl<em>OS</em></b><small>Portada</small></span></a>
-      <a class="pad" href="/uso/"><span class="sug-t"><b>Cosillas que uso</b><small>Software y webs de cada día</small></span></a>
+      <a class="pad" href="/uso/"><span class="sug-t"><b>Cosillas que uso</b><small>Software y webs</small></span></a>
     </nav>
 
     <footer class="foot pad">
