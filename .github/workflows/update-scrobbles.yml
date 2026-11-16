@@ -3,7 +3,7 @@ name: Update Last.fm scrobbles
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 23 * * *' # justo después de medianoche en Madrid: el día anterior ya está completo
+    - cron: '17 23 * * *' # después de medianoche en Madrid (el día anterior ya está completo); minuto raro: en punto GitHub va saturado
 
 permissions:
   contents: write
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Node ya viene en ubuntu-latest; el script solo necesita fetch (Node >= 18)
       - name: Test day boundaries
@@ -28,4 +28,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/scrobbles.json
-          git diff --cached --quiet || { git commit -m 'chore: actualizar escuchas de Last.fm (autogenerado)' && git push origin HEAD; }
+          git diff --cached --quiet || { git commit -m 'chore: actualizar escuchas de Last.fm (autogenerado)' && git pull --rebase origin main && git push origin HEAD; }

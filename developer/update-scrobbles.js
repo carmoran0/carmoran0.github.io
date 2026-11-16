@@ -2,12 +2,13 @@
 /**
  * update-scrobbles.js
  * Guarda en data/scrobbles.json cuántas canciones se escucharon cada día (hora de Madrid)
- * durante las últimas 53 semanas, para el mapa de escuchas de la portada.
+ * durante las últimas 53 semanas hasta ayer, para el mapa de escuchas de la portada.
+ * Hoy no entra: la Action corre poco después de medianoche y el día saldría casi a cero.
  *
  * Last.fm no da recuentos por día, pero user.getrecenttracks con from/to y limit=1
  * devuelve el total del intervalo en @attr.total: una petición por día.
- * Solo se piden los días que faltan y la última semana: hoy va cambiando, y así un día
- * que se guardó a medias (una noche sin Action o con Last.fm caído) se corrige solo.
+ * Solo se piden los días que faltan y la última semana: así un día que se guardó a medias
+ * (una noche sin Action o con Last.fm caído) se corrige solo.
  *
  * Sin dependencias (Node >= 18 por fetch nativo).
  */
@@ -59,11 +60,11 @@ async function main() {
     let old = {};
     try { old = JSON.parse(fs.readFileSync(FILE, 'utf8')).days || {}; } catch (e) {}
 
-    const today = ymd(Date.now());
+    const yesterday = addDays(ymd(Date.now()), -1);
     const days = {};
     let fetched = 0, failed = 0;
     for (let i = DAYS - 1; i >= 0; i--) {
-        const day = addDays(today, -i);
+        const day = addDays(yesterday, -i);
         if (i > 6 && old[day] !== undefined) {
             days[day] = old[day];
             continue;

@@ -3,7 +3,7 @@ name: Update Letterboxd feed
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # una vez al día
+    - cron: '7 0 * * *' # una vez al día; minuto raro: en punto GitHub va saturado y llega horas tarde
 
 permissions:
   contents: write
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download RSS feed
         run: |
@@ -30,4 +30,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/letterboxd.xml
-          git diff --cached --quiet || { git commit -m 'chore: actualizar feed de Letterboxd (autogenerado)' && git push origin HEAD; }
+          git diff --cached --quiet || { git commit -m 'chore: actualizar feed de Letterboxd (autogenerado)' && git pull --rebase origin main && git push origin HEAD; }

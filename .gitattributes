@@ -1,0 +1,2 @@
+# Las CSP de las páginas llevan el hash de sus <script> en línea: con CRLF el hash cambia.
+*.html text eol=lf
