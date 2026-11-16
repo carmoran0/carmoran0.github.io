@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cloud.umami.is 'sha256-wmTty4R2PcXKsLgL1RkgSrEej/MJ9fDY2/Si+Gj2eDw=' 'sha256-5iioqI++klWcFpP/MIYaKPvvbXo2ETdgDwVAX1yPf/w=' 'sha256-UG3QJSiEgcf5ck11kaNEYmXzUasQCdkwKWQHKNg+7DA='; object-src 'none'; base-uri 'none'">
+<meta name="color-scheme" content="light dark">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light'){d.dataset.theme=t;document.querySelector('meta[name=color-scheme]').content=t}})(document.documentElement)</script>
+<meta name="text-scale" content="scale">
 <title>404 · CarlOS</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
-<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/v1/*"}},{"not":{"href_matches":"/legacy/*"}}]},"eagerness":"moderate"}]}</script>
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa" data-domains="carmoran.dev"></script>
 <script defer src="/assets/theme.js"></script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
@@ -20,19 +24,19 @@ a:hover{text-decoration:underline}
 .card{max-width:720px}
 
 .head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;padding-top:clamp(20px,3vw,28px);padding-bottom:clamp(16px,2.4vw,24px);border-bottom:1px solid var(--ink)}
-h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(96px,16vw,160px);line-height:.8;letter-spacing:-.03em}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(6rem,16vw,10rem);line-height:.8;letter-spacing:-.03em}
 .path{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0;max-width:100%;font-family:'IBM Plex Mono',monospace}
-#path{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(16px,2vw,20px);font-weight:500}
-.path small{font-family:'Schibsted Grotesk',Helvetica,sans-serif;font-size:13px;color:var(--muted)}
-.msg{padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink);font-size:15px;line-height:1.5;color:var(--muted);text-wrap:pretty}
+#path{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(1rem,2vw,1.25rem);font-weight:500}
+.path small{font-family:'Schibsted Grotesk',Helvetica,sans-serif;font-size:.8125rem;color:var(--muted)}
+.msg{padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink);font-size:.9375rem;line-height:1.5;color:var(--muted);text-wrap:pretty}
 
 .sug{display:flex;flex-direction:column}
-.sug-h{padding-top:16px;padding-bottom:8px;font-size:13px;color:var(--muted)}
+.sug-h{padding-top:16px;padding-bottom:8px;font-size:.8125rem;color:var(--muted)}
 .sug a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:16px;padding-bottom:16px;border-top:1px solid var(--sep)}
 .sug a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
 .sug-t{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
-.sug-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
-.sug-t small{font-size:13px;color:var(--muted)}
+.sug-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(1.5rem,2.2vw,1.75rem);line-height:1}
+.sug-t small{font-size:.8125rem;color:var(--muted)}
 .sug a:hover small{color:inherit}
 #v1-path{font-family:'IBM Plex Mono',monospace;overflow-wrap:anywhere}
 

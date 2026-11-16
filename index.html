@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cloud.umami.is 'sha256-wmTty4R2PcXKsLgL1RkgSrEej/MJ9fDY2/Si+Gj2eDw=' 'sha256-lg7WaoNrNq4Z6qBLOt4JNngzZUZ5egKydJeiN7ofkGY=' 'sha256-5iioqI++klWcFpP/MIYaKPvvbXo2ETdgDwVAX1yPf/w='; object-src 'none'; base-uri 'none'">
+<meta name="color-scheme" content="light dark">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light'){d.dataset.theme=t;document.querySelector('meta[name=color-scheme]').content=t}})(document.documentElement)</script>
+<meta name="text-scale" content="scale">
 <title>CarlOS</title>
 <meta name="description" content="Carlos: links, lo que suena y las últimas pelis.">
+<meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CarlOS">
 <meta property="og:locale" content="es_ES">
@@ -17,7 +22,6 @@
 <meta property="og:image:alt" content="CarlOS · carmoran.dev">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
-<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
 <link rel="expect" href="#subs" blocking="render">
 <script>
 // Al ir a una subpágina (o volver de ella), su título sale del enlace pulsado y no del h1 «CarlOS».
@@ -39,10 +43,12 @@
   addEventListener('pagereveal',function(e){var a=window.navigation&&navigation.activation;swap(a&&a.from&&a.from.url,e.viewTransition)});
 })();
 </script>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/v1/*"}},{"not":{"href_matches":"/legacy/*"}}]},"eagerness":"moderate"}]}</script>
 <link rel="preconnect" href="https://ws.audioscrobbler.com">
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<link rel="preload" href="/assets/fonts/instrument-serif-italic-os.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa" data-domains="carmoran.dev"></script>
 <script defer src="/assets/theme.js"></script>
 <script defer src="/assets/main.js"></script>
 <link rel="stylesheet" href="/assets/base.css">
@@ -54,73 +60,81 @@
 a{color:inherit;text-decoration:none}
 a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
 h2{font:inherit}
-.label{font-size:13px;color:var(--muted)}
+.label{font-size:.8125rem;color:var(--muted)}
 
 .wrap{position:relative;overflow:hidden}
-#cover{position:fixed;inset:-80px;background-size:cover;background-position:center;filter:blur(60px) saturate(1.1);opacity:var(--cover-op);pointer-events:none}
+/* Fondo: la misma portada que suena (mismo <img> con CORS, así sale de caché), desenfocada */
+#cover{position:fixed;top:-80px;left:-80px;width:calc(100vw + 160px);height:calc(100dvh + 160px);object-fit:cover;filter:blur(60px) saturate(1.1);opacity:var(--cover-op);pointer-events:none}
 .card{position:relative}
 
 /* Barra: pronombres, racha y modo */
 .bar{flex-wrap:wrap}
 .bar-l,.bar-r{display:flex;align-items:center;gap:12px}
 .bar-l img{height:12px;width:auto}
-.streak{display:flex;align-items:center;gap:6px}
-.streak img{height:14px;width:auto;filter:var(--icon)}
+.streak{display:flex;align-items:center;gap:6px;min-height:24px}
+.streak .ico{width:11px;height:14px}
 .streak b{font-family:'IBM Plex Mono',monospace;font-weight:500}
 
 /* Cabecera */
 .head{display:flex;align-items:flex-end;padding-top:clamp(20px,3vw,28px);padding-bottom:clamp(16px,2.4vw,24px);border-bottom:1px solid var(--ink)}
-h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10vw,120px);line-height:.8;letter-spacing:-.03em}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(4rem,10vw,7.5rem);line-height:.8;letter-spacing:-.03em}
 
 /* Links: icono y nombre; en pantallas estrechas el nombre va debajo para que quepan cinco por fila.
    El relleno lateral es el de .pad, para que los iconos de la primera columna caigan en la línea del título */
 .links-wrap{overflow:hidden;border-bottom:1px solid var(--ink)}
 .links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0 -1px -1px 0}
-.links a{display:flex;align-items:center;gap:10px;min-width:0;padding:clamp(12px,1.6vw,16px) clamp(16px,2vw,20px);background:var(--paper);border-right:1px solid var(--sep);border-bottom:1px solid var(--sep);font-size:15px}
+.links a{display:flex;align-items:center;gap:10px;min-width:0;padding:clamp(12px,1.6vw,16px) clamp(16px,2vw,20px);background:var(--paper);border-right:1px solid var(--sep);border-bottom:1px solid var(--sep);font-size:.9375rem}
 .links a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
-.links img{width:16px;height:16px;flex-shrink:0;filter:var(--icon)}
-.links a:hover img{filter:var(--icon-inv)}
-.links span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media (max-width:900px){
-  .links a{flex-direction:column;gap:8px;padding:12px 2px;font-size:12px}
-  .links img{width:20px;height:20px}
-  .links span{max-width:100%}
+.links .ico{width:16px;height:16px}
+.links span:not(.ico){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:56.25em){
+  .links a{flex-direction:column;gap:8px;padding:12px 2px;font-size:.75rem}
+  .links .ico{width:20px;height:20px}
+  .links span:not(.ico){max-width:100%}
 }
-@media (max-width:420px){.links a{padding-left:0;padding-right:0;font-size:11px}}
+@media (max-width:26.25em){.links a{padding-left:0;padding-right:0;font-size:.6875rem;letter-spacing:-.04em}} /* así cabe «SoundCloud» a 320 px */
 
-/* Actividad */
+/* Actividad: a la izquierda las subpáginas y la música; a la derecha las pelis */
 .act{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:1px;background:var(--ink)}
-.act>section{display:flex;flex-direction:column;background:var(--paper)}
+.act>*{display:flex;flex-direction:column;background:var(--paper)}
+.music{display:flex;flex-direction:column}
 
 .sub{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:1px;background:var(--ink);border-bottom:1px solid var(--ink)}
 .sub a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px clamp(16px,2vw,20px);background:var(--paper)}
 .sub a:hover{background:var(--accent);color:var(--paper);text-decoration:none}
 .sub-t{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
-.sub-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(24px,2.2vw,28px);line-height:1}
-.sub-t small{font-size:13px;color:var(--muted)}
+.sub-t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(1.5rem,2.2vw,1.75rem);line-height:1}
+.sub-t small{font-size:.8125rem;color:var(--muted)}
 .sub a:hover small{color:inherit}
-.sub i{font-family:'IBM Plex Mono',monospace;font-size:13px;font-style:normal}
+.sub i{font-family:'IBM Plex Mono',monospace;font-size:.8125rem;font-style:normal}
 
 .np{display:grid;grid-template-columns:clamp(88px,9vw,120px) minmax(0,1fr);gap:16px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-bottom:1px solid var(--ink)}
 #cover-btn{position:relative;width:100%;aspect-ratio:1;padding:0;border:0;cursor:pointer;background:var(--ph)}
 #cover-btn:hover{filter:brightness(.92)}
 #cover-btn img{width:100%;height:100%;object-fit:cover;display:block}
-#play-dot{position:absolute;right:8px;bottom:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:12px;border-radius:50%}
+#cover-btn img:not([src]){visibility:hidden}
+/* Play, pausa y «buscando»: iconos propios, no caracteres (▶ sale como emoji en algunos móviles) */
+#play-dot{position:absolute;right:8px;bottom:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--paper);border-radius:50%}
+#play-dot::before{content:"";width:12px;height:12px;background:currentColor;mask:var(--pd) center/contain no-repeat;forced-color-adjust:none}
+#play-dot[data-s=idle]{--pd:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 1.5v9l7.5-4.5z'/%3E%3C/svg%3E")}
+#play-dot[data-s=loading]{--pd:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='2' cy='6' r='1.2'/%3E%3Ccircle cx='6' cy='6' r='1.2'/%3E%3Ccircle cx='10' cy='6' r='1.2'/%3E%3C/svg%3E")}
+#play-dot[data-s=playing]{--pd:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 1.5H5v9H2.5zM7 1.5h2.5v9H7z'/%3E%3C/svg%3E")}
 .np-info{display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-width:0}
-#np-when{font-size:13px;color:var(--accent)}
+#np-when{font-size:.8125rem;color:var(--accent)}
 .np-txt{display:flex;flex-direction:column;gap:4px}
-#np-title{font-family:'Instrument Serif',serif;font-size:clamp(24px,2.2vw,28px);line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-#np-artist{font-size:15px;color:var(--muted)}
+#np-title{font-family:'Instrument Serif',serif;font-size:clamp(1.5rem,2.2vw,1.75rem);line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+#np-artist{font-size:.9375rem;color:var(--muted)}
 .track{height:2px;background:var(--sep)}
 #prog{height:2px;width:0;background:var(--accent)}
 
 .top{display:flex;flex-direction:column;gap:8px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px)}
-#top-list{display:flex;flex-direction:column;gap:4px}
-#top-list>*{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;line-height:20px;padding:4px 0;border-bottom:1px dotted var(--dot)}
-#top-list>*>span:first-child{display:flex;align-items:baseline;gap:12px;min-width:0}
-.rk{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted2);width:12px;flex-shrink:0}
+#top-list{display:flex;flex-direction:column;gap:4px;list-style:none}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.9375rem;line-height:1.35;padding:4px 0;border-bottom:1px dotted var(--dot)}
+.row>span:first-child{display:flex;align-items:baseline;gap:12px;min-width:0}
+.rk{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted2);width:12px;flex-shrink:0}
 .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)}
+.pl{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted)}
+.empty{font-size:.9375rem;color:var(--muted)}
 
 /* Mapa de escuchas: una columna por semana (lunes arriba), del papel al color del disco que suena */
 .heat{display:flex;flex-direction:column;gap:8px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);border-top:1px solid var(--ink)}
@@ -135,35 +149,35 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 #heat i[data-l="4"]{background:var(--accent)}
 #heat i.off{visibility:hidden}
 #heat i:hover,#heat i.on{outline:1.5px solid var(--ink);outline-offset:0}
-#heat-m{display:grid;grid-template-columns:repeat(var(--weeks,53),minmax(0,1fr));gap:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted2);white-space:nowrap}
+#heat-m{display:grid;grid-template-columns:repeat(var(--weeks,53),minmax(0,1fr));gap:2px;font-family:'IBM Plex Mono',monospace;font-size:.6875rem;color:var(--muted2);white-space:nowrap}
 
 .films{gap:12px;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px)}
 .films-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.films-h a{text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px}
+.films-h a{text-decoration:underline;text-decoration-color:var(--uline);text-underline-offset:3px}
 .films-h a:hover{text-decoration-color:var(--accent)}
 #posters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-#posters a{display:flex;flex-direction:column;gap:4px}
+#posters>*{display:flex;flex-direction:column;gap:4px}
 #posters a:hover{text-decoration:none}
 #posters a:hover .poster{outline:2px solid var(--accent);outline-offset:2px}
-#posters a[hidden]{display:none}
-.poster{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--ph);border:1px solid var(--ink)}
-.stars{font-size:12px}
+#posters>[hidden]{display:none}
+.poster{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;background:var(--ph);border:1px solid var(--ink)}
+.stars{font-size:.75rem}
 
 /* Pie */
 .foot>span{display:flex;flex-wrap:wrap;gap:12px}
 .foot [hidden]{display:none}
-.foot a{text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px}
+.foot a{text-decoration:underline;text-decoration-color:var(--uline);text-underline-offset:3px}
 .foot a:hover{color:var(--ink);text-decoration-color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div id="cover"></div>
+  <img id="cover" alt="" crossorigin="anonymous" hidden>
   <main class="card">
     <div class="bar pad">
       <span class="bar-l">he/they/she <img src="/assets/nb-flag.png" width="30" height="22" alt="Bandera no binaria"></span>
       <span class="bar-r">
-        <a class="streak" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener"><span>Racha de Duolingo</span><img src="/assets/streakico.svg" width="16" height="20" alt=""><b id="streak">1051</b></a>
+        <a class="streak" href="https://www.duolingo.com/profile/Cosaco27" target="_blank" rel="noopener"><span>Racha de Duolingo</span><span class="ico" style="--i:url(/assets/streakico.svg)" aria-hidden="true"></span><b id="streak">1051</b></a>
         <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
       </span>
     </div>
@@ -174,67 +188,69 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(64px,10v
 
     <div class="links-wrap">
       <nav class="links" aria-label="Links">
-        <a href="https://boxd.it/9uosP" target="_blank" rel="noopener me"><img src="/assets/logos/letterboxd.svg" alt=""><span>Letterboxd</span></a>
-        <a href="https://www.instagram.com/testriculo/" target="_blank" rel="noopener me"><img src="/assets/logos/instagram.svg" alt=""><span>Instagram</span></a>
-        <a href="https://discordapp.com/users/357955189149532161" target="_blank" rel="noopener me"><img src="/assets/logos/discord.svg" alt=""><span>Discord</span></a>
-        <a href="https://mastodon.social/@copaco" target="_blank" rel="noopener me"><img src="/assets/logos/mastodon.svg" alt=""><span>Mastodon</span></a>
-        <a href="https://bsky.app/profile/koljoz.bsky.social" target="_blank" rel="noopener me"><img src="/assets/logos/bluesky.svg" alt=""><span>Bluesky</span></a>
-        <a href="https://github.com/carmoran0" target="_blank" rel="noopener me"><img src="/assets/logos/github.svg" alt=""><span>GitHub</span></a>
-        <a href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener me"><img src="/assets/logos/lastfm.svg" alt=""><span>Last.fm</span></a>
-        <a href="https://soundcloud.com/koljoz" target="_blank" rel="noopener me"><img src="/assets/logos/soundcloud.svg" alt=""><span>SoundCloud</span></a>
-        <a href="https://steamcommunity.com/id/poopoopeepeeheehee/" target="_blank" rel="noopener me"><img src="/assets/logos/steam.svg" alt=""><span>Steam</span></a>
-        <a href="mailto:metricas_mensulas.0p@icloud.com" rel="me"><img src="/assets/logos/email.svg" alt=""><span>Email</span></a>
+        <a href="https://boxd.it/9uosP" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/letterboxd.svg)" aria-hidden="true"></span><span>Letterboxd</span></a>
+        <a href="https://www.instagram.com/testriculo/" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/instagram.svg)" aria-hidden="true"></span><span>Instagram</span></a>
+        <a href="https://discordapp.com/users/357955189149532161" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/discord.svg)" aria-hidden="true"></span><span>Discord</span></a>
+        <a href="https://mastodon.social/@copaco" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/mastodon.svg)" aria-hidden="true"></span><span>Mastodon</span></a>
+        <a href="https://bsky.app/profile/koljoz.bsky.social" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/bluesky.svg)" aria-hidden="true"></span><span>Bluesky</span></a>
+        <a href="https://github.com/carmoran0" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/github.svg)" aria-hidden="true"></span><span>GitHub</span></a>
+        <a href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/lastfm.svg)" aria-hidden="true"></span><span>Last.fm</span></a>
+        <a href="https://soundcloud.com/koljoz" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/soundcloud.svg)" aria-hidden="true"></span><span>SoundCloud</span></a>
+        <a href="https://steamcommunity.com/id/poopoopeepeeheehee/" target="_blank" rel="noopener me"><span class="ico" style="--i:url(/assets/logos/steam.svg)" aria-hidden="true"></span><span>Steam</span></a>
+        <a href="mailto:metricas_mensulas.0p@icloud.com" rel="me"><span class="ico" style="--i:url(/assets/logos/email.svg)" aria-hidden="true"></span><span>Email</span></a>
       </nav>
     </div>
 
     <div class="act">
-      <section aria-label="Música">
+      <div>
         <nav class="sub" id="subs" aria-label="Más páginas">
-          <a href="/uso/"><span class="sub-t"><b>Cosillas que uso</b><small>Software y webs</small></span><i>→</i></a>
-          <a href="/estanteria/"><span class="sub-t"><b>Estantería</b><small>Libros leídos</small></span><i>→</i></a>
+          <a href="/uso/"><span class="sub-t"><b>Cosillas que uso</b><small>Software y webs</small></span><i aria-hidden="true">→</i></a>
+          <a href="/estanteria/"><span class="sub-t"><b>Estantería</b><small>Libros leídos</small></span><i aria-hidden="true">→</i></a>
         </nav>
-        <div class="np pad">
-          <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
-            <img id="np-img" src="https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" alt="">
-            <span id="play-dot" class="js-only">▶</span>
-          </button>
-          <div class="np-info">
-            <span id="np-when">Lo último que ha sonado</span>
-            <div class="np-txt">
-              <a id="np-title" href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener">Cargando…</a>
-              <span id="np-artist">Last.fm</span>
+        <section class="music" aria-label="Música">
+          <div class="np pad">
+            <button id="cover-btn" type="button" aria-label="Escuchar preview de 30 s" title="Escuchar preview de 30 s">
+              <img id="np-img" alt="" crossorigin="anonymous" width="300" height="300">
+              <span id="play-dot" class="js-only" data-s="idle" aria-hidden="true"></span>
+            </button>
+            <div class="np-info">
+              <span id="np-when">Lo último que ha sonado</span>
+              <div class="np-txt">
+                <a id="np-title" href="https://www.last.fm/user/sobaco27" target="_blank" rel="noopener">Cargando…</a>
+                <span id="np-artist">Last.fm</span>
+              </div>
+              <div class="track js-only"><div id="prog"></div></div>
             </div>
-            <div class="track js-only"><div id="prog"></div></div>
           </div>
-        </div>
-        <div class="top pad">
-          <h2 class="label">Lo más escuchado esta semana</h2>
-          <div id="top-list">
-            <span><span><span class="rk">1</span><span class="nm">&nbsp;</span></span></span>
-            <span><span><span class="rk">2</span><span class="nm">&nbsp;</span></span></span>
-            <span><span><span class="rk">3</span><span class="nm">&nbsp;</span></span></span>
-            <span><span><span class="rk">4</span><span class="nm">&nbsp;</span></span></span>
-            <span><span><span class="rk">5</span><span class="nm">&nbsp;</span></span></span>
+          <div class="top pad">
+            <h2 class="label">Lo más escuchado esta semana</h2>
+            <ol id="top-list" role="list">
+              <li class="row" aria-hidden="true"><span><span class="rk">1</span><span class="nm">&nbsp;</span></span></li>
+              <li class="row" aria-hidden="true"><span><span class="rk">2</span><span class="nm">&nbsp;</span></span></li>
+              <li class="row" aria-hidden="true"><span><span class="rk">3</span><span class="nm">&nbsp;</span></span></li>
+              <li class="row" aria-hidden="true"><span><span class="rk">4</span><span class="nm">&nbsp;</span></span></li>
+              <li class="row" aria-hidden="true"><span><span class="rk">5</span><span class="nm">&nbsp;</span></span></li>
+            </ol>
           </div>
-        </div>
-        <div class="heat pad" id="heat-box" hidden>
-          <div class="heat-h label"><h2 id="heat-t">Un año de escuchas</h2><span id="heat-read" aria-live="polite"></span></div>
-          <div id="heat"></div>
-          <div id="heat-m" aria-hidden="true"></div>
-        </div>
-      </section>
+          <div class="heat pad" id="heat-box" hidden>
+            <div class="heat-h label"><h2 id="heat-t">Un año de escuchas</h2><span id="heat-read" aria-live="polite"></span></div>
+            <div id="heat"></div>
+            <div id="heat-m" aria-hidden="true"></div>
+          </div>
+        </section>
+      </div>
 
       <section class="films pad" aria-label="Últimas pelis">
         <div class="films-h label"><h2>Últimas pelis</h2><a href="https://boxd.it/9uosP" target="_blank" rel="noopener">Todo en Letterboxd</a></div>
         <div id="posters">
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
-          <a href="https://boxd.it/9uosP" target="_blank" rel="noopener"><span class="poster"></span><span class="stars">&nbsp;</span></a>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
+          <span aria-hidden="true"><span class="poster"></span><span class="stars">&nbsp;</span></span>
         </div>
       </section>
     </div>

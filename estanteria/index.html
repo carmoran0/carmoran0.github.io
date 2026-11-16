@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cloud.umami.is 'sha256-wmTty4R2PcXKsLgL1RkgSrEej/MJ9fDY2/Si+Gj2eDw=' 'sha256-5iioqI++klWcFpP/MIYaKPvvbXo2ETdgDwVAX1yPf/w='; object-src 'none'; base-uri 'none'">
+<meta name="color-scheme" content="light dark">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light'){d.dataset.theme=t;document.querySelector('meta[name=color-scheme]').content=t}})(document.documentElement)</script>
+<meta name="text-scale" content="scale">
 <title>Estantería · CarlOS</title>
 <meta name="description" content="Libros que Carlos ha leído.">
+<meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CarlOS">
 <meta property="og:locale" content="es_ES">
@@ -17,20 +22,19 @@
 <meta property="og:image:alt" content="CarlOS · carmoran.dev">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
-<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/v1/*"}},{"not":{"href_matches":"/legacy/*"}}]},"eagerness":"moderate"}]}</script>
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
-<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa" data-domains="carmoran.dev"></script>
 <script defer src="/assets/theme.js"></script>
 <script defer src="/estanteria/estanteria.js"></script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
-a{color:inherit;text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--uline);text-underline-offset:3px}
 a:hover{text-decoration-color:var(--accent);color:var(--accent)}
 button{font:inherit;color:inherit}
 .plain{text-decoration:none}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .serif{font-family:'Instrument Serif',serif}
 @keyframes shelfIn{from{transform:translateY(-12px);opacity:0}}
 @keyframes fadeIn{from{opacity:0}}
@@ -38,22 +42,23 @@ button{font:inherit;color:inherit}
 
 .head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;padding-top:clamp(20px,3vw,28px);padding-bottom:clamp(16px,2.4vw,24px);border-bottom:1px solid var(--ink)}
 .head>div:first-child{display:flex;flex-direction:column;gap:12px}
-h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,8vw,96px);line-height:.85;letter-spacing:-.03em}
-.head p{font-size:15px;color:var(--muted);max-width:52ch;text-wrap:pretty}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(3.25rem,8vw,6rem);line-height:.85;letter-spacing:-.03em}
+.head p{font-size:.9375rem;color:var(--muted);max-width:52ch;text-wrap:pretty}
 .stats{display:flex;gap:clamp(16px,3vw,32px);font-family:'IBM Plex Mono',monospace}
 .stats div{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
-.stats b{font-size:clamp(22px,2.6vw,30px);font-weight:500;line-height:1}
-.stats span{font-family:'Schibsted Grotesk',Helvetica,sans-serif;font-size:13px;color:var(--muted)}
+.stats b{font-size:clamp(1.375rem,2.6vw,1.875rem);font-weight:500;line-height:1}
+.stats span{font-family:'Schibsted Grotesk',Helvetica,sans-serif;font-size:.8125rem;color:var(--muted)}
 
-.ctl{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;min-height:44px;padding-top:8px;padding-bottom:8px;border-bottom:1px solid var(--ink);font-size:13px}
+.ctl{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;min-height:44px;padding-top:8px;padding-bottom:8px;border-bottom:1px solid var(--ink);font-size:.8125rem}
 .sorts{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
 .sorts>span{color:var(--muted);padding-right:4px}
-.sorts button{height:24px;padding:0 8px;border:1px solid var(--ink);background:transparent;color:var(--ink);letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.sorts button{min-height:24px;padding:0 8px;border:1px solid var(--ink);background:transparent;color:var(--ink);letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 .sorts button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
 #reading{display:flex;align-items:center;gap:6px;padding:0;border:0;background:transparent;color:var(--accent);letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 #reading[hidden]{visibility:hidden}
-#reading span{font-family:'Instrument Serif',serif;font-size:17px;letter-spacing:0;text-transform:none;color:var(--ink)}
+#reading span{font-family:'Instrument Serif',serif;font-size:1.0625rem;letter-spacing:0;text-transform:none;color:var(--ink)}
 
+/* El mueble y los libros son un dibujo: sus medidas y letras van en px a propósito */
 .mueble{padding:clamp(16px,3vw,32px) clamp(12px,3vw,32px) clamp(20px,3vw,32px)}
 .marco{border:1px solid var(--ink);background:var(--paper);padding:12px 10px 0}
 #fondo{min-height:248px;border:1px solid var(--ink);border-bottom:0;background:var(--bg)}
@@ -62,7 +67,7 @@ h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,8vw
 .hueco{position:relative;display:flex;align-items:flex-end;gap:2px;height:236px;padding:0 14px;overflow:hidden}
 .tablero{position:relative;height:12px;margin:0 -1px;background:var(--paper);border:1px solid var(--ink)}
 .sujeta{flex-shrink:0;width:22px;height:66px;margin-left:3px;border-left:6px solid var(--ink);border-bottom:6px solid var(--ink)}
-.vacia{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:13px;color:var(--muted)}
+.vacia{position:absolute;left:0;right:0;bottom:22px;text-align:center;font-size:.8125rem;color:var(--muted)}
 
 .lomo{position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 0 8px;border:1px solid var(--ink);border-bottom:0;box-shadow:inset 3px 0 0 rgba(255,255,255,.1),inset -4px 0 0 rgba(0,0,0,.14)}
 button.lomo{cursor:pointer;transition:transform .18s var(--ease)}
@@ -85,45 +90,54 @@ button.lomo.sel{transform:translateY(-16px)}
 .tt{flex:1;min-width:0;font-family:'Instrument Serif',serif;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
 .tf{flex-shrink:0;width:5px;height:100%;margin-right:9px;border-left:1px solid currentColor;border-right:1px solid currentColor;opacity:.5}
 
-.nojs{padding:20px clamp(16px,2vw,20px);font-size:15px;color:var(--muted)}
+.nojs{padding:20px clamp(16px,2vw,20px);font-size:.9375rem;color:var(--muted)}
 
-#ov{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,10,10,.5);animation:fadeIn .16s var(--ease)}
-.dlg{width:100%;max-width:840px;max-height:calc(100vh - 32px);overflow:auto;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--ink);animation:cardIn .2s var(--ease)}
-.dbar{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px clamp(16px,2vw,20px);background:var(--paper);border-bottom:1px solid var(--ink);font-size:13px}
+/* Ficha: <dialog> modal. El navegador se encarga del foco, de Esc y de dejar inerte lo de detrás;
+   overscroll-behavior evita que la rueda o el dedo muevan la página por debajo. */
+.dlg{width:min(840px,100% - 32px);max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;overflow:auto;overscroll-behavior:contain;background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
+.dlg[open]{display:flex;flex-direction:column}
+.dlg::backdrop{background:rgba(10,10,10,.5);overflow:hidden;overscroll-behavior:contain}
+@media (prefers-reduced-motion:no-preference){
+  .dlg[open]{animation:cardIn .2s var(--ease)}
+  .dlg[open]::backdrop{animation:fadeIn .16s var(--ease)}
+}
+.dbar{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px clamp(16px,2vw,20px);background:var(--paper);border-bottom:1px solid var(--ink);font-size:.8125rem}
 .dbar>span{color:var(--accent);font-variant-numeric:tabular-nums}
 .dbar div{display:flex;gap:4px}
-.dbar button{width:28px;height:24px;border:1px solid var(--ink);background:transparent;cursor:pointer}
+.dbar button{min-width:28px;min-height:24px;border:1px solid var(--ink);background:transparent;cursor:pointer}
 .dbar button:hover{background:var(--ink);color:var(--paper)}
 .dbody{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
 .dl{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:16px;padding:clamp(24px,4vw,40px) 20px 20px;background:var(--bg);border-bottom:1px solid var(--sep)}
 .dl>div{display:flex;align-items:flex-end;gap:8px}
-.dl>span{font-size:12px;color:var(--muted)}
+.dl>span{font-size:.75rem;color:var(--muted)}
 .portada{border:1px solid var(--ink);background:var(--sep);object-fit:cover;display:block}
 .portada-ph{display:flex;flex-direction:column;justify-content:space-between;gap:8px;padding:14px 12px;border:1px solid var(--ink);overflow:hidden}
 .portada-ph b{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;line-height:1;text-wrap:balance;overflow-wrap:anywhere}
 .portada-ph small{font-size:11px}
 .dr{display:flex;flex-direction:column;gap:20px;padding:clamp(20px,3vw,28px)}
 .dr header{display:flex;flex-direction:column;gap:8px}
-.dr .now{font-size:13px;color:var(--accent)}
-.dr .todo{font-size:13px;color:var(--muted)}
-.dr h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,4vw,46px);line-height:.95;letter-spacing:-.02em;text-wrap:balance}
-.dr header>span:last-child{font-size:16px;color:var(--muted)}
+.dr .now{font-size:.8125rem;color:var(--accent)}
+.dr .todo{font-size:.8125rem;color:var(--muted)}
+.dr h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2.125rem,4vw,2.875rem);line-height:.95;letter-spacing:-.02em;text-wrap:balance}
+.dr header>span:last-child{font-size:1rem;color:var(--muted)}
 .rate{display:flex;align-items:center;gap:8px}
-.stars{display:flex;gap:2px;font-size:24px;line-height:1}
+.stars{display:flex;gap:2px;font-size:1.5rem;line-height:1}
 .star{position:relative;display:inline-block;color:var(--dot)}
 .star span{position:absolute;left:0;top:0;overflow:hidden;color:var(--accent)}
-.rate>span:last-child{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)}
+.rate>span:last-child{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted)}
 .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--sep)}
 .meta div{display:flex;flex-direction:column;gap:4px;padding:12px 0}
-.meta small{font-size:12px;color:var(--muted)}
-.meta b{font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;line-height:1}
-.review{font-size:16px;line-height:1.55;white-space:pre-wrap;text-wrap:pretty}
-.acc{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px}
-.acc button{padding:0;border:0;background:transparent;letter-spacing:inherit;text-transform:inherit;text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px;cursor:pointer}
+.meta small{font-size:.75rem;color:var(--muted)}
+.meta b{font-family:'Instrument Serif',serif;font-weight:400;font-size:1.5rem;line-height:1}
+.review{font-size:1rem;line-height:1.55;white-space:pre-wrap;text-wrap:pretty}
+.acc{margin-top:auto;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;font-size:.8125rem}
+.acc button{padding:0;border:0;background:transparent;letter-spacing:inherit;text-transform:inherit;text-decoration:underline;text-decoration-color:var(--uline);text-underline-offset:3px;cursor:pointer}
 .acc button:hover{color:var(--accent);text-decoration-color:var(--accent)}
+.tip{color:var(--accent)}
+.tip:empty{display:none}
 
 /* Con movimiento reducido los libros ya están en la balda */
-@media (prefers-reduced-motion:reduce){.balda,.placa,.pila-tag,.lomo,.tumbado,#ov,.dlg{animation:none!important}button.lomo,.tumbado{transition:none}}
+@media (prefers-reduced-motion:reduce){.balda,.placa,.pila-tag,.lomo,.tumbado{animation:none!important}button.lomo,.tumbado{transition:none}}
 </style>
 </head>
 <body>
@@ -131,7 +145,7 @@ button.lomo.sel{transform:translateY(-16px)}
   <main class="card">
     <div class="bar pad">
       <a class="plain" href="/">← CarlOS</a>
-      <button id="theme" class="js-only" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
+      <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
     </div>
 
     <header class="head pad">
@@ -162,5 +176,6 @@ button.lomo.sel{transform:translateY(-16px)}
     </footer>
   </main>
 </div>
+<dialog id="ficha" class="dlg" closedby="any"></dialog>
 </body>
 </html>

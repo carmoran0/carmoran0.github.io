@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cloud.umami.is 'sha256-wmTty4R2PcXKsLgL1RkgSrEej/MJ9fDY2/Si+Gj2eDw=' 'sha256-5iioqI++klWcFpP/MIYaKPvvbXo2ETdgDwVAX1yPf/w='; object-src 'none'; base-uri 'none'">
+<meta name="color-scheme" content="light dark">
+<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light'){d.dataset.theme=t;document.querySelector('meta[name=color-scheme]').content=t}})(document.documentElement)</script>
+<meta name="text-scale" content="scale">
 <title>Cosillas que uso · CarlOS</title>
 <meta name="description" content="Software y webs que Carlos usa a diario.">
+<meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CarlOS">
 <meta property="og:locale" content="es_ES">
@@ -17,32 +22,32 @@
 <meta property="og:image:alt" content="CarlOS · carmoran.dev">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/gif" href="/assets/favicon.gif">
-<script>(function(d){d.classList.add('js');var t;try{t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('carlos-theme')}catch(e){}if(t==='dark'||t==='light')d.dataset.theme=t})(document.documentElement)</script>
+<script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/v1/*"}},{"not":{"href_matches":"/legacy/*"}}]},"eagerness":"moderate"}]}</script>
 <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
-<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa"></script>
+<link rel="preload" href="/assets/fonts/schibsted-grotesk-400.woff2" as="font" type="font/woff2" crossorigin>
+<script async src="https://cloud.umami.is/script.js" data-website-id="c7c169d5-4f36-465d-8456-98f4ab76bbaa" data-domains="carmoran.dev"></script>
 <script defer src="/assets/theme.js"></script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
-a{color:inherit;text-decoration:underline;text-decoration-color:var(--dot);text-underline-offset:3px}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--uline);text-underline-offset:3px}
 a:hover{text-decoration-color:var(--accent);color:var(--accent)}
 .plain{text-decoration:none}
 
 .head{display:flex;flex-direction:column;gap:12px;padding-top:clamp(20px,3vw,28px);padding-bottom:clamp(16px,2.4vw,24px);border-bottom:1px solid var(--ink)}
-h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,8vw,96px);line-height:.85;letter-spacing:-.03em}
-.head p{font-size:15px;color:var(--muted);max-width:52ch;text-wrap:pretty}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(3.25rem,8vw,6rem);line-height:.85;letter-spacing:-.03em}
+.head p{font-size:.9375rem;color:var(--muted);max-width:52ch;text-wrap:pretty}
 
 .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:1px;background:var(--ink)}
 .groups section{display:flex;flex-direction:column;padding-top:clamp(16px,2vw,20px);padding-bottom:clamp(16px,2vw,20px);background:var(--paper)}
-h2{font-weight:400;font-size:13px;color:var(--muted);padding-bottom:8px}
+h2{font-weight:400;font-size:.8125rem;color:var(--muted);padding-bottom:8px}
 ul{list-style:none}
 li{padding:8px 0}
 .e{display:flex;flex-direction:column;gap:4px;min-width:0}
 .l{display:flex;align-items:baseline;gap:8px}
-.name{font-family:'Instrument Serif',serif;font-size:clamp(24px,2.2vw,28px);line-height:1.05;text-wrap:balance}
+.name{font-family:'Instrument Serif',serif;font-size:clamp(1.5rem,2.2vw,1.75rem);line-height:1.05;text-wrap:balance}
 .lead{flex:1;min-width:16px;border-bottom:1px dotted var(--dot)}
-.cat{font-size:13px;color:var(--muted);white-space:nowrap}
-.note{font-size:13px;line-height:1.4;color:var(--muted);text-wrap:pretty}
+.cat{font-size:.8125rem;color:var(--muted);white-space:nowrap}
+.note{font-size:.8125rem;line-height:1.4;color:var(--muted);text-wrap:pretty}
 </style>
 </head>
 <body>
@@ -50,7 +55,7 @@ li{padding:8px 0}
   <main class="card">
     <div class="bar pad">
       <a class="plain" href="/">← CarlOS</a>
-      <button id="theme" class="js-only" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
+      <button id="theme" class="js-only" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">◐ <span id="theme-label">Oscuro</span></button>
     </div>
 
     <header class="head pad">

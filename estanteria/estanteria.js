@@ -70,7 +70,7 @@
       nota: (x, y) => (+y.rating || 0) - (+x.rating || 0),
       color: (x, y) => colorIdx(x) - colorIdx(y) || (+y.pages || 0) - (+x.pages || 0)
     }[sort];
-    return [...l].sort(by);
+    return l.toSorted(by);
   };
 
   // Lomo: en la balda es un botón; en la ficha, un bloque con borde completo.
@@ -161,8 +161,9 @@
 
     spines.clear();
     let n = 0;
-    // Entran de izquierda a derecha; a partir del noveno, todos a la vez para que la entrada no pase de ~0,7 s
-    const anim = () => fresh ? `animation:shelfIn .4s var(--ease) ${Math.min(n++, 8) * 40}ms both;` : '';
+    // Entran de izquierda a derecha; a partir del noveno, todos a la vez para que la entrada no pase de ~0,7 s.
+    // Relleno backwards: al acabar no se queda aplicada, así el hover y .sel pueden mover el lomo.
+    const anim = () => fresh ? `animation:shelfIn .4s var(--ease) ${Math.min(n++, 8) * 40}ms backwards;` : '';
     const mark = (b, el) => { if (sel === b.id) el.classList.add('sel'); spines.set(b.id, el); return el; };
     $('fondo').replaceChildren(...rows.map(row => {
       const items = row[0] && row[0].k === 'sep' ? row.slice(1) : row; // una placa al principio de balda sobra
@@ -201,45 +202,66 @@
     if (id >= 0) { if (id !== sel) open(id); }
     else if (!s && sel != null) close();
   }
+  // Copiar enlace. El aviso va en un role=status junto al botón (dentro del botón no se anuncia bien)
+  // y dice la verdad: si no se pudo copiar, lo pone.
+  let copyTimer = 0;
   async function copyLink(e) {
-    const btn = e.currentTarget, url = location.href;
-    try { await navigator.clipboard.writeText(url); } catch (err) {
-      const t = h('textarea', { style: 'position:fixed;opacity:0' }, url);
-      document.body.append(t); t.select();
-      try { document.execCommand('copy'); } catch (err2) {}
+    const btn = e.currentTarget, tip = btn.nextElementSibling, url = location.href;
+    let ok = false;
+    try { await navigator.clipboard.writeText(url); ok = true; } catch (err) {
+      // Respaldo antiguo. El textarea va dentro de la ficha: fuera de ella todo es inerte y no se puede seleccionar.
+      const t = h('textarea', { readonly: '', style: 'position:fixed;top:0;opacity:0' }, url);
+      dlg.append(t); t.select();
+      try { ok = document.execCommand('copy'); } catch (err2) {}
       t.remove();
+      btn.focus();
     }
-    btn.textContent = 'Copiado ✓';
-    setTimeout(() => { btn.textContent = 'Copiar enlace'; }, 1600);
+    clearTimeout(copyTimer);
+    tip.textContent = ok ? 'Copiado' : 'No se pudo copiar';
+    copyTimer = setTimeout(() => { tip.textContent = ''; }, 2000);
   }
 
-  // Ficha. Mientras está abierta, la página de detrás es inert: ni Tab ni el lector de pantalla llegan a ella.
-  let ov = null, card = null, lastFocus = null;
+  // Ficha: <dialog> modal. El navegador deja inerte lo de detrás, atrapa el foco, cierra con Esc
+  // (o el gesto de volver) y con closedby="any" también al pulsar fuera.
+  const dlg = $('ficha');
   function open(id) {
     const prev = sel;
     sel = id;
     if (prev != null) spines.get(prev)?.classList.remove('sel');
     spines.get(id)?.classList.add('sel');
     setHash(id);
-    if (!ov) {
-      lastFocus = document.activeElement;
-      card = h('div', { class: 'dlg', role: 'dialog', 'aria-modal': 'true', onclick: e => e.stopPropagation() });
-      ov = h('div', { id: 'ov', onclick: close }, card);
-      document.body.append(ov);
-      document.querySelector('.wrap').inert = true;
-    }
     renderCard();
-    card.querySelector('[aria-label=Cerrar]').focus();
+    if (!dlg.open) {
+      dlg.showModal();
+      dlg.querySelector('[data-k=close]').focus();
+    }
   }
-  function close() {
-    if (sel != null) spines.get(sel)?.classList.remove('sel');
+  function close() { if (dlg.open) dlg.close(); }
+  // Al cerrar (por botón, Esc, clic fuera o atrás), el foco vuelve al lomo del último libro visto
+  dlg.addEventListener('close', () => {
     const id = sel;
     sel = null;
+    if (id != null) spines.get(id)?.classList.remove('sel');
     setHash(null);
-    if (ov) { ov.remove(); ov = card = null; }
-    document.querySelector('.wrap').inert = false;
-    (spines.get(id) || lastFocus)?.focus();
+    clearTimeout(copyTimer);
+    spines.get(id)?.focus();
+  });
+  // Safari aún no tiene closedby: cerrar si se pulsa y se suelta fuera de la ficha
+  if (!('closedBy' in HTMLDialogElement.prototype)) {
+    const outside = e => {
+      const r = dlg.getBoundingClientRect();
+      return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+    };
+    let downOutside = false;
+    dlg.addEventListener('pointerdown', e => { downOutside = outside(e); });
+    dlg.addEventListener('pointerup', e => { if (downOutside && outside(e)) close(); });
   }
+  // ← → pasan de libro dentro de la ficha (sin modificadores: Alt+← sigue siendo «atrás»)
+  dlg.addEventListener('keydown', e => {
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+  });
   function step(dir) {
     if (!list.length) return;
     const i = list.findIndex(b => b.id === sel);
@@ -247,19 +269,23 @@
   }
   function renderCard() {
     const b = list.find(x => x.id === sel);
-    if (!b || !card) return;
+    if (!b) return;
     const d = dims(b);
     const cw = Math.round(d.h * 0.66);
     const r = +b.rating || 0;
     const pos = list.indexOf(b) + 1;
-    card.setAttribute('aria-label', b.title);
-    card.replaceChildren(
+    // Al pasar de libro se rehace la ficha: el foco vuelve al mismo control (si no, saltaría a ✕
+    // o al <body>, y un segundo Enter cerraría la ficha en vez de pasar al siguiente)
+    const keep = dlg.contains(document.activeElement) ? document.activeElement.dataset.k : null;
+    clearTimeout(copyTimer);
+    dlg.setAttribute('aria-label', b.title);
+    dlg.replaceChildren(
       h('div', { class: 'dbar' },
         h('span', null, `Nº ${pad2(pos)} / ${pad2(list.length)}`),
         h('div', null,
-          h('button', { type: 'button', 'aria-label': 'Anterior', onclick: () => step(-1) }, '←'),
-          h('button', { type: 'button', 'aria-label': 'Siguiente', onclick: () => step(1) }, '→'),
-          h('button', { type: 'button', 'aria-label': 'Cerrar', onclick: close }, '✕'))),
+          h('button', { type: 'button', 'data-k': 'prev', 'aria-label': 'Anterior', onclick: () => step(-1) }, '←'),
+          h('button', { type: 'button', 'data-k': 'next', 'aria-label': 'Siguiente', onclick: () => step(1) }, '→'),
+          h('button', { type: 'button', 'data-k': 'close', 'aria-label': 'Cerrar', onclick: close }, '✕'))),
       h('div', { class: 'dbody' },
         h('div', { class: 'dl' },
           h('div', null,
@@ -285,17 +311,12 @@
               .map(([k, v]) => h('div', null, h('small', null, k), h('b', null, String(v))))),
           b.review ? h('p', { class: 'review' }, b.review) : null,
           h('div', { class: 'acc' },
-            h('button', { type: 'button', 'aria-live': 'polite', onclick: copyLink }, 'Copiar enlace'),
-            b.olKey ? h('a', { href: `https://openlibrary.org${b.olKey}`, target: '_blank', rel: 'noopener' }, 'Ver en Open Library') : null)))
+            h('button', { type: 'button', 'data-k': 'copy', onclick: copyLink }, 'Copiar enlace'),
+            h('span', { class: 'tip', role: 'status' }),
+            b.olKey ? h('a', { 'data-k': 'ol', href: `https://openlibrary.org${b.olKey}`, target: '_blank', rel: 'noopener' }, 'Ver en Open Library') : null)))
     );
+    if (keep) dlg.querySelector(`[data-k="${keep}"]`)?.focus();
   }
-
-  addEventListener('keydown', e => {
-    if (sel == null) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft') step(-1);
-    if (e.key === 'ArrowRight') step(1);
-  });
 
   async function loadOl() {
     const missing = RAW.filter(b => !('ol' in b) && !(keyOf(b) in ol));
@@ -321,10 +342,9 @@
     const fondo = $('fondo');
     width = fondo.clientWidth;
     render();
+    fresh = false; // solo entra animada la primera vez; al reordenar o redimensionar, los libros ya están
     fromHash();
     addEventListener('hashchange', fromHash);
-    // Al acabar la entrada se quita la animación: con fill-mode both seguía aplicada y anulaba el hover.
-    setTimeout(() => { fresh = false; for (const el of spines.values()) el.style.animation = ''; }, 800);
     new ResizeObserver(() => { const w = fondo.clientWidth; if (w !== width) { width = w; render(); } }).observe(fondo);
     loadOl();
   }
